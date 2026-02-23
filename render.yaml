@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: cushlabs-voice-agent
+    runtime: node
+    plan: free
+    buildCommand: pnpm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: VAPI_API_PUBLIC_KEY
+        sync: false
+      - key: VAPI_API_PRIVATE_KEY
+        sync: false
+      - key: VAPI_ASSISTANT_ID
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: CARTESIA_API_KEY
+        sync: false
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: cushlabs-voice-redis
+          property: connectionString
+
+  - type: redis
+    name: cushlabs-voice-redis
+    plan: free
+    maxmemoryPolicy: allkeys-lru
+    ipAllowList: []
