@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const webhookRouter = require('./routes/webhook');
+const { initDb } = require('./services/db');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -41,8 +42,9 @@ app.get('/nyc-coaching', (req, res) => {
 // Vapi webhook endpoint
 app.use('/api/webhook', webhookRouter);
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
     console.log(`CushLabs AI Voice Agent backend running on port ${PORT}`);
     console.log(`Webhook URL: http://localhost:${PORT}/api/webhook`);
     console.log(`Frontend: http://localhost:${PORT}`);
+    await initDb();
 });

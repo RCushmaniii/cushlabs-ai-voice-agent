@@ -7,11 +7,18 @@
     "start": "node server.js",
     "dev": "node --watch server.js"
   },
-  "keywords": ["ai", "voice-agent", "vapi", "groq", "cushlabs"],
+  "keywords": [
+    "ai",
+    "voice-agent",
+    "vapi",
+    "groq",
+    "cushlabs"
+  ],
   "author": "CushLabs AI Services",
   "license": "ISC",
   "packageManager": "pnpm@10.17.0",
   "dependencies": {
+    "@neondatabase/serverless": "^1.0.2",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",

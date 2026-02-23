@@ -1,6 +1,7 @@
 const express = require('express');
 const { storeLeadData, getLeadData, deleteLeadData } = require('../services/redis');
 const { getAvailableSlots, bookAppointment } = require('../services/calendar');
+const { saveLead, saveBooking, updateLeadWithCallData } = require('../services/db');
 
 const router = express.Router();
 
@@ -119,18 +120,16 @@ async function handleBookAppointment(functionCall, callId, res) {
         const result = await bookAppointment({ caller_name, caller_email, date_time, notes });
         console.log('[Calendar] Appointment booked:', result);
 
-        // Also store as lead data
+        // Store in Redis (session) and Neon (permanent)
         try {
-            await storeLeadData(callId, {
-                caller_name,
-                caller_email,
-                date_time,
-                notes: notes || '',
-                booked_at: new Date().toISOString(),
-                call_id: callId,
-            });
+            await storeLeadData(callId, { caller_name, caller_email, date_time, notes: notes || '', call_id: callId });
         } catch (redisErr) {
             console.error('[Redis] Failed to store booking lead:', redisErr.message);
+        }
+        try {
+            await saveBooking({ call_id: callId, caller_name, caller_email, date_time, notes });
+        } catch (dbErr) {
+            console.error('[DB] Failed to save booking:', dbErr.message);
         }
 
         return res.status(200).json({
@@ -168,6 +167,11 @@ async function handleQualifyLead(functionCall, callId, res) {
     } catch (redisError) {
         console.error('[Redis] Failed to store lead:', redisError.message);
     }
+    try {
+        await saveLead({ call_id: callId, caller_name: user_name, business_type, interest: ai_interest, source: 'cushlabs' });
+    } catch (dbErr) {
+        console.error('[DB] Failed to save lead:', dbErr.message);
+    }
 
     return res.status(200).json({
         results: [{
@@ -194,6 +198,11 @@ async function handleSaveLead(functionCall, callId, res) {
         console.log('[Vapi] Lead saved:', leadData);
     } catch (redisError) {
         console.error('[Redis] Failed to store lead:', redisError.message);
+    }
+    try {
+        await saveLead({ call_id: callId, caller_name, contact_info, interest, source: 'coaching' });
+    } catch (dbErr) {
+        console.error('[DB] Failed to save lead:', dbErr.message);
     }
 
     return res.status(200).json({
@@ -227,7 +236,11 @@ async function handleEndOfCallReport(message, res) {
                 summary,
                 ended_reason: duration,
             });
-            // TODO: Push to Neon Postgres for permanent storage
+            try {
+                await updateLeadWithCallData(callId, { transcript, summary, ended_reason: duration });
+            } catch (dbErr) {
+                console.error('[DB] Failed to update lead with call data:', dbErr.message);
+            }
             await deleteLeadData(callId);
         }
     } catch (redisError) {
