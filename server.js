@@ -19,11 +19,23 @@ app.get('/api/health', (req, res) => {
 });
 
 // Serve public Vapi config to frontend (only public key + assistant ID, never private key)
+const assistants = {
+    cushlabs: process.env.VAPI_ASSISTANT_ID_CUSHLABS,
+    coaching: process.env.VAPI_ASSISTANT_ID_COACHING,
+};
+
 app.get('/api/config', (req, res) => {
+    const service = req.query.service || 'cushlabs';
+    const assistantId = assistants[service] || assistants.cushlabs;
     res.json({
         publicKey: process.env.VAPI_API_PUBLIC_KEY,
-        assistantId: process.env.VAPI_ASSISTANT_ID,
+        assistantId,
     });
+});
+
+// Serve NYC Coaching page
+app.get('/nyc-coaching', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'nyc-coaching.html'));
 });
 
 // Vapi webhook endpoint

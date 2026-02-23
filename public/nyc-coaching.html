@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#FF6A3D">
+    <meta name="theme-color" content="#C9A84C">
     <link rel="icon" href="/voice_agent.ico" type="image/x-icon">
-    <title>CushLabs AI Services</title>
+    <title>New York English Executive Coaching</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --cush-orange: #FF6A3D;
-            --cush-black: #000000;
-            --cush-gray-900: #0A0A0A;
-            --cush-gray-800: #141414;
-            --cush-gray-700: #1A1A1A;
-            --cush-gray-400: #666666;
-            --cush-gray-300: #888888;
-            --cush-gray-200: #AAAAAA;
-            --color-orange-glow: rgba(255, 106, 61, 0.15);
+            --accent: #C9A84C;
+            --accent-light: #D4BA6A;
+            --accent-glow: rgba(201, 168, 76, 0.15);
+            --accent-glow-strong: rgba(201, 168, 76, 0.25);
+            --bg: #000000;
+            --gray-900: #0A0A0A;
+            --gray-800: #141414;
+            --gray-700: #1A1A1A;
+            --gray-400: #666666;
+            --gray-300: #888888;
+            --gray-200: #AAAAAA;
         }
 
         * {
@@ -29,8 +31,8 @@
         }
 
         ::selection {
-            background-color: var(--cush-orange);
-            color: var(--cush-black);
+            background-color: var(--accent);
+            color: #000000;
         }
 
         html {
@@ -40,7 +42,7 @@
 
         body {
             font-family: "Source Serif 4", Georgia, serif;
-            background: var(--cush-black);
+            background: var(--bg);
             color: #ffffff;
             min-height: 100vh;
             display: flex;
@@ -51,7 +53,7 @@
             position: relative;
         }
 
-        /* Aurora background */
+        /* Subtle aurora — muted gold */
         .aurora-container {
             position: fixed;
             inset: 0;
@@ -63,36 +65,26 @@
         .aurora-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.12;
+            filter: blur(120px);
+            opacity: 0.08;
         }
 
         .aurora-orb-1 {
-            width: 600px;
-            height: 600px;
-            background: var(--cush-orange);
-            top: -15%;
-            right: -10%;
-            animation: aurora-1 22s ease-in-out infinite;
+            width: 700px;
+            height: 700px;
+            background: var(--accent);
+            top: -20%;
+            right: -15%;
+            animation: aurora-1 25s ease-in-out infinite;
         }
 
         .aurora-orb-2 {
             width: 500px;
             height: 500px;
-            background: var(--cush-orange);
-            bottom: -20%;
+            background: #8B7232;
+            bottom: -15%;
             left: -10%;
-            animation: aurora-2 25s ease-in-out infinite;
-        }
-
-        .aurora-orb-3 {
-            width: 350px;
-            height: 350px;
-            background: #ff8c66;
-            top: 40%;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: aurora-1 20s ease-in-out infinite reverse;
+            animation: aurora-2 28s ease-in-out infinite;
         }
 
         @keyframes aurora-1 {
@@ -107,44 +99,89 @@
             66% { transform: translate(30px, -30px) scale(1.1); }
         }
 
+        /* Thin gold line accent */
+        .top-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            z-index: 2;
+        }
+
         /* Content */
         .hero {
             text-align: center;
-            max-width: 720px;
+            max-width: 680px;
             padding: 2rem;
             position: relative;
             z-index: 1;
             animation: fade-in-up 0.8s ease-out;
         }
 
-        .hero-logo {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 1.5rem;
-            border-radius: 1rem;
-            object-fit: contain;
+        .hero-label {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
         }
 
         .hero h1 {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 3.2rem;
-            font-weight: 700;
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 2.8rem;
+            font-weight: 500;
             color: #ffffff;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+            line-height: 1.2;
         }
 
-        .hero h1 span {
-            color: var(--cush-orange);
+        .hero h2 {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 1.4rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--gray-200);
+            margin-bottom: 2rem;
         }
 
         .hero p.tagline {
             font-family: "Source Serif 4", Georgia, serif;
-            font-size: 1.2rem;
-            color: var(--cush-gray-200);
+            font-size: 1.1rem;
+            color: var(--gray-300);
             line-height: 1.8;
             margin-bottom: 2.5rem;
             font-weight: 300;
+        }
+
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .services span {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--gray-300);
+            border: 1px solid var(--gray-700);
+            padding: 0.35rem 0.75rem;
+            border-radius: 100px;
+            transition: border-color 0.3s, color 0.3s;
+        }
+
+        .services span:hover {
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
         /* Voice button */
@@ -152,30 +189,36 @@
             width: 88px;
             height: 88px;
             border-radius: 50%;
-            border: none;
-            background: var(--cush-orange);
+            border: 2px solid var(--accent);
+            background: transparent;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1.25rem;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 0 24px rgba(255, 106, 61, 0.25);
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            box-shadow: 0 0 24px var(--accent-glow);
             position: relative;
         }
 
         .voice-btn:hover:not(:disabled) {
             transform: scale(1.06);
-            box-shadow: 0 0 36px rgba(255, 106, 61, 0.4);
+            background: var(--accent);
+            box-shadow: 0 0 36px var(--accent-glow-strong);
+        }
+
+        .voice-btn:hover:not(:disabled) svg {
+            fill: #000000;
         }
 
         .voice-btn:disabled {
-            opacity: 0.5;
+            opacity: 0.4;
             cursor: not-allowed;
         }
 
         .voice-btn.active {
             background: #ef4444;
+            border-color: #ef4444;
             box-shadow: 0 0 30px rgba(239, 68, 68, 0.4);
         }
 
@@ -183,9 +226,9 @@
         .voice-btn::before {
             content: "";
             position: absolute;
-            inset: -6px;
+            inset: -8px;
             border-radius: 50%;
-            border: 2px solid var(--cush-orange);
+            border: 1px solid var(--accent);
             opacity: 0;
             animation: breathe 4s ease-in-out infinite;
         }
@@ -197,25 +240,30 @@
 
         @keyframes breathe {
             0%, 100% { opacity: 0; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(1.15); }
+            50% { opacity: 0.3; transform: scale(1.18); }
         }
 
         @keyframes breathe-active {
             0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.2); }
+            50% { opacity: 0.5; transform: scale(1.2); }
         }
 
         .voice-btn svg {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
+            fill: var(--accent);
+            transition: fill 0.3s;
+        }
+
+        .voice-btn.active svg {
             fill: white;
         }
 
         .status-text {
             font-family: "Space Grotesk", sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
-            color: var(--cush-gray-300);
+            color: var(--gray-400);
             min-height: 1.5em;
             transition: color 0.3s;
         }
@@ -225,7 +273,7 @@
         }
 
         .status-text.ready {
-            color: var(--cush-orange);
+            color: var(--accent);
         }
 
         /* Footer */
@@ -233,19 +281,26 @@
             position: fixed;
             bottom: 1.5rem;
             font-family: "Space Grotesk", sans-serif;
-            color: var(--cush-gray-400);
-            font-size: 0.8rem;
+            color: var(--gray-400);
+            font-size: 0.75rem;
             z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .footer a {
-            color: var(--cush-orange);
+            color: var(--accent);
             text-decoration: none;
             transition: color 0.3s;
         }
 
         .footer a:hover {
-            color: #ff8c66;
+            color: var(--accent-light);
+        }
+
+        .footer .sep {
+            color: var(--gray-700);
         }
 
         /* Animations */
@@ -256,32 +311,45 @@
 
         @media (prefers-reduced-motion: reduce) {
             .aurora-orb { animation: none !important; }
-            .voice-btn::before { animation: none !important; opacity: 0.3; }
+            .voice-btn::before { animation: none !important; opacity: 0.2; }
             .hero { animation: none !important; opacity: 1; }
         }
 
         @media (max-width: 640px) {
-            .hero h1 { font-size: 2.2rem; }
-            .hero p.tagline { font-size: 1.05rem; }
+            .hero h1 { font-size: 2rem; }
+            .hero h2 { font-size: 1.1rem; }
+            .hero p.tagline { font-size: 1rem; }
             .voice-btn { width: 72px; height: 72px; }
-            .voice-btn svg { width: 30px; height: 30px; }
+            .voice-btn svg { width: 28px; height: 28px; }
+            .services span { font-size: 0.65rem; }
         }
     </style>
 </head>
 <body>
+    <div class="top-line"></div>
+
     <!-- Aurora background -->
     <div class="aurora-container">
         <div class="aurora-orb aurora-orb-1"></div>
         <div class="aurora-orb aurora-orb-2"></div>
-        <div class="aurora-orb aurora-orb-3"></div>
     </div>
 
     <div class="hero">
-        <img src="/images/voice_agent_logo.png" alt="CushLabs AI Voice Agent" class="hero-logo">
-        <h1>Cush<span>Labs</span> AI</h1>
+        <p class="hero-label">New York English</p>
+        <h1>Executive Coaching</h1>
+        <h2>Communicate with clarity, confidence, and presence.</h2>
+
+        <div class="services">
+            <span>Executive Communication</span>
+            <span>Accent Refinement</span>
+            <span>Public Speaking</span>
+            <span>Business English</span>
+            <span>Interview Prep</span>
+        </div>
+
         <p class="tagline">
-            AI integration and software development consulting for small businesses.
-            Talk to our AI assistant to explore how we can help.
+            Speak with James, our AI scheduling assistant, to learn about our services
+            and book your complimentary discovery session.
         </p>
 
         <button class="voice-btn" id="voiceBtn" disabled>
@@ -297,7 +365,9 @@
     </div>
 
     <div class="footer">
-        &copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a>
+        <a href="https://cushlabs.ai">Powered by CushLabs AI</a>
+        <span class="sep">|</span>
+        <span>New York, NY</span>
     </div>
 
     <!-- Vapi Web SDK (ESM) -->
@@ -315,7 +385,7 @@
 
         async function initVapi() {
             try {
-                const res = await fetch("/api/config?service=cushlabs");
+                const res = await fetch("/api/config?service=coaching");
                 const config = await res.json();
                 assistantId = config.assistantId;
 
@@ -326,7 +396,7 @@
                     voiceBtn.classList.add("active");
                     micIcon.style.display = "none";
                     stopIcon.style.display = "block";
-                    statusText.textContent = "Listening... click to end call";
+                    statusText.textContent = "Speaking with James... click to end";
                     statusText.className = "status-text active";
                 });
 
@@ -335,12 +405,12 @@
                     voiceBtn.classList.remove("active");
                     micIcon.style.display = "block";
                     stopIcon.style.display = "none";
-                    statusText.textContent = "Call ended — click to start again";
+                    statusText.textContent = "Call ended — click to speak again";
                     statusText.className = "status-text ready";
                 });
 
                 vapi.on("error", (error) => {
-                    console.error("[CushLabs] Vapi error:", error);
+                    console.error("[NYC Coaching] Vapi error:", error);
                     statusText.textContent = "Something went wrong. Try again.";
                     statusText.className = "status-text";
                     isCallActive = false;
@@ -350,7 +420,7 @@
                 });
 
                 vapi.on("speech-start", () => {
-                    if (isCallActive) statusText.textContent = "Assistant speaking...";
+                    if (isCallActive) statusText.textContent = "James is speaking...";
                 });
 
                 vapi.on("speech-end", () => {
@@ -358,11 +428,11 @@
                 });
 
                 voiceBtn.disabled = false;
-                statusText.textContent = "Click to talk with our AI assistant";
+                statusText.textContent = "Click to speak with James";
                 statusText.className = "status-text ready";
 
             } catch (err) {
-                console.error("[CushLabs] Failed to initialize:", err);
+                console.error("[NYC Coaching] Failed to initialize:", err);
                 statusText.textContent = "Failed to load. Please refresh.";
             }
         }
@@ -373,12 +443,12 @@
             if (isCallActive) {
                 vapi.stop();
             } else {
-                statusText.textContent = "Connecting...";
+                statusText.textContent = "Connecting to James...";
                 voiceBtn.disabled = true;
                 try {
                     await vapi.start(assistantId);
                 } catch (err) {
-                    console.error("[CushLabs] Failed to start call:", err);
+                    console.error("[NYC Coaching] Failed to start call:", err);
                     statusText.textContent = "Failed to connect. Try again.";
                     statusText.className = "status-text";
                 }
