@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CushLabs AI Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero {
+            text-align: center;
+            max-width: 720px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #9ca3af;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .cta-text {
+            font-size: 1rem;
+            color: #6366f1;
+            font-weight: 500;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 1.5rem;
+            color: #4b5563;
+            font-size: 0.85rem;
+        }
+
+        .footer a {
+            color: #6366f1;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>CushLabs AI Services</h1>
+        <p>
+            AI-powered solutions for small businesses. Talk to our AI assistant
+            to explore how we can help transform your operations.
+        </p>
+        <p class="cta-text">Click the voice button below to start a conversation</p>
+    </div>
+
+    <div class="footer">
+        &copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a>
+    </div>
+
+    <!-- Vapi Web SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@vapi-ai/web@latest/dist/vapi.min.js"></script>
+    <script>
+        // Replace these with your actual Vapi credentials
+        const VAPI_PUBLIC_KEY = 'YOUR_VAPI_PUBLIC_KEY';
+        const VAPI_ASSISTANT_ID = 'YOUR_VAPI_ASSISTANT_ID';
+
+        // Initialize Vapi widget
+        const vapi = new Vapi(VAPI_PUBLIC_KEY);
+
+        // Start a call when the user clicks the Vapi button
+        // The Vapi SDK auto-renders a floating action button
+        vapi.on('call-start', () => {
+            console.log('[CushLabs] Voice call started');
+        });
+
+        vapi.on('call-end', () => {
+            console.log('[CushLabs] Voice call ended');
+        });
+
+        vapi.on('error', (error) => {
+            console.error('[CushLabs] Vapi error:', error);
+        });
+
+        vapi.on('speech-start', () => {
+            console.log('[CushLabs] Assistant speaking');
+        });
+
+        vapi.on('speech-end', () => {
+            console.log('[CushLabs] Assistant stopped speaking');
+        });
+
+        // Auto-start with the configured assistant
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('[CushLabs] Voice agent ready. Waiting for user interaction.');
+        });
+    </script>
+</body>
+</html>

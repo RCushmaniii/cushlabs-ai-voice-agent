@@ -1,0 +1,20 @@
+{
+  "name": "cushlabs-ai-voice-agent",
+  "version": "1.0.0",
+  "description": "Low-latency AI voice qualification agent for CushLabs.ai",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": ["ai", "voice-agent", "vapi", "groq", "cushlabs"],
+  "author": "CushLabs AI Services",
+  "license": "ISC",
+  "packageManager": "pnpm@10.17.0",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "redis": "^5.11.0"
+  }
+}

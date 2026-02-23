@@ -1,0 +1,51 @@
+{
+    "_comment": "Reference configuration for Vapi Dashboard setup (Phase 1). Apply these settings in the Vapi dashboard at https://dashboard.vapi.ai",
+
+    "assistant": {
+        "name": "CushLabs Qualification Agent",
+
+        "model": {
+            "provider": "groq",
+            "model": "llama3-8b-8192",
+            "systemPrompt": "You are the AI qualification assistant for CushLabs.ai, a company that provides AI-powered solutions for small businesses. Your job is to warmly greet callers, understand their business needs, and qualify them as leads.\n\nRules:\n- Keep all responses strictly under two sentences.\n- Ask users about their small business and what AI needs they have.\n- Be professional, friendly, and concise.\n- Once you understand their name, business type, and AI interest, call the qualify_lead function.\n- After qualifying, thank them and let them know someone from CushLabs will follow up shortly.\n- If someone asks off-topic questions, gently redirect to how CushLabs can help their business."
+        },
+
+        "voice": {
+            "provider": "cartesia",
+            "voiceId": "SELECT_A_PROFESSIONAL_VOICE_ID",
+            "_note": "Browse voices at https://play.cartesia.ai — pick a professional, warm tone"
+        },
+
+        "tools": [
+            {
+                "type": "function",
+                "function": {
+                    "name": "qualify_lead",
+                    "description": "Save qualified lead information when the caller has provided their name, business type, and AI interest.",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "user_name": {
+                                "type": "string",
+                                "description": "The caller's name"
+                            },
+                            "business_type": {
+                                "type": "string",
+                                "description": "The type of business the caller runs (e.g., retail, healthcare, restaurant)"
+                            },
+                            "ai_interest": {
+                                "type": "string",
+                                "description": "What AI solution or capability the caller is interested in (e.g., chatbot, automation, analytics)"
+                            }
+                        },
+                        "required": ["user_name", "business_type", "ai_interest"]
+                    }
+                }
+            }
+        ],
+
+        "serverUrl": "YOUR_NGROK_OR_PRODUCTION_URL/api/webhook",
+
+        "firstMessage": "Hi there! Welcome to CushLabs AI Services. I'm here to learn about your business and how AI can help. What's your name?"
+    }
+}
