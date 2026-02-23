@@ -18,6 +18,14 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', service: 'cushlabs-ai-voice-agent' });
 });
 
+// Serve public Vapi config to frontend (only public key + assistant ID, never private key)
+app.get('/api/config', (req, res) => {
+    res.json({
+        publicKey: process.env.VAPI_API_PUBLIC_KEY,
+        assistantId: process.env.VAPI_ASSISTANT_ID,
+    });
+});
+
 // Vapi webhook endpoint
 app.use('/api/webhook', webhookRouter);
 

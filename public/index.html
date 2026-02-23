@@ -87,39 +87,44 @@
     <!-- Vapi Web SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@vapi-ai/web@latest/dist/vapi.min.js"></script>
     <script>
-        // Replace these with your actual Vapi credentials
-        const VAPI_PUBLIC_KEY = 'YOUR_VAPI_PUBLIC_KEY';
-        const VAPI_ASSISTANT_ID = 'YOUR_VAPI_ASSISTANT_ID';
+        /**
+         * These values are loaded from the server's /api/config endpoint
+         * so that API keys stay in .env and are never hardcoded in frontend code.
+         */
+        async function initVapi() {
+            try {
+                const res = await fetch('/api/config');
+                const config = await res.json();
 
-        // Initialize Vapi widget
-        const vapi = new Vapi(VAPI_PUBLIC_KEY);
+                const vapi = new Vapi(config.publicKey);
 
-        // Start a call when the user clicks the Vapi button
-        // The Vapi SDK auto-renders a floating action button
-        vapi.on('call-start', () => {
-            console.log('[CushLabs] Voice call started');
-        });
+                vapi.on('call-start', () => {
+                    console.log('[CushLabs] Voice call started');
+                });
 
-        vapi.on('call-end', () => {
-            console.log('[CushLabs] Voice call ended');
-        });
+                vapi.on('call-end', () => {
+                    console.log('[CushLabs] Voice call ended');
+                });
 
-        vapi.on('error', (error) => {
-            console.error('[CushLabs] Vapi error:', error);
-        });
+                vapi.on('error', (error) => {
+                    console.error('[CushLabs] Vapi error:', error);
+                });
 
-        vapi.on('speech-start', () => {
-            console.log('[CushLabs] Assistant speaking');
-        });
+                vapi.on('speech-start', () => {
+                    console.log('[CushLabs] Assistant speaking');
+                });
 
-        vapi.on('speech-end', () => {
-            console.log('[CushLabs] Assistant stopped speaking');
-        });
+                vapi.on('speech-end', () => {
+                    console.log('[CushLabs] Assistant stopped speaking');
+                });
 
-        // Auto-start with the configured assistant
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('[CushLabs] Voice agent ready. Waiting for user interaction.');
-        });
+                console.log('[CushLabs] Voice agent initialized. Ready for interaction.');
+            } catch (err) {
+                console.error('[CushLabs] Failed to initialize voice agent:', err);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initVapi);
     </script>
 </body>
 </html>
