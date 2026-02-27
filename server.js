@@ -39,6 +39,11 @@ app.get('/nyc-coaching', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'nyc-coaching.html'));
 });
 
+// Serve Portfolio page
+app.get('/portfolio', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'portfolio.html'));
+});
+
 // Vapi webhook endpoint
 app.use('/api/webhook', webhookRouter);
 

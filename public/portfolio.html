@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FF6A3D">
+    <link rel="icon" href="/voice_agent.ico" type="image/x-icon">
+    <title>AI Voice Agent Portfolio — CushLabs AI Services</title>
+    <meta name="description" content="Production-ready AI voice agents for lead qualification, appointment booking, customer support, and more. See live demos and industry use cases.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cush-orange: #FF6A3D;
+            --cush-orange-light: #ff8c66;
+            --cush-black: #000000;
+            --gray-950: #050505;
+            --gray-900: #0A0A0A;
+            --gray-800: #141414;
+            --gray-700: #1A1A1A;
+            --gray-600: #2A2A2A;
+            --gray-500: #444444;
+            --gray-400: #666666;
+            --gray-300: #888888;
+            --gray-200: #AAAAAA;
+            --gray-100: #CCCCCC;
+            --orange-glow: rgba(255, 106, 61, 0.15);
+            --orange-glow-strong: rgba(255, 106, 61, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background-color: var(--cush-orange);
+            color: var(--cush-black);
+        }
+
+        html {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Source Serif 4", Georgia, serif;
+            background: var(--cush-black);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Aurora background */
+        .aurora-container {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .aurora-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.08;
+        }
+
+        .aurora-orb-1 {
+            width: 800px;
+            height: 800px;
+            background: var(--cush-orange);
+            top: -20%;
+            right: -15%;
+            animation: aurora-1 25s ease-in-out infinite;
+        }
+
+        .aurora-orb-2 {
+            width: 600px;
+            height: 600px;
+            background: #ff8c66;
+            bottom: -15%;
+            left: -10%;
+            animation: aurora-2 28s ease-in-out infinite;
+        }
+
+        .aurora-orb-3 {
+            width: 400px;
+            height: 400px;
+            background: var(--cush-orange);
+            top: 50%;
+            left: 40%;
+            animation: aurora-1 22s ease-in-out infinite reverse;
+        }
+
+        @keyframes aurora-1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        @keyframes aurora-2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-40px, 20px) scale(0.9); }
+            66% { transform: translate(30px, -30px) scale(1.1); }
+        }
+
+        /* Top accent line */
+        .top-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--cush-orange), transparent);
+            z-index: 10;
+        }
+
+        /* Nav */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9;
+            padding: 1.25rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .nav-brand {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .nav-brand span {
+            color: var(--cush-orange);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--gray-300);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--cush-orange);
+        }
+
+        /* Sections */
+        .section {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 5rem;
+            padding-bottom: 4rem;
+            animation: fade-in-up 0.8s ease-out;
+        }
+
+        .hero-label {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--cush-orange);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 3.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        .hero h1 .accent {
+            color: var(--cush-orange);
+        }
+
+        .hero h2 {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 1.3rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--gray-200);
+            max-width: 600px;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-value {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--cush-orange);
+            display: block;
+        }
+
+        .hero-stat-label {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-400);
+            margin-top: 0.25rem;
+        }
+
+        .scroll-cue {
+            margin-top: 2rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .scroll-cue svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--gray-500);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+
+        /* Section headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-label {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--cush-orange);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-subtitle {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: var(--gray-300);
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Live Demos */
+        .demos {
+            padding: 5rem 2rem;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .demo-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.4s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        .demo-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .demo-card.cushlabs-card {
+            --card-accent: #FF6A3D;
+        }
+
+        .demo-card.cushlabs-card:hover {
+            border-color: rgba(255, 106, 61, 0.3);
+        }
+
+        .demo-card.coaching-card {
+            --card-accent: #C9A84C;
+        }
+
+        .demo-card.coaching-card:hover {
+            border-color: rgba(201, 168, 76, 0.3);
+        }
+
+        .demo-card-glow {
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 300px;
+            height: 300px;
+            background: var(--card-accent);
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+        }
+
+        .demo-card:hover .demo-card-glow {
+            opacity: 0.06;
+        }
+
+        .demo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #22c55e;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            padding: 0.3rem 0.7rem;
+            border-radius: 100px;
+            margin-bottom: 1.25rem;
+        }
+
+        .demo-badge-dot {
+            width: 6px;
+            height: 6px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .demo-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .demo-card-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--card-accent);
+        }
+
+        .demo-card h3 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .demo-card h4 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--card-accent);
+            margin-bottom: 1rem;
+        }
+
+        .demo-card p {
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--gray-300);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .demo-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .demo-feature {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.65rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--gray-300);
+            border: 1px solid var(--gray-700);
+            padding: 0.3rem 0.6rem;
+            border-radius: 100px;
+            transition: border-color 0.3s, color 0.3s;
+        }
+
+        .demo-card:hover .demo-feature {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .demo-tech {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.65rem;
+            color: var(--gray-500);
+            margin-bottom: 1.5rem;
+        }
+
+        .demo-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--card-accent);
+            text-decoration: none;
+            transition: gap 0.3s;
+        }
+
+        .demo-link:hover {
+            gap: 0.75rem;
+        }
+
+        .demo-link svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--card-accent);
+        }
+
+        /* Use Cases */
+        .use-cases {
+            padding: 5rem 2rem;
+        }
+
+        .use-case-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+
+        .use-case-card {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 2rem 1.5rem;
+            transition: border-color 0.4s, transform 0.3s;
+            position: relative;
+        }
+
+        .use-case-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .use-case-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        .use-case-icon.healthcare { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.15); }
+        .use-case-icon.realestate { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.15); }
+        .use-case-icon.legal { background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.15); }
+        .use-case-icon.restaurant { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.15); }
+        .use-case-icon.support { background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.15); }
+        .use-case-icon.fitness { background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.15); }
+
+        .use-case-card h3 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .use-case-card p {
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: var(--gray-300);
+            line-height: 1.65;
+            margin-bottom: 1.25rem;
+        }
+
+        .use-case-capabilities {
+            list-style: none;
+        }
+
+        .use-case-capabilities li {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.72rem;
+            color: var(--gray-400);
+            padding: 0.3rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .use-case-capabilities li::before {
+            content: "";
+            width: 4px;
+            height: 4px;
+            background: var(--cush-orange);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* How it works */
+        .how-it-works {
+            padding: 5rem 2rem;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            counter-reset: step;
+        }
+
+        .step {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            position: relative;
+        }
+
+        .step-number {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: rgba(255, 106, 61, 0.12);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .step h3 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .step p {
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--gray-400);
+            line-height: 1.6;
+        }
+
+        /* CTA */
+        .cta {
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .cta p {
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: var(--gray-300);
+            max-width: 500px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #000000;
+            background: var(--cush-orange);
+            border: none;
+            padding: 0.85rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 0 20px var(--orange-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px var(--orange-glow-strong);
+        }
+
+        .btn-secondary {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--cush-orange);
+            background: transparent;
+            border: 1px solid rgba(255, 106, 61, 0.3);
+            padding: 0.85rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--cush-orange);
+            background: rgba(255, 106, 61, 0.05);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer p {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.75rem;
+            color: var(--gray-500);
+        }
+
+        .footer a {
+            color: var(--cush-orange);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--cush-orange-light);
+        }
+
+        /* Animations */
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (prefers-reduced-motion: reduce) {
+            .aurora-orb { animation: none !important; }
+            .scroll-cue { animation: none !important; }
+            .demo-badge-dot { animation: none !important; opacity: 1; }
+            .hero, .reveal { animation: none !important; opacity: 1; transform: none; }
+        }
+
+        @media (max-width: 900px) {
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .use-case-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav {
+                padding: 1rem 1.25rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 0.7rem;
+            }
+
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+
+            .hero h2 {
+                font-size: 1.1rem;
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+            }
+
+            .hero-stat-value {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.7rem;
+            }
+
+            .use-case-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .cta h2 {
+                font-size: 1.8rem;
+            }
+
+            .demo-card {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-line"></div>
+
+    <!-- Aurora background -->
+    <div class="aurora-container">
+        <div class="aurora-orb aurora-orb-1"></div>
+        <div class="aurora-orb aurora-orb-2"></div>
+        <div class="aurora-orb aurora-orb-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="/" class="nav-brand">Cush<span>Labs</span></a>
+        <ul class="nav-links">
+            <li><a href="#demos">Live Demos</a></li>
+            <li><a href="#use-cases">Use Cases</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="section hero">
+        <p class="hero-label">CushLabs AI Services</p>
+        <h1>AI Voice Agents<br>for <span class="accent">Every Business</span></h1>
+        <h2>
+            Production-ready voice assistants that qualify leads, book appointments,
+            and handle customer conversations — 24/7, with zero hold times.
+        </h2>
+
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <span class="hero-stat-value">&lt;500ms</span>
+                <span class="hero-stat-label">Response Latency</span>
+            </div>
+            <div class="hero-stat">
+                <span class="hero-stat-value">24/7</span>
+                <span class="hero-stat-label">Availability</span>
+            </div>
+            <div class="hero-stat">
+                <span class="hero-stat-value">2</span>
+                <span class="hero-stat-label">Live Assistants</span>
+            </div>
+        </div>
+
+        <div class="cta-buttons">
+            <a href="#demos" class="btn-primary">Try a Live Demo</a>
+            <a href="#contact" class="btn-secondary">Build Yours</a>
+        </div>
+
+        <div class="scroll-cue">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Live Demos -->
+    <section class="section demos" id="demos">
+        <div class="section-header reveal">
+            <p class="section-label">Live Demos</p>
+            <h2 class="section-title">Talk to Our Agents</h2>
+            <p class="section-subtitle">
+                These are production voice agents — click through to have a real conversation
+                and experience the technology firsthand.
+            </p>
+        </div>
+
+        <div class="demo-grid">
+            <!-- Clara — CushLabs -->
+            <div class="demo-card cushlabs-card reveal">
+                <div class="demo-card-glow"></div>
+                <div class="demo-badge">
+                    <span class="demo-badge-dot"></span>
+                    Live
+                </div>
+                <div class="demo-card-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+                    </svg>
+                </div>
+                <h3>Clara</h3>
+                <h4>AI Lead Qualification</h4>
+                <p>
+                    An intelligent lead qualification agent for CushLabs AI Services.
+                    Clara greets prospects, understands their business needs, and captures
+                    qualified lead data — all through natural voice conversation.
+                </p>
+                <div class="demo-features">
+                    <span class="demo-feature">Lead Capture</span>
+                    <span class="demo-feature">Needs Assessment</span>
+                    <span class="demo-feature">AI Interest Mapping</span>
+                    <span class="demo-feature">CRM Integration</span>
+                </div>
+                <p class="demo-tech">Claude Sonnet &middot; Vapi Clara Voice &middot; Neon Postgres</p>
+                <a href="/" class="demo-link">
+                    Talk to Clara
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- James — NYC Coaching -->
+            <div class="demo-card coaching-card reveal">
+                <div class="demo-card-glow"></div>
+                <div class="demo-badge">
+                    <span class="demo-badge-dot"></span>
+                    Live
+                </div>
+                <div class="demo-card-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/>
+                    </svg>
+                </div>
+                <h3>James</h3>
+                <h4>Appointment Booking</h4>
+                <p>
+                    A premium scheduling assistant for an executive coaching practice.
+                    James checks real-time Google Calendar availability, books sessions with
+                    Google Meet links, and sends confirmation emails — hands-free.
+                </p>
+                <div class="demo-features">
+                    <span class="demo-feature">Google Calendar</span>
+                    <span class="demo-feature">Real-Time Availability</span>
+                    <span class="demo-feature">Auto-Booking</span>
+                    <span class="demo-feature">Email Confirmations</span>
+                    <span class="demo-feature">Google Meet Links</span>
+                </div>
+                <p class="demo-tech">Groq Llama 3.1 &middot; Cartesia Nathan Voice &middot; Google Calendar API</p>
+                <a href="/nyc-coaching" class="demo-link">
+                    Talk to James
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="section use-cases" id="use-cases">
+        <div class="section-header reveal">
+            <p class="section-label">Industry Applications</p>
+            <h2 class="section-title">Built for Any Business</h2>
+            <p class="section-subtitle">
+                The same voice agent platform powers these ready-to-deploy
+                solutions across industries.
+            </p>
+        </div>
+
+        <div class="use-case-grid">
+            <!-- Healthcare -->
+            <div class="use-case-card reveal">
+                <div class="use-case-icon healthcare">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z" fill="#3B82F6"/>
+                    </svg>
+                </div>
+                <h3>Healthcare</h3>
+                <p>Patient intake and appointment scheduling that reduces front-desk burden and after-hours call volume.</p>
+                <ul class="use-case-capabilities">
+                    <li>Patient pre-screening questions</li>
+                    <li>Insurance verification prompts</li>
+                    <li>EHR-aware scheduling</li>
+                    <li>Prescription refill requests</li>
+                </ul>
+            </div>
+
+            <!-- Real Estate -->
+            <div class="use-case-card reveal">
+                <div class="use-case-icon realestate">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="#10B981"/>
+                    </svg>
+                </div>
+                <h3>Real Estate</h3>
+                <p>Capture property inquiries and schedule showings while agents are out meeting clients.</p>
+                <ul class="use-case-capabilities">
+                    <li>Property detail lookups</li>
+                    <li>Tour scheduling by listing</li>
+                    <li>Buyer/seller qualification</li>
+                    <li>Market area routing</li>
+                </ul>
+            </div>
+
+            <!-- Legal -->
+            <div class="use-case-card reveal">
+                <div class="use-case-icon legal">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z" fill="#A855F7"/>
+                    </svg>
+                </div>
+                <h3>Legal Services</h3>
+                <p>Client intake and consultation booking for law firms. Capture case details before the first meeting.</p>
+                <ul class="use-case-capabilities">
+                    <li>Case type classification</li>
+                    <li>Conflict-of-interest screening</li>
+                    <li>Attorney-matched scheduling</li>
+                    <li>Document prep reminders</li>
+                </ul>
+            </div>
+
+            <!-- Restaurant -->
+            <div class="use-case-card reveal">
+                <div class="use-case-icon restaurant">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z" fill="#F59E0B"/>
+                    </svg>
+                </div>
+                <h3>Restaurants</h3>
+                <p>Handle reservation calls, answer menu questions, and manage waitlists — while staff focus on guests.</p>
+                <ul class="use-case-capabilities">
+                    <li>Table reservations</li>
+                    <li>Menu & allergy info</li>
+                    <li>Waitlist management</li>
+                    <li>Catering inquiries</li>
+                </ul>
+            </div>
+
+            <!-- Customer Support -->
+            <div class="use-case-card reveal">
+                <div class="use-case-icon support">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 1c-4.97 0-9 4.03-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7c0-4.97-4.03-9-9-9z" fill="#6366F1"/>
+                    </svg>
+                </div>
+                <h3>Customer Support</h3>
+                <p>First-line support that resolves common issues, routes complex cases, and eliminates hold times.</p>
+                <ul class="use-case-capabilities">
+                    <li>FAQ resolution</li>
+                    <li>Ticket creation & routing</li>
+                    <li>Order status lookups</li>
+                    <li>Escalation to humans</li>
+                </ul>
+            </div>
+
+            <!-- Fitness -->
+            <div class="use-case-card reveal">
+                <div class="use-case-icon fitness">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29z" fill="#EC4899"/>
+                    </svg>
+                </div>
+                <h3>Fitness & Wellness</h3>
+                <p>Class booking, membership inquiries, and personal training scheduling for studios and gyms.</p>
+                <ul class="use-case-capabilities">
+                    <li>Class schedule & booking</li>
+                    <li>Membership plan info</li>
+                    <li>Trainer matching</li>
+                    <li>Trial session booking</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section how-it-works" id="how-it-works">
+        <div class="section-header reveal">
+            <p class="section-label">Platform</p>
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">
+                From concept to production in days, not months.
+                Each agent is custom-built around your business logic.
+            </p>
+        </div>
+
+        <div class="steps reveal">
+            <div class="step">
+                <div class="step-number">01</div>
+                <h3>Define the Role</h3>
+                <p>We map your workflow — who calls, what they need, and what the ideal conversation looks like.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">02</div>
+                <h3>Build the Agent</h3>
+                <p>Custom voice, personality, and tool integrations. Calendar, CRM, database — whatever your stack needs.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">03</div>
+                <h3>Connect Systems</h3>
+                <p>Webhooks tie into your existing tools. Google Calendar, Salesforce, Stripe, Slack — all fair game.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">04</div>
+                <h3>Deploy & Iterate</h3>
+                <p>Go live on web, phone, or both. Real-time analytics and call transcripts help optimize over time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section cta" id="contact">
+        <div class="reveal">
+            <h2>Ready to Build Your Agent?</h2>
+            <p>
+                Every business has conversations that could be smarter.
+                Let's find yours.
+            </p>
+            <div class="cta-buttons">
+                <a href="/" class="btn-primary">Talk to Clara</a>
+                <a href="mailto:robert@cushlabs.ai" class="btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a> &middot; New York, NY</p>
+    </div>
+
+    <!-- Scroll reveal -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
