@@ -12,7 +12,11 @@ services:
         sync: false
       - key: VAPI_API_PRIVATE_KEY
         sync: false
-      - key: VAPI_ASSISTANT_ID
+      - key: VAPI_ASSISTANT_ID_CUSHLABS
+        sync: false
+      - key: VAPI_ASSISTANT_ID_COACHING
+        sync: false
+      - key: VAPI_ASSISTANT_ID_MEDSPA
         sync: false
       - key: GROQ_API_KEY
         sync: false
