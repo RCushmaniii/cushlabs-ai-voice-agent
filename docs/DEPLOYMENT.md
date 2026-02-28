@@ -49,16 +49,16 @@ All secrets are stored as env vars in Render dashboard (never committed to git).
 
 ### Optional (Enable Features)
 
-| Variable | Purpose |
-|----------|---------|
-| `DATABASE_URL` | Neon Postgres connection string (permanent lead/booking storage) |
-| `GOOGLE_CLIENT_ID` | Google OAuth — enables real calendar availability |
-| `GOOGLE_CLIENT_SECRET` | Google OAuth |
-| `GOOGLE_REFRESH_TOKEN` | Google OAuth refresh token |
-| `CALENDAR_ID` | Google Calendar ID for FreeBusy + event creation |
-| `COACH_EMAIL` | Email for calendar invite attendee (default: `rcushmaniii@gmail.com`) |
-| `GROQ_API_KEY` | Not used by server directly — Vapi uses it internally for James |
-| `CARTESIA_API_KEY` | Not used by server directly — for voice setup scripts only |
+| Variable | Purpose | Status |
+|----------|---------|--------|
+| `DATABASE_URL` | Neon Postgres connection string (permanent lead/booking storage) | **NOT SET on Render** — add ASAP. Without it, all leads, bookings, and transcripts are lost. Get from https://console.neon.tech |
+| `GOOGLE_CLIENT_ID` | Google OAuth — enables real calendar availability | Not set on Render |
+| `GOOGLE_CLIENT_SECRET` | Google OAuth | Not set on Render |
+| `GOOGLE_REFRESH_TOKEN` | Google OAuth refresh token | Not set on Render |
+| `CALENDAR_ID` | Google Calendar ID for FreeBusy + event creation | Not set on Render |
+| `COACH_EMAIL` | Email for calendar invite attendee (default: `rcushmaniii@gmail.com`) | Not set on Render |
+| `GROQ_API_KEY` | Not used by server directly — Vapi uses it internally for James | Not set on Render |
+| `CARTESIA_API_KEY` | Not used by server directly — for voice setup scripts only | Not set on Render |
 
 ### Local Development
 
@@ -86,7 +86,9 @@ Copy `.env.example` to `.env` and fill in values. Run with `pnpm dev` (uses `nod
 - **Dashboard**: https://console.neon.tech
 - **Role**: Permanent storage for leads and bookings
 - **Tables**: `leads`, `bookings` (auto-created on startup by `services/db.js`)
-- **Status**: Requires `DATABASE_URL` env var on Render (graceful skip if not set)
+- **Status**: **NOT CONNECTED** — Neon project not yet created for this repo. Code is ready, just needs `DATABASE_URL`.
+- **Priority**: HIGH — without this, all lead data, bookings, and call transcripts are lost after Redis TTL (24h) or flush
+- **Setup**: Create a Neon project → copy the connection string → add as `DATABASE_URL` on Render → redeploy. Tables auto-create on startup.
 
 ### Google Calendar
 
