@@ -314,7 +314,7 @@
 
         .demo-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
         }
 
@@ -347,6 +347,14 @@
 
         .demo-card.coaching-card:hover {
             border-color: rgba(201, 168, 76, 0.3);
+        }
+
+        .demo-card.medspa-card {
+            --card-accent: #C4956A;
+        }
+
+        .demo-card.medspa-card:hover {
+            border-color: rgba(196, 149, 106, 0.3);
         }
 
         .demo-card-glow {
@@ -741,7 +749,7 @@
 
         @media (max-width: 900px) {
             .demo-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
             }
 
             .use-case-grid {
@@ -802,6 +810,10 @@
             .demo-card {
                 padding: 2rem 1.5rem;
             }
+
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -845,7 +857,7 @@
                 <span class="hero-stat-label">Availability</span>
             </div>
             <div class="hero-stat">
-                <span class="hero-stat-value">2</span>
+                <span class="hero-stat-value">3</span>
                 <span class="hero-stat-label">Live Assistants</span>
             </div>
         </div>
@@ -937,6 +949,41 @@
                 <p class="demo-tech">Groq Llama 3.1 &middot; Cartesia Nathan Voice &middot; Google Calendar API</p>
                 <a href="/nyc-coaching" class="demo-link">
                     Talk to James
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Sophia — Med Spa -->
+            <div class="demo-card medspa-card reveal">
+                <div class="demo-card-glow"></div>
+                <div class="demo-badge">
+                    <span class="demo-badge-dot"></span>
+                    Live
+                </div>
+                <div class="demo-card-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <h3>Sophia</h3>
+                <h4>Med Spa AI Front Desk</h4>
+                <p>
+                    An AI front desk agent for medical aesthetics clinics.
+                    Sophia qualifies new clients, answers treatment questions,
+                    handles pricing objections, and books consultations — 24/7.
+                </p>
+                <div class="demo-features">
+                    <span class="demo-feature">Client Qualification</span>
+                    <span class="demo-feature">Treatment Info</span>
+                    <span class="demo-feature">Objection Handling</span>
+                    <span class="demo-feature">Consultation Booking</span>
+                    <span class="demo-feature">After-Hours Capture</span>
+                </div>
+                <p class="demo-tech">Claude Sonnet &middot; Cartesia Hannah Voice &middot; Deepgram Nova-2</p>
+                <a href="/medspa" class="demo-link">
+                    Talk to Sophia
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
                     </svg>

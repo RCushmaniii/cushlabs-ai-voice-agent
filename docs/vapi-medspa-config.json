@@ -1,0 +1,51 @@
+{
+  "name": "Sophia - Med Spa AI Front Desk",
+  "model": {
+    "provider": "anthropic",
+    "model": "claude-sonnet-4-20250514",
+    "temperature": 0.4,
+    "maxTokens": 250,
+    "systemMessage": "[PASTE FULL SYSTEM PROMPT FROM medspa-system-prompt.md HERE]"
+  },
+  "voice": {
+    "provider": "cartesia",
+    "voiceId": "[USE CARTESIA HANNAH OR EQUIVALENT WARM FEMALE VOICE ID]",
+    "speed": 0.92,
+    "stability": 0.85
+  },
+  "firstMessage": "Thank you for calling Radiance Medical Spa. This is Sophia, how can I help you today?",
+  "transcriber": {
+    "provider": "deepgram",
+    "model": "nova-2",
+    "language": "en"
+  },
+  "endCallMessage": "Thank you for calling Radiance Medical Spa. We look forward to seeing you. Have a wonderful day!",
+  "silenceTimeoutSeconds": 30,
+  "maxDurationSeconds": 600,
+  "endCallPhrases": [
+    "goodbye",
+    "that's all",
+    "have a good day",
+    "thanks bye"
+  ],
+  "metadata": {
+    "vertical": "med-spa",
+    "demo": true,
+    "version": "1.0"
+  },
+
+  "_notes": {
+    "CONFIGURATION_TIPS": [
+      "Temperature 0.4 keeps responses consistent but not robotic",
+      "maxTokens 250 prevents long-winded responses — critical for voice",
+      "silenceTimeoutSeconds 30 gives caller time to think without hanging up too fast",
+      "maxDurationSeconds 600 = 10 min cap, prevents runaway calls during demo",
+      "For production: add serverUrl for webhook to capture call data + trigger SMS"
+    ],
+    "TOOL_INTEGRATION": [
+      "Add Cal.com or Calendly function tool for real booking",
+      "Add Twilio SMS function for confirmation texts",
+      "Add webhook to push lead data to Google Sheets or CRM"
+    ]
+  }
+}

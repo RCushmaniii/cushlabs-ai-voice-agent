@@ -23,6 +23,7 @@ app.get('/api/health', (req, res) => {
 const assistants = {
     cushlabs: process.env.VAPI_ASSISTANT_ID_CUSHLABS,
     coaching: process.env.VAPI_ASSISTANT_ID_COACHING,
+    medspa: process.env.VAPI_ASSISTANT_ID_MEDSPA,
 };
 
 app.get('/api/config', (req, res) => {
@@ -37,6 +38,11 @@ app.get('/api/config', (req, res) => {
 // Serve NYC Coaching page
 app.get('/nyc-coaching', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'nyc-coaching.html'));
+});
+
+// Serve Med Spa demo page
+app.get('/medspa', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'medspa.html'));
 });
 
 // Serve Portfolio page

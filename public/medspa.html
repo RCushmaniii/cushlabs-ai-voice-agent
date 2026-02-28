@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#C4956A">
+    <link rel="icon" href="/voice_agent.ico" type="image/x-icon">
+    <title>Radiance Medical Spa — AI Front Desk</title>
+    <meta name="description" content="Speak with Sophia, our AI scheduling assistant, to learn about treatments and book your complimentary consultation.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #C4956A;
+            --accent-light: #D4A88C;
+            --accent-glow: rgba(196, 149, 106, 0.15);
+            --accent-glow-strong: rgba(196, 149, 106, 0.25);
+            --bg: #000000;
+            --gray-900: #0A0A0A;
+            --gray-800: #141414;
+            --gray-700: #1A1A1A;
+            --gray-400: #666666;
+            --gray-300: #888888;
+            --gray-200: #AAAAAA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background-color: var(--accent);
+            color: #000000;
+        }
+
+        html {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: "Source Serif 4", Georgia, serif;
+            background: var(--bg);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Subtle aurora — warm rose gold */
+        .aurora-container {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .aurora-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.08;
+        }
+
+        .aurora-orb-1 {
+            width: 700px;
+            height: 700px;
+            background: var(--accent);
+            top: -20%;
+            right: -15%;
+            animation: aurora-1 25s ease-in-out infinite;
+        }
+
+        .aurora-orb-2 {
+            width: 500px;
+            height: 500px;
+            background: #8B6B4A;
+            bottom: -15%;
+            left: -10%;
+            animation: aurora-2 28s ease-in-out infinite;
+        }
+
+        @keyframes aurora-1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        @keyframes aurora-2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-40px, 20px) scale(0.9); }
+            66% { transform: translate(30px, -30px) scale(1.1); }
+        }
+
+        /* Thin accent line */
+        .top-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            z-index: 2;
+        }
+
+        /* Content */
+        .hero {
+            text-align: center;
+            max-width: 680px;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+            animation: fade-in-up 0.8s ease-out;
+        }
+
+        .hero-label {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 2.8rem;
+            font-weight: 500;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+        }
+
+        .hero h2 {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 1.4rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--gray-200);
+            margin-bottom: 2rem;
+        }
+
+        .hero p.tagline {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 1.1rem;
+            color: var(--gray-300);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .services span {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--gray-300);
+            border: 1px solid var(--gray-700);
+            padding: 0.35rem 0.75rem;
+            border-radius: 100px;
+            transition: border-color 0.3s, color 0.3s;
+        }
+
+        .services span:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Voice button */
+        .voice-btn {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            box-shadow: 0 0 24px var(--accent-glow);
+            position: relative;
+        }
+
+        .voice-btn:hover:not(:disabled) {
+            transform: scale(1.06);
+            background: var(--accent);
+            box-shadow: 0 0 36px var(--accent-glow-strong);
+        }
+
+        .voice-btn:hover:not(:disabled) svg {
+            fill: #000000;
+        }
+
+        .voice-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .voice-btn.active {
+            background: #ef4444;
+            border-color: #ef4444;
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.4);
+        }
+
+        /* Breathing ring */
+        .voice-btn::before {
+            content: "";
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 1px solid var(--accent);
+            opacity: 0;
+            animation: breathe 4s ease-in-out infinite;
+        }
+
+        .voice-btn.active::before {
+            border-color: #ef4444;
+            animation: breathe-active 1.5s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { opacity: 0; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(1.18); }
+        }
+
+        @keyframes breathe-active {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .voice-btn svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--accent);
+            transition: fill 0.3s;
+        }
+
+        .voice-btn.active svg {
+            fill: white;
+        }
+
+        .status-text {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--gray-400);
+            min-height: 1.5em;
+            transition: color 0.3s;
+        }
+
+        .status-text.active {
+            color: #ef4444;
+        }
+
+        .status-text.ready {
+            color: var(--accent);
+        }
+
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 1.5rem;
+            font-family: "Space Grotesk", sans-serif;
+            color: var(--gray-400);
+            font-size: 0.75rem;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--accent-light);
+        }
+
+        .footer .sep {
+            color: var(--gray-700);
+        }
+
+        /* Animations */
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .aurora-orb { animation: none !important; }
+            .voice-btn::before { animation: none !important; opacity: 0.2; }
+            .hero { animation: none !important; opacity: 1; }
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 2rem; }
+            .hero h2 { font-size: 1.1rem; }
+            .hero p.tagline { font-size: 1rem; }
+            .voice-btn { width: 72px; height: 72px; }
+            .voice-btn svg { width: 28px; height: 28px; }
+            .services span { font-size: 0.65rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-line"></div>
+
+    <!-- Aurora background -->
+    <div class="aurora-container">
+        <div class="aurora-orb aurora-orb-1"></div>
+        <div class="aurora-orb aurora-orb-2"></div>
+    </div>
+
+    <div class="hero">
+        <p class="hero-label">Radiance Medical Spa</p>
+        <h1>AI Front Desk</h1>
+        <h2>Never miss a client. Never miss a booking.</h2>
+
+        <div class="services">
+            <span>Botox & Dysport</span>
+            <span>Dermal Fillers</span>
+            <span>Laser Treatments</span>
+            <span>Body Contouring</span>
+            <span>Skin Rejuvenation</span>
+        </div>
+
+        <p class="tagline">
+            Speak with Sophia, our AI scheduling assistant, to learn about our services
+            and book your complimentary consultation.
+        </p>
+
+        <button class="voice-btn" id="voiceBtn" disabled>
+            <svg id="micIcon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1-9c0-.55.45-1 1-1s1 .45 1 1v6c0 .55-.45 1-1 1s-1-.45-1-1V5z"/>
+                <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+            </svg>
+            <svg id="stopIcon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+                <rect x="6" y="6" width="12" height="12" rx="2"/>
+            </svg>
+        </button>
+        <p class="status-text" id="statusText">Loading...</p>
+    </div>
+
+    <div class="footer">
+        <a href="https://cushlabs.ai">Powered by CushLabs AI</a>
+        <span class="sep">|</span>
+        <span>Scottsdale, AZ</span>
+    </div>
+
+    <!-- Vapi Web SDK (ESM) -->
+    <script type="module">
+        import VapiModule from "https://cdn.jsdelivr.net/npm/@vapi-ai/web@latest/+esm";
+        const Vapi = VapiModule.default || VapiModule;
+
+        const voiceBtn = document.getElementById("voiceBtn");
+        const micIcon = document.getElementById("micIcon");
+        const stopIcon = document.getElementById("stopIcon");
+        const statusText = document.getElementById("statusText");
+        let vapi = null;
+        let isCallActive = false;
+        let assistantId = null;
+
+        async function initVapi() {
+            try {
+                const res = await fetch("/api/config?service=medspa");
+                const config = await res.json();
+                assistantId = config.assistantId;
+
+                vapi = new Vapi(config.publicKey);
+
+                vapi.on("call-start", () => {
+                    isCallActive = true;
+                    voiceBtn.classList.add("active");
+                    micIcon.style.display = "none";
+                    stopIcon.style.display = "block";
+                    statusText.textContent = "Speaking with Sophia... click to end";
+                    statusText.className = "status-text active";
+                });
+
+                vapi.on("call-end", () => {
+                    isCallActive = false;
+                    voiceBtn.classList.remove("active");
+                    micIcon.style.display = "block";
+                    stopIcon.style.display = "none";
+                    statusText.textContent = "Call ended — click to speak again";
+                    statusText.className = "status-text ready";
+                });
+
+                vapi.on("error", (error) => {
+                    console.error("[Med Spa] Vapi error:", error);
+                    statusText.textContent = "Something went wrong. Try again.";
+                    statusText.className = "status-text";
+                    isCallActive = false;
+                    voiceBtn.classList.remove("active");
+                    micIcon.style.display = "block";
+                    stopIcon.style.display = "none";
+                });
+
+                vapi.on("speech-start", () => {
+                    if (isCallActive) statusText.textContent = "Sophia is speaking...";
+                });
+
+                vapi.on("speech-end", () => {
+                    if (isCallActive) statusText.textContent = "Listening...";
+                });
+
+                voiceBtn.disabled = false;
+                statusText.textContent = "Click to speak with Sophia";
+                statusText.className = "status-text ready";
+
+            } catch (err) {
+                console.error("[Med Spa] Failed to initialize:", err);
+                statusText.textContent = "Failed to load. Please refresh.";
+            }
+        }
+
+        voiceBtn.addEventListener("click", async () => {
+            if (!vapi) return;
+
+            if (isCallActive) {
+                vapi.stop();
+            } else {
+                statusText.textContent = "Connecting to Sophia...";
+                voiceBtn.disabled = true;
+                try {
+                    await vapi.start(assistantId);
+                } catch (err) {
+                    console.error("[Med Spa] Failed to start call:", err);
+                    statusText.textContent = "Failed to connect. Try again.";
+                    statusText.className = "status-text";
+                }
+                voiceBtn.disabled = false;
+            }
+        });
+
+        initVapi();
+    </script>
+</body>
+</html>
