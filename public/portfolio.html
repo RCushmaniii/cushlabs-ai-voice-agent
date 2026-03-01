@@ -20,9 +20,9 @@
             --cush-orange-light: #FF9B7A;
             --cush-orange-glow: rgba(255, 106, 61, 0.2);
             --cush-black: #050505;
-            --glass-bg: rgba(20, 20, 22, 0.4);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-highlight: rgba(255, 255, 255, 0.15);
+            --glass-bg: rgba(10, 10, 12, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-highlight: rgba(255, 255, 255, 0.12);
             /* Neutrals */
             --gray-950: #080808;
             --gray-900: #121212;
@@ -53,86 +53,8 @@
             background: rgba(248, 250, 252, 0.8) !important;
         }
 
-        :root.light-theme .hero h1,
-        :root.light-theme .section-title,
-        :root.light-theme .hero-stat-value,
-        :root.light-theme .demo-card h3,
-        :root.light-theme .use-case-card h3,
-        :root.light-theme .step h3,
-        :root.light-theme .cta h2 {
-            color: var(--text-main) !important;
-        }
-
-        :root.light-theme .scroll-cue svg {
-            fill: var(--text-main) !important;
-        }
-
-        :root.light-theme .demo-card::before {
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0) 100%) !important;
-        }
-
-        :root.light-theme .demo-feature {
-            border-color: rgba(0, 0, 0, 0.1) !important;
-            background: rgba(0, 0, 0, 0.02) !important;
-            color: var(--gray-300) !important;
-        }
-
-        :root.light-theme .demo-card:hover .demo-feature {
-            background: rgba(0, 0, 0, 0.05) !important;
-            border-color: rgba(0, 0, 0, 0.15) !important;
-        }
-
-        :root.light-theme .demo-card-icon {
-            border: 1px solid rgba(0, 0, 0, 0.1) !important;
-            background: rgba(0, 0, 0, 0.03) !important;
-        }
-
-        :root.light-theme .step-number {
-            color: rgba(0, 0, 0, 0.05) !important;
-        }
-
-        :root.light-theme .nav-brand {
-            color: #0F172A;
-        }
-
-        :root.light-theme .btn-secondary {
-            color: var(--text-main);
-            background: rgba(0, 0, 0, 0.05);
-            border-color: rgba(0, 0, 0, 0.12);
-        }
-
-        :root.light-theme .demo-card {
-            background: rgba(255, 255, 255, 0.6);
-        }
-
-        :root.light-theme .use-case-card {
-            background: rgba(255, 255, 255, 0.5);
-            border-color: rgba(0, 0, 0, 0.08);
-        }
-
-        :root.light-theme .use-case-card:hover {
-            background: rgba(255, 255, 255, 0.7);
-        }
-
-        :root.light-theme .step p,
-        :root.light-theme .cta p,
-        :root.light-theme .hero h2,
-        :root.light-theme .section-subtitle,
-        :root.light-theme .demo-card p,
-        :root.light-theme .use-case-card p {
-            color: var(--gray-300) !important;
-        }
-
-        :root.light-theme .use-case-capabilities li {
-            color: var(--gray-200) !important;
-        }
-
-        :root.light-theme .demo-tech {
-            color: var(--gray-400) !important;
-        }
-
-        :root.light-theme .footer p {
-            color: var(--gray-400);
+        :root.light-theme .aurora-orb {
+            opacity: 0.06;
         }
 
         .theme-btn {
@@ -331,7 +253,7 @@
             font-family: "Space Grotesk", sans-serif;
             font-size: 1.2rem;
             font-weight: 700;
-            color: #FFFFFF;
+            color: var(--text-main);
             text-decoration: none;
             letter-spacing: -0.02em;
         }
@@ -397,7 +319,7 @@
             font-family: "Space Grotesk", sans-serif;
             font-size: clamp(2.5rem, 6vw, 4.5rem);
             font-weight: 700;
-            color: #fff;
+            color: var(--text-main);
             margin-bottom: 1.25rem;
             letter-spacing: -0.03em;
             line-height: 1.1;
@@ -427,8 +349,9 @@
             padding: 1.5rem 3rem;
             border-radius: 20px;
             border: 1px solid var(--glass-border);
-            backdrop-filter: blur(12px);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
         }
 
         .hero-stat {
@@ -439,7 +362,7 @@
             font-family: "Space Grotesk", sans-serif;
             font-size: clamp(1.8rem, 3vw, 2.5rem);
             font-weight: 700;
-            color: #fff;
+            color: var(--text-main);
             display: block;
         }
 
@@ -463,7 +386,7 @@
         .scroll-cue svg {
             width: 24px;
             height: 24px;
-            fill: #fff;
+            fill: var(--text-main);
         }
 
         @keyframes bounce {
@@ -498,7 +421,7 @@
             font-family: "Space Grotesk", sans-serif;
             font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 700;
-            color: #ffffff;
+            color: var(--text-main);
             letter-spacing: -0.02em;
             margin-bottom: 1rem;
         }
@@ -525,7 +448,7 @@
         }
 
         .demo-card {
-            background: rgba(20, 20, 22, 0.4);
+            background: var(--glass-bg);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--glass-border);
@@ -544,7 +467,8 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
+            background: linear-gradient(180deg, var(--glass-highlight) 0%, transparent 100%);
+            opacity: 0.3;
             z-index: -1;
             pointer-events: none;
         }
@@ -620,8 +544,8 @@
             width: 56px;
             height: 56px;
             border-radius: 16px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -638,7 +562,7 @@
             font-family: "Space Grotesk", sans-serif;
             font-size: 1.5rem;
             font-weight: 700;
-            color: #fff;
+            color: var(--text-main);
             margin-bottom: 0.25rem;
         }
 
@@ -675,16 +599,16 @@
             text-transform: uppercase;
             letter-spacing: 0.06em;
             color: var(--gray-200);
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             padding: 0.4rem 0.8rem;
             border-radius: 100px;
             transition: all 0.3s;
         }
 
         .demo-card:hover .demo-feature {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.15);
+            background: var(--glass-highlight);
+            border-color: var(--glass-highlight);
         }
 
         .demo-tech {
@@ -762,8 +686,8 @@
         }
 
         .use-case-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             border-radius: 20px;
             padding: 2.5rem 2rem;
             transition: all 0.4s;
@@ -775,8 +699,8 @@
         .use-case-card:hover {
             transform: translateY(-5px);
             border-color: var(--glass-highlight);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            background: rgba(255, 255, 255, 0.03);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            background: var(--glass-highlight);
         }
 
         .use-case-icon {
@@ -824,7 +748,7 @@
             font-family: "Space Grotesk", sans-serif;
             font-size: 1.2rem;
             font-weight: 600;
-            color: #fff;
+            color: var(--text-main);
             margin-bottom: 0.75rem;
         }
 
@@ -882,7 +806,8 @@
             font-family: "Space Grotesk", sans-serif;
             font-size: 3.5rem;
             font-weight: 700;
-            color: rgba(255, 255, 255, 0.05);
+            color: var(--glass-highlight);
+            opacity: 0.4;
             line-height: 1;
             margin-bottom: 1.5rem;
         }
@@ -891,7 +816,7 @@
             font-family: "Space Grotesk", sans-serif;
             font-size: 1.2rem;
             font-weight: 600;
-            color: #fff;
+            color: var(--text-main);
             margin-bottom: 0.75rem;
         }
 
@@ -913,7 +838,7 @@
             font-family: "Space Grotesk", sans-serif;
             font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 700;
-            color: #fff;
+            color: var(--text-main);
             margin-bottom: 1.5rem;
             letter-spacing: -0.02em;
         }
@@ -962,9 +887,9 @@
             font-family: "Inter", sans-serif;
             font-size: 0.95rem;
             font-weight: 600;
-            color: #fff;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             padding: 1rem 2.5rem;
             border-radius: 12px;
             cursor: pointer;
@@ -977,8 +902,8 @@
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
+            background: var(--glass-highlight);
+            border-color: var(--glass-highlight);
             transform: translateY(-3px);
         }
 
@@ -1134,7 +1059,7 @@
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
-            <a href="/" class="nav-brand">Cush<span>Labs</span><span>.ai</span></a>
+            <a href="/" class="nav-brand">CUSH<span>LABS.AI</span></a>
             <div class="nav-controls">
                 <ul class="nav-links">
                     <li><a href="#demos">Live Demos</a></li>
@@ -1315,7 +1240,7 @@
             <div class="demo-card tech-card reveal">
                 <div class="demo-card-glow"></div>
                 <div class="demo-badge"
-                    style="color: var(--gray-300); background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);">
+                    style="color: var(--gray-300); background: var(--glass-bg); border: 1px solid var(--glass-border);">
                     <span class="demo-badge-dot"
                         style="background: var(--gray-300); box-shadow: none; animation: none;"></span>
                     Coming Soon
@@ -1353,7 +1278,7 @@
             <div class="demo-card ecommerce-card reveal">
                 <div class="demo-card-glow"></div>
                 <div class="demo-badge"
-                    style="color: var(--gray-300); background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);">
+                    style="color: var(--gray-300); background: var(--glass-bg); border: 1px solid var(--glass-border);">
                     <span class="demo-badge-dot"
                         style="background: var(--gray-300); box-shadow: none; animation: none;"></span>
                     Coming Soon
@@ -1391,7 +1316,7 @@
             <div class="demo-card realestate-card reveal">
                 <div class="demo-card-glow"></div>
                 <div class="demo-badge"
-                    style="color: var(--gray-300); background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);">
+                    style="color: var(--gray-300); background: var(--glass-bg); border: 1px solid var(--glass-border);">
                     <span class="demo-badge-dot"
                         style="background: var(--gray-300); box-shadow: none; animation: none;"></span>
                     Coming Soon
