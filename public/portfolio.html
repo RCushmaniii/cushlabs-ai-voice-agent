@@ -1,32 +1,179 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FF6A3D">
     <link rel="icon" href="/voice_agent.ico" type="image/x-icon">
     <title>AI Voice Agent Portfolio — CushLabs AI Services</title>
-    <meta name="description" content="Production-ready AI voice agents for lead qualification, appointment booking, customer support, and more. See live demos and industry use cases.">
+    <meta name="description"
+        content="Production-ready AI voice agents for lead qualification, appointment booking, customer support, and more. See live demos and industry use cases.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        :root {
+        \n:root {
             --cush-orange: #FF6A3D;
-            --cush-orange-light: #ff8c66;
-            --cush-black: #000000;
-            --gray-950: #050505;
-            --gray-900: #0A0A0A;
-            --gray-800: #141414;
-            --gray-700: #1A1A1A;
-            --gray-600: #2A2A2A;
-            --gray-500: #444444;
-            --gray-400: #666666;
-            --gray-300: #888888;
-            --gray-200: #AAAAAA;
-            --gray-100: #CCCCCC;
-            --orange-glow: rgba(255, 106, 61, 0.15);
-            --orange-glow-strong: rgba(255, 106, 61, 0.3);
+            --cush-orange-light: #FF9B7A;
+            --cush-orange-glow: rgba(255, 106, 61, 0.2);
+            --cush-black: #050505;
+            --glass-bg: rgba(20, 20, 22, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-highlight: rgba(255, 255, 255, 0.15);
+            /* Neutrals */
+            --gray-950: #080808;
+            --gray-900: #121212;
+            --gray-800: #1E1E1E;
+            --gray-400: #9CA3AF;
+            --gray-300: #B8C0CC;
+            --gray-200: #D4D8DE;
+            --text-main: #FAFAFA;
+        }
+
+        /* Light Theme Overrides */
+        :root.light-theme {
+            --cush-black: #F8FAFC;
+            --text-main: #0F172A;
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --glass-highlight: rgba(0, 0, 0, 0.15);
+
+            --gray-950: #FFFFFF;
+            --gray-900: #F1F5F9;
+            --gray-800: #E2E8F0;
+            --gray-400: #64748B;
+            --gray-300: #334155;
+            --gray-200: #1E293B;
+        }
+
+        :root.light-theme .nav {
+            background: rgba(248, 250, 252, 0.8) !important;
+        }
+
+        :root.light-theme .hero h1,
+        :root.light-theme .section-title,
+        :root.light-theme .hero-stat-value,
+        :root.light-theme .demo-card h3,
+        :root.light-theme .use-case-card h3,
+        :root.light-theme .step h3,
+        :root.light-theme .cta h2 {
+            color: var(--text-main) !important;
+        }
+
+        :root.light-theme .scroll-cue svg {
+            fill: var(--text-main) !important;
+        }
+
+        :root.light-theme .demo-card::before {
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0) 100%) !important;
+        }
+
+        :root.light-theme .demo-feature {
+            border-color: rgba(0, 0, 0, 0.1) !important;
+            background: rgba(0, 0, 0, 0.02) !important;
+            color: var(--gray-300) !important;
+        }
+
+        :root.light-theme .demo-card:hover .demo-feature {
+            background: rgba(0, 0, 0, 0.05) !important;
+            border-color: rgba(0, 0, 0, 0.15) !important;
+        }
+
+        :root.light-theme .demo-card-icon {
+            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+            background: rgba(0, 0, 0, 0.03) !important;
+        }
+
+        :root.light-theme .step-number {
+            color: rgba(0, 0, 0, 0.05) !important;
+        }
+
+        :root.light-theme .nav-brand {
+            color: #0F172A;
+        }
+
+        :root.light-theme .btn-secondary {
+            color: var(--text-main);
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.12);
+        }
+
+        :root.light-theme .demo-card {
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        :root.light-theme .use-case-card {
+            background: rgba(255, 255, 255, 0.5);
+            border-color: rgba(0, 0, 0, 0.08);
+        }
+
+        :root.light-theme .use-case-card:hover {
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        :root.light-theme .step p,
+        :root.light-theme .cta p,
+        :root.light-theme .hero h2,
+        :root.light-theme .section-subtitle,
+        :root.light-theme .demo-card p,
+        :root.light-theme .use-case-card p {
+            color: var(--gray-300) !important;
+        }
+
+        :root.light-theme .use-case-capabilities li {
+            color: var(--gray-200) !important;
+        }
+
+        :root.light-theme .demo-tech {
+            color: var(--gray-400) !important;
+        }
+
+        :root.light-theme .footer p {
+            color: var(--gray-400);
+        }
+
+        .theme-btn {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            padding: 0.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-main);
+            transition: all 0.3s;
+            width: 36px;
+            height: 36px;
+        }
+
+        .theme-btn:hover {
+            background: var(--glass-highlight);
+        }
+
+        .theme-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .sun-icon {
+            display: none;
+        }
+
+        .moon-icon {
+            display: block;
+        }
+
+        :root.light-theme .sun-icon {
+            display: block;
+        }
+
+        :root.light-theme .moon-icon {
+            display: none;
         }
 
         * {
@@ -41,18 +188,26 @@
         }
 
         html {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
             scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            font-family: "Source Serif 4", Georgia, serif;
+            font-family: 'Inter', system-ui, sans-serif;
             background: var(--cush-black);
-            color: #ffffff;
+            color: var(--text-main);
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+        }
+
+        /* Glassmorphism Utilities */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
         }
 
         /* Aurora background */
@@ -67,58 +222,79 @@
         .aurora-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.08;
+            filter: blur(140px);
+            opacity: 0.12;
+            mix-blend-mode: screen;
         }
 
         .aurora-orb-1 {
-            width: 800px;
-            height: 800px;
+            width: 900px;
+            height: 900px;
             background: var(--cush-orange);
             top: -20%;
-            right: -15%;
-            animation: aurora-1 25s ease-in-out infinite;
+            right: -20%;
+            animation: aurora-1 30s ease-in-out infinite;
         }
 
         .aurora-orb-2 {
-            width: 600px;
-            height: 600px;
-            background: #ff8c66;
-            bottom: -15%;
-            left: -10%;
-            animation: aurora-2 28s ease-in-out infinite;
+            width: 700px;
+            height: 700px;
+            background: #9D4EDD;
+            bottom: -20%;
+            left: -15%;
+            animation: aurora-2 35s ease-in-out infinite;
         }
 
         .aurora-orb-3 {
-            width: 400px;
-            height: 400px;
-            background: var(--cush-orange);
-            top: 50%;
-            left: 40%;
-            animation: aurora-1 22s ease-in-out infinite reverse;
+            width: 500px;
+            height: 500px;
+            background: #3B82F6;
+            top: 40%;
+            left: 30%;
+            animation: aurora-1 25s ease-in-out infinite reverse;
         }
 
         @keyframes aurora-1 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -30px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(50px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-30px, 30px) scale(0.9);
+            }
         }
 
         @keyframes aurora-2 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-40px, 20px) scale(0.9); }
-            66% { transform: translate(30px, -30px) scale(1.1); }
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(-50px, 30px) scale(0.9);
+            }
+
+            66% {
+                transform: translate(40px, -40px) scale(1.1);
+            }
         }
 
-        /* Top accent line */
         .top-line {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            height: 2px;
+            height: 3px;
             background: linear-gradient(90deg, transparent, var(--cush-orange), transparent);
             z-index: 10;
+            opacity: 0.8;
         }
 
         /* Nav */
@@ -128,22 +304,36 @@
             left: 0;
             right: 0;
             z-index: 9;
+            background: rgba(5, 5, 5, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            transition: background 0.3s;
+        }
+
+        .nav-container {
+            max-width: 1460px;
+            margin: 0 auto;
             padding: 1.25rem 2rem;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
         }
 
         .nav-brand {
             font-family: "Space Grotesk", sans-serif;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            color: #ffffff;
+            color: #FFFFFF;
             text-decoration: none;
+            letter-spacing: -0.02em;
         }
 
         .nav-brand span {
@@ -152,15 +342,15 @@
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             list-style: none;
         }
 
         .nav-links a {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 0.8rem;
+            font-family: "Inter", sans-serif;
+            font-size: 0.85rem;
             font-weight: 500;
-            color: var(--gray-300);
+            color: var(--gray-200);
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -171,11 +361,11 @@
             color: var(--cush-orange);
         }
 
-        /* Sections */
+        /* General Section */
         .section {
             position: relative;
             z-index: 1;
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
         }
@@ -188,14 +378,14 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding-top: 5rem;
+            padding-top: 6rem;
             padding-bottom: 4rem;
             animation: fade-in-up 0.8s ease-out;
         }
 
         .hero-label {
             font-family: "Space Grotesk", sans-serif;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.25em;
@@ -205,33 +395,40 @@
 
         .hero h1 {
             font-family: "Space Grotesk", sans-serif;
-            font-size: 3.8rem;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
             font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 1rem;
+            color: #fff;
+            margin-bottom: 1.25rem;
             letter-spacing: -0.03em;
             line-height: 1.1;
         }
 
         .hero h1 .accent {
-            color: var(--cush-orange);
+            background: linear-gradient(135deg, #FF6A3D, #FF9B7A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero h2 {
-            font-family: "Source Serif 4", Georgia, serif;
-            font-size: 1.3rem;
+            font-family: "Inter", sans-serif;
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
             font-weight: 300;
-            font-style: italic;
-            color: var(--gray-200);
-            max-width: 600px;
-            line-height: 1.7;
-            margin-bottom: 2.5rem;
+            color: var(--gray-300);
+            max-width: 650px;
+            line-height: 1.6;
+            margin-bottom: 3rem;
         }
 
         .hero-stats {
             display: flex;
-            gap: 3rem;
-            margin-bottom: 3rem;
+            gap: clamp(2rem, 5vw, 4rem);
+            margin-bottom: 3.5rem;
+            background: var(--glass-bg);
+            padding: 1.5rem 3rem;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
         }
 
         .hero-stat {
@@ -240,200 +437,214 @@
 
         .hero-stat-value {
             font-family: "Space Grotesk", sans-serif;
-            font-size: 2rem;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
             font-weight: 700;
-            color: var(--cush-orange);
+            color: #fff;
             display: block;
         }
 
         .hero-stat-label {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 0.7rem;
+            font-family: "Inter", sans-serif;
+            font-size: 0.75rem;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--gray-400);
-            margin-top: 0.25rem;
+            color: var(--cush-orange);
+            margin-top: 0.5rem;
+            display: block;
         }
 
         .scroll-cue {
             margin-top: 2rem;
             animation: bounce 2s ease-in-out infinite;
+            opacity: 0.6;
         }
 
         .scroll-cue svg {
             width: 24px;
             height: 24px;
-            fill: var(--gray-500);
+            fill: #fff;
         }
 
         @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(8px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(8px);
+            }
         }
 
         /* Section headers */
         .section-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
 
         .section-label {
             font-family: "Space Grotesk", sans-serif;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.25em;
+            letter-spacing: 0.2em;
             color: var(--cush-orange);
             margin-bottom: 1rem;
         }
 
         .section-title {
             font-family: "Space Grotesk", sans-serif;
-            font-size: 2.2rem;
+            font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 700;
             color: #ffffff;
             letter-spacing: -0.02em;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
         }
 
         .section-subtitle {
-            font-family: "Source Serif 4", Georgia, serif;
-            font-size: 1.05rem;
+            font-family: "Inter", sans-serif;
+            font-size: 1.1rem;
             font-weight: 300;
             color: var(--gray-300);
-            max-width: 560px;
+            max-width: 600px;
             margin: 0 auto;
             line-height: 1.7;
         }
 
         /* Live Demos */
         .demos {
-            padding: 5rem 2rem;
+            padding: 6rem 2rem;
         }
 
         .demo-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
         .demo-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 16px;
-            padding: 2.5rem 2rem;
+            background: rgba(20, 20, 22, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            border-radius: 24px;
+            padding: 2.5rem;
             position: relative;
             overflow: hidden;
-            transition: border-color 0.4s, transform 0.3s, box-shadow 0.3s;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+        }
+
+        .demo-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
+            z-index: -1;
+            pointer-events: none;
         }
 
         .demo-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            transform: translateY(-8px);
+            border-color: var(--glass-highlight);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
-        .demo-card.cushlabs-card {
-            --card-accent: #FF6A3D;
-        }
-
-        .demo-card.cushlabs-card:hover {
-            border-color: rgba(255, 106, 61, 0.3);
-        }
-
-        .demo-card.coaching-card {
-            --card-accent: #C9A84C;
-        }
-
-        .demo-card.coaching-card:hover {
-            border-color: rgba(201, 168, 76, 0.3);
-        }
-
-        .demo-card.medspa-card {
-            --card-accent: #C4956A;
-        }
-
-        .demo-card.medspa-card:hover {
-            border-color: rgba(196, 149, 106, 0.3);
+        .demo-card:hover .demo-card-glow {
+            opacity: 0.15;
+            transform: scale(1.2);
         }
 
         .demo-card-glow {
             position: absolute;
-            top: -50%;
-            right: -30%;
-            width: 300px;
-            height: 300px;
+            top: -50px;
+            right: -50px;
+            width: 250px;
+            height: 250px;
             background: var(--card-accent);
             border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0;
-            transition: opacity 0.4s;
+            filter: blur(80px);
+            opacity: 0.05;
+            transition: all 0.5s ease;
             pointer-events: none;
-        }
-
-        .demo-card:hover .demo-card-glow {
-            opacity: 0.06;
+            z-index: -1;
         }
 
         .demo-badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 0.6rem;
+            gap: 0.5rem;
+            font-family: "Inter", sans-serif;
+            font-size: 0.7rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: #22c55e;
-            background: rgba(34, 197, 94, 0.1);
-            border: 1px solid rgba(34, 197, 94, 0.2);
-            padding: 0.3rem 0.7rem;
+            letter-spacing: 0.1em;
+            color: #34D399;
+            background: rgba(52, 211, 153, 0.12);
+            border: 1px solid rgba(52, 211, 153, 0.25);
+            padding: 0.4rem 0.8rem;
             border-radius: 100px;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
+            align-self: flex-start;
         }
 
         .demo-badge-dot {
             width: 6px;
             height: 6px;
-            background: #22c55e;
+            background: #34D399;
             border-radius: 50%;
+            box-shadow: 0 0 8px #34D399;
             animation: pulse-dot 2s ease-in-out infinite;
         }
 
         @keyframes pulse-dot {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(0.8);
+            }
         }
 
         .demo-card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.04);
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
         }
 
         .demo-card-icon svg {
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             fill: var(--card-accent);
         }
 
         .demo-card h3 {
             font-family: "Space Grotesk", sans-serif;
-            font-size: 1.35rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 0.5rem;
+            color: #fff;
+            margin-bottom: 0.25rem;
         }
 
         .demo-card h4 {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 0.7rem;
+            font-family: "Inter", sans-serif;
+            font-size: 0.8rem;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -445,121 +656,184 @@
             font-size: 0.95rem;
             font-weight: 300;
             color: var(--gray-300);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            flex-grow: 1;
         }
 
         .demo-features {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.4rem;
-            margin-bottom: 1.5rem;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
         }
 
         .demo-feature {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 0.65rem;
+            font-family: "Inter", sans-serif;
+            font-size: 0.7rem;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.06em;
-            color: var(--gray-300);
-            border: 1px solid var(--gray-700);
-            padding: 0.3rem 0.6rem;
+            color: var(--gray-200);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.4rem 0.8rem;
             border-radius: 100px;
-            transition: border-color 0.3s, color 0.3s;
+            transition: all 0.3s;
         }
 
         .demo-card:hover .demo-feature {
-            border-color: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
         .demo-tech {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 0.65rem;
-            color: var(--gray-500);
+            font-family: "Inter", sans-serif;
+            font-size: 0.7rem;
+            color: var(--gray-400);
             margin-bottom: 1.5rem;
         }
 
         .demo-link {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 0.8rem;
+            font-family: "Inter", sans-serif;
+            font-size: 0.9rem;
             font-weight: 600;
-            color: var(--card-accent);
+            color: #000;
+            background: var(--card-accent);
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
             text-decoration: none;
-            transition: gap 0.3s;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .demo-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            filter: brightness(1.1);
             gap: 0.75rem;
         }
 
         .demo-link svg {
-            width: 16px;
-            height: 16px;
-            fill: var(--card-accent);
+            width: 18px;
+            height: 18px;
+            fill: #000;
+            transition: transform 0.3s;
+        }
+
+        /* Card Variations */
+        .cushlabs-card {
+            --card-accent: #FF6A3D;
+        }
+
+        .coaching-card {
+            --card-accent: #C9A84C;
+        }
+
+        .medspa-card {
+            --card-accent: #C4956A;
+        }
+
+        .tech-card {
+            --card-accent: #3B82F6;
+        }
+
+        .ecommerce-card {
+            --card-accent: #EC4899;
+        }
+
+        .realestate-card {
+            --card-accent: #34D399;
         }
 
         /* Use Cases */
         .use-cases {
-            padding: 5rem 2rem;
+            padding: 6rem 2rem;
         }
 
         .use-case-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.25rem;
+            gap: 1.5rem;
         }
 
         .use-case-card {
-            background: rgba(255, 255, 255, 0.015);
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 14px;
-            padding: 2rem 1.5rem;
-            transition: border-color 0.4s, transform 0.3s;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            transition: all 0.4s;
             position: relative;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         .use-case-card:hover {
-            transform: translateY(-3px);
-            border-color: rgba(255, 255, 255, 0.12);
+            transform: translateY(-5px);
+            border-color: var(--glass-highlight);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.03);
         }
 
         .use-case-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.25rem;
-            font-size: 1.3rem;
-            line-height: 1;
+            margin-bottom: 1.5rem;
         }
 
-        .use-case-icon.healthcare { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.15); }
-        .use-case-icon.realestate { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.15); }
-        .use-case-icon.legal { background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.15); }
-        .use-case-icon.restaurant { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.15); }
-        .use-case-icon.support { background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.15); }
-        .use-case-icon.fitness { background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.15); }
+        /* Keep existing use case colors */
+        .use-case-icon.healthcare {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .use-case-icon.realestate {
+            background: rgba(52, 211, 153, 0.12);
+            border: 1px solid rgba(52, 211, 153, 0.25);
+        }
+
+        .use-case-icon.legal {
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .use-case-icon.restaurant {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .use-case-icon.support {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .use-case-icon.fitness {
+            background: rgba(236, 72, 153, 0.1);
+            border: 1px solid rgba(236, 72, 153, 0.2);
+        }
 
         .use-case-card h3 {
             font-family: "Space Grotesk", sans-serif;
-            font-size: 1.05rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 0.5rem;
+            color: #fff;
+            margin-bottom: 0.75rem;
         }
 
         .use-case-card p {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 300;
             color: var(--gray-300);
-            line-height: 1.65;
-            margin-bottom: 1.25rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
         }
 
         .use-case-capabilities {
@@ -567,149 +841,161 @@
         }
 
         .use-case-capabilities li {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 0.72rem;
-            color: var(--gray-400);
-            padding: 0.3rem 0;
+            font-family: "Inter", sans-serif;
+            font-size: 0.85rem;
+            color: var(--gray-200);
+            padding: 0.4rem 0;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
         }
 
         .use-case-capabilities li::before {
             content: "";
-            width: 4px;
-            height: 4px;
+            width: 6px;
+            height: 6px;
             background: var(--cush-orange);
             border-radius: 50%;
-            flex-shrink: 0;
+            opacity: 0.8;
         }
 
         /* How it works */
         .how-it-works {
-            padding: 5rem 2rem;
+            padding: 6rem 2rem;
+            position: relative;
         }
 
         .steps {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            counter-reset: step;
+            gap: 2rem;
         }
 
         .step {
-            text-align: center;
-            padding: 1.5rem 1rem;
             position: relative;
+            padding: 2rem;
+            border-radius: 24px;
+            text-align: left;
         }
 
         .step-number {
             font-family: "Space Grotesk", sans-serif;
-            font-size: 2.5rem;
+            font-size: 3.5rem;
             font-weight: 700;
-            color: rgba(255, 106, 61, 0.12);
+            color: rgba(255, 255, 255, 0.05);
             line-height: 1;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .step h3 {
             font-family: "Space Grotesk", sans-serif;
-            font-size: 0.95rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 0.5rem;
+            color: #fff;
+            margin-bottom: 0.75rem;
         }
 
         .step p {
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             font-weight: 300;
-            color: var(--gray-400);
+            color: var(--gray-300);
             line-height: 1.6;
         }
 
         /* CTA */
         .cta {
-            padding: 6rem 2rem;
+            padding: 8rem 2rem;
             text-align: center;
+            position: relative;
         }
 
         .cta h2 {
             font-family: "Space Grotesk", sans-serif;
-            font-size: 2.4rem;
+            font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 1rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
             letter-spacing: -0.02em;
         }
 
         .cta p {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             font-weight: 300;
             color: var(--gray-300);
-            max-width: 500px;
-            margin: 0 auto 2.5rem;
+            max-width: 550px;
+            margin: 0 auto 3rem;
             line-height: 1.7;
         }
 
         .cta-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .btn-primary {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 0.85rem;
+            font-family: "Inter", sans-serif;
+            font-size: 0.95rem;
             font-weight: 600;
-            color: #000000;
+            color: #000;
             background: var(--cush-orange);
             border: none;
-            padding: 0.85rem 2rem;
-            border-radius: 8px;
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
             cursor: pointer;
             text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.3s;
-            box-shadow: 0 0 20px var(--orange-glow);
+            transition: all 0.3s;
+            box-shadow: 0 0 25px var(--cush-orange-glow);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 30px var(--orange-glow-strong);
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(255, 106, 61, 0.4);
+            background: var(--cush-orange-light);
         }
 
         .btn-secondary {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 0.85rem;
+            font-family: "Inter", sans-serif;
+            font-size: 0.95rem;
             font-weight: 600;
-            color: var(--cush-orange);
-            background: transparent;
-            border: 1px solid rgba(255, 106, 61, 0.3);
-            padding: 0.85rem 2rem;
-            border-radius: 8px;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
             cursor: pointer;
             text-decoration: none;
-            transition: border-color 0.3s, background 0.3s;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
-            border-color: var(--cush-orange);
-            background: rgba(255, 106, 61, 0.05);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
         }
 
         /* Footer */
         .footer {
             text-align: center;
-            padding: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--glass-border);
             position: relative;
             z-index: 1;
+            margin-top: 4rem;
         }
 
         .footer p {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 0.75rem;
-            color: var(--gray-500);
+            font-family: "Inter", sans-serif;
+            font-size: 0.85rem;
+            color: var(--gray-400);
         }
 
         .footer a {
@@ -724,14 +1010,21 @@
 
         /* Animations */
         @keyframes fade-in-up {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .reveal.visible {
@@ -741,58 +1034,68 @@
 
         /* Responsive */
         @media (prefers-reduced-motion: reduce) {
-            .aurora-orb { animation: none !important; }
-            .scroll-cue { animation: none !important; }
-            .demo-badge-dot { animation: none !important; opacity: 1; }
-            .hero, .reveal { animation: none !important; opacity: 1; transform: none; }
+            .aurora-orb {
+                animation: none !important;
+            }
+
+            .scroll-cue {
+                animation: none !important;
+            }
+
+            .demo-badge-dot {
+                animation: none !important;
+                opacity: 1;
+            }
+
+            .hero,
+            .reveal {
+                animation: none !important;
+                opacity: 1;
+                transform: none;
+            }
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 1024px) {
             .demo-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .use-case-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .steps {
-                grid-template-columns: 1fr 1fr;
-                gap: 1rem;
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
             .nav {
-                padding: 1rem 1.25rem;
+                padding: 0;
+            }
+
+            .nav-container {
+                padding: 1rem 1.5rem;
             }
 
             .nav-links {
-                gap: 1rem;
+                display: none;
             }
 
-            .nav-links a {
-                font-size: 0.7rem;
-            }
-
-            .hero h1 {
-                font-size: 2.4rem;
-            }
-
-            .hero h2 {
-                font-size: 1.1rem;
+            .hero {
+                padding-top: 8rem;
             }
 
             .hero-stats {
-                gap: 1.5rem;
+                flex-direction: column;
+                gap: 2rem;
+                padding: 2rem;
+                width: 100%;
+                max-width: 300px;
             }
 
-            .hero-stat-value {
-                font-size: 1.5rem;
-            }
-
-            .section-title {
-                font-size: 1.7rem;
+            .demo-grid {
+                grid-template-columns: 1fr;
             }
 
             .use-case-grid {
@@ -803,20 +1106,21 @@
                 grid-template-columns: 1fr;
             }
 
-            .cta h2 {
-                font-size: 1.8rem;
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
             }
 
-            .demo-card {
-                padding: 2rem 1.5rem;
-            }
-
-            .demo-grid {
-                grid-template-columns: 1fr;
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
             }
         }
+
+        \n
     </style>
 </head>
+
 <body>
     <div class="top-line"></div>
 
@@ -829,13 +1133,27 @@
 
     <!-- Navigation -->
     <nav class="nav">
-        <a href="/" class="nav-brand">Cush<span>Labs</span></a>
-        <ul class="nav-links">
-            <li><a href="#demos">Live Demos</a></li>
-            <li><a href="#use-cases">Use Cases</a></li>
-            <li><a href="#how-it-works">How It Works</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+        <div class="nav-container">
+            <a href="/" class="nav-brand">Cush<span>Labs</span><span>.ai</span></a>
+            <div class="nav-controls">
+                <ul class="nav-links">
+                    <li><a href="#demos">Live Demos</a></li>
+                    <li><a href="#use-cases">Use Cases</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+                    <svg class="sun-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41.39.39 1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41.39.39 1.03.39 1.41 0l1.06-1.06z" />
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
     </nav>
 
     <!-- Hero -->
@@ -869,7 +1187,7 @@
 
         <div class="scroll-cue">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
             </svg>
         </div>
     </section>
@@ -895,7 +1213,8 @@
                 </div>
                 <div class="demo-card-icon">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+                        <path
+                            d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z" />
                     </svg>
                 </div>
                 <h3>Clara</h3>
@@ -915,7 +1234,7 @@
                 <a href="/" class="demo-link">
                     Talk to Clara
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
                     </svg>
                 </a>
             </div>
@@ -929,7 +1248,8 @@
                 </div>
                 <div class="demo-card-icon">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/>
+                        <path
+                            d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z" />
                     </svg>
                 </div>
                 <h3>James</h3>
@@ -950,7 +1270,7 @@
                 <a href="/nyc-coaching" class="demo-link">
                     Talk to James
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
                     </svg>
                 </a>
             </div>
@@ -964,7 +1284,8 @@
                 </div>
                 <div class="demo-card-icon">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                     </svg>
                 </div>
                 <h3>Sophia</h3>
@@ -985,7 +1306,120 @@
                 <a href="/medspa" class="demo-link">
                     Talk to Sophia
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Marcus — Tech Support -->
+            <div class="demo-card tech-card reveal">
+                <div class="demo-card-glow"></div>
+                <div class="demo-badge"
+                    style="color: var(--gray-300); background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);">
+                    <span class="demo-badge-dot"
+                        style="background: var(--gray-300); box-shadow: none; animation: none;"></span>
+                    Coming Soon
+                </div>
+                <div class="demo-card-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M21 12.22C21 6.73 16.74 3 12 3c-4.69 0-9 3.65-9 9.28-.6.34-1 .98-1 1.72v2c0 1.1.9 2 2 2h1v-6.1c0-3.87 3.13-7 7-7s7 3.13 7 7V19h-8v2h8c1.1 0 2-.9 2-2v-1.22c.59-.31 1-.92 1-1.64v-2.3c0-.7-.41-1.31-1-1.62z" />
+                    </svg>
+                </div>
+                <h3>Marcus</h3>
+                <h4>Tech Support AI</h4>
+                <p>
+                    An L1 technical support agent that handles troubleshooting,
+                    API documentation queries, and billing questions automatically,
+                    escalating only when necessary.
+                </p>
+                <div class="demo-features">
+                    <span class="demo-feature">Troubleshooting</span>
+                    <span class="demo-feature">API Help</span>
+                    <span class="demo-feature">Ticket Routing</span>
+                    <span class="demo-feature">Billing QA</span>
+                </div>
+                <p class="demo-tech">GPT-4o &middot; ElevenLabs Marcus</p>
+                <a href="#" class="demo-link" onclick="event.preventDefault()">
+                    Notify Me
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Emma — E-commerce -->
+            <div class="demo-card ecommerce-card reveal">
+                <div class="demo-card-glow"></div>
+                <div class="demo-badge"
+                    style="color: var(--gray-300); background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);">
+                    <span class="demo-badge-dot"
+                        style="background: var(--gray-300); box-shadow: none; animation: none;"></span>
+                    Coming Soon
+                </div>
+                <div class="demo-card-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M15.55 13c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.37-.66-.11-1.48-.87-1.48H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7l1.1-2h7.45zM6.16 6h12.15l-2.76 5H8.53L6.16 6zM7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
+                    </svg>
+                </div>
+                <h3>Emma</h3>
+                <h4>E-commerce Concierge</h4>
+                <p>
+                    A retail shopping assistant that checks order status, processes
+                    returns, and provides personalized product recommendations based
+                    on customer purchase history.
+                </p>
+                <div class="demo-features">
+                    <span class="demo-feature">Order Tracking</span>
+                    <span class="demo-feature">Returns</span>
+                    <span class="demo-feature">Recommendations</span>
+                    <span class="demo-feature">Shopify Sync</span>
+                </div>
+                <p class="demo-tech">Claude Sonnet &middot; PlayHT Emma</p>
+                <a href="#" class="demo-link" onclick="event.preventDefault()">
+                    Notify Me
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                    </svg>
+                </a>
+            </div>
+
+            <!-- David — Real Estate -->
+            <div class="demo-card realestate-card reveal">
+                <div class="demo-card-glow"></div>
+                <div class="demo-badge"
+                    style="color: var(--gray-300); background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);">
+                    <span class="demo-badge-dot"
+                        style="background: var(--gray-300); box-shadow: none; animation: none;"></span>
+                    Coming Soon
+                </div>
+                <div class="demo-card-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                    </svg>
+                </div>
+                <h3>David</h3>
+                <h4>Real Estate Agent</h4>
+                <p>
+                    An outbound and inbound real estate setter that qualifies buyers,
+                    looks up MLS property details, and schedules home tours directly
+                    on your calendar.
+                </p>
+                <div class="demo-features">
+                    <span class="demo-feature">MLS Lookups</span>
+                    <span class="demo-feature">Tour Booking</span>
+                    <span class="demo-feature">Lead Qualification</span>
+                    <span class="demo-feature">Area Routing</span>
+                </div>
+                <p class="demo-tech">Llama 3.1 &middot; Cartesia David</p>
+                <a href="#" class="demo-link" onclick="event.preventDefault()">
+                    Notify Me
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
                     </svg>
                 </a>
             </div>
@@ -1008,11 +1442,14 @@
             <div class="use-case-card reveal">
                 <div class="use-case-icon healthcare">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z" fill="#3B82F6"/>
+                        <path
+                            d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"
+                            fill="#3B82F6" />
                     </svg>
                 </div>
                 <h3>Healthcare</h3>
-                <p>Patient intake and appointment scheduling that reduces front-desk burden and after-hours call volume.</p>
+                <p>Patient intake and appointment scheduling that reduces front-desk burden and after-hours call volume.
+                </p>
                 <ul class="use-case-capabilities">
                     <li>Patient pre-screening questions</li>
                     <li>Insurance verification prompts</li>
@@ -1025,7 +1462,7 @@
             <div class="use-case-card reveal">
                 <div class="use-case-icon realestate">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="#10B981"/>
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="#34D399" />
                     </svg>
                 </div>
                 <h3>Real Estate</h3>
@@ -1042,11 +1479,14 @@
             <div class="use-case-card reveal">
                 <div class="use-case-icon legal">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z" fill="#A855F7"/>
+                        <path
+                            d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"
+                            fill="#A855F7" />
                     </svg>
                 </div>
                 <h3>Legal Services</h3>
-                <p>Client intake and consultation booking for law firms. Capture case details before the first meeting.</p>
+                <p>Client intake and consultation booking for law firms. Capture case details before the first meeting.
+                </p>
                 <ul class="use-case-capabilities">
                     <li>Case type classification</li>
                     <li>Conflict-of-interest screening</li>
@@ -1059,11 +1499,14 @@
             <div class="use-case-card reveal">
                 <div class="use-case-icon restaurant">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z" fill="#F59E0B"/>
+                        <path
+                            d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"
+                            fill="#F59E0B" />
                     </svg>
                 </div>
                 <h3>Restaurants</h3>
-                <p>Handle reservation calls, answer menu questions, and manage waitlists — while staff focus on guests.</p>
+                <p>Handle reservation calls, answer menu questions, and manage waitlists — while staff focus on guests.
+                </p>
                 <ul class="use-case-capabilities">
                     <li>Table reservations</li>
                     <li>Menu & allergy info</li>
@@ -1076,7 +1519,9 @@
             <div class="use-case-card reveal">
                 <div class="use-case-icon support">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 1c-4.97 0-9 4.03-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7c0-4.97-4.03-9-9-9z" fill="#6366F1"/>
+                        <path
+                            d="M12 1c-4.97 0-9 4.03-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7c0-4.97-4.03-9-9-9z"
+                            fill="#6366F1" />
                     </svg>
                 </div>
                 <h3>Customer Support</h3>
@@ -1093,7 +1538,9 @@
             <div class="use-case-card reveal">
                 <div class="use-case-icon fitness">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29z" fill="#EC4899"/>
+                        <path
+                            d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29z"
+                            fill="#EC4899" />
                     </svg>
                 </div>
                 <h3>Fitness & Wellness</h3>
@@ -1128,12 +1575,14 @@
             <div class="step">
                 <div class="step-number">02</div>
                 <h3>Build the Agent</h3>
-                <p>Custom voice, personality, and tool integrations. Calendar, CRM, database — whatever your stack needs.</p>
+                <p>Custom voice, personality, and tool integrations. Calendar, CRM, database — whatever your stack
+                    needs.</p>
             </div>
             <div class="step">
                 <div class="step-number">03</div>
                 <h3>Connect Systems</h3>
-                <p>Webhooks tie into your existing tools. Google Calendar, Salesforce, Stripe, Slack — all fair game.</p>
+                <p>Webhooks tie into your existing tools. Google Calendar, Salesforce, Stripe, Slack — all fair game.
+                </p>
             </div>
             <div class="step">
                 <div class="step-number">04</div>
@@ -1177,6 +1626,36 @@
         });
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Theme Switcher Logic
+        const themeBtn = document.getElementById('theme-toggle');
+        const root = document.documentElement;
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            root.classList.add('light-theme');
+            root.classList.remove('dark');
+        } else if (savedTheme === 'dark') {
+            root.classList.add('dark');
+            root.classList.remove('light-theme');
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            root.classList.add('light-theme');
+            root.classList.remove('dark');
+        }
+
+        if (themeBtn) {
+            themeBtn.addEventListener('click', () => {
+                root.classList.toggle('light-theme');
+                if (root.classList.contains('light-theme')) {
+                    root.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    root.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+        }
     </script>
 </body>
+
 </html>
