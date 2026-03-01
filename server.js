@@ -28,7 +28,11 @@ app.use(express.json());
 // Serve static frontend files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Health check endpoint
+// Health check endpoints — /healthz for Render's health check path, /api/health for internal use
+app.get('/healthz', (req, res) => {
+    res.status(200).send('OK');
+});
+
 app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', service: 'cushlabs-ai-voice-agent' });
 });
