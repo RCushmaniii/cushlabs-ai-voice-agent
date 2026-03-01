@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FF6A3D">
+    <link rel="icon" href="/voice_agent.ico" type="image/x-icon">
+    <title>Contact — CushLabs AI Services</title>
+    <meta name="description" content="Get in touch with CushLabs AI Services. Send us a message or book a free consultation to discuss your AI voice agent project.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cush-orange: #FF6A3D;
+            --cush-orange-light: #FF9B7A;
+            --cush-orange-glow: rgba(255, 106, 61, 0.2);
+            --cush-black: #050505;
+            --glass-bg: rgba(10, 10, 12, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-highlight: rgba(255, 255, 255, 0.12);
+            --gray-950: #080808;
+            --gray-900: #121212;
+            --gray-800: #1E1E1E;
+            --gray-400: #9CA3AF;
+            --gray-300: #B8C0CC;
+            --gray-200: #D4D8DE;
+            --text-main: #FAFAFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background-color: var(--cush-orange);
+            color: var(--cush-black);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: "Source Serif 4", Georgia, serif;
+            background: var(--cush-black);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ── Aurora background ── */
+        .aurora-container {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .aurora-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(140px);
+            opacity: 0.12;
+            mix-blend-mode: screen;
+        }
+
+        .aurora-orb-1 {
+            width: 900px;
+            height: 900px;
+            background: var(--cush-orange);
+            top: -20%;
+            right: -20%;
+            animation: aurora-1 30s ease-in-out infinite;
+        }
+
+        .aurora-orb-2 {
+            width: 700px;
+            height: 700px;
+            background: #9D4EDD;
+            bottom: -20%;
+            left: -15%;
+            animation: aurora-2 35s ease-in-out infinite;
+        }
+
+        .aurora-orb-3 {
+            width: 500px;
+            height: 500px;
+            background: #3B82F6;
+            top: 40%;
+            left: 30%;
+            animation: aurora-1 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes aurora-1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(50px, -50px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+
+        @keyframes aurora-2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-50px, 30px) scale(0.9); }
+            66% { transform: translate(40px, -40px) scale(1.1); }
+        }
+
+        /* ── Top accent line ── */
+        .top-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--cush-orange), transparent);
+            z-index: 10;
+            opacity: 0.8;
+        }
+
+        /* ── Glass utility ── */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        /* ── Navigation ── */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9;
+            background: rgba(5, 5, 5, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            transition: background 0.3s;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.25rem 2rem;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-brand span {
+            color: var(--cush-orange);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--gray-200);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.nav-active {
+            color: var(--cush-orange);
+        }
+
+        .lang-toggle {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            color: var(--gray-200);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.4rem 0.9rem;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            text-transform: uppercase;
+        }
+
+        .lang-toggle:hover {
+            color: var(--cush-orange);
+            border-color: var(--cush-orange);
+            background: rgba(255, 106, 61, 0.08);
+        }
+
+        /* ── Section base ── */
+        .section {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ── Section headers ── */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-label {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--cush-orange);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--gray-300);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ── Contact Hero ── */
+        .contact-hero {
+            padding-top: 8rem;
+            padding-bottom: 3rem;
+            text-align: center;
+            animation: fade-in-up 0.8s ease-out;
+        }
+
+        .contact-hero h1 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        .contact-hero h1 .accent {
+            background: linear-gradient(135deg, #FF6A3D, #FF9B7A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-hero p {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: clamp(1.05rem, 2vw, 1.25rem);
+            font-weight: 300;
+            color: var(--gray-300);
+            max-width: 550px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ── Iframe sections ── */
+        .iframe-section {
+            padding: 3rem 2rem;
+        }
+
+        .iframe-wrapper {
+            border-radius: 20px;
+            overflow: hidden;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .iframe-wrapper iframe {
+            width: 100%;
+            border: none;
+            display: block;
+        }
+
+        .iframe-contact {
+            height: 700px;
+        }
+
+        .iframe-consult {
+            height: 800px;
+        }
+
+        /* ── Alt Contact Cards ── */
+        .alt-contact {
+            padding: 4rem 2rem;
+        }
+
+        .alt-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .alt-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            text-decoration: none;
+            display: block;
+        }
+
+        .alt-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--glass-highlight);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .alt-card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: rgba(255, 106, 61, 0.1);
+            border: 1px solid rgba(255, 106, 61, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+        }
+
+        .alt-card-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: var(--cush-orange);
+        }
+
+        .alt-card h3 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .alt-card p {
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: var(--gray-300);
+            line-height: 1.5;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--glass-border);
+            position: relative;
+            z-index: 1;
+            margin-top: 0;
+        }
+
+        .footer p {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.85rem;
+            color: var(--gray-400);
+        }
+
+        .footer a {
+            color: var(--cush-orange);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--cush-orange-light);
+        }
+
+        /* ── Animations ── */
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Responsive ── */
+        @media (prefers-reduced-motion: reduce) {
+            .aurora-orb { animation: none !important; }
+            .contact-hero, .reveal {
+                animation: none !important;
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-controls {
+                gap: 0;
+            }
+
+            .contact-hero {
+                padding-top: 6rem;
+            }
+
+            .alt-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .iframe-contact {
+                height: 600px;
+            }
+
+            .iframe-consult {
+                height: 700px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-line"></div>
+
+    <!-- Aurora background -->
+    <div class="aurora-container">
+        <div class="aurora-orb aurora-orb-1"></div>
+        <div class="aurora-orb aurora-orb-2"></div>
+        <div class="aurora-orb aurora-orb-3"></div>
+    </div>
+
+    <!-- ═══ Navigation ═══ -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">CUSH<span>LABS.AI</span></a>
+            <div class="nav-controls">
+                <ul class="nav-links">
+                    <li><a href="/#capabilities" data-i18n="nav.capabilities">What We Build</a></li>
+                    <li><a href="/#how-it-works" data-i18n="nav.howItWorks">How It Works</a></li>
+                    <li><a href="/#demos" data-i18n="nav.demos">Live Demos</a></li>
+                    <li><a href="/contact" class="nav-active" data-i18n="nav.contact">Contact</a></li>
+                </ul>
+                <button class="lang-toggle" id="langToggle" aria-label="Switch language">ES</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══ Hero ═══ -->
+    <section class="section contact-hero">
+        <h1 data-i18n-html="contact.hero.h1">Get in <span class="accent">Touch</span></h1>
+        <p data-i18n="contact.hero.subtitle">Have a project in mind? Send us a message or book a free consultation — we'll get back to you within 24 hours.</p>
+    </section>
+
+    <!-- ═══ Contact Form Iframe ═══ -->
+    <section class="section iframe-section reveal">
+        <div class="section-header">
+            <p class="section-label" data-i18n="contact.form.label">Send a Message</p>
+            <h2 class="section-title" data-i18n="contact.form.title">Contact Form</h2>
+            <p class="section-subtitle" data-i18n="contact.form.subtitle">Tell us about your business and what you're looking for. We'll follow up with a custom proposal.</p>
+        </div>
+        <div class="iframe-wrapper glass-panel">
+            <iframe src="https://www.cushlabs.ai/contact" class="iframe-contact" loading="lazy" title="CushLabs Contact Form"></iframe>
+        </div>
+    </section>
+
+    <!-- ═══ Consultation Iframe ═══ -->
+    <section class="section iframe-section reveal">
+        <div class="section-header">
+            <p class="section-label" data-i18n="contact.consult.label">Book a Call</p>
+            <h2 class="section-title" data-i18n="contact.consult.title">Free Consultation</h2>
+            <p class="section-subtitle" data-i18n="contact.consult.subtitle">Schedule a 30-minute call to discuss your AI voice agent needs. No commitment, no sales pitch.</p>
+        </div>
+        <div class="iframe-wrapper glass-panel">
+            <iframe src="https://www.cushlabs.ai/consultation" class="iframe-consult" loading="lazy" title="CushLabs Consultation Booking"></iframe>
+        </div>
+    </section>
+
+    <!-- ═══ Alternative Contact ═══ -->
+    <section class="section alt-contact reveal">
+        <div class="section-header">
+            <p class="section-label" data-i18n="contact.alt.label">Other Ways to Reach Us</p>
+            <h2 class="section-title" data-i18n="contact.alt.title">Direct Contact</h2>
+        </div>
+        <div class="alt-grid">
+            <a href="mailto:robert@cushlabs.ai" class="alt-card">
+                <div class="alt-card-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                </div>
+                <h3 data-i18n="contact.alt.email.title">Email</h3>
+                <p>robert@cushlabs.ai</p>
+            </a>
+            <a href="https://wa.me/19175551234?text=Hi%20Robert%2C%20I%27m%20interested%20in%20an%20AI%20voice%20agent%20for%20my%20business." class="alt-card" target="_blank" rel="noopener noreferrer">
+                <div class="alt-card-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                </div>
+                <h3>WhatsApp</h3>
+                <p data-i18n="contact.alt.whatsapp.desc">Message us directly</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- ═══ Footer ═══ -->
+    <footer class="footer">
+        <p data-i18n-html="footer">&copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a> &middot; New York, NY</p>
+    </footer>
+
+    <!-- Scroll reveal -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const reveals = document.querySelectorAll(".reveal");
+            if (!reveals.length) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+
+            reveals.forEach((el) => observer.observe(el));
+        });
+    </script>
+
+    <!-- i18n: Bilingual EN/ES -->
+    <script>
+    (function () {
+        const translations = {
+            en: {
+                // Nav (shared keys)
+                "nav.capabilities": "What We Build",
+                "nav.howItWorks": "How It Works",
+                "nav.demos": "Live Demos",
+                "nav.contact": "Contact",
+                // Contact Hero
+                "contact.hero.h1": 'Get in <span class="accent">Touch</span>',
+                "contact.hero.subtitle": "Have a project in mind? Send us a message or book a free consultation — we'll get back to you within 24 hours.",
+                // Contact Form
+                "contact.form.label": "Send a Message",
+                "contact.form.title": "Contact Form",
+                "contact.form.subtitle": "Tell us about your business and what you're looking for. We'll follow up with a custom proposal.",
+                // Consultation
+                "contact.consult.label": "Book a Call",
+                "contact.consult.title": "Free Consultation",
+                "contact.consult.subtitle": "Schedule a 30-minute call to discuss your AI voice agent needs. No commitment, no sales pitch.",
+                // Alt Contact
+                "contact.alt.label": "Other Ways to Reach Us",
+                "contact.alt.title": "Direct Contact",
+                "contact.alt.email.title": "Email",
+                "contact.alt.whatsapp.desc": "Message us directly",
+                // Footer
+                "footer": '&copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a> &middot; New York, NY'
+            },
+            es: {
+                // Nav
+                "nav.capabilities": "Servicios",
+                "nav.howItWorks": "Proceso",
+                "nav.demos": "Demos en Vivo",
+                "nav.contact": "Contacto",
+                // Contact Hero
+                "contact.hero.h1": '<span class="accent">Cont\u00e1ctanos</span>',
+                "contact.hero.subtitle": "\u00bfTienes un proyecto en mente? Env\u00edanos un mensaje o agenda una consulta gratuita — te respondemos en 24 horas.",
+                // Contact Form
+                "contact.form.label": "Enviar un Mensaje",
+                "contact.form.title": "Formulario de Contacto",
+                "contact.form.subtitle": "Cu\u00e9ntanos sobre tu negocio y lo que necesitas. Te enviaremos una propuesta personalizada.",
+                // Consultation
+                "contact.consult.label": "Agendar una Llamada",
+                "contact.consult.title": "Consulta Gratuita",
+                "contact.consult.subtitle": "Agenda una llamada de 30 minutos para hablar sobre tu agente de voz IA. Sin compromiso, sin discurso de ventas.",
+                // Alt Contact
+                "contact.alt.label": "Otras Formas de Contactarnos",
+                "contact.alt.title": "Contacto Directo",
+                "contact.alt.email.title": "Correo",
+                "contact.alt.whatsapp.desc": "Escr\u00edbenos directamente",
+                // Footer
+                "footer": '&copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a> &middot; Nueva York, NY'
+            }
+        };
+
+        let currentLang = "en";
+
+        function t(key) {
+            return (translations[currentLang] && translations[currentLang][key]) || translations.en[key] || key;
+        }
+
+        function applyLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+
+            document.querySelectorAll("[data-i18n]").forEach(function (el) {
+                var key = el.getAttribute("data-i18n");
+                var val = t(key);
+                if (val) el.textContent = val;
+            });
+
+            document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
+                var key = el.getAttribute("data-i18n-html");
+                var val = t(key);
+                if (val) el.innerHTML = val;
+            });
+
+            var toggle = document.getElementById("langToggle");
+            if (toggle) toggle.textContent = lang === "en" ? "ES" : "EN";
+
+            localStorage.setItem("cushlabs-lang", lang);
+        }
+
+        function getInitialLanguage() {
+            var stored = localStorage.getItem("cushlabs-lang");
+            if (stored === "en" || stored === "es") return stored;
+            var nav = (navigator.language || "").toLowerCase();
+            if (nav.startsWith("es")) return "es";
+            return "en";
+        }
+
+        // Toggle handler
+        var toggle = document.getElementById("langToggle");
+        if (toggle) {
+            toggle.addEventListener("click", function () {
+                applyLanguage(currentLang === "en" ? "es" : "en");
+            });
+        }
+
+        // Apply initial language
+        var initialLang = getInitialLanguage();
+        if (initialLang === "es") {
+            applyLanguage("es");
+        }
+    })();
+    </script>
+</body>
+</html>

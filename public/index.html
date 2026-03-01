@@ -189,6 +189,35 @@
             color: var(--cush-orange);
         }
 
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .lang-toggle {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            color: var(--gray-200);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.4rem 0.9rem;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            text-transform: uppercase;
+        }
+
+        .lang-toggle:hover {
+            color: var(--cush-orange);
+            border-color: var(--cush-orange);
+            background: rgba(255, 106, 61, 0.08);
+        }
+
         /* ── Section base ── */
         .section {
             position: relative;
@@ -891,6 +920,10 @@
                 display: none;
             }
 
+            .nav-controls {
+                gap: 0;
+            }
+
             .hero {
                 padding-top: 8rem;
             }
@@ -953,20 +986,23 @@
     <nav class="nav">
         <div class="nav-container">
             <a href="/" class="nav-brand">CUSH<span>LABS.AI</span></a>
-            <ul class="nav-links">
-                <li><a href="#capabilities">What We Build</a></li>
-                <li><a href="#how-it-works">How It Works</a></li>
-                <li><a href="#demos">Live Demos</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+            <div class="nav-controls">
+                <ul class="nav-links">
+                    <li><a href="#capabilities" data-i18n="nav.capabilities">What We Build</a></li>
+                    <li><a href="#how-it-works" data-i18n="nav.howItWorks">How It Works</a></li>
+                    <li><a href="#demos" data-i18n="nav.demos">Live Demos</a></li>
+                    <li><a href="/contact" data-i18n="nav.contact">Contact</a></li>
+                </ul>
+                <button class="lang-toggle" id="langToggle" aria-label="Switch language">ES</button>
+            </div>
         </div>
     </nav>
 
     <!-- ═══ 2. Hero ═══ -->
     <section class="section hero" id="hero">
-        <p class="hero-label">CushLabs AI Services</p>
-        <h1>Your Business Deserves<br>a <span class="accent">Smarter Front Door</span></h1>
-        <p class="hero-subtitle">
+        <p class="hero-label" data-i18n="hero.label">CushLabs AI Services</p>
+        <h1 data-i18n-html="hero.h1">Your Business Deserves<br>a <span class="accent">Smarter Front Door</span></h1>
+        <p class="hero-subtitle" data-i18n="hero.subtitle">
             AI voice agents that answer every call, qualify every lead,
             and book every appointment — 24/7, with zero hold times.
         </p>
@@ -985,15 +1021,15 @@
         <div class="hero-stats">
             <div class="hero-stat">
                 <span class="hero-stat-value">&lt;500ms</span>
-                <span class="hero-stat-label">Response</span>
+                <span class="hero-stat-label" data-i18n="hero.stat.response">Response</span>
             </div>
             <div class="hero-stat">
                 <span class="hero-stat-value">24/7</span>
-                <span class="hero-stat-label">Availability</span>
+                <span class="hero-stat-label" data-i18n="hero.stat.availability">Availability</span>
             </div>
             <div class="hero-stat">
                 <span class="hero-stat-value">3</span>
-                <span class="hero-stat-label">Live Assistants</span>
+                <span class="hero-stat-label" data-i18n="hero.stat.assistants">Live Assistants</span>
             </div>
         </div>
 
@@ -1007,9 +1043,9 @@
     <!-- ═══ 3. What We Build ═══ -->
     <section class="section capabilities" id="capabilities">
         <div class="section-header reveal">
-            <p class="section-label">What We Build</p>
-            <h2 class="section-title">Voice Agents That Work for You</h2>
-            <p class="section-subtitle">
+            <p class="section-label" data-i18n="cap.label">What We Build</p>
+            <h2 class="section-title" data-i18n="cap.title">Voice Agents That Work for You</h2>
+            <p class="section-subtitle" data-i18n="cap.subtitle">
                 Every agent is custom-built for your business — from the voice and personality
                 to the systems it connects to.
             </p>
@@ -1022,8 +1058,8 @@
                         <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
                     </svg>
                 </div>
-                <h3>Lead Qualification</h3>
-                <p>Capture every call, ask the right questions, score and route leads to your sales team automatically.</p>
+                <h3 data-i18n="cap.lead.title">Lead Qualification</h3>
+                <p data-i18n="cap.lead.desc">Capture every call, ask the right questions, score and route leads to your sales team automatically.</p>
             </div>
 
             <div class="cap-card reveal">
@@ -1032,8 +1068,8 @@
                         <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/>
                     </svg>
                 </div>
-                <h3>Appointment Booking</h3>
-                <p>Real-time calendar checks, auto-booking with confirmations, and Google Meet links — all hands-free.</p>
+                <h3 data-i18n="cap.booking.title">Appointment Booking</h3>
+                <p data-i18n="cap.booking.desc">Real-time calendar checks, auto-booking with confirmations, and Google Meet links — all hands-free.</p>
             </div>
 
             <div class="cap-card reveal">
@@ -1042,8 +1078,8 @@
                         <path d="M21 12.22C21 6.73 16.74 3 12 3c-4.69 0-9 3.65-9 9.28-.6.34-1 .98-1 1.72v2c0 1.1.9 2 2 2h1v-6.1c0-3.87 3.13-7 7-7s7 3.13 7 7V19h-8v2h8c1.1 0 2-.9 2-2v-1.22c.59-.31 1-.92 1-1.64v-2.3c0-.7-.41-1.31-1-1.62z"/>
                     </svg>
                 </div>
-                <h3>Customer Support</h3>
-                <p>L1 support that resolves FAQs, handles billing questions, and escalates to humans only when needed.</p>
+                <h3 data-i18n="cap.support.title">Customer Support</h3>
+                <p data-i18n="cap.support.desc">L1 support that resolves FAQs, handles billing questions, and escalates to humans only when needed.</p>
             </div>
 
             <div class="cap-card reveal">
@@ -1052,8 +1088,8 @@
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                     </svg>
                 </div>
-                <h3>AI Front Desk</h3>
-                <p>A virtual receptionist that greets callers, answers service questions, and manages scheduling 24/7.</p>
+                <h3 data-i18n="cap.frontdesk.title">AI Front Desk</h3>
+                <p data-i18n="cap.frontdesk.desc">A virtual receptionist that greets callers, answers service questions, and manages scheduling 24/7.</p>
             </div>
         </div>
     </section>
@@ -1061,9 +1097,9 @@
     <!-- ═══ 4. How It Works ═══ -->
     <section class="section how-it-works" id="how-it-works">
         <div class="section-header reveal">
-            <p class="section-label">Our Process</p>
-            <h2 class="section-title">How It Works</h2>
-            <p class="section-subtitle">
+            <p class="section-label" data-i18n="how.label">Our Process</p>
+            <h2 class="section-title" data-i18n="how.title">How It Works</h2>
+            <p class="section-subtitle" data-i18n="how.subtitle">
                 From concept to production in days, not months.
             </p>
         </div>
@@ -1071,26 +1107,26 @@
         <div class="steps">
             <div class="step reveal">
                 <div class="step-number">01</div>
-                <h3>Define the Role</h3>
-                <p>We map your call flow, customer questions, and business rules into a detailed agent persona and script.</p>
+                <h3 data-i18n="how.step1.title">Define the Role</h3>
+                <p data-i18n="how.step1.desc">We map your call flow, customer questions, and business rules into a detailed agent persona and script.</p>
             </div>
 
             <div class="step reveal">
                 <div class="step-number">02</div>
-                <h3>Build the Agent</h3>
-                <p>We select the best LLM, voice, and STT models for your use case and wire up the conversation logic.</p>
+                <h3 data-i18n="how.step2.title">Build the Agent</h3>
+                <p data-i18n="how.step2.desc">We select the best LLM, voice, and STT models for your use case and wire up the conversation logic.</p>
             </div>
 
             <div class="step reveal">
                 <div class="step-number">03</div>
-                <h3>Connect Systems</h3>
-                <p>Calendar, CRM, database, email — your agent integrates directly with the tools you already use.</p>
+                <h3 data-i18n="how.step3.title">Connect Systems</h3>
+                <p data-i18n="how.step3.desc">Calendar, CRM, database, email — your agent integrates directly with the tools you already use.</p>
             </div>
 
             <div class="step reveal">
                 <div class="step-number">04</div>
-                <h3>Deploy &amp; Iterate</h3>
-                <p>Launch on web, phone, or both. We monitor conversations and refine the agent based on real performance data.</p>
+                <h3 data-i18n="how.step4.title">Deploy &amp; Iterate</h3>
+                <p data-i18n="how.step4.desc">Launch on web, phone, or both. We monitor conversations and refine the agent based on real performance data.</p>
             </div>
         </div>
     </section>
@@ -1098,9 +1134,9 @@
     <!-- ═══ 5. Live Demos ═══ -->
     <section class="section demos" id="demos">
         <div class="section-header reveal">
-            <p class="section-label">Live Demos</p>
-            <h2 class="section-title">Talk to Our Agents</h2>
-            <p class="section-subtitle">
+            <p class="section-label" data-i18n="demos.label">Live Demos</p>
+            <h2 class="section-title" data-i18n="demos.title">Talk to Our Agents</h2>
+            <p class="section-subtitle" data-i18n="demos.subtitle">
                 These are production voice agents — have a real conversation
                 and experience the technology firsthand.
             </p>
@@ -1112,7 +1148,7 @@
                 <div class="demo-card-glow"></div>
                 <div class="demo-badge">
                     <span class="demo-badge-dot"></span>
-                    Live
+                    <span data-i18n="demos.badge">Live</span>
                 </div>
                 <div class="demo-card-icon">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1120,21 +1156,21 @@
                     </svg>
                 </div>
                 <h3>Clara</h3>
-                <h4>Lead Qualification</h4>
-                <p>
+                <h4 data-i18n="demos.clara.role">Lead Qualification</h4>
+                <p data-i18n="demos.clara.desc">
                     CushLabs' intelligent lead qualification agent. Clara greets prospects,
                     understands their business needs, and captures qualified lead data — all
                     through natural voice conversation.
                 </p>
                 <div class="demo-features">
-                    <span class="demo-feature">Lead Capture</span>
-                    <span class="demo-feature">Needs Assessment</span>
-                    <span class="demo-feature">AI Interest Mapping</span>
-                    <span class="demo-feature">CRM Integration</span>
+                    <span class="demo-feature" data-i18n="demos.clara.f1">Lead Capture</span>
+                    <span class="demo-feature" data-i18n="demos.clara.f2">Needs Assessment</span>
+                    <span class="demo-feature" data-i18n="demos.clara.f3">AI Interest Mapping</span>
+                    <span class="demo-feature" data-i18n="demos.clara.f4">CRM Integration</span>
                 </div>
                 <p class="demo-tech">Claude Sonnet &middot; Vapi Clara Voice &middot; Neon Postgres</p>
                 <a href="#hero" class="demo-link">
-                    Talk to Clara
+                    <span data-i18n="demos.clara.cta">Talk to Clara</span>
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
                     </svg>
@@ -1146,7 +1182,7 @@
                 <div class="demo-card-glow"></div>
                 <div class="demo-badge">
                     <span class="demo-badge-dot"></span>
-                    Live
+                    <span data-i18n="demos.badge">Live</span>
                 </div>
                 <div class="demo-card-icon">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1154,21 +1190,21 @@
                     </svg>
                 </div>
                 <h3>James</h3>
-                <h4>Appointment Booking</h4>
-                <p>
+                <h4 data-i18n="demos.james.role">Appointment Booking</h4>
+                <p data-i18n="demos.james.desc">
                     A premium scheduling assistant for an executive coaching practice.
                     James checks real-time Google Calendar availability, books sessions with
                     Google Meet links, and sends confirmation emails.
                 </p>
                 <div class="demo-features">
-                    <span class="demo-feature">Google Calendar</span>
-                    <span class="demo-feature">Real-Time Availability</span>
-                    <span class="demo-feature">Auto-Booking</span>
-                    <span class="demo-feature">Email Confirmations</span>
+                    <span class="demo-feature" data-i18n="demos.james.f1">Google Calendar</span>
+                    <span class="demo-feature" data-i18n="demos.james.f2">Real-Time Availability</span>
+                    <span class="demo-feature" data-i18n="demos.james.f3">Auto-Booking</span>
+                    <span class="demo-feature" data-i18n="demos.james.f4">Email Confirmations</span>
                 </div>
                 <p class="demo-tech">Groq Llama 3.1 &middot; Cartesia Nathan Voice &middot; Google Calendar API</p>
                 <a href="/nyc-coaching" class="demo-link">
-                    Talk to James
+                    <span data-i18n="demos.james.cta">Talk to James</span>
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
                     </svg>
@@ -1180,7 +1216,7 @@
                 <div class="demo-card-glow"></div>
                 <div class="demo-badge">
                     <span class="demo-badge-dot"></span>
-                    Live
+                    <span data-i18n="demos.badge">Live</span>
                 </div>
                 <div class="demo-card-icon">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1188,21 +1224,21 @@
                     </svg>
                 </div>
                 <h3>Sophia</h3>
-                <h4>Med Spa AI Front Desk</h4>
-                <p>
+                <h4 data-i18n="demos.sophia.role">Med Spa AI Front Desk</h4>
+                <p data-i18n="demos.sophia.desc">
                     An AI front desk agent for medical aesthetics clinics.
                     Sophia qualifies new clients, answers treatment questions,
                     handles pricing objections, and books consultations — 24/7.
                 </p>
                 <div class="demo-features">
-                    <span class="demo-feature">Client Qualification</span>
-                    <span class="demo-feature">Treatment Info</span>
-                    <span class="demo-feature">Objection Handling</span>
-                    <span class="demo-feature">Consultation Booking</span>
+                    <span class="demo-feature" data-i18n="demos.sophia.f1">Client Qualification</span>
+                    <span class="demo-feature" data-i18n="demos.sophia.f2">Treatment Info</span>
+                    <span class="demo-feature" data-i18n="demos.sophia.f3">Objection Handling</span>
+                    <span class="demo-feature" data-i18n="demos.sophia.f4">Consultation Booking</span>
                 </div>
                 <p class="demo-tech">Claude Sonnet &middot; Cartesia Cindy Voice &middot; Deepgram Nova-2</p>
                 <a href="/medspa" class="demo-link">
-                    Talk to Sophia
+                    <span data-i18n="demos.sophia.cta">Talk to Sophia</span>
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
                     </svg>
@@ -1212,23 +1248,23 @@
     </section>
 
     <!-- ═══ 6. CTA ═══ -->
-    <section class="section cta" id="contact">
+    <section class="section cta" id="cta">
         <div class="reveal">
-            <h2>Ready to Build Your Agent?</h2>
-            <p>
+            <h2 data-i18n="cta.title">Ready to Build Your Agent?</h2>
+            <p data-i18n="cta.subtitle">
                 Whether you need lead qualification, appointment booking,
                 or a full AI front desk — we'll build it and deploy it for you.
             </p>
             <div class="cta-buttons">
-                <a href="#hero" class="btn-primary">Talk to Clara</a>
-                <a href="mailto:robert@cushlabs.ai" class="btn-secondary">Get in Touch</a>
+                <a href="#hero" class="btn-primary" data-i18n="cta.talkClara">Talk to Clara</a>
+                <a href="/contact" class="btn-secondary" data-i18n="cta.getInTouch">Get in Touch</a>
             </div>
         </div>
     </section>
 
     <!-- ═══ 7. Footer ═══ -->
     <footer class="footer">
-        <p>&copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a> &middot; New York, NY</p>
+        <p data-i18n-html="footer">&copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a> &middot; New York, NY</p>
     </footer>
 
     <!-- Vapi Web SDK (ESM) -->
@@ -1337,6 +1373,296 @@
 
             reveals.forEach((el) => observer.observe(el));
         });
+    </script>
+
+    <!-- i18n: Bilingual EN/ES -->
+    <script>
+    (function () {
+        const translations = {
+            en: {
+                // Nav
+                "nav.capabilities": "What We Build",
+                "nav.howItWorks": "How It Works",
+                "nav.demos": "Live Demos",
+                "nav.contact": "Contact",
+                // Hero
+                "hero.label": "CushLabs AI Services",
+                "hero.h1": 'Your Business Deserves<br>a <span class="accent">Smarter Front Door</span>',
+                "hero.subtitle": "AI voice agents that answer every call, qualify every lead, and book every appointment — 24/7, with zero hold times.",
+                "hero.stat.response": "Response",
+                "hero.stat.availability": "Availability",
+                "hero.stat.assistants": "Live Assistants",
+                "hero.warmup": "Waking up the server — one moment...",
+                // Vapi status strings
+                "status.loading": "Loading...",
+                "status.ready": "Click to talk with Clara",
+                "status.connecting": "Connecting...",
+                "status.listening": "Listening... click to end call",
+                "status.ended": "Call ended — click to start again",
+                "status.speaking": "Assistant speaking...",
+                "status.listeningShort": "Listening...",
+                "status.error": "Something went wrong. Try again.",
+                "status.failInit": "Failed to load. Please refresh.",
+                "status.failConnect": "Failed to connect. Try again.",
+                // Capabilities
+                "cap.label": "What We Build",
+                "cap.title": "Voice Agents That Work for You",
+                "cap.subtitle": "Every agent is custom-built for your business — from the voice and personality to the systems it connects to.",
+                "cap.lead.title": "Lead Qualification",
+                "cap.lead.desc": "Capture every call, ask the right questions, score and route leads to your sales team automatically.",
+                "cap.booking.title": "Appointment Booking",
+                "cap.booking.desc": "Real-time calendar checks, auto-booking with confirmations, and Google Meet links — all hands-free.",
+                "cap.support.title": "Customer Support",
+                "cap.support.desc": "L1 support that resolves FAQs, handles billing questions, and escalates to humans only when needed.",
+                "cap.frontdesk.title": "AI Front Desk",
+                "cap.frontdesk.desc": "A virtual receptionist that greets callers, answers service questions, and manages scheduling 24/7.",
+                // How It Works
+                "how.label": "Our Process",
+                "how.title": "How It Works",
+                "how.subtitle": "From concept to production in days, not months.",
+                "how.step1.title": "Define the Role",
+                "how.step1.desc": "We map your call flow, customer questions, and business rules into a detailed agent persona and script.",
+                "how.step2.title": "Build the Agent",
+                "how.step2.desc": "We select the best LLM, voice, and STT models for your use case and wire up the conversation logic.",
+                "how.step3.title": "Connect Systems",
+                "how.step3.desc": "Calendar, CRM, database, email — your agent integrates directly with the tools you already use.",
+                "how.step4.title": "Deploy & Iterate",
+                "how.step4.desc": "Launch on web, phone, or both. We monitor conversations and refine the agent based on real performance data.",
+                // Live Demos
+                "demos.label": "Live Demos",
+                "demos.title": "Talk to Our Agents",
+                "demos.subtitle": "These are production voice agents — have a real conversation and experience the technology firsthand.",
+                "demos.badge": "Live",
+                "demos.clara.role": "Lead Qualification",
+                "demos.clara.desc": "CushLabs' intelligent lead qualification agent. Clara greets prospects, understands their business needs, and captures qualified lead data — all through natural voice conversation.",
+                "demos.clara.f1": "Lead Capture",
+                "demos.clara.f2": "Needs Assessment",
+                "demos.clara.f3": "AI Interest Mapping",
+                "demos.clara.f4": "CRM Integration",
+                "demos.clara.cta": "Talk to Clara",
+                "demos.james.role": "Appointment Booking",
+                "demos.james.desc": "A premium scheduling assistant for an executive coaching practice. James checks real-time Google Calendar availability, books sessions with Google Meet links, and sends confirmation emails.",
+                "demos.james.f1": "Google Calendar",
+                "demos.james.f2": "Real-Time Availability",
+                "demos.james.f3": "Auto-Booking",
+                "demos.james.f4": "Email Confirmations",
+                "demos.james.cta": "Talk to James",
+                "demos.sophia.role": "Med Spa AI Front Desk",
+                "demos.sophia.desc": "An AI front desk agent for medical aesthetics clinics. Sophia qualifies new clients, answers treatment questions, handles pricing objections, and books consultations — 24/7.",
+                "demos.sophia.f1": "Client Qualification",
+                "demos.sophia.f2": "Treatment Info",
+                "demos.sophia.f3": "Objection Handling",
+                "demos.sophia.f4": "Consultation Booking",
+                "demos.sophia.cta": "Talk to Sophia",
+                // CTA
+                "cta.title": "Ready to Build Your Agent?",
+                "cta.subtitle": "Whether you need lead qualification, appointment booking, or a full AI front desk — we'll build it and deploy it for you.",
+                "cta.talkClara": "Talk to Clara",
+                "cta.getInTouch": "Get in Touch",
+                // Footer
+                "footer": '&copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a> &middot; New York, NY'
+            },
+            es: {
+                // Nav
+                "nav.capabilities": "Servicios",
+                "nav.howItWorks": "Proceso",
+                "nav.demos": "Demos en Vivo",
+                "nav.contact": "Contacto",
+                // Hero
+                "hero.label": "CushLabs AI Services",
+                "hero.h1": 'Tu Negocio Merece<br>una <span class="accent">Entrada Inteligente</span>',
+                "hero.subtitle": "Agentes de voz con IA que responden cada llamada, califican cada prospecto y agendan cada cita — 24/7, sin tiempos de espera.",
+                "hero.stat.response": "Respuesta",
+                "hero.stat.availability": "Disponibilidad",
+                "hero.stat.assistants": "Asistentes Activos",
+                "hero.warmup": "Iniciando el servidor — un momento...",
+                // Vapi status strings
+                "status.loading": "Cargando...",
+                "status.ready": "Haz clic para hablar con Clara",
+                "status.connecting": "Conectando...",
+                "status.listening": "Escuchando... haz clic para terminar",
+                "status.ended": "Llamada terminada — haz clic para reiniciar",
+                "status.speaking": "Asistente hablando...",
+                "status.listeningShort": "Escuchando...",
+                "status.error": "Algo sali\u00f3 mal. Int\u00e9ntalo de nuevo.",
+                "status.failInit": "Error al cargar. Actualiza la p\u00e1gina.",
+                "status.failConnect": "Error al conectar. Int\u00e9ntalo de nuevo.",
+                // Capabilities
+                "cap.label": "Nuestros Servicios",
+                "cap.title": "Agentes de Voz Que Trabajan Para Ti",
+                "cap.subtitle": "Cada agente se construye a medida para tu negocio — desde la voz y personalidad hasta los sistemas que conecta.",
+                "cap.lead.title": "Calificaci\u00f3n de Prospectos",
+                "cap.lead.desc": "Captura cada llamada, haz las preguntas correctas, puntua y dirige prospectos a tu equipo de ventas autom\u00e1ticamente.",
+                "cap.booking.title": "Agendamiento de Citas",
+                "cap.booking.desc": "Consultas de calendario en tiempo real, reservas autom\u00e1ticas con confirmaciones y enlaces de Google Meet — todo sin intervenci\u00f3n.",
+                "cap.support.title": "Soporte al Cliente",
+                "cap.support.desc": "Soporte L1 que resuelve preguntas frecuentes, maneja consultas de facturaci\u00f3n y escala a humanos solo cuando es necesario.",
+                "cap.frontdesk.title": "Recepci\u00f3n Virtual IA",
+                "cap.frontdesk.desc": "Una recepcionista virtual que recibe llamadas, responde preguntas sobre servicios y gestiona agendamientos 24/7.",
+                // How It Works
+                "how.label": "Nuestro Proceso",
+                "how.title": "C\u00f3mo Funciona",
+                "how.subtitle": "Del concepto a producci\u00f3n en d\u00edas, no meses.",
+                "how.step1.title": "Definir el Rol",
+                "how.step1.desc": "Mapeamos tu flujo de llamadas, preguntas de clientes y reglas de negocio en una persona y gui\u00f3n detallado.",
+                "how.step2.title": "Construir el Agente",
+                "how.step2.desc": "Seleccionamos los mejores modelos de LLM, voz y STT para tu caso de uso y conectamos la l\u00f3gica conversacional.",
+                "how.step3.title": "Conectar Sistemas",
+                "how.step3.desc": "Calendario, CRM, base de datos, email — tu agente se integra directamente con las herramientas que ya usas.",
+                "how.step4.title": "Lanzar e Iterar",
+                "how.step4.desc": "Lanza en web, tel\u00e9fono o ambos. Monitoreamos conversaciones y refinamos el agente con datos de rendimiento reales.",
+                // Live Demos
+                "demos.label": "Demos en Vivo",
+                "demos.title": "Habla con Nuestros Agentes",
+                "demos.subtitle": "Estos son agentes de voz en producci\u00f3n — ten una conversaci\u00f3n real y experimenta la tecnolog\u00eda de primera mano.",
+                "demos.badge": "En Vivo",
+                "demos.clara.role": "Calificaci\u00f3n de Prospectos",
+                "demos.clara.desc": "El agente inteligente de calificaci\u00f3n de CushLabs. Clara saluda a los prospectos, entiende sus necesidades de negocio y captura datos de prospectos calificados — todo a trav\u00e9s de conversaci\u00f3n de voz natural.",
+                "demos.clara.f1": "Captura de Prospectos",
+                "demos.clara.f2": "Evaluaci\u00f3n de Necesidades",
+                "demos.clara.f3": "Mapeo de Inter\u00e9s IA",
+                "demos.clara.f4": "Integraci\u00f3n CRM",
+                "demos.clara.cta": "Hablar con Clara",
+                "demos.james.role": "Agendamiento de Citas",
+                "demos.james.desc": "Un asistente premium de agendamiento para una pr\u00e1ctica de coaching ejecutivo. James verifica la disponibilidad en Google Calendar en tiempo real, agenda sesiones con enlaces de Google Meet y env\u00eda correos de confirmaci\u00f3n.",
+                "demos.james.f1": "Google Calendar",
+                "demos.james.f2": "Disponibilidad en Tiempo Real",
+                "demos.james.f3": "Reserva Autom\u00e1tica",
+                "demos.james.f4": "Confirmaciones por Email",
+                "demos.james.cta": "Hablar con James",
+                "demos.sophia.role": "Recepci\u00f3n IA para Med Spa",
+                "demos.sophia.desc": "Un agente de recepci\u00f3n IA para cl\u00ednicas de est\u00e9tica m\u00e9dica. Sophia califica nuevos clientes, responde preguntas sobre tratamientos, maneja objeciones de precio y agenda consultas — 24/7.",
+                "demos.sophia.f1": "Calificaci\u00f3n de Clientes",
+                "demos.sophia.f2": "Info de Tratamientos",
+                "demos.sophia.f3": "Manejo de Objeciones",
+                "demos.sophia.f4": "Reserva de Consultas",
+                "demos.sophia.cta": "Hablar con Sophia",
+                // CTA
+                "cta.title": "\u00bfListo Para Crear Tu Agente?",
+                "cta.subtitle": "Ya sea que necesites calificaci\u00f3n de prospectos, agendamiento de citas o una recepci\u00f3n virtual completa — lo construimos y lo desplegamos por ti.",
+                "cta.talkClara": "Hablar con Clara",
+                "cta.getInTouch": "Cont\u00e1ctanos",
+                // Footer
+                "footer": '&copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a> &middot; Nueva York, NY'
+            }
+        };
+
+        // Vapi status text map (English → translation key)
+        const vapiStatusMap = {
+            "Loading...": "status.loading",
+            "Click to talk with Clara": "status.ready",
+            "Connecting...": "status.connecting",
+            "Listening... click to end call": "status.listening",
+            "Call ended — click to start again": "status.ended",
+            "Assistant speaking...": "status.speaking",
+            "Listening...": "status.listeningShort",
+            "Something went wrong. Try again.": "status.error",
+            "Failed to load. Please refresh.": "status.failInit",
+            "Failed to connect. Try again.": "status.failConnect"
+        };
+
+        let currentLang = "en";
+
+        function t(key) {
+            return (translations[currentLang] && translations[currentLang][key]) || translations.en[key] || key;
+        }
+
+        function applyLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+
+            // textContent replacements
+            document.querySelectorAll("[data-i18n]").forEach(function (el) {
+                var key = el.getAttribute("data-i18n");
+                var val = t(key);
+                if (val) el.textContent = val;
+            });
+
+            // innerHTML replacements
+            document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
+                var key = el.getAttribute("data-i18n-html");
+                var val = t(key);
+                if (val) el.innerHTML = val;
+            });
+
+            // Update toggle button text
+            var toggle = document.getElementById("langToggle");
+            if (toggle) toggle.textContent = lang === "en" ? "ES" : "EN";
+
+            // Translate current Vapi status text
+            var statusEl = document.getElementById("statusText");
+            if (statusEl) {
+                var currentText = statusEl.textContent;
+                // Check if current text matches any known English string
+                if (vapiStatusMap[currentText]) {
+                    statusEl.textContent = t(vapiStatusMap[currentText]);
+                } else {
+                    // Check if current text matches any translated string — find original key
+                    for (var enText in vapiStatusMap) {
+                        var key = vapiStatusMap[enText];
+                        if (translations.es[key] === currentText || translations.en[key] === currentText) {
+                            statusEl.textContent = t(key);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            localStorage.setItem("cushlabs-lang", lang);
+        }
+
+        function getInitialLanguage() {
+            var stored = localStorage.getItem("cushlabs-lang");
+            if (stored === "en" || stored === "es") return stored;
+            var nav = (navigator.language || "").toLowerCase();
+            if (nav.startsWith("es")) return "es";
+            return "en";
+        }
+
+        // MutationObserver — translate Vapi's dynamic status text updates
+        var statusEl = document.getElementById("statusText");
+        if (statusEl) {
+            var statusObserver = new MutationObserver(function () {
+                if (currentLang !== "es") return;
+                var text = statusEl.textContent;
+                if (vapiStatusMap[text]) {
+                    statusEl.textContent = t(vapiStatusMap[text]);
+                }
+            });
+            statusObserver.observe(statusEl, { childList: true, characterData: true, subtree: true });
+        }
+
+        // Warmup message — if config fetch takes >3s, show friendly message
+        var warmupTimeout = setTimeout(function () {
+            if (statusEl && statusEl.textContent === (currentLang === "es" ? t("status.loading") : "Loading...")) {
+                statusEl.textContent = t("hero.warmup");
+            }
+        }, 3000);
+
+        // Clear warmup on any status change (Vapi init will update it)
+        if (statusEl) {
+            var warmupObserver = new MutationObserver(function () {
+                clearTimeout(warmupTimeout);
+                warmupObserver.disconnect();
+            });
+            warmupObserver.observe(statusEl, { childList: true, characterData: true, subtree: true });
+        }
+
+        // Toggle handler
+        var toggle = document.getElementById("langToggle");
+        if (toggle) {
+            toggle.addEventListener("click", function () {
+                applyLanguage(currentLang === "en" ? "es" : "en");
+            });
+        }
+
+        // Apply initial language
+        var initialLang = getInitialLanguage();
+        if (initialLang === "es") {
+            applyLanguage("es");
+        }
+        // If EN, no need to apply — HTML is already in English
+    })();
     </script>
 </body>
 </html>

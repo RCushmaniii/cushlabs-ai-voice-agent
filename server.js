@@ -50,6 +50,11 @@ app.get('/portfolio', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'portfolio.html'));
 });
 
+// Serve Contact page
+app.get('/contact', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'contact.html'));
+});
+
 // Vapi webhook endpoint
 app.use('/api/webhook', webhookRouter);
 
@@ -58,4 +63,12 @@ app.listen(PORT, async () => {
     console.log(`Webhook URL: http://localhost:${PORT}/api/webhook`);
     console.log(`Frontend: http://localhost:${PORT}`);
     await initDb();
+
+    // Keep Render free tier warm — self-ping every 14 minutes
+    const KEEP_ALIVE_URL = process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
+    setInterval(() => {
+        fetch(`${KEEP_ALIVE_URL}/api/health`)
+            .then(() => console.log('[keep-alive] ping sent'))
+            .catch(() => {});
+    }, 14 * 60 * 1000);
 });
