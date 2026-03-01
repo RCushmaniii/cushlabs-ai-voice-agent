@@ -5,21 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FF6A3D">
     <link rel="icon" href="/voice_agent.ico" type="image/x-icon">
-    <title>CushLabs AI Services</title>
+    <title>CushLabs AI Services — AI Voice Agents for Every Business</title>
+    <meta name="description" content="Production-ready AI voice agents that qualify leads, book appointments, and handle customer conversations — 24/7. Talk to Clara, our live AI assistant.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet">
     <style>
         :root {
             --cush-orange: #FF6A3D;
-            --cush-black: #000000;
-            --cush-gray-900: #0A0A0A;
-            --cush-gray-800: #141414;
-            --cush-gray-700: #1A1A1A;
-            --cush-gray-400: #666666;
-            --cush-gray-300: #888888;
-            --cush-gray-200: #AAAAAA;
-            --color-orange-glow: rgba(255, 106, 61, 0.15);
+            --cush-orange-light: #FF9B7A;
+            --cush-orange-glow: rgba(255, 106, 61, 0.2);
+            --cush-black: #050505;
+            --glass-bg: rgba(10, 10, 12, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-highlight: rgba(255, 255, 255, 0.12);
+            --gray-950: #080808;
+            --gray-900: #121212;
+            --gray-800: #1E1E1E;
+            --gray-400: #9CA3AF;
+            --gray-300: #B8C0CC;
+            --gray-200: #D4D8DE;
+            --text-main: #FAFAFA;
         }
 
         * {
@@ -34,6 +40,7 @@
         }
 
         html {
+            scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
@@ -41,17 +48,13 @@
         body {
             font-family: "Source Serif 4", Georgia, serif;
             background: var(--cush-black);
-            color: #ffffff;
+            color: var(--text-main);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            overflow-x: hidden;
             position: relative;
         }
 
-        /* Aurora background */
+        /* ── Aurora background ── */
         .aurora-container {
             position: fixed;
             inset: 0;
@@ -63,91 +66,224 @@
         .aurora-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(100px);
+            filter: blur(140px);
             opacity: 0.12;
+            mix-blend-mode: screen;
         }
 
         .aurora-orb-1 {
-            width: 600px;
-            height: 600px;
+            width: 900px;
+            height: 900px;
             background: var(--cush-orange);
-            top: -15%;
-            right: -10%;
-            animation: aurora-1 22s ease-in-out infinite;
+            top: -20%;
+            right: -20%;
+            animation: aurora-1 30s ease-in-out infinite;
         }
 
         .aurora-orb-2 {
-            width: 500px;
-            height: 500px;
-            background: var(--cush-orange);
+            width: 700px;
+            height: 700px;
+            background: #9D4EDD;
             bottom: -20%;
-            left: -10%;
-            animation: aurora-2 25s ease-in-out infinite;
+            left: -15%;
+            animation: aurora-2 35s ease-in-out infinite;
         }
 
         .aurora-orb-3 {
-            width: 350px;
-            height: 350px;
-            background: #ff8c66;
+            width: 500px;
+            height: 500px;
+            background: #3B82F6;
             top: 40%;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: aurora-1 20s ease-in-out infinite reverse;
+            left: 30%;
+            animation: aurora-1 25s ease-in-out infinite reverse;
         }
 
         @keyframes aurora-1 {
             0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -30px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
+            33% { transform: translate(50px, -50px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
         }
 
         @keyframes aurora-2 {
             0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-40px, 20px) scale(0.9); }
-            66% { transform: translate(30px, -30px) scale(1.1); }
+            33% { transform: translate(-50px, 30px) scale(0.9); }
+            66% { transform: translate(40px, -40px) scale(1.1); }
         }
 
-        /* Content */
-        .hero {
-            text-align: center;
-            max-width: 720px;
-            padding: 2rem;
+        /* ── Top accent line ── */
+        .top-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--cush-orange), transparent);
+            z-index: 10;
+            opacity: 0.8;
+        }
+
+        /* ── Glass utility ── */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        /* ── Navigation ── */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9;
+            background: rgba(5, 5, 5, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            transition: background 0.3s;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.25rem 2rem;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-brand span {
+            color: var(--cush-orange);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--gray-200);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--cush-orange);
+        }
+
+        /* ── Section base ── */
+        .section {
             position: relative;
             z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ── Section headers ── */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--cush-orange);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--gray-300);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 6rem;
+            padding-bottom: 4rem;
             animation: fade-in-up 0.8s ease-out;
         }
 
-        .hero-logo {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 1.5rem;
-            border-radius: 1rem;
-            object-fit: contain;
+        .hero-label {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--cush-orange);
+            margin-bottom: 1.5rem;
         }
 
         .hero h1 {
             font-family: "Space Grotesk", sans-serif;
-            font-size: 3.2rem;
+            font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
+            color: var(--text-main);
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
         }
 
-        .hero h1 span {
-            color: var(--cush-orange);
+        .hero h1 .accent {
+            background: linear-gradient(135deg, #FF6A3D, #FF9B7A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .hero p.tagline {
+        .hero-subtitle {
             font-family: "Source Serif 4", Georgia, serif;
-            font-size: 1.2rem;
-            color: var(--cush-gray-200);
-            line-height: 1.8;
-            margin-bottom: 2.5rem;
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
             font-weight: 300;
+            color: var(--gray-300);
+            max-width: 600px;
+            line-height: 1.7;
+            margin-bottom: 3rem;
         }
 
-        /* Voice button */
+        /* ── Voice button ── */
         .voice-btn {
             width: 88px;
             height: 88px;
@@ -179,7 +315,6 @@
             box-shadow: 0 0 30px rgba(239, 68, 68, 0.4);
         }
 
-        /* Breathing ring */
         .voice-btn::before {
             content: "";
             position: absolute;
@@ -215,9 +350,10 @@
             font-family: "Space Grotesk", sans-serif;
             font-size: 0.9rem;
             font-weight: 500;
-            color: var(--cush-gray-300);
+            color: var(--gray-400);
             min-height: 1.5em;
             transition: color 0.3s;
+            margin-bottom: 3rem;
         }
 
         .status-text.active {
@@ -228,14 +364,468 @@
             color: var(--cush-orange);
         }
 
-        /* Footer */
-        .footer {
-            position: fixed;
-            bottom: 1.5rem;
+        /* ── Hero stats bar ── */
+        .hero-stats {
+            display: flex;
+            gap: clamp(2rem, 5vw, 4rem);
+            margin-bottom: 2rem;
+            background: var(--glass-bg);
+            padding: 1.5rem 3rem;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-value {
             font-family: "Space Grotesk", sans-serif;
-            color: var(--cush-gray-400);
-            font-size: 0.8rem;
+            font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+            font-weight: 700;
+            color: var(--text-main);
+            display: block;
+        }
+
+        .hero-stat-label {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--cush-orange);
+            margin-top: 0.35rem;
+            display: block;
+        }
+
+        .scroll-cue {
+            margin-top: 1.5rem;
+            animation: bounce 2s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        .scroll-cue svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-main);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+
+        /* ── What We Build (4-card grid) ── */
+        .capabilities {
+            padding: 6rem 2rem;
+        }
+
+        .cap-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .cap-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .cap-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--glass-highlight);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            background: var(--glass-highlight);
+        }
+
+        .cap-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: rgba(255, 106, 61, 0.1);
+            border: 1px solid rgba(255, 106, 61, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .cap-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--cush-orange);
+        }
+
+        .cap-card h3 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.75rem;
+        }
+
+        .cap-card p {
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--gray-300);
+            line-height: 1.6;
+        }
+
+        /* ── How It Works (4 steps) ── */
+        .how-it-works {
+            padding: 6rem 2rem;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .step {
+            position: relative;
+            padding: 2rem;
+            border-radius: 24px;
+            text-align: left;
+        }
+
+        .step-number {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--glass-highlight);
+            opacity: 0.4;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .step h3 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.75rem;
+        }
+
+        .step p {
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--gray-300);
+            line-height: 1.6;
+        }
+
+        /* ── Live Demos (3 cards) ── */
+        .demos {
+            padding: 6rem 2rem;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .demo-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            border-radius: 24px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
             z-index: 1;
+        }
+
+        .demo-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, var(--glass-highlight) 0%, transparent 100%);
+            opacity: 0.3;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .demo-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--glass-highlight);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .demo-card:hover .demo-card-glow {
+            opacity: 0.15;
+            transform: scale(1.2);
+        }
+
+        .demo-card-glow {
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 250px;
+            height: 250px;
+            background: var(--card-accent);
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.05;
+            transition: all 0.5s ease;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .demo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #34D399;
+            background: rgba(52, 211, 153, 0.12);
+            border: 1px solid rgba(52, 211, 153, 0.25);
+            padding: 0.4rem 0.8rem;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
+            align-self: flex-start;
+        }
+
+        .demo-badge-dot {
+            width: 6px;
+            height: 6px;
+            background: #34D399;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #34D399;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .demo-card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .demo-card-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--card-accent);
+        }
+
+        .demo-card h3 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.25rem;
+        }
+
+        .demo-card h4 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--card-accent);
+            margin-bottom: 1rem;
+        }
+
+        .demo-card p {
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--gray-300);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        .demo-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .demo-feature {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--gray-200);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.4rem 0.8rem;
+            border-radius: 100px;
+            transition: all 0.3s;
+        }
+
+        .demo-card:hover .demo-feature {
+            background: var(--glass-highlight);
+            border-color: var(--glass-highlight);
+        }
+
+        .demo-tech {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.7rem;
+            color: var(--gray-400);
+            margin-bottom: 1.5rem;
+        }
+
+        .demo-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #000;
+            background: var(--card-accent);
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .demo-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            filter: brightness(1.1);
+            gap: 0.75rem;
+        }
+
+        .demo-link svg {
+            width: 18px;
+            height: 18px;
+            fill: #000;
+            transition: transform 0.3s;
+        }
+
+        .cushlabs-card { --card-accent: #FF6A3D; }
+        .coaching-card { --card-accent: #C9A84C; }
+        .medspa-card { --card-accent: #C4956A; }
+
+        /* ── CTA ── */
+        .cta {
+            padding: 8rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .cta h2 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .cta p {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--gray-300);
+            max-width: 550px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #000;
+            background: var(--cush-orange);
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 0 25px var(--cush-orange-glow);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(255, 106, 61, 0.4);
+            background: var(--cush-orange-light);
+        }
+
+        .btn-secondary {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: var(--glass-highlight);
+            border-color: var(--glass-highlight);
+            transform: translateY(-3px);
+        }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--glass-border);
+            position: relative;
+            z-index: 1;
+            margin-top: 0;
+        }
+
+        .footer p {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.85rem;
+            color: var(--gray-400);
         }
 
         .footer a {
@@ -245,30 +835,113 @@
         }
 
         .footer a:hover {
-            color: #ff8c66;
+            color: var(--cush-orange-light);
         }
 
-        /* Animations */
+        /* ── Animations ── */
         @keyframes fade-in-up {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            .aurora-orb { animation: none !important; }
-            .voice-btn::before { animation: none !important; opacity: 0.3; }
-            .hero { animation: none !important; opacity: 1; }
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        @media (max-width: 640px) {
-            .hero h1 { font-size: 2.2rem; }
-            .hero p.tagline { font-size: 1.05rem; }
-            .voice-btn { width: 72px; height: 72px; }
-            .voice-btn svg { width: 30px; height: 30px; }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Responsive ── */
+        @media (prefers-reduced-motion: reduce) {
+            .aurora-orb { animation: none !important; }
+            .scroll-cue { animation: none !important; }
+            .demo-badge-dot { animation: none !important; opacity: 1; }
+            .voice-btn::before { animation: none !important; opacity: 0.3; }
+            .hero, .reveal {
+                animation: none !important;
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .cap-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .demo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 8rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 2rem;
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .cap-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 320px;
+                margin: 0 auto;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+            }
+
+            .voice-btn {
+                width: 72px;
+                height: 72px;
+            }
+
+            .voice-btn svg {
+                width: 30px;
+                height: 30px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="top-line"></div>
+
     <!-- Aurora background -->
     <div class="aurora-container">
         <div class="aurora-orb aurora-orb-1"></div>
@@ -276,12 +949,26 @@
         <div class="aurora-orb aurora-orb-3"></div>
     </div>
 
-    <div class="hero">
-        <img src="/images/voice_agent_logo.png" alt="CushLabs AI Voice Agent" class="hero-logo">
-        <h1>Cush<span>Labs</span> AI</h1>
-        <p class="tagline">
-            AI integration and software development consulting for small businesses.
-            Talk to our AI assistant to explore how we can help.
+    <!-- ═══ 1. Navigation ═══ -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">CUSH<span>LABS.AI</span></a>
+            <ul class="nav-links">
+                <li><a href="#capabilities">What We Build</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#demos">Live Demos</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ═══ 2. Hero ═══ -->
+    <section class="section hero" id="hero">
+        <p class="hero-label">CushLabs AI Services</p>
+        <h1>Your Business Deserves<br>a <span class="accent">Smarter Front Door</span></h1>
+        <p class="hero-subtitle">
+            AI voice agents that answer every call, qualify every lead,
+            and book every appointment — 24/7, with zero hold times.
         </p>
 
         <button class="voice-btn" id="voiceBtn" disabled>
@@ -294,11 +981,255 @@
             </svg>
         </button>
         <p class="status-text" id="statusText">Loading...</p>
-    </div>
 
-    <div class="footer">
-        &copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a>
-    </div>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <span class="hero-stat-value">&lt;500ms</span>
+                <span class="hero-stat-label">Response</span>
+            </div>
+            <div class="hero-stat">
+                <span class="hero-stat-value">24/7</span>
+                <span class="hero-stat-label">Availability</span>
+            </div>
+            <div class="hero-stat">
+                <span class="hero-stat-value">3</span>
+                <span class="hero-stat-label">Live Assistants</span>
+            </div>
+        </div>
+
+        <div class="scroll-cue">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- ═══ 3. What We Build ═══ -->
+    <section class="section capabilities" id="capabilities">
+        <div class="section-header reveal">
+            <p class="section-label">What We Build</p>
+            <h2 class="section-title">Voice Agents That Work for You</h2>
+            <p class="section-subtitle">
+                Every agent is custom-built for your business — from the voice and personality
+                to the systems it connects to.
+            </p>
+        </div>
+
+        <div class="cap-grid">
+            <div class="cap-card reveal">
+                <div class="cap-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+                    </svg>
+                </div>
+                <h3>Lead Qualification</h3>
+                <p>Capture every call, ask the right questions, score and route leads to your sales team automatically.</p>
+            </div>
+
+            <div class="cap-card reveal">
+                <div class="cap-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/>
+                    </svg>
+                </div>
+                <h3>Appointment Booking</h3>
+                <p>Real-time calendar checks, auto-booking with confirmations, and Google Meet links — all hands-free.</p>
+            </div>
+
+            <div class="cap-card reveal">
+                <div class="cap-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 12.22C21 6.73 16.74 3 12 3c-4.69 0-9 3.65-9 9.28-.6.34-1 .98-1 1.72v2c0 1.1.9 2 2 2h1v-6.1c0-3.87 3.13-7 7-7s7 3.13 7 7V19h-8v2h8c1.1 0 2-.9 2-2v-1.22c.59-.31 1-.92 1-1.64v-2.3c0-.7-.41-1.31-1-1.62z"/>
+                    </svg>
+                </div>
+                <h3>Customer Support</h3>
+                <p>L1 support that resolves FAQs, handles billing questions, and escalates to humans only when needed.</p>
+            </div>
+
+            <div class="cap-card reveal">
+                <div class="cap-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <h3>AI Front Desk</h3>
+                <p>A virtual receptionist that greets callers, answers service questions, and manages scheduling 24/7.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ 4. How It Works ═══ -->
+    <section class="section how-it-works" id="how-it-works">
+        <div class="section-header reveal">
+            <p class="section-label">Our Process</p>
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">
+                From concept to production in days, not months.
+            </p>
+        </div>
+
+        <div class="steps">
+            <div class="step reveal">
+                <div class="step-number">01</div>
+                <h3>Define the Role</h3>
+                <p>We map your call flow, customer questions, and business rules into a detailed agent persona and script.</p>
+            </div>
+
+            <div class="step reveal">
+                <div class="step-number">02</div>
+                <h3>Build the Agent</h3>
+                <p>We select the best LLM, voice, and STT models for your use case and wire up the conversation logic.</p>
+            </div>
+
+            <div class="step reveal">
+                <div class="step-number">03</div>
+                <h3>Connect Systems</h3>
+                <p>Calendar, CRM, database, email — your agent integrates directly with the tools you already use.</p>
+            </div>
+
+            <div class="step reveal">
+                <div class="step-number">04</div>
+                <h3>Deploy &amp; Iterate</h3>
+                <p>Launch on web, phone, or both. We monitor conversations and refine the agent based on real performance data.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ 5. Live Demos ═══ -->
+    <section class="section demos" id="demos">
+        <div class="section-header reveal">
+            <p class="section-label">Live Demos</p>
+            <h2 class="section-title">Talk to Our Agents</h2>
+            <p class="section-subtitle">
+                These are production voice agents — have a real conversation
+                and experience the technology firsthand.
+            </p>
+        </div>
+
+        <div class="demo-grid">
+            <!-- Clara — CushLabs -->
+            <div class="demo-card cushlabs-card reveal">
+                <div class="demo-card-glow"></div>
+                <div class="demo-badge">
+                    <span class="demo-badge-dot"></span>
+                    Live
+                </div>
+                <div class="demo-card-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+                    </svg>
+                </div>
+                <h3>Clara</h3>
+                <h4>Lead Qualification</h4>
+                <p>
+                    CushLabs' intelligent lead qualification agent. Clara greets prospects,
+                    understands their business needs, and captures qualified lead data — all
+                    through natural voice conversation.
+                </p>
+                <div class="demo-features">
+                    <span class="demo-feature">Lead Capture</span>
+                    <span class="demo-feature">Needs Assessment</span>
+                    <span class="demo-feature">AI Interest Mapping</span>
+                    <span class="demo-feature">CRM Integration</span>
+                </div>
+                <p class="demo-tech">Claude Sonnet &middot; Vapi Clara Voice &middot; Neon Postgres</p>
+                <a href="#hero" class="demo-link">
+                    Talk to Clara
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- James — NYC Coaching -->
+            <div class="demo-card coaching-card reveal">
+                <div class="demo-card-glow"></div>
+                <div class="demo-badge">
+                    <span class="demo-badge-dot"></span>
+                    Live
+                </div>
+                <div class="demo-card-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/>
+                    </svg>
+                </div>
+                <h3>James</h3>
+                <h4>Appointment Booking</h4>
+                <p>
+                    A premium scheduling assistant for an executive coaching practice.
+                    James checks real-time Google Calendar availability, books sessions with
+                    Google Meet links, and sends confirmation emails.
+                </p>
+                <div class="demo-features">
+                    <span class="demo-feature">Google Calendar</span>
+                    <span class="demo-feature">Real-Time Availability</span>
+                    <span class="demo-feature">Auto-Booking</span>
+                    <span class="demo-feature">Email Confirmations</span>
+                </div>
+                <p class="demo-tech">Groq Llama 3.1 &middot; Cartesia Nathan Voice &middot; Google Calendar API</p>
+                <a href="/nyc-coaching" class="demo-link">
+                    Talk to James
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Sophia — Med Spa -->
+            <div class="demo-card medspa-card reveal">
+                <div class="demo-card-glow"></div>
+                <div class="demo-badge">
+                    <span class="demo-badge-dot"></span>
+                    Live
+                </div>
+                <div class="demo-card-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <h3>Sophia</h3>
+                <h4>Med Spa AI Front Desk</h4>
+                <p>
+                    An AI front desk agent for medical aesthetics clinics.
+                    Sophia qualifies new clients, answers treatment questions,
+                    handles pricing objections, and books consultations — 24/7.
+                </p>
+                <div class="demo-features">
+                    <span class="demo-feature">Client Qualification</span>
+                    <span class="demo-feature">Treatment Info</span>
+                    <span class="demo-feature">Objection Handling</span>
+                    <span class="demo-feature">Consultation Booking</span>
+                </div>
+                <p class="demo-tech">Claude Sonnet &middot; Cartesia Cindy Voice &middot; Deepgram Nova-2</p>
+                <a href="/medspa" class="demo-link">
+                    Talk to Sophia
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ 6. CTA ═══ -->
+    <section class="section cta" id="contact">
+        <div class="reveal">
+            <h2>Ready to Build Your Agent?</h2>
+            <p>
+                Whether you need lead qualification, appointment booking,
+                or a full AI front desk — we'll build it and deploy it for you.
+            </p>
+            <div class="cta-buttons">
+                <a href="#hero" class="btn-primary">Talk to Clara</a>
+                <a href="mailto:robert@cushlabs.ai" class="btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ 7. Footer ═══ -->
+    <footer class="footer">
+        <p>&copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a> &middot; New York, NY</p>
+    </footer>
 
     <!-- Vapi Web SDK (ESM) -->
     <script type="module">
@@ -358,7 +1289,7 @@
                 });
 
                 voiceBtn.disabled = false;
-                statusText.textContent = "Click to talk with our AI assistant";
+                statusText.textContent = "Click to talk with Clara";
                 statusText.className = "status-text ready";
 
             } catch (err) {
@@ -387,6 +1318,25 @@
         });
 
         initVapi();
+    </script>
+
+    <!-- Scroll reveal -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const reveals = document.querySelectorAll(".reveal");
+            if (!reveals.length) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+
+            reveals.forEach((el) => observer.observe(el));
+        });
     </script>
 </body>
 </html>
