@@ -8,7 +8,21 @@ const { initDb } = require('./services/db');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+// CORS — restrict to production domain + local dev
+const allowedOrigins = [
+    'https://voice.cushlabs.ai',
+    'http://localhost:3000',
+];
+app.use(cors({
+    origin: function (origin, callback) {
+        // Allow server-to-server requests (no origin, e.g. Vapi webhooks) + allowed origins
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(null, false);
+        }
+    }
+}));
 app.use(express.json());
 
 // Serve static frontend files

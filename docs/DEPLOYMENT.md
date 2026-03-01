@@ -2,9 +2,9 @@
 
 ## Hosting: Render (Free Tier)
 
-- **Live URL**: https://cushlabs-voice-agent.onrender.com
+- **Live URL**: https://voice.cushlabs.ai
 - **Platform**: [Render](https://render.com) — free web service + free Redis
-- **Domain**: `cushlabs-voice-agent.onrender.com` (Render-assigned, not custom)
+- **Domain**: `voice.cushlabs.ai` (custom domain via Render)
 - **Deploy method**: Auto-deploy from GitHub on push to `main`
 - **GitHub repo**: https://github.com/RCushmaniii/cushlabs-ai-voice-agent
 - **Blueprint file**: `render.yaml` (defines services + env var declarations)
@@ -72,7 +72,7 @@ Copy `.env.example` to `.env` and fill in values. Run with `pnpm dev` (uses `nod
 
 - **Dashboard**: https://dashboard.vapi.ai
 - **Role**: Manages assistants, LLM routing, voice synthesis, call handling
-- **Webhook URL**: `https://cushlabs-voice-agent.onrender.com/api/webhook`
+- **Webhook URL**: `https://voice.cushlabs.ai/api/webhook`
 - **How assistants work**: Created via Vapi dashboard or API. Each has its own LLM, voice, system prompt, and tool definitions. Our server only provides the assistant ID to the frontend; Vapi handles everything else.
 
 | Assistant | Vapi ID | LLM | Voice |
@@ -113,6 +113,7 @@ Copy `.env.example` to `.env` and fill in values. Run with `pnpm dev` (uses `nod
 | `/nyc-coaching` | `public/nyc-coaching.html` | NYC Executive Coaching — James (appointment booking) |
 | `/medspa` | `public/medspa.html` | Radiance Medical Spa — Sophia (front desk) |
 | `/portfolio` | `public/portfolio.html` | Portfolio showcase — all demos + industry use cases |
+| `/contact` | `public/contact.html` | Contact page — iframes for cushlabs.ai form + consultation |
 | `/api/config?service=X` | `server.js` | Returns `{ publicKey, assistantId }` for frontend |
 | `/api/webhook` | `routes/webhook.js` | Vapi webhook endpoint for function calls |
 | `/api/health` | `server.js` | Health check (`{ status: 'ok' }`) |

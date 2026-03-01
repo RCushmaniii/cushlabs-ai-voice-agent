@@ -184,7 +184,7 @@ If the call comes in outside business hours:
         silenceTimeoutSeconds: 30,
         maxDurationSeconds: 600,
         endCallPhrases: ['goodbye', "that's all", 'have a good day', 'thanks bye'],
-        serverUrl: 'https://cushlabs-voice-agent.onrender.com/api/webhook',
+        serverUrl: 'https://voice.cushlabs.ai/api/webhook',
         metadata: {
             vertical: 'med-spa',
             demo: true,
