@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FF6A3D">
-    <link rel="icon" href="/voice_agent.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
     <title>CushLabs AI Services — AI Voice Agents for Every Business</title>
     <meta name="description" content="Production-ready AI voice agents that qualify leads, book appointments, and handle customer conversations — 24/7. Talk to Clara, our live AI assistant.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -216,6 +220,26 @@
             color: var(--cush-orange);
             border-color: var(--cush-orange);
             background: rgba(255, 106, 61, 0.08);
+        }
+
+        /* ── Hamburger menu ── */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .hamburger svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-main);
+            transition: fill 0.3s;
+        }
+
+        .hamburger:hover svg {
+            fill: var(--cush-orange);
         }
 
         /* ── Section base ── */
@@ -918,10 +942,38 @@
 
             .nav-links {
                 display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(5, 5, 5, 0.97);
+                backdrop-filter: blur(24px);
+                -webkit-backdrop-filter: blur(24px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2.5rem;
+                z-index: 100;
+                padding: 2rem;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                font-size: 1.3rem;
+                letter-spacing: 0.15em;
+            }
+
+            .hamburger {
+                display: flex;
+                align-items: center;
             }
 
             .nav-controls {
-                gap: 0;
+                gap: 1rem;
             }
 
             .hero {
@@ -994,6 +1046,9 @@
                     <li><a href="/contact" data-i18n="nav.contact">Contact</a></li>
                 </ul>
                 <button class="lang-toggle" id="langToggle" aria-label="Switch language">ES</button>
+                <button class="hamburger" id="menuToggle" aria-label="Toggle menu">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+                </button>
             </div>
         </div>
     </nav>
@@ -1662,6 +1717,26 @@
             applyLanguage("es");
         }
         // If EN, no need to apply — HTML is already in English
+    })();
+    </script>
+    <!-- Mobile menu toggle -->
+    <script>
+    (function() {
+        var toggle = document.getElementById('menuToggle');
+        var links = document.querySelector('.nav-links');
+        if (!toggle || !links) return;
+        toggle.addEventListener('click', function() {
+            var isOpen = links.classList.toggle('open');
+            toggle.innerHTML = isOpen
+                ? '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>'
+                : '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
+        });
+        links.querySelectorAll('a').forEach(function(a) {
+            a.addEventListener('click', function() {
+                links.classList.remove('open');
+                toggle.innerHTML = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
+            });
+        });
     })();
     </script>
 </body>

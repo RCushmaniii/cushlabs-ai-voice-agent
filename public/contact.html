@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FF6A3D">
-    <link rel="icon" href="/voice_agent.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
     <title>Contact — CushLabs AI Services</title>
-    <meta name="description" content="Get in touch with CushLabs AI Services. Send us a message or book a free consultation to discuss your AI voice agent project.">
+    <meta name="description" content="Get in touch with CushLabs AI Services. Send us a message, reach out on WhatsApp, or book a free consultation call.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -19,31 +23,15 @@
             --glass-bg: rgba(10, 10, 12, 0.65);
             --glass-border: rgba(255, 255, 255, 0.1);
             --glass-highlight: rgba(255, 255, 255, 0.12);
-            --gray-950: #080808;
-            --gray-900: #121212;
-            --gray-800: #1E1E1E;
             --gray-400: #9CA3AF;
             --gray-300: #B8C0CC;
             --gray-200: #D4D8DE;
             --text-main: #FAFAFA;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        ::selection {
-            background-color: var(--cush-orange);
-            color: var(--cush-black);
-        }
-
-        html {
-            scroll-behavior: smooth;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        ::selection { background-color: var(--cush-orange); color: var(--cush-black); }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
         body {
             font-family: "Source Serif 4", Georgia, serif;
@@ -54,434 +42,110 @@
             position: relative;
         }
 
-        /* ── Aurora background ── */
-        .aurora-container {
-            position: fixed;
-            inset: 0;
-            overflow: hidden;
-            z-index: 0;
-            pointer-events: none;
-        }
+        /* ── Aurora ── */
+        .aurora-container { position: fixed; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
+        .aurora-orb { position: absolute; border-radius: 50%; filter: blur(140px); opacity: 0.12; mix-blend-mode: screen; }
+        .aurora-orb-1 { width: 900px; height: 900px; background: var(--cush-orange); top: -20%; right: -20%; animation: aurora-1 30s ease-in-out infinite; }
+        .aurora-orb-2 { width: 700px; height: 700px; background: #9D4EDD; bottom: -20%; left: -15%; animation: aurora-2 35s ease-in-out infinite; }
+        @keyframes aurora-1 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(50px,-50px) scale(1.1)} 66%{transform:translate(-30px,30px) scale(0.9)} }
+        @keyframes aurora-2 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(-50px,30px) scale(0.9)} 66%{transform:translate(40px,-40px) scale(1.1)} }
 
-        .aurora-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(140px);
-            opacity: 0.12;
-            mix-blend-mode: screen;
-        }
+        .top-line { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--cush-orange), transparent); z-index: 10; opacity: 0.8; }
 
-        .aurora-orb-1 {
-            width: 900px;
-            height: 900px;
-            background: var(--cush-orange);
-            top: -20%;
-            right: -20%;
-            animation: aurora-1 30s ease-in-out infinite;
-        }
+        /* ── Nav ── */
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 9; background: rgba(5,5,5,0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 1.25rem 2rem; width: 100%; display: flex; align-items: center; justify-content: space-between; }
+        .nav-brand { font-family: "Space Grotesk", sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; }
+        .nav-brand span { color: var(--cush-orange); }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { font-family: "Space Grotesk", sans-serif; font-size: 0.85rem; font-weight: 500; color: var(--gray-200); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.nav-active { color: var(--cush-orange); }
+        .nav-controls { display: flex; align-items: center; gap: 2.5rem; }
+        .lang-toggle { font-family: "Space Grotesk", sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; color: var(--gray-200); background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 0.4rem 0.9rem; border-radius: 100px; cursor: pointer; transition: all 0.3s; text-transform: uppercase; }
+        .lang-toggle:hover { color: var(--cush-orange); border-color: var(--cush-orange); background: rgba(255,106,61,0.08); }
+        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+        .hamburger svg { width: 24px; height: 24px; fill: var(--text-main); transition: fill 0.3s; }
+        .hamburger:hover svg { fill: var(--cush-orange); }
 
-        .aurora-orb-2 {
-            width: 700px;
-            height: 700px;
-            background: #9D4EDD;
-            bottom: -20%;
-            left: -15%;
-            animation: aurora-2 35s ease-in-out infinite;
-        }
+        /* ── Layout ── */
+        .section { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .section-label { font-family: "Space Grotesk", sans-serif; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.2em; color: var(--cush-orange); margin-bottom: 1rem; }
+        .section-title { font-family: "Space Grotesk", sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--text-main); letter-spacing: -0.02em; margin-bottom: 1rem; }
+        .section-subtitle { font-family: "Source Serif 4", Georgia, serif; font-size: 1.1rem; font-weight: 300; color: var(--gray-300); max-width: 600px; margin: 0 auto; line-height: 1.7; }
 
-        .aurora-orb-3 {
-            width: 500px;
-            height: 500px;
-            background: #3B82F6;
-            top: 40%;
-            left: 30%;
-            animation: aurora-1 25s ease-in-out infinite reverse;
-        }
+        .hero { padding-top: 10rem; padding-bottom: 4rem; text-align: center; animation: fade-in-up 0.8s ease-out; }
+        .contact-section { padding: 2rem 2rem 6rem; }
+        .contact-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3rem; align-items: start; }
 
-        @keyframes aurora-1 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(50px, -50px) scale(1.1); }
-            66% { transform: translate(-30px, 30px) scale(0.9); }
-        }
+        /* ── Form ── */
+        .form-panel { background: var(--glass-bg); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid var(--glass-border); border-radius: 24px; padding: 3rem; }
+        .form-panel h2 { font-family: "Space Grotesk", sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--text-main); margin-bottom: 2rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; font-family: "Space Grotesk", sans-serif; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-300); margin-bottom: 0.5rem; }
+        .form-group label .req { color: var(--cush-orange); }
+        .form-group input, .form-group textarea { width: 100%; font-family: "Source Serif 4", Georgia, serif; font-size: 1rem; color: var(--text-main); background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border); border-radius: 12px; padding: 0.9rem 1.2rem; transition: border-color 0.3s, background 0.3s; outline: none; }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--cush-orange); background: rgba(255,106,61,0.04); }
+        .form-group input::placeholder, .form-group textarea::placeholder { color: var(--gray-400); }
+        .form-group textarea { resize: vertical; min-height: 140px; }
 
-        @keyframes aurora-2 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-50px, 30px) scale(0.9); }
-            66% { transform: translate(40px, -40px) scale(1.1); }
-        }
+        .form-submit { font-family: "Space Grotesk", sans-serif; font-size: 0.95rem; font-weight: 600; color: #000; background: var(--cush-orange); border: none; padding: 1rem 2.5rem; border-radius: 12px; cursor: pointer; transition: all 0.3s; box-shadow: 0 0 25px var(--cush-orange-glow); width: 100%; }
+        .form-submit:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(255,106,61,0.4); background: var(--cush-orange-light); }
+        .form-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-        /* ── Top accent line ── */
-        .top-line {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--cush-orange), transparent);
-            z-index: 10;
-            opacity: 0.8;
-        }
+        .form-success { display: none; text-align: center; padding: 2rem 0; }
+        .form-success.visible { display: block; }
+        .form-success svg { width: 48px; height: 48px; fill: #34D399; margin-bottom: 1rem; }
+        .form-success h3 { font-family: "Space Grotesk", sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem; }
+        .form-success p { font-size: 1rem; color: var(--gray-300); line-height: 1.6; }
 
-        /* ── Glass utility ── */
-        .glass-panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
-        }
+        /* ── Sidebar ── */
+        .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+        .sidebar-card { background: var(--glass-bg); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; transition: all 0.4s cubic-bezier(0.16,1,0.3,1); }
+        .sidebar-card:hover { transform: translateY(-4px); border-color: var(--glass-highlight); }
+        .sidebar-card-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(255,106,61,0.1); border: 1px solid rgba(255,106,61,0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+        .sidebar-card-icon svg { width: 22px; height: 22px; fill: var(--cush-orange); }
+        .sidebar-card h3 { font-family: "Space Grotesk", sans-serif; font-size: 1.05rem; font-weight: 600; color: var(--text-main); margin-bottom: 0.4rem; }
+        .sidebar-card p { font-size: 0.9rem; font-weight: 300; color: var(--gray-300); line-height: 1.5; margin-bottom: 1rem; }
+        .sidebar-link { font-family: "Space Grotesk", sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--cush-orange); text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; transition: gap 0.3s, color 0.3s; }
+        .sidebar-link:hover { gap: 0.65rem; color: var(--cush-orange-light); }
+        .sidebar-link svg { width: 16px; height: 16px; fill: currentColor; }
 
-        /* ── Navigation ── */
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 9;
-            background: rgba(5, 5, 5, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-            transition: background 0.3s;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1.25rem 2rem;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .nav-brand {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-main);
-            text-decoration: none;
-            letter-spacing: -0.02em;
-        }
-
-        .nav-brand span {
-            color: var(--cush-orange);
-        }
-
-        .nav-controls {
-            display: flex;
-            align-items: center;
-            gap: 2.5rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--gray-200);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.nav-active {
-            color: var(--cush-orange);
-        }
-
-        .lang-toggle {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.08em;
-            color: var(--gray-200);
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            padding: 0.4rem 0.9rem;
-            border-radius: 100px;
-            cursor: pointer;
-            transition: all 0.3s;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            text-transform: uppercase;
-        }
-
-        .lang-toggle:hover {
-            color: var(--cush-orange);
-            border-color: var(--cush-orange);
-            background: rgba(255, 106, 61, 0.08);
-        }
-
-        /* ── Section base ── */
-        .section {
-            position: relative;
-            z-index: 1;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* ── Section headers ── */
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-label {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--cush-orange);
-            margin-bottom: 1rem;
-        }
-
-        .section-title {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 700;
-            color: var(--text-main);
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            font-family: "Source Serif 4", Georgia, serif;
-            font-size: 1.1rem;
-            font-weight: 300;
-            color: var(--gray-300);
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-
-        /* ── Contact Hero ── */
-        .contact-hero {
-            padding-top: 8rem;
-            padding-bottom: 3rem;
-            text-align: center;
-            animation: fade-in-up 0.8s ease-out;
-        }
-
-        .contact-hero h1 {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: clamp(2.5rem, 6vw, 3.5rem);
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 1rem;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
-        }
-
-        .contact-hero h1 .accent {
-            background: linear-gradient(135deg, #FF6A3D, #FF9B7A);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .contact-hero p {
-            font-family: "Source Serif 4", Georgia, serif;
-            font-size: clamp(1.05rem, 2vw, 1.25rem);
-            font-weight: 300;
-            color: var(--gray-300);
-            max-width: 550px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-
-        /* ── Iframe sections ── */
-        .iframe-section {
-            padding: 3rem 2rem;
-        }
-
-        .iframe-wrapper {
-            border-radius: 20px;
-            overflow: hidden;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .iframe-wrapper iframe {
-            width: 100%;
-            border: none;
-            display: block;
-        }
-
-        .iframe-contact {
-            height: 700px;
-        }
-
-        .iframe-consult {
-            height: 800px;
-        }
-
-        /* ── Alt Contact Cards ── */
-        .alt-contact {
-            padding: 4rem 2rem;
-        }
-
-        .alt-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .alt-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
-            border-radius: 20px;
-            padding: 2.5rem 2rem;
-            text-align: center;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            text-decoration: none;
-            display: block;
-        }
-
-        .alt-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--glass-highlight);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-        }
-
-        .alt-card-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 16px;
-            background: rgba(255, 106, 61, 0.1);
-            border: 1px solid rgba(255, 106, 61, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.25rem;
-        }
-
-        .alt-card-icon svg {
-            width: 26px;
-            height: 26px;
-            fill: var(--cush-orange);
-        }
-
-        .alt-card h3 {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 0.5rem;
-        }
-
-        .alt-card p {
-            font-size: 0.9rem;
-            font-weight: 300;
-            color: var(--gray-300);
-            line-height: 1.5;
-        }
+        /* ── CTA ── */
+        .cta { padding: 6rem 2rem; text-align: center; }
+        .cta h2 { font-family: "Space Grotesk", sans-serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; color: var(--text-main); margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+        .cta p { font-family: "Source Serif 4", Georgia, serif; font-size: 1.1rem; font-weight: 300; color: var(--gray-300); max-width: 550px; margin: 0 auto 3rem; line-height: 1.7; }
+        .btn-primary { font-family: "Space Grotesk", sans-serif; font-size: 0.95rem; font-weight: 600; color: #000; background: var(--cush-orange); border: none; padding: 1rem 2.5rem; border-radius: 12px; cursor: pointer; text-decoration: none; transition: all 0.3s; box-shadow: 0 0 25px var(--cush-orange-glow); display: inline-flex; align-items: center; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 40px rgba(255,106,61,0.4); background: var(--cush-orange-light); }
 
         /* ── Footer ── */
-        .footer {
-            text-align: center;
-            padding: 3rem 2rem;
-            border-top: 1px solid var(--glass-border);
-            position: relative;
-            z-index: 1;
-            margin-top: 0;
-        }
+        .footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--glass-border); position: relative; z-index: 1; }
+        .footer p { font-family: "Space Grotesk", sans-serif; font-size: 0.85rem; color: var(--gray-400); }
+        .footer a { color: var(--cush-orange); text-decoration: none; }
+        .footer a:hover { color: var(--cush-orange-light); }
 
-        .footer p {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 0.85rem;
-            color: var(--gray-400);
-        }
+        @keyframes fade-in-up { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        .footer a {
-            color: var(--cush-orange);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer a:hover {
-            color: var(--cush-orange-light);
-        }
-
-        /* ── Animations ── */
-        @keyframes fade-in-up {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ── Responsive ── */
-        @media (prefers-reduced-motion: reduce) {
-            .aurora-orb { animation: none !important; }
-            .contact-hero, .reveal {
-                animation: none !important;
-                opacity: 1;
-                transform: none;
-            }
-        }
-
+        @media (prefers-reduced-motion: reduce) { .aurora-orb { animation: none !important; } .hero, .reveal { animation: none !important; opacity: 1; transform: none; } }
+        @media (max-width: 1024px) { .contact-grid { grid-template-columns: 1fr; } }
         @media (max-width: 768px) {
-            .nav-container {
-                padding: 1rem 1.5rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .nav-controls {
-                gap: 0;
-            }
-
-            .contact-hero {
-                padding-top: 6rem;
-            }
-
-            .alt-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .iframe-contact {
-                height: 600px;
-            }
-
-            .iframe-consult {
-                height: 700px;
-            }
+            .nav-container { padding: 1rem 1.5rem; }
+            .nav-links { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(5,5,5,0.97); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; z-index: 100; padding: 2rem; }
+            .nav-links.open { display: flex; }
+            .nav-links a { font-size: 1.3rem; letter-spacing: 0.15em; }
+            .hamburger { display: flex; align-items: center; }
+            .nav-controls { gap: 1rem; }
+            .hero { padding-top: 8rem; }
+            .form-panel { padding: 2rem; }
         }
     </style>
 </head>
 <body>
     <div class="top-line"></div>
-
-    <!-- Aurora background -->
     <div class="aurora-container">
         <div class="aurora-orb aurora-orb-1"></div>
         <div class="aurora-orb aurora-orb-2"></div>
-        <div class="aurora-orb aurora-orb-3"></div>
     </div>
 
     <!-- ═══ Navigation ═══ -->
@@ -491,202 +155,205 @@
             <div class="nav-controls">
                 <ul class="nav-links">
                     <li><a href="/#capabilities" data-i18n="nav.capabilities">What We Build</a></li>
-                    <li><a href="/#how-it-works" data-i18n="nav.howItWorks">How It Works</a></li>
                     <li><a href="/#demos" data-i18n="nav.demos">Live Demos</a></li>
+                    <li><a href="/portfolio" data-i18n="nav.portfolio">Portfolio</a></li>
                     <li><a href="/contact" class="nav-active" data-i18n="nav.contact">Contact</a></li>
                 </ul>
                 <button class="lang-toggle" id="langToggle" aria-label="Switch language">ES</button>
+                <button class="hamburger" id="menuToggle" aria-label="Toggle menu">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+                </button>
             </div>
         </div>
     </nav>
 
     <!-- ═══ Hero ═══ -->
-    <section class="section contact-hero">
-        <h1 data-i18n-html="contact.hero.h1">Get in <span class="accent">Touch</span></h1>
-        <p data-i18n="contact.hero.subtitle">Have a project in mind? Send us a message or book a free consultation — we'll get back to you within 24 hours.</p>
+    <section class="section hero">
+        <p class="section-label" data-i18n="hero.label">Get in Touch</p>
+        <h1 class="section-title" data-i18n="hero.title">Let's Talk About Your Project</h1>
+        <p class="section-subtitle" data-i18n="hero.subtitle">Tell us what you're working on. We'll get back to you with honest thoughts and a clear path forward — no pressure, no pitch.</p>
     </section>
 
-    <!-- ═══ Contact Form Iframe ═══ -->
-    <section class="section iframe-section reveal">
-        <div class="section-header">
-            <p class="section-label" data-i18n="contact.form.label">Send a Message</p>
-            <h2 class="section-title" data-i18n="contact.form.title">Contact Form</h2>
-            <p class="section-subtitle" data-i18n="contact.form.subtitle">Tell us about your business and what you're looking for. We'll follow up with a custom proposal.</p>
-        </div>
-        <div class="iframe-wrapper glass-panel">
-            <iframe src="https://www.cushlabs.ai/contact" class="iframe-contact" loading="lazy" title="CushLabs Contact Form"></iframe>
-        </div>
-    </section>
-
-    <!-- ═══ Consultation Iframe ═══ -->
-    <section class="section iframe-section reveal">
-        <div class="section-header">
-            <p class="section-label" data-i18n="contact.consult.label">Book a Call</p>
-            <h2 class="section-title" data-i18n="contact.consult.title">Free Consultation</h2>
-            <p class="section-subtitle" data-i18n="contact.consult.subtitle">Schedule a 30-minute call to discuss your AI voice agent needs. No commitment, no sales pitch.</p>
-        </div>
-        <div class="iframe-wrapper glass-panel">
-            <iframe src="https://www.cushlabs.ai/consultation" class="iframe-consult" loading="lazy" title="CushLabs Consultation Booking"></iframe>
-        </div>
-    </section>
-
-    <!-- ═══ Alternative Contact ═══ -->
-    <section class="section alt-contact reveal">
-        <div class="section-header">
-            <p class="section-label" data-i18n="contact.alt.label">Other Ways to Reach Us</p>
-            <h2 class="section-title" data-i18n="contact.alt.title">Direct Contact</h2>
-        </div>
-        <div class="alt-grid">
-            <a href="mailto:robert@cushlabs.ai" class="alt-card">
-                <div class="alt-card-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                    </svg>
+    <!-- ═══ Contact Grid ═══ -->
+    <section class="section contact-section">
+        <div class="contact-grid reveal">
+            <div class="form-panel">
+                <h2 data-i18n="form.title">Send a Message</h2>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label data-i18n-html="form.name">Name <span class="req">*</span></label>
+                        <input type="text" name="name" required autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n-html="form.email">Email <span class="req">*</span></label>
+                        <input type="email" name="email" required autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="form.phone">Phone</label>
+                        <input type="tel" name="phone" autocomplete="tel">
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n-html="form.message">Message <span class="req">*</span></label>
+                        <textarea name="message" required rows="5"></textarea>
+                    </div>
+                    <button type="submit" class="form-submit" data-i18n="form.submit">Send Message</button>
+                </form>
+                <div class="form-success" id="formSuccess">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <h3 data-i18n="form.successTitle">Message Sent</h3>
+                    <p data-i18n="form.successDesc">We'll get back to you within 24 hours — usually faster.</p>
                 </div>
-                <h3 data-i18n="contact.alt.email.title">Email</h3>
-                <p>robert@cushlabs.ai</p>
-            </a>
-            <a href="https://wa.me/19175551234?text=Hi%20Robert%2C%20I%27m%20interested%20in%20an%20AI%20voice%20agent%20for%20my%20business." class="alt-card" target="_blank" rel="noopener noreferrer">
-                <div class="alt-card-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                    </svg>
+            </div>
+
+            <div class="sidebar">
+                <div class="sidebar-card">
+                    <div class="sidebar-card-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    </div>
+                    <h3 data-i18n="sidebar.email.title">Email</h3>
+                    <p data-i18n="sidebar.email.desc">Drop us a line anytime.</p>
+                    <a href="mailto:robert@cushlabs.ai" class="sidebar-link">
+                        <span>robert@cushlabs.ai</span>
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                    </a>
                 </div>
-                <h3>WhatsApp</h3>
-                <p data-i18n="contact.alt.whatsapp.desc">Message us directly</p>
-            </a>
+
+                <div class="sidebar-card">
+                    <div class="sidebar-card-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    </div>
+                    <h3>WhatsApp</h3>
+                    <p data-i18n="sidebar.whatsapp.desc">Message us directly — whatever's easier.</p>
+                    <a href="https://wa.me/523315590572" target="_blank" rel="noopener" class="sidebar-link">
+                        <span data-i18n="sidebar.whatsapp.link">Send WhatsApp</span>
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                    </a>
+                </div>
+
+                <div class="sidebar-card">
+                    <div class="sidebar-card-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
+                    </div>
+                    <h3 data-i18n="sidebar.call.title">Book a Free Call</h3>
+                    <p data-i18n="sidebar.call.desc">15-30 minute Google Meet. No pitch — just a real conversation about what you're building.</p>
+                    <a href="https://www.cushlabs.ai/consultation" target="_blank" rel="noopener" class="sidebar-link">
+                        <span data-i18n="sidebar.call.link">Schedule Now</span>
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- ═══ Footer ═══ -->
+    <!-- ═══ CTA ═══ -->
+    <section class="section cta">
+        <div class="reveal">
+            <h2 data-i18n="cta.title">Or Talk to Clara</h2>
+            <p data-i18n="cta.subtitle">Want to see what an AI voice agent can do? Have a real conversation with Clara, our live AI assistant, on the homepage.</p>
+            <a href="/" class="btn-primary" data-i18n="cta.btn">Talk to Clara</a>
+        </div>
+    </section>
+
     <footer class="footer">
         <p data-i18n-html="footer">&copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a> &middot; New York, NY</p>
     </footer>
 
-    <!-- Scroll reveal -->
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const reveals = document.querySelectorAll(".reveal");
-            if (!reveals.length) return;
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("visible");
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
-
-            reveals.forEach((el) => observer.observe(el));
-        });
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var btn = this.querySelector('.form-submit');
+        btn.disabled = true;
+        btn.textContent = '...';
+        try {
+            var res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: this.name.value, email: this.email.value, phone: this.phone.value, message: this.message.value }),
+            });
+            if (res.ok) { this.style.display = 'none'; document.getElementById('formSuccess').classList.add('visible'); }
+            else throw new Error('fail');
+        } catch (err) { btn.disabled = false; btn.textContent = 'Send Message'; alert('Something went wrong. Please try email or WhatsApp instead.'); }
+    });
     </script>
 
-    <!-- i18n: Bilingual EN/ES -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var reveals = document.querySelectorAll(".reveal");
+        if (!reveals.length) return;
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) { if (entry.isIntersecting) { entry.target.classList.add("visible"); observer.unobserve(entry.target); } });
+        }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+        reveals.forEach(function(el) { observer.observe(el); });
+    });
+    </script>
+
     <script>
     (function () {
-        const translations = {
+        var translations = {
             en: {
-                // Nav (shared keys)
-                "nav.capabilities": "What We Build",
-                "nav.howItWorks": "How It Works",
-                "nav.demos": "Live Demos",
-                "nav.contact": "Contact",
-                // Contact Hero
-                "contact.hero.h1": 'Get in <span class="accent">Touch</span>',
-                "contact.hero.subtitle": "Have a project in mind? Send us a message or book a free consultation — we'll get back to you within 24 hours.",
-                // Contact Form
-                "contact.form.label": "Send a Message",
-                "contact.form.title": "Contact Form",
-                "contact.form.subtitle": "Tell us about your business and what you're looking for. We'll follow up with a custom proposal.",
-                // Consultation
-                "contact.consult.label": "Book a Call",
-                "contact.consult.title": "Free Consultation",
-                "contact.consult.subtitle": "Schedule a 30-minute call to discuss your AI voice agent needs. No commitment, no sales pitch.",
-                // Alt Contact
-                "contact.alt.label": "Other Ways to Reach Us",
-                "contact.alt.title": "Direct Contact",
-                "contact.alt.email.title": "Email",
-                "contact.alt.whatsapp.desc": "Message us directly",
-                // Footer
+                "nav.capabilities": "What We Build", "nav.demos": "Live Demos", "nav.portfolio": "Portfolio", "nav.contact": "Contact",
+                "hero.label": "Get in Touch", "hero.title": "Let's Talk About Your Project",
+                "hero.subtitle": "Tell us what you're working on. We'll get back to you with honest thoughts and a clear path forward \u2014 no pressure, no pitch.",
+                "form.title": "Send a Message", "form.name": 'Name <span class="req">*</span>', "form.email": 'Email <span class="req">*</span>',
+                "form.phone": "Phone", "form.message": 'Message <span class="req">*</span>', "form.submit": "Send Message",
+                "form.successTitle": "Message Sent", "form.successDesc": "We'll get back to you within 24 hours \u2014 usually faster.",
+                "sidebar.email.title": "Email", "sidebar.email.desc": "Drop us a line anytime.",
+                "sidebar.whatsapp.desc": "Message us directly \u2014 whatever's easier.", "sidebar.whatsapp.link": "Send WhatsApp",
+                "sidebar.call.title": "Book a Free Call", "sidebar.call.desc": "15-30 minute Google Meet. No pitch \u2014 just a real conversation about what you're building.",
+                "sidebar.call.link": "Schedule Now",
+                "cta.title": "Or Talk to Clara", "cta.subtitle": "Want to see what an AI voice agent can do? Have a real conversation with Clara, our live AI assistant, on the homepage.",
+                "cta.btn": "Talk to Clara",
                 "footer": '&copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a> &middot; New York, NY'
             },
             es: {
-                // Nav
-                "nav.capabilities": "Servicios",
-                "nav.howItWorks": "Proceso",
-                "nav.demos": "Demos en Vivo",
-                "nav.contact": "Contacto",
-                // Contact Hero
-                "contact.hero.h1": '<span class="accent">Cont\u00e1ctanos</span>',
-                "contact.hero.subtitle": "\u00bfTienes un proyecto en mente? Env\u00edanos un mensaje o agenda una consulta gratuita — te respondemos en 24 horas.",
-                // Contact Form
-                "contact.form.label": "Enviar un Mensaje",
-                "contact.form.title": "Formulario de Contacto",
-                "contact.form.subtitle": "Cu\u00e9ntanos sobre tu negocio y lo que necesitas. Te enviaremos una propuesta personalizada.",
-                // Consultation
-                "contact.consult.label": "Agendar una Llamada",
-                "contact.consult.title": "Consulta Gratuita",
-                "contact.consult.subtitle": "Agenda una llamada de 30 minutos para hablar sobre tu agente de voz IA. Sin compromiso, sin discurso de ventas.",
-                // Alt Contact
-                "contact.alt.label": "Otras Formas de Contactarnos",
-                "contact.alt.title": "Contacto Directo",
-                "contact.alt.email.title": "Correo",
-                "contact.alt.whatsapp.desc": "Escr\u00edbenos directamente",
-                // Footer
+                "nav.capabilities": "Servicios", "nav.demos": "Demos en Vivo", "nav.portfolio": "Portafolio", "nav.contact": "Contacto",
+                "hero.label": "Cont\u00e1ctanos", "hero.title": "Hablemos de Tu Proyecto",
+                "hero.subtitle": "Cu\u00e9ntanos en qu\u00e9 est\u00e1s trabajando. Te responderemos con ideas honestas y un camino claro \u2014 sin presi\u00f3n, sin ventas.",
+                "form.title": "Env\u00eda un Mensaje", "form.name": 'Nombre <span class="req">*</span>', "form.email": 'Correo <span class="req">*</span>',
+                "form.phone": "Tel\u00e9fono", "form.message": 'Mensaje <span class="req">*</span>', "form.submit": "Enviar Mensaje",
+                "form.successTitle": "Mensaje Enviado", "form.successDesc": "Te responderemos en menos de 24 horas \u2014 normalmente m\u00e1s r\u00e1pido.",
+                "sidebar.email.title": "Correo", "sidebar.email.desc": "Escr\u00edbenos cuando quieras.",
+                "sidebar.whatsapp.desc": "Escr\u00edbenos directamente \u2014 lo que sea m\u00e1s f\u00e1cil.", "sidebar.whatsapp.link": "Enviar WhatsApp",
+                "sidebar.call.title": "Agenda una Llamada Gratis", "sidebar.call.desc": "15-30 minutos por Google Meet. Sin ventas \u2014 solo una conversaci\u00f3n real.",
+                "sidebar.call.link": "Agendar Ahora",
+                "cta.title": "O Habla con Clara", "cta.subtitle": "\u00bfQuieres ver lo que un agente de voz IA puede hacer? Habla con Clara, nuestra asistente en vivo.",
+                "cta.btn": "Hablar con Clara",
                 "footer": '&copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a> &middot; Nueva York, NY'
             }
         };
-
-        let currentLang = "en";
-
-        function t(key) {
-            return (translations[currentLang] && translations[currentLang][key]) || translations.en[key] || key;
-        }
-
+        var currentLang = "en";
+        function t(key) { return (translations[currentLang] && translations[currentLang][key]) || translations.en[key] || key; }
         function applyLanguage(lang) {
-            currentLang = lang;
-            document.documentElement.lang = lang;
-
-            document.querySelectorAll("[data-i18n]").forEach(function (el) {
-                var key = el.getAttribute("data-i18n");
-                var val = t(key);
-                if (val) el.textContent = val;
-            });
-
-            document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
-                var key = el.getAttribute("data-i18n-html");
-                var val = t(key);
-                if (val) el.innerHTML = val;
-            });
-
-            var toggle = document.getElementById("langToggle");
-            if (toggle) toggle.textContent = lang === "en" ? "ES" : "EN";
-
+            currentLang = lang; document.documentElement.lang = lang;
+            document.querySelectorAll("[data-i18n]").forEach(function(el) { var v = t(el.getAttribute("data-i18n")); if (v) el.textContent = v; });
+            document.querySelectorAll("[data-i18n-html]").forEach(function(el) { var v = t(el.getAttribute("data-i18n-html")); if (v) el.innerHTML = v; });
+            var tog = document.getElementById("langToggle"); if (tog) tog.textContent = lang === "en" ? "ES" : "EN";
             localStorage.setItem("cushlabs-lang", lang);
         }
-
-        function getInitialLanguage() {
-            var stored = localStorage.getItem("cushlabs-lang");
-            if (stored === "en" || stored === "es") return stored;
-            var nav = (navigator.language || "").toLowerCase();
-            if (nav.startsWith("es")) return "es";
-            return "en";
-        }
-
-        // Toggle handler
+        function getInitialLanguage() { var s = localStorage.getItem("cushlabs-lang"); if (s === "en" || s === "es") return s; var n = (navigator.language || "").toLowerCase(); if (n.startsWith("es")) return "es"; return "en"; }
         var toggle = document.getElementById("langToggle");
-        if (toggle) {
-            toggle.addEventListener("click", function () {
-                applyLanguage(currentLang === "en" ? "es" : "en");
-            });
-        }
+        if (toggle) toggle.addEventListener("click", function() { applyLanguage(currentLang === "en" ? "es" : "en"); });
+        if (getInitialLanguage() === "es") applyLanguage("es");
+    })();
+    </script>
 
-        // Apply initial language
-        var initialLang = getInitialLanguage();
-        if (initialLang === "es") {
-            applyLanguage("es");
-        }
+    <script>
+    (function() {
+        var toggle = document.getElementById('menuToggle');
+        var links = document.querySelector('.nav-links');
+        if (!toggle || !links) return;
+        toggle.addEventListener('click', function() {
+            var isOpen = links.classList.toggle('open');
+            toggle.innerHTML = isOpen
+                ? '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>'
+                : '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
+        });
+        links.querySelectorAll('a').forEach(function(a) {
+            a.addEventListener('click', function() {
+                links.classList.remove('open');
+                toggle.innerHTML = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
+            });
+        });
     })();
     </script>
 </body>

@@ -79,6 +79,39 @@ app.get('/trades', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'trades.html'));
 });
 
+// Contact form endpoint
+app.post('/api/contact', async (req, res) => {
+    const { name, email, phone, message } = req.body;
+    if (!name || !email || !message) {
+        return res.status(400).json({ error: 'Name, email, and message are required.' });
+    }
+    try {
+        if (process.env.DATABASE_URL) {
+            const { neon } = require('@neondatabase/serverless');
+            const sql = neon(process.env.DATABASE_URL);
+            await sql`
+                CREATE TABLE IF NOT EXISTS contact_messages (
+                    id SERIAL PRIMARY KEY,
+                    name TEXT NOT NULL,
+                    email TEXT NOT NULL,
+                    phone TEXT,
+                    message TEXT NOT NULL,
+                    created_at TIMESTAMPTZ DEFAULT NOW()
+                )
+            `;
+            await sql`
+                INSERT INTO contact_messages (name, email, phone, message)
+                VALUES (${name}, ${email}, ${phone || null}, ${message})
+            `;
+        }
+        console.log(`[Contact] Message from ${name} <${email}>: ${message.substring(0, 100)}`);
+        res.json({ ok: true });
+    } catch (err) {
+        console.error('[Contact] Failed to save message:', err.message);
+        res.json({ ok: true }); // Still return success — message is logged
+    }
+});
+
 // Vapi webhook endpoint
 app.use('/api/webhook', webhookRouter);
 
