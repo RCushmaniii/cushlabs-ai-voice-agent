@@ -1,6 +1,6 @@
 {
   "name": "cushlabs-ai-voice-agent",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Production-ready AI voice agents for lead qualification, appointment booking, and customer conversations — powered by Vapi, Claude, and Google Calendar",
   "main": "server.js",
   "scripts": {
