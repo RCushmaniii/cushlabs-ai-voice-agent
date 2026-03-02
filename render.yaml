@@ -3,7 +3,7 @@ services:
     name: cushlabs-voice-agent
     runtime: node
     plan: free
-    buildCommand: pnpm install
+    buildCommand: corepack enable && pnpm install
     startCommand: node server.js
     envVars:
       - key: NODE_ENV
