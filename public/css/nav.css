@@ -1,0 +1,338 @@
+/* ══════════════════════════════════════════════
+   Shared Navigation — CushLabs AI Services
+   All pages use CushLabs orange brand colors.
+   ══════════════════════════════════════════════ */
+
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9;
+    background: rgba(5, 5, 5, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background 0.3s;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.25rem 2rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-brand {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #FAFAFA;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+}
+
+.nav-brand span {
+    color: #FF6A3D;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    list-style: none;
+}
+
+.nav-links a {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #D4D8DE;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.nav-active {
+    color: #FF6A3D;
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+/* ── Language toggle ── */
+.lang-toggle {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #D4D8DE;
+    background: rgba(10, 10, 12, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.4rem 0.9rem;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    text-transform: uppercase;
+}
+
+.lang-toggle:hover {
+    color: #FF6A3D;
+    border-color: #FF6A3D;
+    background: rgba(255, 106, 61, 0.08);
+}
+
+/* ── Theme toggle (portfolio) ── */
+.theme-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #FAFAFA;
+    transition: all 0.3s;
+    width: 36px;
+    height: 36px;
+}
+
+.theme-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.theme-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+.sun-icon {
+    display: none;
+}
+
+.moon-icon {
+    display: block;
+}
+
+:root.light-theme .sun-icon {
+    display: block;
+}
+
+:root.light-theme .moon-icon {
+    display: none;
+}
+
+/* ── Hamburger ── */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.hamburger svg {
+    width: 24px;
+    height: 24px;
+    fill: #FAFAFA;
+    transition: fill 0.3s;
+}
+
+.hamburger:hover svg {
+    fill: #FF6A3D;
+}
+
+/* ── Dropdown ── */
+.nav-dropdown {
+    position: relative;
+}
+
+.dropdown-trigger {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.dropdown-trigger svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+    transition: transform 0.3s;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    padding-top: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(10, 10, 12, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    min-width: 240px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    list-style: none;
+}
+
+.nav-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.nav-dropdown:hover .dropdown-trigger svg {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 0.65rem 1.25rem;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: 0;
+    transition: all 0.2s;
+}
+
+.dropdown-menu a:hover {
+    color: #FF6A3D;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* ── Portfolio light-theme overrides ── */
+:root.light-theme .nav {
+    background: rgba(248, 250, 252, 0.8) !important;
+}
+
+:root.light-theme .nav-brand {
+    color: #0F172A;
+}
+
+:root.light-theme .nav-links a {
+    color: #1E293B;
+}
+
+:root.light-theme .nav-links a:hover,
+:root.light-theme .nav-links a.nav-active {
+    color: #FF6A3D;
+}
+
+:root.light-theme .hamburger svg {
+    fill: #0F172A;
+}
+
+:root.light-theme .theme-btn {
+    color: #0F172A;
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+:root.light-theme .theme-btn:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+:root.light-theme .dropdown-menu {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+:root.light-theme .dropdown-menu a {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+:root.light-theme .dropdown-menu a:hover {
+    color: #FF6A3D;
+    background: rgba(0, 0, 0, 0.03);
+}
+
+/* ── Mobile responsive (768px) ── */
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 1rem 1.5rem;
+    }
+
+    .nav-links {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(5, 5, 5, 0.97);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        z-index: 100;
+        padding: 2rem;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links a {
+        font-size: 1.3rem;
+        letter-spacing: 0.15em;
+    }
+
+    .hamburger {
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-controls {
+        gap: 1rem;
+    }
+
+    .nav-dropdown > .dropdown-trigger {
+        display: none;
+    }
+
+    .dropdown-menu {
+        display: flex !important;
+        position: static;
+        transform: none;
+        background: none !important;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border: none !important;
+        box-shadow: none;
+        border-radius: 0;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        padding: 0;
+        min-width: auto;
+    }
+
+    .dropdown-menu a {
+        padding: 0;
+        font-size: 1.1rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #D4D8DE !important;
+    }
+
+    .dropdown-menu a:hover {
+        background: none !important;
+        color: #FF6A3D !important;
+    }
+}

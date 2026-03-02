@@ -14,6 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/nav.css">
     <style>
         :root {
             --cush-orange: #FF6A3D;
@@ -51,40 +52,6 @@
         @keyframes aurora-2 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(-50px,30px) scale(0.9)} 66%{transform:translate(40px,-40px) scale(1.1)} }
 
         .top-line { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--cush-orange), transparent); z-index: 10; opacity: 0.8; }
-
-        /* ── Nav ── */
-        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 9; background: rgba(5,5,5,0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
-        .nav-container { max-width: 1200px; margin: 0 auto; padding: 1.25rem 2rem; width: 100%; display: flex; align-items: center; justify-content: space-between; }
-        .nav-brand { font-family: "Space Grotesk", sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; }
-        .nav-brand span { color: var(--cush-orange); }
-        .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
-        .nav-links a { font-family: "Space Grotesk", sans-serif; font-size: 0.85rem; font-weight: 500; color: var(--gray-200); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.3s; }
-        .nav-links a:hover, .nav-links a.nav-active { color: var(--cush-orange); }
-        .nav-controls { display: flex; align-items: center; gap: 2.5rem; }
-        .lang-toggle { font-family: "Space Grotesk", sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; color: var(--gray-200); background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 0.4rem 0.9rem; border-radius: 100px; cursor: pointer; transition: all 0.3s; text-transform: uppercase; }
-        .lang-toggle:hover { color: var(--cush-orange); border-color: var(--cush-orange); background: rgba(255,106,61,0.08); }
-        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
-        .hamburger svg { width: 24px; height: 24px; fill: var(--text-main); transition: fill 0.3s; }
-        .hamburger:hover svg { fill: var(--cush-orange); }
-
-        /* ── Dropdown ── */
-        .nav-dropdown { position: relative; }
-        .dropdown-trigger { display: flex; align-items: center; gap: 0.25rem; }
-        .dropdown-trigger svg { width: 14px; height: 14px; fill: currentColor; transition: transform 0.3s; }
-        .dropdown-menu {
-            display: none; position: absolute; top: 100%; padding-top: 0.75rem; left: 50%; transform: translateX(-50%);
-            background: rgba(10,10,12,0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
-            min-width: 240px; box-shadow: 0 12px 40px rgba(0,0,0,0.5); list-style: none;
-        }
-        .nav-dropdown:hover .dropdown-menu { display: block; }
-        .nav-dropdown:hover .dropdown-trigger svg { transform: rotate(180deg); }
-        .dropdown-menu a {
-            display: block; padding: 0.65rem 1.25rem; font-family: "Space Grotesk", sans-serif;
-            font-size: 0.85rem; font-weight: 500; color: rgba(255,255,255,0.7);
-            text-decoration: none; text-transform: none; letter-spacing: 0; transition: all 0.2s;
-        }
-        .dropdown-menu a:hover { color: var(--cush-orange); background: rgba(255,255,255,0.04); }
 
         /* ── Layout ── */
         .section { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
@@ -278,21 +245,6 @@
         @media (prefers-reduced-motion: reduce) { .aurora-orb { animation: none !important; } .hero, .reveal { animation: none !important; opacity: 1; transform: none; } }
         @media (max-width: 1024px) { .contact-grid { grid-template-columns: 1fr; } }
         @media (max-width: 768px) {
-            .nav-container { padding: 1rem 1.5rem; }
-            .nav-links { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(5,5,5,0.97); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; z-index: 100; padding: 2rem; }
-            .nav-links.open { display: flex; }
-            .nav-links a { font-size: 1.3rem; letter-spacing: 0.15em; }
-            .hamburger { display: flex; align-items: center; }
-            .nav-controls { gap: 1rem; }
-            .nav-dropdown > .dropdown-trigger { display: none; }
-            .dropdown-menu {
-                display: flex !important; position: static; transform: none;
-                background: none; backdrop-filter: none; -webkit-backdrop-filter: none;
-                border: none; box-shadow: none; border-radius: 0;
-                flex-direction: column; align-items: center; gap: 2rem; padding: 0; min-width: auto;
-            }
-            .dropdown-menu a { padding: 0; font-size: 1.1rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-200); }
-            .dropdown-menu a:hover { background: none; color: var(--cush-orange); }
             .hero { padding-top: 8rem; }
             .form-panel { padding: 2rem; }
         }
@@ -306,30 +258,8 @@
     </div>
 
     <!-- ═══ Navigation ═══ -->
-    <nav class="nav">
-        <div class="nav-container">
-            <a href="/" class="nav-brand">CUSH<span>LABS.AI</span></a>
-            <div class="nav-controls">
-                <ul class="nav-links">
-                    <li class="nav-dropdown">
-                        <a href="/#demos" class="dropdown-trigger" data-i18n="nav.demos">Demos <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/">Clara — AI Assistant</a></li>
-                            <li><a href="/nyc-coaching">James — Exec Coaching</a></li>
-                            <li><a href="/medspa">Sophia — Med Spa</a></li>
-                            <li><a href="/trades">Mike — Home Services</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/portfolio" data-i18n="nav.portfolio">Portfolio</a></li>
-                    <li><a href="/contact" class="nav-active" data-i18n="nav.contact">Contact</a></li>
-                </ul>
-                <button class="lang-toggle" id="langToggle" aria-label="Switch language">ES</button>
-                <button class="hamburger" id="menuToggle" aria-label="Toggle menu">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
-                </button>
-            </div>
-        </div>
-    </nav>
+    <div id="nav-root" data-page="contact"></div>
+    <script src="/js/nav.js"></script>
 
     <!-- ═══ Hero ═══ -->
     <section class="section hero">
@@ -541,33 +471,13 @@
             currentLang = lang; document.documentElement.lang = lang;
             document.querySelectorAll("[data-i18n]").forEach(function(el) { var v = t(el.getAttribute("data-i18n")); if (v) el.textContent = v; });
             document.querySelectorAll("[data-i18n-html]").forEach(function(el) { var v = t(el.getAttribute("data-i18n-html")); if (v) el.innerHTML = v; });
-            var tog = document.getElementById("langToggle"); if (tog) tog.textContent = lang === "en" ? "ES" : "EN";
+            if (window.cushlabsNav) window.cushlabsNav.updateLanguage(lang);
             localStorage.setItem("cushlabs-lang", lang);
         }
         function getInitialLanguage() { var s = localStorage.getItem("cushlabs-lang"); if (s === "en" || s === "es") return s; var n = (navigator.language || "").toLowerCase(); if (n.startsWith("es")) return "es"; return "en"; }
         var toggle = document.getElementById("langToggle");
         if (toggle) toggle.addEventListener("click", function() { applyLanguage(currentLang === "en" ? "es" : "en"); });
         if (getInitialLanguage() === "es") applyLanguage("es");
-    })();
-    </script>
-
-    <script>
-    (function() {
-        var toggle = document.getElementById('menuToggle');
-        var links = document.querySelector('.nav-links');
-        if (!toggle || !links) return;
-        toggle.addEventListener('click', function() {
-            var isOpen = links.classList.toggle('open');
-            toggle.innerHTML = isOpen
-                ? '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>'
-                : '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
-        });
-        links.querySelectorAll('a').forEach(function(a) {
-            a.addEventListener('click', function() {
-                links.classList.remove('open');
-                toggle.innerHTML = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
-            });
-        });
     })();
     </script>
 </body>
