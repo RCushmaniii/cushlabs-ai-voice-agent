@@ -365,14 +365,22 @@
         /* Footer */
         .footer {
             position: fixed;
-            bottom: 1.5rem;
+            bottom: 0;
+            left: 0;
+            right: 0;
             font-family: "Space Grotesk", sans-serif;
             color: var(--gray-400);
             font-size: 0.75rem;
             z-index: 1;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 1rem 2rem;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255,255,255,0.06);
         }
 
         .footer a {
@@ -386,7 +394,7 @@
         }
 
         .footer .sep {
-            color: var(--gray-700);
+            color: rgba(255,255,255,0.1);
         }
 
         /* Animations */
@@ -470,9 +478,13 @@
     </div>
 
     <div class="footer">
-        <a href="https://cushlabs.ai">Powered by CushLabs AI</a>
-        <span class="sep">|</span>
-        <span>New York, NY</span>
+        <a href="/" class="footer-brand-link">CUSHLABS.AI</a>
+        <span class="sep">&middot;</span>
+        <a href="/portfolio">Portfolio</a>
+        <span class="sep">&middot;</span>
+        <a href="/contact">Contact</a>
+        <span class="sep">&middot;</span>
+        <span>&copy; 2026</span>
     </div>
 
     <script>
