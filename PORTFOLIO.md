@@ -5,7 +5,7 @@
 portfolio_enabled: true
 portfolio_priority: 1
 portfolio_featured: true
-portfolio_last_reviewed: "2026-03-01"
+portfolio_last_reviewed: "2026-03-02"
 
 title: "AI Voice Agent Platform"
 tagline: "Production voice AI agents that qualify leads, book appointments, and handle support calls 24/7"
@@ -43,7 +43,19 @@ metrics:
 demo_url: "https://voice.cushlabs.ai"
 live_url: "https://voice.cushlabs.ai"
 
-hero_images: []
+hero_images:
+  - "/portfolio/voice-cushlabs-01.webp"
+  - "/portfolio/voice-cushlabs-02.webp"
+  - "/portfolio/voice-cushlabs-03.webp"
+  - "/portfolio/voice-cushlabs-04.webp"
+  - "/portfolio/voice-cushlabs-05.webp"
+  - "/portfolio/voice-cushlabs-06.webp"
+  - "/portfolio/voice-cushlabs-07.webp"
+  - "/portfolio/voice-cushlabs-08.webp"
+  - "/portfolio/voice-cushlabs-09.webp"
+  - "/portfolio/voice-cushlabs-10.webp"
+demo_video_url: "/video/voice-cushlabs-brief.mp4"
+demo_video_poster: "/video/voice-cushlabs-brief-poster.webp"
 tags:
   - "voice-ai"
   - "vapi"
