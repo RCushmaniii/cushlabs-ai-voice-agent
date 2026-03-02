@@ -864,28 +864,138 @@
 
         /* ── Footer ── */
         .footer {
-            text-align: center;
-            padding: 3rem 2rem;
-            border-top: 1px solid var(--glass-border);
             position: relative;
             z-index: 1;
+            border-top: 1px solid var(--glass-border);
+            background: rgba(5,5,5,0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             margin-top: 0;
         }
 
-        .footer p {
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand span {
+            color: var(--accent);
+        }
+
+        .footer-tagline {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 0.95rem;
+            color: var(--gray-400);
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+            max-width: 280px;
+        }
+
+        .footer-location {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.8rem;
+            color: var(--gray-400);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .footer-location svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .footer-heading {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-main);
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
             font-family: "Space Grotesk", sans-serif;
             font-size: 0.85rem;
             color: var(--gray-400);
+            text-decoration: none;
+            transition: color 0.3s;
         }
 
-        .footer a {
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--glass-border);
+            padding-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-bottom p {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.8rem;
+            color: var(--gray-400);
+        }
+
+        .footer-bottom a {
             color: var(--accent);
             text-decoration: none;
             transition: color 0.3s;
         }
 
-        .footer a:hover {
+        .footer-bottom a:hover {
             color: var(--accent-light);
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
         }
 
         /* ── Animations ── */
@@ -1381,7 +1491,47 @@
 
     <!-- ═══ 9. Footer ═══ -->
     <footer class="footer">
-        <p data-i18n-html="footer">&copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a> &middot; New York, NY</p>
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="/" class="footer-brand">CUSH<span>LABS.AI</span></a>
+                    <p class="footer-tagline" data-i18n="footer.tagline">AI voice agents that qualify leads, book appointments, and handle customer calls — 24/7.</p>
+                    <p class="footer-location">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        New York, NY
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-heading" data-i18n="footer.nav">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/portfolio">Portfolio</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-heading" data-i18n="footer.demos">Live Demos</h4>
+                    <ul class="footer-links">
+                        <li><a href="/">Clara — AI Assistant</a></li>
+                        <li><a href="/nyc-coaching">James — Exec Coaching</a></li>
+                        <li><a href="/medspa">Sophia — Med Spa</a></li>
+                        <li><a href="/trades">Mike — Home Services</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-heading" data-i18n="footer.connect">Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:robert@cushlabs.ai">robert@cushlabs.ai</a></li>
+                        <li><a href="https://wa.me/523315590572" target="_blank" rel="noopener">WhatsApp</a></li>
+                        <li><a href="https://cushlabs.ai/consultation" target="_blank" rel="noopener" data-i18n="footer.call">Book a Free Call</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a></p>
+                <p data-i18n="footer.built">Built with AI, powered by voice.</p>
+            </div>
+        </div>
     </footer>
 
     <!-- Vapi Web SDK (ESM) -->
@@ -1595,7 +1745,12 @@
                 "cta.tryMike": "Try Mike Now",
                 "cta.getStarted": "Get Started",
                 // Footer
-                "footer": '&copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a> &middot; New York, NY'
+                "footer.tagline": "AI voice agents that qualify leads, book appointments, and handle customer calls — 24/7.",
+                "footer.nav": "Navigation",
+                "footer.demos": "Live Demos",
+                "footer.connect": "Connect",
+                "footer.call": "Book a Free Call",
+                "footer.built": "Built with AI, powered by voice.",
             },
             es: {
                 // Nav
@@ -1696,7 +1851,12 @@
                 "cta.tryMike": "Probar a Mike",
                 "cta.getStarted": "Empezar",
                 // Footer
-                "footer": '&copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a> &middot; Nueva York, NY'
+                "footer.tagline": "Agentes de voz con IA que califican prospectos, agendan citas y atienden llamadas — 24/7.",
+                "footer.nav": "Navegación",
+                "footer.demos": "Demos en Vivo",
+                "footer.connect": "Conectar",
+                "footer.call": "Reservar Llamada Gratis",
+                "footer.built": "Hecho con IA, impulsado por voz.",
             }
         };
 
