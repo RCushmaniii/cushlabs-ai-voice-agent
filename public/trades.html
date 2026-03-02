@@ -245,6 +245,67 @@
             fill: var(--accent);
         }
 
+        /* ── Dropdown ── */
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .dropdown-trigger {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .dropdown-trigger svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+            transition: transform 0.3s;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(10, 10, 12, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 0.5rem 0;
+            min-width: 240px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            list-style: none;
+        }
+
+        .nav-dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .nav-dropdown:hover .dropdown-trigger svg {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.65rem 1.25rem;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            text-transform: none;
+            letter-spacing: 0;
+            transition: all 0.2s;
+        }
+
+        .dropdown-menu a:hover {
+            color: var(--accent);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
         /* ── Section base ── */
         .section {
             position: relative;
@@ -1077,6 +1138,40 @@
                 letter-spacing: 0.15em;
             }
 
+            .nav-dropdown > .dropdown-trigger {
+                display: none;
+            }
+
+            .dropdown-menu {
+                display: flex !important;
+                position: static;
+                transform: none;
+                background: none;
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                border: none;
+                box-shadow: none;
+                border-radius: 0;
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+                padding: 0;
+                min-width: auto;
+            }
+
+            .dropdown-menu a {
+                padding: 0;
+                font-size: 1.1rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--gray-200);
+            }
+
+            .dropdown-menu a:hover {
+                background: none;
+                color: var(--accent);
+            }
+
             .hamburger {
                 display: flex;
                 align-items: center;
@@ -1158,9 +1253,16 @@
             <a href="/" class="nav-brand">CUSH<span>LABS.AI</span></a>
             <div class="nav-controls">
                 <ul class="nav-links">
+                    <li class="nav-dropdown">
+                        <a href="/#demos" class="dropdown-trigger" data-i18n="nav.demos">Demos <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/">Clara — AI Assistant</a></li>
+                            <li><a href="/nyc-coaching">James — Exec Coaching</a></li>
+                            <li><a href="/medspa">Sophia — Med Spa</a></li>
+                            <li><a href="/trades">Mike — Home Services</a></li>
+                        </ul>
+                    </li>
                     <li><a href="/portfolio" data-i18n="nav.portfolio">Portfolio</a></li>
-                    <li><a href="#features" data-i18n="nav.features">Features</a></li>
-                    <li><a href="#industries" data-i18n="nav.industries">Industries</a></li>
                     <li><a href="/contact" data-i18n="nav.contact">Contact</a></li>
                 </ul>
                 <button class="lang-toggle" id="langToggle" aria-label="Switch language">ES</button>
@@ -1648,9 +1750,8 @@
         const translations = {
             en: {
                 // Nav
+                "nav.demos": "Demos",
                 "nav.portfolio": "Portfolio",
-                "nav.features": "Features",
-                "nav.industries": "Industries",
                 "nav.contact": "Contact",
                 // Hero
                 "hero.label": "AI for Home Services",
@@ -1754,9 +1855,8 @@
             },
             es: {
                 // Nav
+                "nav.demos": "Demos",
                 "nav.portfolio": "Portafolio",
-                "nav.features": "Funciones",
-                "nav.industries": "Industrias",
                 "nav.contact": "Contacto",
                 // Hero
                 "hero.label": "IA para Servicios del Hogar",
