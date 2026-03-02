@@ -4,3 +4,9 @@ node_modules/
 dist/
 .DS_Store
 Thumbs.db
+
+# Original image sources (WebP versions are tracked)
+public/portfolio/*.png
+public/portfolio/*.jpg
+public/video/*.jpg
+public/images/voice_agent_logo.png
