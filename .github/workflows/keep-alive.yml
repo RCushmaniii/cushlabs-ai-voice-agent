@@ -1,0 +1,16 @@
+name: Keep Render Warm
+
+on:
+  schedule:
+    # Every 14 minutes — Render free tier spins down after 15 min of inactivity
+    - cron: '*/14 * * * *'
+  workflow_dispatch: # Manual trigger for testing
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping health endpoint
+        run: |
+          echo "Pinging voice.cushlabs.ai to prevent Render cold start..."
+          curl -sf --max-time 60 https://voice.cushlabs.ai/healthz && echo "OK" || echo "Server waking up (expected on first hit)"
