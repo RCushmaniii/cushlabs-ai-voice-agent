@@ -354,6 +354,14 @@
             margin-top: 1.5rem;
             animation: bounce 2s ease-in-out infinite;
             opacity: 0.6;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.3s;
+        }
+
+        .scroll-cue:hover {
+            opacity: 1;
         }
 
         .scroll-cue svg {
@@ -1044,11 +1052,11 @@
             </div>
         </div>
 
-        <div class="scroll-cue">
+        <a href="#problem" class="scroll-cue" aria-label="Scroll to next section">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
             </svg>
-        </div>
+        </a>
     </section>
 
     <!-- ═══ 3. The Problem ═══ -->
