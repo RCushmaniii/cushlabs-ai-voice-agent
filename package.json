@@ -1,7 +1,7 @@
 {
   "name": "cushlabs-ai-voice-agent",
   "version": "1.0.0",
-  "description": "Low-latency AI voice qualification agent for CushLabs.ai",
+  "description": "Production-ready AI voice agents for lead qualification, appointment booking, and customer conversations — powered by Vapi, Claude, and Google Calendar",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -11,7 +11,12 @@
     "ai",
     "voice-agent",
     "vapi",
-    "groq",
+    "conversational-ai",
+    "lead-qualification",
+    "appointment-booking",
+    "google-calendar",
+    "claude",
+    "express",
     "cushlabs"
   ],
   "author": "CushLabs AI Services",
