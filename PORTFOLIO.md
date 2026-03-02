@@ -22,7 +22,7 @@ tech_stack:
   - "Redis"
   - "Google Calendar API"
   - "Render"
-thumbnail: ""
+thumbnail: "/portfolio/voice-cushlabs-thumb.webp"
 status: "Production"
 
 problem: "Businesses lose leads to unanswered calls, voicemail black holes, and hold-time abandonment. Hiring receptionists is expensive and still leaves gaps outside business hours. Existing IVR systems frustrate callers with rigid menu trees that never actually solve the problem."
