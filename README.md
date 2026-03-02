@@ -13,6 +13,7 @@ Production-ready AI voice agents that qualify leads, book appointments, and hand
 | **Clara** | Lead Qualification | AI Services | Cartesia | Claude Sonnet | [/](https://voice.cushlabs.ai) |
 | **James** | Appointment Booking | Executive Coaching | Cartesia Nathan | Groq Llama 3.1 | [/nyc-coaching](https://voice.cushlabs.ai/nyc-coaching) |
 | **Sophia** | AI Front Desk | Medical Spa | Cartesia Cindy | Claude Sonnet | [/medspa](https://voice.cushlabs.ai/medspa) |
+| **Mike** | AI Dispatcher | Home Services | Cartesia Wyatt | Claude Sonnet | [/trades](https://voice.cushlabs.ai/trades) |
 
 Each agent is fully functional — try them by clicking the mic button on any page.
 
@@ -63,10 +64,13 @@ Browser (Vapi Web SDK)
 │   ├── index.html               # CushLabs landing page (Clara) — bilingual
 │   ├── nyc-coaching.html        # Executive coaching page (James)
 │   ├── medspa.html              # Med spa demo page (Sophia)
+│   ├── trades.html              # Home services demo page (Mike) — bilingual
 │   ├── portfolio.html           # Portfolio showcase
 │   └── contact.html             # Contact page with iframes — bilingual
 ├── scripts/
 │   ├── update-all-assistants.js # Batch-update Vapi assistant configs
+│   ├── create-trades-assistant.js # Create Mike trades assistant
+│   ├── list-cartesia-voices.js  # Voice discovery utility
 │   └── setup-medspa-assistant.js
 ├── docs/
 │   ├── DEPLOYMENT.md            # Full deployment + infra documentation
@@ -111,6 +115,7 @@ pnpm dev
 | `VAPI_ASSISTANT_ID_CUSHLABS` | Yes | Clara assistant ID |
 | `VAPI_ASSISTANT_ID_COACHING` | Yes | James assistant ID |
 | `VAPI_ASSISTANT_ID_MEDSPA` | Yes | Sophia assistant ID |
+| `VAPI_ASSISTANT_ID_TRADES` | Yes | Mike assistant ID |
 | `REDIS_URL` | Yes | Redis connection string |
 | `DATABASE_URL` | Optional | Neon Postgres (leads + bookings persist) |
 | `GOOGLE_CLIENT_ID` | Optional | Google Calendar real-time availability |

@@ -42,6 +42,7 @@ const assistants = {
     cushlabs: process.env.VAPI_ASSISTANT_ID_CUSHLABS,
     coaching: process.env.VAPI_ASSISTANT_ID_COACHING,
     medspa: process.env.VAPI_ASSISTANT_ID_MEDSPA,
+    trades: process.env.VAPI_ASSISTANT_ID_TRADES,
 };
 
 app.get('/api/config', (req, res) => {
@@ -71,6 +72,11 @@ app.get('/portfolio', (req, res) => {
 // Serve Contact page
 app.get('/contact', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'contact.html'));
+});
+
+// Serve Trades demo page
+app.get('/trades', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'trades.html'));
 });
 
 // Vapi webhook endpoint
