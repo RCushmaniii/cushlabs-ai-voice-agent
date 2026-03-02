@@ -74,6 +74,11 @@ app.get('/contact', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'contact.html'));
 });
 
+// Serve Consultation / Book a Call page
+app.get('/consultation', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'consultation.html'));
+});
+
 // Serve Trades demo page
 app.get('/trades', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'trades.html'));

@@ -55,188 +55,352 @@
 
         /* ── Layout ── */
         .section { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-        .section-label { font-family: "Space Grotesk", sans-serif; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.2em; color: var(--cush-orange); margin-bottom: 1rem; }
-        .section-title { font-family: "Space Grotesk", sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--text-main); letter-spacing: -0.02em; margin-bottom: 1rem; }
-        .section-subtitle { font-family: "Source Serif 4", Georgia, serif; font-size: 1.1rem; font-weight: 300; color: var(--gray-300); max-width: 600px; margin: 0 auto; line-height: 1.7; }
 
-        .hero { padding-top: 10rem; padding-bottom: 4rem; text-align: center; animation: fade-in-up 0.8s ease-out; }
-        .contact-section { padding: 2rem 2rem 6rem; }
+        /* ── Hero ── */
+        .hero { padding-top: 10rem; padding-bottom: 3rem; text-align: center; animation: fade-in-up 0.8s ease-out; }
+        .hero-badge {
+            display: inline-block;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--cush-orange);
+            background: rgba(255, 106, 61, 0.1);
+            border-radius: 9999px;
+            padding: 0.35rem 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+        .hero-subtitle {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--gray-300);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+        .hero-ctas {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .hero-cta-primary {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #000;
+            background: var(--cush-orange);
+            padding: 0.85rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            box-shadow: 0 0 25px var(--cush-orange-glow);
+        }
+        .hero-cta-primary:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(255,106,61,0.4); background: var(--cush-orange-light); }
+        .hero-cta-primary svg { width: 18px; height: 18px; transition: transform 0.3s; }
+        .hero-cta-primary:hover svg { transform: translateX(4px); }
+        .hero-cta-secondary {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--gray-300);
+            border: 1px solid var(--glass-border);
+            padding: 0.85rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+        .hero-cta-secondary:hover { border-color: var(--cush-orange); color: var(--cush-orange); }
+        .hero-cta-secondary svg { width: 18px; height: 18px; transition: transform 0.3s; }
+        .hero-cta-secondary:hover svg { transform: translateY(4px); }
+        .hero-reassurance {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.85rem;
+            color: var(--gray-400);
+        }
+
+        /* ── Contact Grid ── */
+        .contact-section { padding: 1rem 2rem 6rem; }
         .contact-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3rem; align-items: start; }
 
-        /* ── Form ── */
-        .form-panel { background: var(--glass-bg); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid var(--glass-border); border-radius: 24px; padding: 3rem; }
-        .form-panel h2 { font-family: "Space Grotesk", sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--text-main); margin-bottom: 2rem; }
-        .form-group { margin-bottom: 1.5rem; }
-        .form-group label { display: block; font-family: "Space Grotesk", sans-serif; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-300); margin-bottom: 0.5rem; }
+        /* ── Form Panel ── */
+        .form-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+        }
+        .form-panel h2 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+        .form-group { margin-bottom: 1.25rem; }
+        .form-group label {
+            display: block;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--gray-300);
+            margin-bottom: 0.5rem;
+        }
         .form-group label .req { color: var(--cush-orange); }
-        .form-group input, .form-group textarea { width: 100%; font-family: "Source Serif 4", Georgia, serif; font-size: 1rem; color: var(--text-main); background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border); border-radius: 12px; padding: 0.9rem 1.2rem; transition: border-color 0.3s, background 0.3s; outline: none; }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 1rem;
+            color: var(--text-main);
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            transition: border-color 0.3s, background 0.3s;
+            outline: none;
+        }
         .form-group input:focus, .form-group textarea:focus { border-color: var(--cush-orange); background: rgba(255,106,61,0.04); }
         .form-group input::placeholder, .form-group textarea::placeholder { color: var(--gray-400); }
-        .form-group textarea { resize: vertical; min-height: 140px; }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .form-hint {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.75rem;
+            color: var(--gray-400);
+            margin-top: 0.4rem;
+        }
 
-        .form-submit { font-family: "Space Grotesk", sans-serif; font-size: 0.95rem; font-weight: 600; color: #000; background: var(--cush-orange); border: none; padding: 1rem 2.5rem; border-radius: 12px; cursor: pointer; transition: all 0.3s; box-shadow: 0 0 25px var(--cush-orange-glow); width: 100%; }
+        .consent-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        .consent-row input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            accent-color: var(--cush-orange);
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+        .consent-row label {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.85rem;
+            color: var(--gray-300);
+            cursor: pointer;
+            line-height: 1.5;
+        }
+        .consent-row label .req { color: var(--cush-orange); }
+
+        .form-error {
+            display: none;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1.25rem;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.85rem;
+            color: #F87171;
+        }
+        .form-error.visible { display: block; }
+
+        .form-submit {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #000;
+            background: var(--cush-orange);
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 25px var(--cush-orange-glow);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
         .form-submit:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(255,106,61,0.4); background: var(--cush-orange-light); }
         .form-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .form-submit .spinner {
+            display: none;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(0,0,0,0.3);
+            border-top-color: #000;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        .form-success { display: none; text-align: center; padding: 2rem 0; }
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 2rem 0;
+        }
         .form-success.visible { display: block; }
-        .form-success svg { width: 48px; height: 48px; fill: #34D399; margin-bottom: 1rem; }
-        .form-success h3 { font-family: "Space Grotesk", sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem; }
+        .form-success-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(52, 211, 153, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+        }
+        .form-success-icon svg { width: 32px; height: 32px; stroke: #34D399; fill: none; }
+        .form-success h3 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
         .form-success p { font-size: 1rem; color: var(--gray-300); line-height: 1.6; }
 
         /* ── Sidebar ── */
-        .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
-        .sidebar-card { background: var(--glass-bg); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; transition: all 0.4s cubic-bezier(0.16,1,0.3,1); }
-        .sidebar-card:hover { transform: translateY(-4px); border-color: var(--glass-highlight); }
-        .sidebar-card-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(255,106,61,0.1); border: 1px solid rgba(255,106,61,0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
-        .sidebar-card-icon svg { width: 22px; height: 22px; fill: var(--cush-orange); }
-        .sidebar-card h3 { font-family: "Space Grotesk", sans-serif; font-size: 1.05rem; font-weight: 600; color: var(--text-main); margin-bottom: 0.4rem; }
-        .sidebar-card p { font-size: 0.9rem; font-weight: 300; color: var(--gray-300); line-height: 1.5; margin-bottom: 1rem; }
-        .sidebar-link { font-family: "Space Grotesk", sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--cush-orange); text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; transition: gap 0.3s, color 0.3s; }
-        .sidebar-link:hover { gap: 0.65rem; color: var(--cush-orange-light); }
-        .sidebar-link svg { width: 16px; height: 16px; fill: currentColor; }
+        .sidebar-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+        }
+        .sidebar-panel h2 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+        .sidebar-panel > p {
+            font-size: 0.9rem;
+            color: var(--gray-300);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-buttons { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem; }
+        .sidebar-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.25rem;
+            border-radius: 12px;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .sidebar-btn svg { width: 20px; height: 20px; }
+        .sidebar-btn-email {
+            color: var(--text-main);
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--glass-border);
+        }
+        .sidebar-btn-email:hover { border-color: var(--cush-orange); color: var(--cush-orange); }
+        .sidebar-btn-whatsapp {
+            color: #fff;
+            background: #16a34a;
+            border: 1px solid transparent;
+        }
+        .sidebar-btn-whatsapp:hover { background: #15803d; }
+
+        .sidebar-info { margin-bottom: 1.5rem; }
+        .sidebar-info-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.6rem 0;
+        }
+        .sidebar-info-row:not(:last-child) { border-bottom: 1px solid var(--glass-border); }
+        .sidebar-info-label {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.85rem;
+            color: var(--gray-400);
+        }
+        .sidebar-info-value {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            text-align: right;
+        }
+
+        .sidebar-divider {
+            border: none;
+            border-top: 1px solid var(--glass-border);
+            margin: 0 0 1.5rem;
+        }
+        .sidebar-cta-label {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.85rem;
+            color: var(--gray-400);
+            margin-bottom: 0.75rem;
+        }
+        .sidebar-cta-link {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--cush-orange);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: gap 0.3s, color 0.3s;
+        }
+        .sidebar-cta-link:hover { gap: 0.65rem; color: var(--cush-orange-light); }
+        .sidebar-cta-link svg { width: 16px; height: 16px; fill: none; stroke: currentColor; }
 
         /* ── CTA ── */
-        .cta { padding: 6rem 2rem; text-align: center; }
+        .cta { padding: 6rem 2rem; text-align: center; position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; }
         .cta h2 { font-family: "Space Grotesk", sans-serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; color: var(--text-main); margin-bottom: 1.5rem; letter-spacing: -0.02em; }
         .cta p { font-family: "Source Serif 4", Georgia, serif; font-size: 1.1rem; font-weight: 300; color: var(--gray-300); max-width: 550px; margin: 0 auto 3rem; line-height: 1.7; }
         .btn-primary { font-family: "Space Grotesk", sans-serif; font-size: 0.95rem; font-weight: 600; color: #000; background: var(--cush-orange); border: none; padding: 1rem 2.5rem; border-radius: 12px; cursor: pointer; text-decoration: none; transition: all 0.3s; box-shadow: 0 0 25px var(--cush-orange-glow); display: inline-flex; align-items: center; }
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 40px rgba(255,106,61,0.4); background: var(--cush-orange-light); }
 
         /* ── Footer ── */
-        .footer {
-            position: relative;
-            z-index: 1;
-            border-top: 1px solid var(--glass-border);
-            background: rgba(5,5,5,0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-
-        .footer-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem 2rem;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1fr;
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-brand {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--text-main);
-            text-decoration: none;
-            letter-spacing: -0.02em;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
-
-        .footer-brand span {
-            color: var(--cush-orange);
-        }
-
-        .footer-tagline {
-            font-family: "Source Serif 4", Georgia, serif;
-            font-size: 0.95rem;
-            color: var(--gray-400);
-            line-height: 1.7;
-            margin-bottom: 1.25rem;
-            max-width: 280px;
-        }
-
-        .footer-location {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 0.8rem;
-            color: var(--gray-400);
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .footer-location svg {
-            width: 14px;
-            height: 14px;
-            fill: var(--cush-orange);
-            flex-shrink: 0;
-        }
-
-        .footer-heading {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--text-main);
-            margin-bottom: 1.25rem;
-        }
-
-        .footer-links {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .footer-links a {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 0.85rem;
-            color: var(--gray-400);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--cush-orange);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid var(--glass-border);
-            padding-top: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .footer-bottom p {
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 0.8rem;
-            color: var(--gray-400);
-        }
-
-        .footer-bottom a {
-            color: var(--cush-orange);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-bottom a:hover {
-            color: var(--cush-orange-light);
-        }
-
-        @media (max-width: 768px) {
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 2.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            .footer-bottom {
-                flex-direction: column;
-                gap: 0.5rem;
-                text-align: center;
-            }
-        }
+        .footer { position: relative; z-index: 1; border-top: 1px solid var(--glass-border); background: rgba(5,5,5,0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .footer-inner { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem 2rem; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+        .footer-brand { font-family: "Space Grotesk", sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; display: inline-block; margin-bottom: 1rem; }
+        .footer-brand span { color: var(--cush-orange); }
+        .footer-tagline { font-family: "Source Serif 4", Georgia, serif; font-size: 0.95rem; color: var(--gray-400); line-height: 1.7; margin-bottom: 1.25rem; max-width: 280px; }
+        .footer-location { font-family: "Space Grotesk", sans-serif; font-size: 0.8rem; color: var(--gray-400); display: flex; align-items: center; gap: 0.4rem; }
+        .footer-location svg { width: 14px; height: 14px; fill: var(--cush-orange); flex-shrink: 0; }
+        .footer-heading { font-family: "Space Grotesk", sans-serif; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-main); margin-bottom: 1.25rem; }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+        .footer-links a { font-family: "Space Grotesk", sans-serif; font-size: 0.85rem; color: var(--gray-400); text-decoration: none; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--cush-orange); }
+        .footer-bottom { border-top: 1px solid var(--glass-border); padding-top: 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+        .footer-bottom p { font-family: "Space Grotesk", sans-serif; font-size: 0.8rem; color: var(--gray-400); }
+        .footer-bottom a { color: var(--cush-orange); text-decoration: none; transition: color 0.3s; }
+        .footer-bottom a:hover { color: var(--cush-orange-light); }
 
         @keyframes fade-in-up { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
@@ -246,7 +410,13 @@
         @media (max-width: 1024px) { .contact-grid { grid-template-columns: 1fr; } }
         @media (max-width: 768px) {
             .hero { padding-top: 8rem; }
-            .form-panel { padding: 2rem; }
+            .form-panel, .sidebar-panel { padding: 1.75rem; }
+            .form-row { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+        }
+        @media (max-width: 480px) {
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
         }
     </style>
 </head>
@@ -263,84 +433,106 @@
 
     <!-- ═══ Hero ═══ -->
     <section class="section hero">
-        <p class="section-label" data-i18n="hero.label">Get in Touch</p>
-        <h1 class="section-title" data-i18n="hero.title">Let's Talk About Your Project</h1>
-        <p class="section-subtitle" data-i18n="hero.subtitle">Tell us what you're working on. We'll get back to you with honest thoughts and a clear path forward — no pressure, no pitch.</p>
+        <span class="hero-badge" data-i18n="hero.badge">Get in Touch</span>
+        <h1 data-i18n="hero.title">Let's Talk About Your Project</h1>
+        <p class="hero-subtitle" data-i18n="hero.subtitle">Tell us what you're working on. We'll get back to you with honest thoughts and a clear path forward — no pressure, no pitch.</p>
+        <div class="hero-ctas">
+            <a href="/consultation" class="hero-cta-primary" data-i18n="hero.ctaPrimary">
+                Book a Free Call
+            </a>
+            <a href="#contact-form" class="hero-cta-secondary" data-i18n="hero.ctaSecondary">
+                Send a Message
+            </a>
+        </div>
+        <p class="hero-reassurance" data-i18n="hero.reassurance">Response within 24 hours. Usually faster.</p>
     </section>
 
     <!-- ═══ Contact Grid ═══ -->
-    <section class="section contact-section">
+    <section class="section contact-section" id="contact-form">
         <div class="contact-grid reveal">
+            <!-- Form Panel -->
             <div class="form-panel">
                 <h2 data-i18n="form.title">Send a Message</h2>
                 <form id="contactForm">
-                    <div class="form-group">
-                        <label data-i18n-html="form.name">Name <span class="req">*</span></label>
-                        <input type="text" name="name" required autocomplete="name">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name" data-i18n-html="form.name">Name <span class="req">*</span></label>
+                            <input type="text" id="name" name="name" required autocomplete="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email" data-i18n-html="form.email">Email <span class="req">*</span></label>
+                            <input type="email" id="email" name="email" required autocomplete="email">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label data-i18n-html="form.email">Email <span class="req">*</span></label>
-                        <input type="email" name="email" required autocomplete="email">
+                        <label for="phone" data-i18n="form.phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" autocomplete="tel">
+                        <p class="form-hint" data-i18n="form.phoneHint">Optional — include country code for WhatsApp</p>
                     </div>
                     <div class="form-group">
-                        <label data-i18n="form.phone">Phone</label>
-                        <input type="tel" name="phone" autocomplete="tel">
+                        <label for="message" data-i18n-html="form.message">Message <span class="req">*</span></label>
+                        <textarea id="message" name="message" required rows="5" data-placeholder-i18n="form.messageHint" placeholder="What are you building? What does success look like for you?"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label data-i18n-html="form.message">Message <span class="req">*</span></label>
-                        <textarea name="message" required rows="5"></textarea>
+                    <div class="consent-row">
+                        <input type="checkbox" id="consent" name="consent" required>
+                        <label for="consent" data-i18n-html="form.consent">I agree to the Terms of Use and Privacy Policy <span class="req">*</span></label>
                     </div>
-                    <button type="submit" class="form-submit" data-i18n="form.submit">Send Message</button>
+                    <div id="formError" class="form-error"></div>
+                    <button type="submit" class="form-submit" id="submitBtn">
+                        <span id="submitText" data-i18n="form.submit">Send Message</span>
+                        <span class="spinner" id="submitSpinner"></span>
+                    </button>
                 </form>
                 <div class="form-success" id="formSuccess">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <div class="form-success-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </div>
                     <h3 data-i18n="form.successTitle">Message Sent</h3>
                     <p data-i18n="form.successDesc">We'll get back to you within 24 hours — usually faster.</p>
                 </div>
             </div>
 
-            <div class="sidebar">
-                <div class="sidebar-card">
-                    <div class="sidebar-card-icon">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                    </div>
-                    <h3 data-i18n="sidebar.email.title">Email</h3>
-                    <p data-i18n="sidebar.email.desc">Drop us a line anytime.</p>
-                    <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#105;&#110;&#102;&#111;&#64;&#99;&#117;&#115;&#104;&#108;&#97;&#98;&#115;&#46;&#97;&#105;" class="sidebar-link">
-                        <span>&#105;&#110;&#102;&#111;&#64;&#99;&#117;&#115;&#104;&#108;&#97;&#98;&#115;&#46;&#97;&#105;</span>
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+            <!-- Sidebar -->
+            <div class="sidebar-panel">
+                <h2 data-i18n="sidebar.title">Get in Touch</h2>
+                <p data-i18n="sidebar.subtitle">Drop us a message here or reach out on WhatsApp — whatever's easier.</p>
+
+                <div class="sidebar-buttons">
+                    <!-- Email button — href assembled by JS to hide from scrapers -->
+                    <a id="emailBtn" href="mailto:" data-u="info" data-d="cushlabs.ai" data-s="CushLabs%20Inquiry" class="sidebar-btn sidebar-btn-email">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        <span data-i18n="sidebar.emailBtn">Send Email</span>
+                    </a>
+                    <a href="https://api.whatsapp.com/send/?phone=523315590572&text=Hi%20Robert!%20I%20found%20you%20through%20voice.cushlabs.ai%20and%20had%20a%20quick%20question%20about%20a%20project.&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="sidebar-btn sidebar-btn-whatsapp">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        <span data-i18n="sidebar.whatsappBtn">Send WhatsApp</span>
                     </a>
                 </div>
 
-                <div class="sidebar-card">
-                    <div class="sidebar-card-icon">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                <div class="sidebar-info">
+                    <div class="sidebar-info-row">
+                        <span class="sidebar-info-label" data-i18n="sidebar.timezone">Time Zone</span>
+                        <span class="sidebar-info-value" data-i18n="sidebar.timezoneValue">Guadalajara, Mexico (UTC−6)</span>
                     </div>
-                    <h3>WhatsApp</h3>
-                    <p data-i18n="sidebar.whatsapp.desc">Message us directly — whatever's easier.</p>
-                    <a href="https://wa.me/523315590572" target="_blank" rel="noopener" class="sidebar-link">
-                        <span data-i18n="sidebar.whatsapp.link">Send WhatsApp</span>
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-                    </a>
+                    <div class="sidebar-info-row">
+                        <span class="sidebar-info-label" data-i18n="sidebar.emailLabel">Email</span>
+                        <span class="sidebar-info-value" id="emailDisplay"></span>
+                    </div>
                 </div>
 
-                <div class="sidebar-card">
-                    <div class="sidebar-card-icon">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
-                    </div>
-                    <h3 data-i18n="sidebar.call.title">Book a Free Call</h3>
-                    <p data-i18n="sidebar.call.desc">15-30 minute Google Meet. No pitch — just a real conversation about what you're building.</p>
-                    <a href="https://www.cushlabs.ai/consultation" target="_blank" rel="noopener" class="sidebar-link">
-                        <span data-i18n="sidebar.call.link">Schedule Now</span>
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-                    </a>
-                </div>
+                <hr class="sidebar-divider">
+                <p class="sidebar-cta-label" data-i18n="sidebar.talkLive">Prefer to talk live?</p>
+                <a href="/consultation" class="sidebar-cta-link" data-i18n="sidebar.consultation">
+                    Or book a free call
+                </a>
             </div>
         </div>
     </section>
 
     <!-- ═══ CTA ═══ -->
-    <section class="section cta">
+    <section class="cta">
         <div class="reveal">
             <h2 data-i18n="cta.title">Or Talk to Clara</h2>
             <p data-i18n="cta.subtitle">Want to see what an AI voice agent can do? Have a real conversation with Clara, our live AI assistant, on the homepage.</p>
@@ -379,9 +571,9 @@
                 <div class="footer-col">
                     <h4 class="footer-heading" data-i18n="footer.connect">Connect</h4>
                     <ul class="footer-links">
-                        <li><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#105;&#110;&#102;&#111;&#64;&#99;&#117;&#115;&#104;&#108;&#97;&#98;&#115;&#46;&#97;&#105;">&#105;&#110;&#102;&#111;&#64;&#99;&#117;&#115;&#104;&#108;&#97;&#98;&#115;&#46;&#97;&#105;</a></li>
+                        <li><a id="footerEmail" href="mailto:">info@cushlabs.ai</a></li>
                         <li><a href="https://wa.me/523315590572" target="_blank" rel="noopener">WhatsApp</a></li>
-                        <li><a href="https://cushlabs.ai/consultation" target="_blank" rel="noopener" data-i18n="footer.call">Book a Free Call</a></li>
+                        <li><a href="/consultation" data-i18n="footer.call">Book a Free Call</a></li>
                     </ul>
                 </div>
             </div>
@@ -392,24 +584,87 @@
         </div>
     </footer>
 
+    <!-- Email anti-scraping: assemble from data attributes -->
     <script>
-    document.getElementById('contactForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        var btn = this.querySelector('.form-submit');
-        btn.disabled = true;
-        btn.textContent = '...';
-        try {
-            var res = await fetch('/api/contact', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name: this.name.value, email: this.email.value, phone: this.phone.value, message: this.message.value }),
-            });
-            if (res.ok) { this.style.display = 'none'; document.getElementById('formSuccess').classList.add('visible'); }
-            else throw new Error('fail');
-        } catch (err) { btn.disabled = false; btn.textContent = 'Send Message'; alert('Something went wrong. Please try email or WhatsApp instead.'); }
+    document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('emailBtn');
+        if (btn) {
+            var u = btn.getAttribute('data-u');
+            var d = btn.getAttribute('data-d');
+            var s = btn.getAttribute('data-s');
+            var addr = u + '@' + d;
+            btn.href = 'mailto:' + addr + '?subject=' + s;
+            var display = document.getElementById('emailDisplay');
+            if (display) display.textContent = addr;
+            var footerLink = document.getElementById('footerEmail');
+            if (footerLink) { footerLink.href = 'mailto:' + addr; footerLink.textContent = addr; }
+        }
     });
     </script>
 
+    <!-- Contact form submission via Formspree -->
+    <script>
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var btn = document.getElementById('submitBtn');
+        var submitText = document.getElementById('submitText');
+        var spinner = document.getElementById('submitSpinner');
+        var errorEl = document.getElementById('formError');
+        var successEl = document.getElementById('formSuccess');
+        var lang = document.documentElement.lang || 'en';
+
+        errorEl.classList.remove('visible');
+
+        var name = document.getElementById('name').value.trim();
+        var email = document.getElementById('email').value.trim();
+        var phone = document.getElementById('phone').value.trim();
+        var message = document.getElementById('message').value.trim();
+        var consent = document.getElementById('consent').checked;
+
+        if (!name || !email || !message || !consent) {
+            errorEl.textContent = lang === 'es'
+                ? 'Completa los campos requeridos y acepta los términos.'
+                : 'Please complete the required fields and accept the terms.';
+            errorEl.classList.add('visible');
+            return;
+        }
+
+        btn.disabled = true;
+        submitText.textContent = lang === 'es' ? 'Enviando...' : 'Sending...';
+        spinner.style.display = 'inline-block';
+
+        try {
+            var res = await fetch('https://formspree.io/f/mlgwnqky', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    _replyto: email,
+                    phone: phone || undefined,
+                    message: message,
+                    _subject: 'New contact from ' + name + ' — voice.cushlabs.ai',
+                    _language: lang
+                })
+            });
+            var data = await res.json();
+            if (!res.ok) throw new Error(data.errors ? data.errors.map(function(e) { return e.message; }).join(', ') : 'Unknown error');
+
+            this.style.display = 'none';
+            successEl.classList.add('visible');
+        } catch (err) {
+            errorEl.textContent = lang === 'es'
+                ? 'Hubo un error al enviar. Intenta de nuevo o escríbenos por WhatsApp.'
+                : 'Something went wrong. Please try again or reach out via WhatsApp.';
+            errorEl.classList.add('visible');
+            btn.disabled = false;
+            submitText.textContent = lang === 'es' ? 'Enviar Mensaje' : 'Send Message';
+            spinner.style.display = 'none';
+        }
+    });
+    </script>
+
+    <!-- Scroll reveal -->
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         var reveals = document.querySelectorAll(".reveal");
@@ -421,23 +676,42 @@
     });
     </script>
 
+    <!-- i18n: Bilingual EN/ES -->
     <script>
     (function () {
         var translations = {
             en: {
                 "nav.demos": "Demos", "nav.portfolio": "Portfolio", "nav.contact": "Contact",
-                "hero.label": "Get in Touch", "hero.title": "Let's Talk About Your Project",
-                "hero.subtitle": "Tell us what you're working on. We'll get back to you with honest thoughts and a clear path forward \u2014 no pressure, no pitch.",
-                "form.title": "Send a Message", "form.name": 'Name <span class="req">*</span>', "form.email": 'Email <span class="req">*</span>',
-                "form.phone": "Phone", "form.message": 'Message <span class="req">*</span>', "form.submit": "Send Message",
-                "form.successTitle": "Message Sent", "form.successDesc": "We'll get back to you within 24 hours \u2014 usually faster.",
-                "sidebar.email.title": "Email", "sidebar.email.desc": "Drop us a line anytime.",
-                "sidebar.whatsapp.desc": "Message us directly \u2014 whatever's easier.", "sidebar.whatsapp.link": "Send WhatsApp",
-                "sidebar.call.title": "Book a Free Call", "sidebar.call.desc": "15-30 minute Google Meet. No pitch \u2014 just a real conversation about what you're building.",
-                "sidebar.call.link": "Schedule Now",
-                "cta.title": "Or Talk to Clara", "cta.subtitle": "Want to see what an AI voice agent can do? Have a real conversation with Clara, our live AI assistant, on the homepage.",
+                "hero.badge": "Get in Touch",
+                "hero.title": "Let's Talk About Your Project",
+                "hero.subtitle": "Tell us what you're working on. We'll get back to you with honest thoughts and a clear path forward — no pressure, no pitch.",
+                "hero.ctaPrimary": "Book a Free Call",
+                "hero.ctaSecondary": "Send a Message",
+                "hero.reassurance": "Response within 24 hours. Usually faster.",
+                "form.title": "Send a Message",
+                "form.name": 'Name <span class="req">*</span>',
+                "form.email": 'Email <span class="req">*</span>',
+                "form.phone": "Phone",
+                "form.phoneHint": "Optional — include country code for WhatsApp",
+                "form.message": 'Message <span class="req">*</span>',
+                "form.messageHint": "What are you building? What does success look like for you?",
+                "form.consent": 'I agree to the Terms of Use and Privacy Policy <span class="req">*</span>',
+                "form.submit": "Send Message",
+                "form.successTitle": "Message Sent",
+                "form.successDesc": "We'll get back to you within 24 hours — usually faster.",
+                "sidebar.title": "Get in Touch",
+                "sidebar.subtitle": "Drop us a message here or reach out on WhatsApp — whatever's easier.",
+                "sidebar.emailBtn": "Send Email",
+                "sidebar.whatsappBtn": "Send WhatsApp",
+                "sidebar.timezone": "Time Zone",
+                "sidebar.timezoneValue": "Guadalajara, Mexico (UTC−6)",
+                "sidebar.emailLabel": "Email",
+                "sidebar.talkLive": "Prefer to talk live?",
+                "sidebar.consultation": "Or book a free call",
+                "cta.title": "Or Talk to Clara",
+                "cta.subtitle": "Want to see what an AI voice agent can do? Have a real conversation with Clara, our live AI assistant, on the homepage.",
                 "cta.btn": "Talk to Clara",
-                "footer.tagline": "AI voice agents that qualify leads, book appointments, and handle customer calls \u2014 24/7.",
+                "footer.tagline": "AI voice agents that qualify leads, book appointments, and handle customer calls — 24/7.",
                 "footer.nav": "Navigation",
                 "footer.demos": "Live Demos",
                 "footer.connect": "Connect",
@@ -446,19 +720,37 @@
             },
             es: {
                 "nav.demos": "Demos", "nav.portfolio": "Portafolio", "nav.contact": "Contacto",
-                "hero.label": "Cont\u00e1ctanos", "hero.title": "Hablemos de Tu Proyecto",
-                "hero.subtitle": "Cu\u00e9ntanos en qu\u00e9 est\u00e1s trabajando. Te responderemos con ideas honestas y un camino claro \u2014 sin presi\u00f3n, sin ventas.",
-                "form.title": "Env\u00eda un Mensaje", "form.name": 'Nombre <span class="req">*</span>', "form.email": 'Correo <span class="req">*</span>',
-                "form.phone": "Tel\u00e9fono", "form.message": 'Mensaje <span class="req">*</span>', "form.submit": "Enviar Mensaje",
-                "form.successTitle": "Mensaje Enviado", "form.successDesc": "Te responderemos en menos de 24 horas \u2014 normalmente m\u00e1s r\u00e1pido.",
-                "sidebar.email.title": "Correo", "sidebar.email.desc": "Escr\u00edbenos cuando quieras.",
-                "sidebar.whatsapp.desc": "Escr\u00edbenos directamente \u2014 lo que sea m\u00e1s f\u00e1cil.", "sidebar.whatsapp.link": "Enviar WhatsApp",
-                "sidebar.call.title": "Agenda una Llamada Gratis", "sidebar.call.desc": "15-30 minutos por Google Meet. Sin ventas \u2014 solo una conversaci\u00f3n real.",
-                "sidebar.call.link": "Agendar Ahora",
-                "cta.title": "O Habla con Clara", "cta.subtitle": "\u00bfQuieres ver lo que un agente de voz IA puede hacer? Habla con Clara, nuestra asistente en vivo.",
+                "hero.badge": "Contáctanos",
+                "hero.title": "Hablemos de Tu Proyecto",
+                "hero.subtitle": "Cuéntanos en qué estás trabajando. Te responderemos con ideas honestas y un camino claro — sin presión, sin ventas.",
+                "hero.ctaPrimary": "Agendar Llamada Gratis",
+                "hero.ctaSecondary": "Enviar Mensaje",
+                "hero.reassurance": "Respuesta en 24 horas. Usualmente más rápido.",
+                "form.title": "Envía un Mensaje",
+                "form.name": 'Nombre <span class="req">*</span>',
+                "form.email": 'Correo <span class="req">*</span>',
+                "form.phone": "Teléfono",
+                "form.phoneHint": "Opcional — incluye código de país para WhatsApp",
+                "form.message": 'Mensaje <span class="req">*</span>',
+                "form.messageHint": "¿Qué estás construyendo? ¿Cómo se ve el éxito para ti?",
+                "form.consent": 'Acepto los Términos de Uso y la Política de Privacidad <span class="req">*</span>',
+                "form.submit": "Enviar Mensaje",
+                "form.successTitle": "Mensaje Enviado",
+                "form.successDesc": "Te responderemos en menos de 24 horas — normalmente más rápido.",
+                "sidebar.title": "Escríbenos",
+                "sidebar.subtitle": "Mándanos un mensaje aquí o por WhatsApp — lo que te sea más fácil.",
+                "sidebar.emailBtn": "Enviar Email",
+                "sidebar.whatsappBtn": "Enviar WhatsApp",
+                "sidebar.timezone": "Zona Horaria",
+                "sidebar.timezoneValue": "Guadalajara, México (UTC−6)",
+                "sidebar.emailLabel": "Email",
+                "sidebar.talkLive": "¿Prefieres hablar en vivo?",
+                "sidebar.consultation": "O agenda una llamada gratis",
+                "cta.title": "O Habla con Clara",
+                "cta.subtitle": "¿Quieres ver lo que un agente de voz IA puede hacer? Habla con Clara, nuestra asistente en vivo.",
                 "cta.btn": "Hablar con Clara",
-                "footer.tagline": "Agentes de voz con IA que califican prospectos, agendan citas y atienden llamadas \u2014 24/7.",
-                "footer.nav": "Navegaci\u00f3n",
+                "footer.tagline": "Agentes de voz con IA que califican prospectos, agendan citas y atienden llamadas — 24/7.",
+                "footer.nav": "Navegación",
                 "footer.demos": "Demos en Vivo",
                 "footer.connect": "Conectar",
                 "footer.call": "Reservar Llamada Gratis",
@@ -471,6 +763,17 @@
             currentLang = lang; document.documentElement.lang = lang;
             document.querySelectorAll("[data-i18n]").forEach(function(el) { var v = t(el.getAttribute("data-i18n")); if (v) el.textContent = v; });
             document.querySelectorAll("[data-i18n-html]").forEach(function(el) { var v = t(el.getAttribute("data-i18n-html")); if (v) el.innerHTML = v; });
+            // Update textarea placeholder
+            var msgTextarea = document.getElementById('message');
+            if (msgTextarea) msgTextarea.placeholder = t('form.messageHint');
+            // Update WhatsApp link for language
+            var waLink = document.querySelector('.sidebar-btn-whatsapp');
+            if (waLink) {
+                var waMsg = lang === 'es'
+                    ? 'Hola Robert! Te encontré en voice.cushlabs.ai y tengo una pregunta sobre un proyecto.'
+                    : 'Hi Robert! I found you through voice.cushlabs.ai and had a quick question about a project.';
+                waLink.href = 'https://api.whatsapp.com/send/?phone=523315590572&text=' + encodeURIComponent(waMsg) + '&type=phone_number&app_absent=0';
+            }
             if (window.cushlabsNav) window.cushlabsNav.updateLanguage(lang);
             localStorage.setItem("cushlabs-lang", lang);
         }
