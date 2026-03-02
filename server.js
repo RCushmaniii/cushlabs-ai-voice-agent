@@ -43,6 +43,7 @@ const assistants = {
     coaching: process.env.VAPI_ASSISTANT_ID_COACHING,
     medspa: process.env.VAPI_ASSISTANT_ID_MEDSPA,
     trades: process.env.VAPI_ASSISTANT_ID_TRADES,
+    realestate: process.env.VAPI_ASSISTANT_ID_REALESTATE,
 };
 
 app.get('/api/config', (req, res) => {
@@ -84,6 +85,11 @@ app.get('/trades', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'trades.html'));
 });
 
+// Serve Real Estate demo page
+app.get('/realestate', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'realestate.html'));
+});
+
 // Contact form endpoint
 app.post('/api/contact', async (req, res) => {
     const { name, email, phone, message } = req.body;
@@ -114,6 +120,88 @@ app.post('/api/contact', async (req, res) => {
     } catch (err) {
         console.error('[Contact] Failed to save message:', err.message);
         res.json({ ok: true }); // Still return success — message is logged
+    }
+});
+
+// --- Outbound Call Endpoint (Real Estate) ---
+const outboundRateLimit = new Map(); // IP -> last call timestamp
+
+app.post('/api/outbound-call', async (req, res) => {
+    const { phoneNumber, propertyId } = req.body;
+
+    // Validate env vars
+    const vapiKey = process.env.VAPI_API_PRIVATE_KEY;
+    const phoneNumberId = process.env.VAPI_PHONE_NUMBER_ID;
+    const assistantId = process.env.VAPI_ASSISTANT_ID_REALESTATE;
+
+    if (!vapiKey || !phoneNumberId || !assistantId) {
+        return res.status(503).json({
+            error: 'Outbound calling is not configured. Missing VAPI_API_PRIVATE_KEY, VAPI_PHONE_NUMBER_ID, or VAPI_ASSISTANT_ID_REALESTATE.'
+        });
+    }
+
+    // Validate phone number (E.164 US format)
+    if (!phoneNumber || !/^\+1\d{10}$/.test(phoneNumber)) {
+        return res.status(400).json({
+            error: 'Invalid phone number. Must be US E.164 format: +1XXXXXXXXXX'
+        });
+    }
+
+    // Rate limit: 1 call per 30s per IP
+    const clientIp = req.ip || req.connection.remoteAddress;
+    const lastCall = outboundRateLimit.get(clientIp);
+    const now = Date.now();
+    if (lastCall && now - lastCall < 30000) {
+        const waitSec = Math.ceil((30000 - (now - lastCall)) / 1000);
+        return res.status(429).json({
+            error: `Rate limited. Please wait ${waitSec} seconds before placing another call.`
+        });
+    }
+
+    try {
+        const callBody = {
+            phoneNumberId,
+            assistantId,
+            customer: { number: phoneNumber },
+            metadata: { source: 'realestate-demo', propertyId: propertyId || null },
+        };
+
+        console.log(`[Outbound] Initiating call to ${phoneNumber}`, { propertyId });
+
+        const vapiRes = await fetch('https://api.vapi.ai/call', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${vapiKey}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(callBody),
+        });
+
+        const data = await vapiRes.json();
+
+        if (!vapiRes.ok) {
+            console.error('[Outbound] Vapi API error:', JSON.stringify(data));
+            return res.status(vapiRes.status >= 500 ? 502 : 400).json({
+                error: data.message || 'Failed to initiate outbound call.',
+            });
+        }
+
+        // Record successful call for rate limiting
+        outboundRateLimit.set(clientIp, now);
+
+        // Clean up old rate limit entries every 100 calls
+        if (outboundRateLimit.size > 100) {
+            for (const [ip, ts] of outboundRateLimit) {
+                if (now - ts > 60000) outboundRateLimit.delete(ip);
+            }
+        }
+
+        console.log(`[Outbound] Call initiated: ${data.id} → ${phoneNumber}`);
+        return res.json({ callId: data.id, status: data.status || 'queued' });
+
+    } catch (err) {
+        console.error('[Outbound] Error:', err.message);
+        return res.status(500).json({ error: 'Internal server error initiating call.' });
     }
 });
 

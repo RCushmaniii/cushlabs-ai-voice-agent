@@ -15,7 +15,7 @@
     var page = root.getAttribute('data-page') || '';
 
     // Pages that show a language toggle
-    var i18nPages = { index: true, trades: true, contact: true };
+    var i18nPages = { index: true, trades: true, contact: true, realestate: true };
     var showLang = !!i18nPages[page];
 
     // Portfolio shows theme toggle instead
@@ -27,6 +27,7 @@
         'nyc-coaching': 'demos',
         medspa: 'demos',
         trades: 'demos',
+        realestate: 'demos',
         portfolio: 'portfolio',
         contact: 'contact'
     };
@@ -73,6 +74,7 @@
         '<li><a href="/nyc-coaching">James &mdash; Exec Coaching</a></li>' +
         '<li><a href="/medspa">Sophia &mdash; Med Spa</a></li>' +
         '<li><a href="/trades">Mike &mdash; Home Services</a></li>' +
+        '<li><a href="/realestate">David &mdash; Real Estate</a></li>' +
         '</ul></li>' +
         '<li><a href="/portfolio"' + cls('portfolio') + '>' + t('portfolio') + '</a></li>' +
         '<li><a href="/contact"' + cls('contact') + '>' + t('contact') + '</a></li>' +

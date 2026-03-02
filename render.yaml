@@ -18,6 +18,12 @@ services:
         sync: false
       - key: VAPI_ASSISTANT_ID_MEDSPA
         sync: false
+      - key: VAPI_ASSISTANT_ID_TRADES
+        sync: false
+      - key: VAPI_ASSISTANT_ID_REALESTATE
+        sync: false
+      - key: VAPI_PHONE_NUMBER_ID
+        sync: false
       - key: GROQ_API_KEY
         sync: false
       - key: CARTESIA_API_KEY

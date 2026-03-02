@@ -1,0 +1,107 @@
+{
+  "name": "David — Real Estate Setter",
+  "firstMessage": "Hi, this is David from Prestige Realty Group. I'm reaching out because you expressed interest in real estate in New Jersey. Is now a good time to chat for a minute?",
+  "voicemailMessage": "Hi, this is David from Prestige Realty Group. I was calling about some properties you might be interested in. Feel free to call us back anytime, or visit our website. Thanks!",
+  "endCallMessage": "Thanks so much for your time. We'll be in touch soon. Have a great day!",
+  "endCallPhrases": ["goodbye", "talk to you soon", "that's all", "thanks bye", "have a good day", "take care", "bye bye", "not interested"],
+  "voice": {
+    "provider": "cartesia",
+    "voiceId": "820a3788-2b37-4d21-847a-b65d8a68c99a",
+    "model": "sonic-3"
+  },
+  "model": {
+    "model": "claude-sonnet-4-6",
+    "provider": "anthropic",
+    "temperature": 0.4,
+    "maxTokens": 300
+  },
+  "transcriber": {
+    "model": "nova-3",
+    "language": "en",
+    "provider": "deepgram",
+    "endpointing": 255
+  },
+  "startSpeakingPlan": {
+    "waitSeconds": 0.4,
+    "smartEndpointingEnabled": "livekit"
+  },
+  "serverUrl": "https://voice.cushlabs.ai/api/webhook",
+  "silenceTimeoutSeconds": 30,
+  "maxDurationSeconds": 600,
+  "backgroundDenoisingEnabled": true,
+  "metadata": {
+    "vertical": "real-estate",
+    "demo": true,
+    "version": "1.0",
+    "callDirection": "outbound"
+  },
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "lookup_property",
+        "description": "Look up property details from the MLS database by property ID or address. Call this when discussing a specific property.",
+        "parameters": {
+          "type": "object",
+          "required": [],
+          "properties": {
+            "propertyId": { "type": "string", "description": "MLS property ID (e.g., MLS-2024-001)" },
+            "address": { "type": "string", "description": "Property address or partial address to search for" }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "qualify_buyer",
+        "description": "Save buyer qualification data after gathering their requirements through conversation.",
+        "parameters": {
+          "type": "object",
+          "required": ["buyer_name"],
+          "properties": {
+            "buyer_name": { "type": "string", "description": "Full name of the buyer" },
+            "budget_range": { "type": "string", "description": "Budget range (e.g., '$500K-$700K')" },
+            "timeline": { "type": "string", "description": "Purchase timeline (e.g., 'next 3 months')" },
+            "pre_approved": { "type": "string", "description": "Mortgage pre-approval status" },
+            "preferred_areas": { "type": "string", "description": "Preferred towns or areas in NJ" },
+            "beds_baths": { "type": "string", "description": "Bedroom and bathroom requirements" },
+            "contact_info": { "type": "string", "description": "Phone number or email if provided" }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "check_tour_availability",
+        "description": "Check available time slots for scheduling a property tour.",
+        "parameters": {
+          "type": "object",
+          "required": [],
+          "properties": {
+            "timezone": { "type": "string", "description": "Caller timezone, default America/New_York" }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "book_tour",
+        "description": "Book a property tour on the calendar. Requires buyer name, email, date/time, and property details.",
+        "parameters": {
+          "type": "object",
+          "required": ["buyer_name", "buyer_email", "date_time"],
+          "properties": {
+            "buyer_name": { "type": "string", "description": "Full name of the buyer" },
+            "buyer_email": { "type": "string", "description": "Email for the tour confirmation" },
+            "date_time": { "type": "string", "description": "Selected date and time in ISO 8601 format" },
+            "property_address": { "type": "string", "description": "Address of the property to tour" },
+            "notes": { "type": "string", "description": "Additional notes about the tour or buyer preferences" }
+          }
+        }
+      }
+    }
+  ]
+}
