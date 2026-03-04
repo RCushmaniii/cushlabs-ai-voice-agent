@@ -10,15 +10,21 @@ const mockMLS = require(path.join(__dirname, '..', 'data', 'mock-mls.json'));
 const router = express.Router();
 
 // Verify Vapi webhook secret if configured
+// Supports both: Authorization: Bearer <token> (modern) and x-vapi-secret header (legacy)
 router.use((req, res, next) => {
     const secret = process.env.VAPI_WEBHOOK_SECRET;
     if (!secret) return next(); // No secret configured — skip verification
-    const incoming = req.headers['x-vapi-secret'];
-    if (incoming !== secret) {
-        console.warn('[Vapi Webhook] Unauthorized request — invalid or missing x-vapi-secret header');
-        return res.status(401).json({ error: 'Unauthorized' });
+
+    const authHeader = req.headers['authorization'];
+    const bearerToken = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : null;
+    const legacyToken = req.headers['x-vapi-secret'];
+
+    if (bearerToken === secret || legacyToken === secret) {
+        return next();
     }
-    next();
+
+    console.warn('[Vapi Webhook] Unauthorized request — invalid or missing secret');
+    return res.status(401).json({ error: 'Unauthorized' });
 });
 
 router.post('/', async (req, res) => {
