@@ -9,6 +9,18 @@ const mockMLS = require(path.join(__dirname, '..', 'data', 'mock-mls.json'));
 
 const router = express.Router();
 
+// Verify Vapi webhook secret if configured
+router.use((req, res, next) => {
+    const secret = process.env.VAPI_WEBHOOK_SECRET;
+    if (!secret) return next(); // No secret configured — skip verification
+    const incoming = req.headers['x-vapi-secret'];
+    if (incoming !== secret) {
+        console.warn('[Vapi Webhook] Unauthorized request — invalid or missing x-vapi-secret header');
+        return res.status(401).json({ error: 'Unauthorized' });
+    }
+    next();
+});
+
 router.post('/', async (req, res) => {
     try {
         const { message } = req.body;

@@ -1,12 +1,27 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const compression = require('compression');
 const path = require('path');
 const webhookRouter = require('./routes/webhook');
 const { initDb } = require('./services/db');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// --- Security Headers ---
+app.use((req, res, next) => {
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-Frame-Options', 'DENY');
+    res.setHeader('Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload');
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    res.setHeader('Permissions-Policy', 'camera=(), geolocation=()');
+    res.setHeader('X-XSS-Protection', '0'); // Disabled per modern best practice (CSP preferred)
+    next();
+});
+
+// --- Gzip Compression ---
+app.use(compression());
 
 // CORS — restrict to production domain + local dev
 const allowedOrigins = [
@@ -23,10 +38,21 @@ app.use(cors({
         }
     }
 }));
-app.use(express.json());
 
-// Serve static frontend files
-app.use(express.static(path.join(__dirname, 'public')));
+// Body parser with size limit (100KB — webhooks can include transcripts)
+app.use(express.json({ limit: '100kb' }));
+
+// Serve static frontend files with caching
+app.use(express.static(path.join(__dirname, 'public'), {
+    maxAge: '1d',            // HTML/CSS/JS: 1 day cache
+    etag: true,
+    setHeaders: (res, filePath) => {
+        // Images and fonts: 1 year immutable cache
+        if (/\.(png|jpg|jpeg|webp|svg|ico|woff2?|ttf|eot)$/i.test(filePath)) {
+            res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+        }
+    },
+}));
 
 // Health check endpoints — /healthz for Render's health check path, /api/health for internal use
 app.get('/healthz', (req, res) => {
@@ -90,32 +116,62 @@ app.get('/realestate', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'realestate.html'));
 });
 
+// --- Simple rate limiter factory ---
+function createRateLimiter(windowMs, maxPerWindow) {
+    const hits = new Map();
+    // Periodic cleanup every 60s to prevent memory leak
+    setInterval(() => {
+        const cutoff = Date.now() - windowMs;
+        for (const [key, timestamps] of hits) {
+            const filtered = timestamps.filter(t => t > cutoff);
+            if (filtered.length === 0) hits.delete(key);
+            else hits.set(key, filtered);
+        }
+    }, 60000).unref();
+
+    return (req, res, next) => {
+        const ip = req.ip || req.connection?.remoteAddress || 'unknown';
+        const now = Date.now();
+        const cutoff = now - windowMs;
+        const timestamps = (hits.get(ip) || []).filter(t => t > cutoff);
+        if (timestamps.length >= maxPerWindow) {
+            return res.status(429).json({ error: 'Too many requests. Please try again later.' });
+        }
+        timestamps.push(now);
+        hits.set(ip, timestamps);
+        next();
+    };
+}
+
+// Rate limit: 5 contact form submissions per 15 min per IP
+const contactLimiter = createRateLimiter(15 * 60 * 1000, 5);
+
 // Contact form endpoint
-app.post('/api/contact', async (req, res) => {
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+app.post('/api/contact', contactLimiter, async (req, res) => {
     const { name, email, phone, message } = req.body;
     if (!name || !email || !message) {
         return res.status(400).json({ error: 'Name, email, and message are required.' });
     }
+    if (!EMAIL_RE.test(email)) {
+        return res.status(400).json({ error: 'Invalid email address.' });
+    }
+    // Truncate inputs to reasonable lengths
+    const safeName = String(name).slice(0, 200);
+    const safeEmail = String(email).slice(0, 254);
+    const safePhone = phone ? String(phone).slice(0, 30) : null;
+    const safeMessage = String(message).slice(0, 5000);
+
     try {
         if (process.env.DATABASE_URL) {
             const { neon } = require('@neondatabase/serverless');
             const sql = neon(process.env.DATABASE_URL);
             await sql`
-                CREATE TABLE IF NOT EXISTS contact_messages (
-                    id SERIAL PRIMARY KEY,
-                    name TEXT NOT NULL,
-                    email TEXT NOT NULL,
-                    phone TEXT,
-                    message TEXT NOT NULL,
-                    created_at TIMESTAMPTZ DEFAULT NOW()
-                )
-            `;
-            await sql`
                 INSERT INTO contact_messages (name, email, phone, message)
-                VALUES (${name}, ${email}, ${phone || null}, ${message})
+                VALUES (${safeName}, ${safeEmail}, ${safePhone}, ${safeMessage})
             `;
         }
-        console.log(`[Contact] Message from ${name} <${email}>: ${message.substring(0, 100)}`);
+        console.log(`[Contact] Message from ${safeName} <${safeEmail}>: ${safeMessage.substring(0, 100)}`);
         res.json({ ok: true });
     } catch (err) {
         console.error('[Contact] Failed to save message:', err.message);
@@ -124,9 +180,10 @@ app.post('/api/contact', async (req, res) => {
 });
 
 // --- Outbound Call Endpoint (Real Estate) ---
-const outboundRateLimit = new Map(); // IP -> last call timestamp
+// Rate limit: 1 call per 30s per IP
+const outboundLimiter = createRateLimiter(30000, 1);
 
-app.post('/api/outbound-call', async (req, res) => {
+app.post('/api/outbound-call', outboundLimiter, async (req, res) => {
     const { phoneNumber, propertyId } = req.body;
 
     // Validate env vars
@@ -144,17 +201,6 @@ app.post('/api/outbound-call', async (req, res) => {
     if (!phoneNumber || !/^\+1\d{10}$/.test(phoneNumber)) {
         return res.status(400).json({
             error: 'Invalid phone number. Must be US E.164 format: +1XXXXXXXXXX'
-        });
-    }
-
-    // Rate limit: 1 call per 30s per IP
-    const clientIp = req.ip || req.connection.remoteAddress;
-    const lastCall = outboundRateLimit.get(clientIp);
-    const now = Date.now();
-    if (lastCall && now - lastCall < 30000) {
-        const waitSec = Math.ceil((30000 - (now - lastCall)) / 1000);
-        return res.status(429).json({
-            error: `Rate limited. Please wait ${waitSec} seconds before placing another call.`
         });
     }
 
@@ -184,16 +230,6 @@ app.post('/api/outbound-call', async (req, res) => {
             return res.status(vapiRes.status >= 500 ? 502 : 400).json({
                 error: data.message || 'Failed to initiate outbound call.',
             });
-        }
-
-        // Record successful call for rate limiting
-        outboundRateLimit.set(clientIp, now);
-
-        // Clean up old rate limit entries every 100 calls
-        if (outboundRateLimit.size > 100) {
-            for (const [ip, ts] of outboundRateLimit) {
-                if (now - ts > 60000) outboundRateLimit.delete(ip);
-            }
         }
 
         console.log(`[Outbound] Call initiated: ${data.id} → ${phoneNumber}`);
