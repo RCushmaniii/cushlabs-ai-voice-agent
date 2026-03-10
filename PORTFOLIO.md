@@ -71,7 +71,6 @@ tags:
   - "outbound-calling"
   - "real-estate"
   - "home-services"
-  - "webhooks"
 date_completed: "2026-03"
 ---
 
