@@ -3,10 +3,10 @@
  * Uses OAuth2 refresh token flow (same credentials as cushlabs booking system).
  */
 
-const TIMEZONE = 'America/New_York';
+const TIMEZONE = 'America/Mexico_City';
 const SESSION_DURATION_MIN = 30;
 const MIN_ADVANCE_MIN = 210; // 3.5 hours minimum advance booking
-const BUSINESS_HOURS = { start: 9, end: 17 }; // 9 AM - 5 PM ET, weekdays only
+const BUSINESS_HOURS = { start: 9, end: 17 }; // 9 AM - 5 PM CST, weekdays only
 const COACH_EMAIL = process.env.COACH_EMAIL || 'rcushmaniii@gmail.com';
 
 // Token cache
@@ -74,6 +74,13 @@ async function getGoogleSlots(accessToken, calendarId, timezone) {
     const now = new Date();
     const minBookingTime = new Date(now.getTime() + MIN_ADVANCE_MIN * 60 * 1000);
 
+    // Dual-calendar: check both work calendar and personal calendar for conflicts
+    const personalCalendar = process.env.PERSONAL_CALENDAR_ID || calendarId;
+    const calendarItems = [{ id: calendarId }];
+    if (personalCalendar !== calendarId) {
+        calendarItems.push({ id: personalCalendar });
+    }
+
     let daysFound = 0;
     let dayOffset = 0;
 
@@ -89,7 +96,7 @@ async function getGoogleSlots(accessToken, calendarId, timezone) {
         const timeMin = `${dateStr}T${pad(BUSINESS_HOURS.start)}:00:00`;
         const timeMax = `${dateStr}T${pad(BUSINESS_HOURS.end)}:00:00`;
 
-        // Query FreeBusy
+        // Query FreeBusy for both calendars
         const res = await fetch('https://www.googleapis.com/calendar/v3/freeBusy', {
             method: 'POST',
             headers: {
@@ -97,17 +104,22 @@ async function getGoogleSlots(accessToken, calendarId, timezone) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                timeMin: new Date(`${timeMin}-05:00`).toISOString(),
-                timeMax: new Date(`${timeMax}-05:00`).toISOString(),
+                timeMin: new Date(`${timeMin}-06:00`).toISOString(),
+                timeMax: new Date(`${timeMax}-06:00`).toISOString(),
                 timeZone: timezone,
-                items: [{ id: calendarId }],
+                items: calendarItems,
             }),
         });
 
         if (!res.ok) throw new Error(`FreeBusy API: ${res.status}`);
         const data = await res.json();
 
-        const busyPeriods = (data?.calendars?.[calendarId]?.busy || []).map(b => ({
+        // Combine busy periods from all calendars
+        const workBusy = data?.calendars?.[calendarId]?.busy || [];
+        const personalBusy = personalCalendar !== calendarId
+            ? (data?.calendars?.[personalCalendar]?.busy || [])
+            : [];
+        const busyPeriods = [...workBusy, ...personalBusy].map(b => ({
             start: new Date(b.start),
             end: new Date(b.end),
         }));
@@ -116,7 +128,7 @@ async function getGoogleSlots(accessToken, calendarId, timezone) {
         const daySlots = [];
         for (let hour = BUSINESS_HOURS.start; hour < BUSINESS_HOURS.end; hour++) {
             for (let min = 0; min < 60; min += 30) {
-                const slotStart = new Date(`${dateStr}T${pad(hour)}:${pad(min)}:00-05:00`);
+                const slotStart = new Date(`${dateStr}T${pad(hour)}:${pad(min)}:00-06:00`);
                 const slotEnd = new Date(slotStart.getTime() + SESSION_DURATION_MIN * 60 * 1000);
 
                 // Skip past slots and slots too soon
@@ -217,8 +229,8 @@ async function bookAppointment({ caller_name, caller_email, date_time, notes }) 
         const accessToken = await getAccessToken();
 
         const eventBody = {
-            summary: `Discovery Session: ${caller_name} — NYC Executive Coaching`,
-            description: `Executive Coaching Discovery Session\nName: ${caller_name}\nEmail: ${caller_email}${notes ? `\nNotes: ${notes}` : ''}`,
+            summary: `AI Strategy Consultation — CushLabs: ${caller_name}`,
+            description: `AI Strategy Consultation — CushLabs.ai\nName: ${caller_name}\nEmail: ${caller_email}${notes ? `\nNotes: ${notes}` : ''}`,
             start: { dateTime: date_time, timeZone: TIMEZONE },
             end: { dateTime: endDate.toISOString(), timeZone: TIMEZONE },
             attendees: [
@@ -227,7 +239,7 @@ async function bookAppointment({ caller_name, caller_email, date_time, notes }) 
             ],
             conferenceData: {
                 createRequest: {
-                    requestId: `coaching-${Date.now()}-${Math.random().toString(36).substring(7)}`,
+                    requestId: `cushlabs-voice-${Date.now()}-${Math.random().toString(36).substring(7)}`,
                     conferenceSolutionKey: { type: 'hangoutsMeet' },
                 },
             },

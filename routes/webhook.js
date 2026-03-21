@@ -110,7 +110,7 @@ async function handleFunctionCall(message, res) {
 
 // --- Check Availability ---
 async function handleCheckAvailability(functionCall, res) {
-    const timezone = functionCall.parameters?.timezone || 'America/New_York';
+    const timezone = functionCall.parameters?.timezone || 'America/Mexico_City';
 
     try {
         const slots = await getAvailableSlots(timezone);
@@ -332,7 +332,7 @@ async function handleQualifyBuyer(functionCall, callId, res) {
 
 // --- Check Tour Availability (Real Estate) ---
 async function handleCheckTourAvailability(functionCall, res) {
-    const timezone = functionCall.parameters?.timezone || 'America/New_York';
+    const timezone = functionCall.parameters?.timezone || 'America/Mexico_City';
 
     try {
         const slots = await getAvailableSlots(timezone);
