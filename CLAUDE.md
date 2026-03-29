@@ -1,0 +1,104 @@
+# CLAUDE.md — CushLabs AI Voice Agent
+
+## Project Overview
+
+Production AI voice agent platform for lead qualification, appointment booking, and customer conversations. Powered by Vapi (voice infrastructure), Claude (AI), and Google Calendar (scheduling). Express 5 backend with Neon Postgres for persistence and Redis for session caching.
+
+## Tech Stack
+
+- Node.js 20 (Alpine in Docker)
+- Express 5
+- Vapi — voice agent infrastructure (webhook-driven)
+- Anthropic Claude — conversational AI
+- Google Calendar API — appointment scheduling
+- Neon Postgres — persistent storage
+- Redis 7 — session cache (64MB max, allkeys-lru)
+- pnpm — package manager
+
+## Project Structure
+
+```
+cushlabs-ai-voice-agent/
+├── server.js               # Express app entry point
+├── routes/
+│   └── webhook.js          # Vapi webhook handlers
+├── services/
+│   ├── calendar.js         # Google Calendar integration
+│   ├── db.js               # Neon Postgres client
+│   └── redis.js            # Redis session cache
+├── data/                   # Static data files
+├── scripts/                # Utility scripts
+├── docs/                   # Documentation
+├── Dockerfile              # Node 20 Alpine, pnpm
+├── vapi-config.json        # Vapi assistant configuration
+└── package.json
+```
+
+## Development Commands
+
+```powershell
+# Install dependencies
+pnpm install
+
+# Run dev server (auto-restart on changes)
+pnpm dev
+
+# Run production
+pnpm start
+```
+
+## Key Patterns & Conventions
+
+- **Webhook-driven:** Vapi sends events to `/webhook` — the app processes and responds
+- **Session caching:** Redis stores conversation state with TTL-based expiry
+- **External databases:** Neon Postgres is remote (connection string in env), not self-hosted
+- **Stateless app layer:** App can be restarted without losing data (Redis is a cache, Postgres is persistent)
+
+## Environment Variables
+
+See `.env` on VPS at `~/apps/cushlabs-prod-server/.env.voice-agent`. Key vars include:
+- Vapi API credentials
+- Anthropic API key
+- Google Calendar OAuth credentials
+- Neon Postgres connection string
+- Redis URL (`redis://redis:6379` in Docker)
+
+## Production Deployment — Hetzner VPS
+
+- **Hosted on:** Hetzner VPS (cushlabs-prod-01) via Docker
+- **Host:** `178.156.192.117`
+- **SSH:** `ssh deploy@178.156.192.117`
+- **URL:** https://voice.cushlabs.ai
+- **VPS path:** `~/apps/cushlabs-ai-voice-agent/`
+- **Orchestration:** `~/apps/cushlabs-prod-server/docker-compose.yml`
+- **Domain:** `voice.cushlabs.ai` (HTTPS via Caddy/Let's Encrypt)
+- **Internal port:** 3000 (behind Caddy reverse proxy, bound to `127.0.0.1`)
+- **Redis:** Container on same Docker network at `redis://redis:6379`
+- **Database:** Neon Postgres (external, connection string in env)
+- **Health check:** `GET /healthz`
+
+### Deploy
+
+```bash
+ssh deploy@178.156.192.117 'cd ~/apps/cushlabs-ai-voice-agent && git pull && cd ~/apps/cushlabs-prod-server && docker compose up -d --build voice-agent'
+```
+
+Code changes require `--build`. Config-only changes (env vars) just need `docker compose restart voice-agent`.
+
+### Logs
+
+```bash
+ssh deploy@178.156.192.117 'docker logs -f voice-agent'
+```
+
+### Vitals
+
+Add to HTML pages:
+```html
+<script src="https://vitals.cushlabs.ai/tracker.js" data-site="voice" defer></script>
+```
+
+## Known Issues
+
+- Redis is a cache only — if it restarts, active sessions are lost but no persistent data is affected
+- Google Calendar OAuth tokens need periodic refresh
