@@ -63,7 +63,7 @@
 
     // Build nav HTML
     var html = '<nav class="nav"><div class="nav-container">' +
-        '<a href="/" class="nav-brand">CUSH<span>LABS.AI</span></a>' +
+        '<a href="/" class="nav-brand"><img src="/android-chrome-512x512.png" alt="CushLabs" class="nav-brand-icon">CushLabs <span>Voice</span></a>' +
         '<div class="nav-controls">' +
         '<ul class="nav-links">' +
         '<li class="nav-dropdown">' +
