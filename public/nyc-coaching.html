@@ -8,7 +8,22 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <title>New York English Executive Coaching</title>
+    <title>AI Voice Agent for Executive Coaching — Live Demo | CushLabs</title>
+    <meta name="description" content="Live demo: James is an AI scheduling assistant built by CushLabs for executive coaching practices. Try the voice agent now — or build your own.">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://voice.cushlabs.ai/nyc-coaching">
+    <meta property="og:title" content="AI Voice Agent for Executive Coaching — Live Demo | CushLabs">
+    <meta property="og:description" content="Live demo: James is an AI scheduling assistant built by CushLabs for executive coaching practices. Try the voice agent now.">
+    <meta property="og:image" content="https://voice.cushlabs.ai/images/og/voice-agent-og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="CushLabs.ai">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Voice Agent for Executive Coaching — Live Demo | CushLabs">
+    <meta name="twitter:description" content="Live demo: James is an AI scheduling assistant built by CushLabs for executive coaching practices. Try the voice agent now.">
+    <meta name="twitter:image" content="https://voice.cushlabs.ai/images/og/voice-agent-og.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
@@ -282,6 +297,71 @@
             color: var(--accent);
         }
 
+        /* Demo banner */
+        .demo-banner {
+            position: fixed;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--gray-300);
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--gray-700);
+            border-radius: 100px;
+            padding: 0.4rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            white-space: nowrap;
+        }
+
+        .demo-banner a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .demo-banner a:hover {
+            color: var(--accent-light);
+        }
+
+        .demo-banner .sep {
+            color: var(--gray-700);
+        }
+
+        .cta-link {
+            display: inline-block;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            margin-top: 2rem;
+            padding: 0.5rem 1.25rem;
+            border: 1px solid var(--accent);
+            border-radius: 100px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .cta-link:hover {
+            background: var(--accent);
+            color: #000;
+        }
+
+        @media (max-width: 768px) {
+            .demo-banner {
+                font-size: 0.65rem;
+                padding: 0.35rem 1rem;
+                top: 52px;
+            }
+        }
+
         /* Footer */
         .footer {
             position: fixed;
@@ -351,6 +431,12 @@
         <div class="aurora-orb aurora-orb-2"></div>
     </div>
 
+    <div class="demo-banner">
+        <span>Live CushLabs Demo</span>
+        <span class="sep">|</span>
+        <a href="/contact">Want this for your business?</a>
+    </div>
+
     <div class="hero">
         <p class="hero-label">New York English</p>
         <h1>Executive Coaching</h1>
@@ -379,17 +465,41 @@
             </svg>
         </button>
         <p class="status-text" id="statusText">Loading...</p>
+
+        <a href="/contact" class="cta-link">Build Your Own AI Agent</a>
     </div>
 
     <div class="footer">
         <a href="/" class="footer-brand-link">CUSHLABS.AI</a>
         <span class="sep">&middot;</span>
+        <a href="/">Home</a>
+        <span class="sep">&middot;</span>
         <a href="/portfolio">Portfolio</a>
+        <span class="sep">&middot;</span>
+        <a href="/consultation">Book a Call</a>
         <span class="sep">&middot;</span>
         <a href="/contact">Contact</a>
         <span class="sep">&middot;</span>
-        <span>&copy; 2026</span>
+        <span>&copy; 2026 CushLabs AI Services</span>
     </div>
+
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "AI Voice Agent for Executive Coaching",
+        "description": "AI scheduling assistant that books discovery sessions, answers service questions, and qualifies leads for executive coaching practices.",
+        "provider": {
+            "@type": "Organization",
+            "name": "CushLabs AI Services",
+            "url": "https://voice.cushlabs.ai"
+        },
+        "url": "https://voice.cushlabs.ai/nyc-coaching",
+        "category": "AI Voice Agent",
+        "areaServed": "US"
+    }
+    </script>
 
     <!-- Vapi Web SDK (ESM) -->
     <script type="module">
