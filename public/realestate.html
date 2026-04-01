@@ -8,8 +8,25 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
+    <link rel="alternate" hreflang="en" href="https://voice.cushlabs.ai/realestate">
+    <link rel="alternate" hreflang="es" href="https://voice.cushlabs.ai/realestate">
+    <link rel="alternate" hreflang="x-default" href="https://voice.cushlabs.ai/realestate">
     <title>AI Real Estate Setter — Outbound Calling Demo | CushLabs</title>
     <meta name="description" content="Meet David — an AI outbound real estate setter that qualifies buyers, looks up MLS property data, and books property tours. Try the live outbound calling demo.">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://voice.cushlabs.ai/realestate">
+    <meta property="og:title" content="AI Real Estate Setter — Outbound Calling Demo | CushLabs">
+    <meta property="og:description" content="Meet David — an AI outbound real estate setter that qualifies buyers, looks up MLS data, and books property tours. Try the live demo.">
+    <meta property="og:image" content="https://voice.cushlabs.ai/images/og/voice-agent-og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="CushLabs.ai">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Real Estate Setter — Outbound Calling Demo | CushLabs">
+    <meta name="twitter:description" content="Meet David — an AI outbound real estate setter that qualifies buyers, looks up MLS data, and books property tours. Try the live demo.">
+    <meta name="twitter:image" content="https://voice.cushlabs.ai/images/og/voice-agent-og.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
@@ -1305,10 +1322,28 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a></p>
-                <p data-i18n="footer.built">Built with AI, powered by voice.</p>
+                <p data-i18n="footer.built">Built by Robert Cushman — powered by AI and voice.</p>
             </div>
         </div>
     </footer>
+
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "AI Outbound Real Estate Setter",
+        "description": "AI outbound calling agent that qualifies buyers, looks up MLS property data, and books property tours for real estate teams.",
+        "provider": {
+            "@type": "Organization",
+            "name": "CushLabs AI Services",
+            "url": "https://voice.cushlabs.ai"
+        },
+        "url": "https://voice.cushlabs.ai/realestate",
+        "category": "AI Voice Agent",
+        "areaServed": "US"
+    }
+    </script>
 
     <!-- ═══ Outbound Call Logic ═══ -->
     <script>

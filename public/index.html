@@ -8,6 +8,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
+    <link rel="alternate" hreflang="en" href="https://voice.cushlabs.ai/">
+    <link rel="alternate" hreflang="es" href="https://voice.cushlabs.ai/">
+    <link rel="alternate" hreflang="x-default" href="https://voice.cushlabs.ai/">
     <title>CushLabs AI Services — AI Voice Agents for Every Business</title>
     <meta name="description" content="Production-ready AI voice agents that qualify leads, book appointments, and handle customer conversations — 24/7. Talk to Clara, our live AI assistant.">
     <!-- Open Graph -->
@@ -1399,10 +1402,41 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a></p>
-                <p data-i18n="footer.built">Built with AI, powered by voice.</p>
+                <p data-i18n="footer.built">Built by Robert Cushman — powered by AI and voice.</p>
             </div>
         </div>
     </footer>
+
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "CushLabs AI Services",
+        "url": "https://voice.cushlabs.ai",
+        "logo": "https://voice.cushlabs.ai/images/og/voice-agent-og.png",
+        "description": "Production-ready AI voice agents that qualify leads, book appointments, and handle customer conversations — 24/7.",
+        "founder": {
+            "@type": "Person",
+            "name": "Robert Cushman"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "New York",
+            "addressRegion": "NY",
+            "addressCountry": "US"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "info@cushlabs.ai",
+            "contactType": "sales",
+            "availableLanguage": ["English", "Spanish"]
+        },
+        "sameAs": [
+            "https://cushlabs.ai"
+        ]
+    }
+    </script>
 
     <!-- Vapi Web SDK (ESM) -->
     <script type="module">
