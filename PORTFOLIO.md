@@ -3,7 +3,7 @@
 # PORTFOLIO.md — CushLabs AI Voice Agent
 # =============================================================================
 portfolio_enabled: true
-portfolio_priority: 1
+portfolio_priority: 3
 portfolio_featured: true
 portfolio_last_reviewed: "2026-03-02"
 
