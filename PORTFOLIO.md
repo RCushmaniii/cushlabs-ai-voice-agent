@@ -5,7 +5,7 @@
 portfolio_enabled: true
 portfolio_priority: 3
 portfolio_featured: true
-portfolio_last_reviewed: "2026-03-02"
+portfolio_last_reviewed: "2026-04-05"
 
 title: "AI Voice Agent Platform"
 tagline: "Production voice AI agents that qualify leads, book appointments, and handle support calls 24/7"
@@ -22,7 +22,10 @@ tech_stack:
   - "Neon PostgreSQL"
   - "Redis"
   - "Google Calendar API"
-  - "Render"
+  - "Docker"
+  - "Hetzner VPS"
+  - "Caddy"
+  - "Sentry"
 thumbnail: "/portfolio/voice-cushlabs-thumb.webp"
 status: "Production"
 
@@ -37,6 +40,10 @@ key_features:
   - "Webhook-driven function calling for calendar, database, MLS lookup, and CRM operations during live calls"
   - "Session state via Redis for multi-turn conversation context across function calls"
   - "Lead data persisted to Neon PostgreSQL with full call metadata"
+  - "Sentry error monitoring with Express error handler and performance tracing"
+  - "Content-Security-Policy, HSTS, and full security header hardening"
+  - "Startup environment validation with fail-fast on missing critical vars"
+  - "28-test suite covering endpoints, auth, webhook routing, and security headers"
   - "Full bilingual EN/ES support across all pages"
 metrics:
   - "Sub-500ms voice response time"
@@ -109,7 +116,10 @@ Five demo agents are deployed at voice.cushlabs.ai: Clara handles lead qualifica
 - **Redis session state:** Maintains conversation context across multiple function calls within a single Vapi session
 - **Neon PostgreSQL persistence:** Lead data, call metadata, and booking confirmations stored for CRM integration
 - **Full bilingual i18n:** Client-side EN/ES toggle with localStorage persistence, MutationObserver for dynamic Vapi status translation
-- **Render deployment:** Express server + Redis instance via Render Blueprint (render.yaml) for reproducible infrastructure
+- **Hetzner VPS deployment:** Dockerized Express + Redis behind Caddy reverse proxy with auto-TLS, deployed via docker-compose
+- **Sentry error monitoring:** Production error tracking with Express error handler and 20% performance trace sampling
+- **Security hardening:** Content-Security-Policy tuned per-app, HSTS with preload, and startup env validation
+- **Test suite:** 28 tests using Node.js built-in test runner covering health, security headers, config, contact form, webhook auth, and all webhook event handlers
 
 ## Results
 
@@ -124,4 +134,4 @@ Five demo agents are deployed at voice.cushlabs.ai: Clara handles lead qualifica
 - Webhook-driven architecture that executes real-world actions during live calls (8 function handlers)
 - 5-agent deployment across 5 industries with domain-specific LLM, voice, and system prompt configurations
 - Full bilingual EN/ES support with client-side i18n
-- Infrastructure-as-code via Render Blueprint for reproducible deployments
+- Dockerized deployment on Hetzner VPS with Caddy auto-TLS, Sentry monitoring, and 28-test suite
