@@ -23,6 +23,11 @@
   "author": "CushLabs AI Services",
   "license": "ISC",
   "packageManager": "pnpm@10.17.0",
+  "pnpm": {
+    "overrides": {
+      "path-to-regexp": ">=8.4.0"
+    }
+  },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
     "@sentry/node": "^10.47.0",
