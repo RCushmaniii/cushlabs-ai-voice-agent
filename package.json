@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node --watch server.js"
+    "dev": "node --watch server.js",
+    "test": "node --experimental-vm-modules --test test/*.test.js"
   },
   "keywords": [
     "ai",
@@ -24,6 +25,7 @@
   "packageManager": "pnpm@10.17.0",
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
+    "@sentry/node": "^10.47.0",
     "compression": "^1.8.1",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",

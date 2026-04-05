@@ -1,10 +1,23 @@
 require('dotenv').config();
+const Sentry = require('@sentry/node');
+
+// Initialize Sentry before anything else
+Sentry.init({
+    dsn: process.env.SENTRY_DSN,
+    environment: process.env.NODE_ENV || 'development',
+    tracesSampleRate: 0.2,
+});
+
 const express = require('express');
 const cors = require('cors');
 const compression = require('compression');
 const path = require('path');
 const webhookRouter = require('./routes/webhook');
 const { initDb } = require('./services/db');
+const { validateEnv } = require('./services/env');
+
+// Fail fast if critical env vars are missing
+validateEnv();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,6 +30,16 @@ app.use((req, res, next) => {
     res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
     res.setHeader('Permissions-Policy', 'camera=(), geolocation=()');
     res.setHeader('X-XSS-Protection', '0'); // Disabled per modern best practice (CSP preferred)
+    res.setHeader('Content-Security-Policy', [
+        "default-src 'self'",
+        "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://vitals.cushlabs.ai",
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+        "font-src 'self' https://fonts.gstatic.com",
+        "img-src 'self' data:",
+        "connect-src 'self' https://*.vapi.ai wss://*.vapi.ai https://formspree.io https://vitals.cushlabs.ai",
+        "media-src 'self' blob:",
+        "frame-src 'none'",
+    ].join('; '));
     next();
 });
 
@@ -243,6 +266,9 @@ app.post('/api/outbound-call', outboundLimiter, async (req, res) => {
 
 // Vapi webhook endpoint
 app.use('/api/webhook', webhookRouter);
+
+// Sentry error handler — must be after all routes/middleware
+Sentry.setupExpressErrorHandler(app);
 
 app.listen(PORT, async () => {
     console.log(`CushLabs AI Voice Agent backend running on port ${PORT}`);
