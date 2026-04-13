@@ -81,6 +81,7 @@
         '<li><a href="/services"' + cls('services') + '>' + t('services') + '</a></li>' +
         '<li><a href="/portfolio"' + cls('portfolio') + '>' + t('portfolio') + '</a></li>' +
         '<li><a href="/contact"' + cls('contact') + '>' + t('contact') + '</a></li>' +
+        '<li class="nav-cta-li"><a href="/consultation" class="nav-cta-mobile">' + t('cta') + '</a></li>' +
         '</ul>' +
         '<a href="/consultation" class="nav-cta">' + t('cta') + '</a>';
 
@@ -145,8 +146,9 @@
             if (portfolioLink) portfolioLink.textContent = t('portfolio');
             var contactLink = root.querySelector('a[href="/contact"]');
             if (contactLink) contactLink.textContent = t('contact');
-            var ctaLink = root.querySelector('a.nav-cta');
-            if (ctaLink) ctaLink.textContent = t('cta');
+            root.querySelectorAll('a.nav-cta, a.nav-cta-mobile').forEach(function (a) {
+                a.textContent = t('cta');
+            });
             // Update lang toggle text
             var langBtn = document.getElementById('langToggle');
             if (langBtn) langBtn.textContent = lang === 'en' ? 'ES' : 'EN';

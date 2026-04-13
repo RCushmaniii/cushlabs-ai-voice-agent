@@ -102,6 +102,31 @@
     box-shadow: 0 0 24px rgba(255, 106, 61, 0.4);
 }
 
+/* ── Mobile-only CTA inside nav-links ── */
+.nav-cta-li {
+    display: none; /* hidden on desktop — the .nav-cta button handles desktop */
+}
+
+.nav-cta-mobile {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #000 !important;
+    background: #FF6A3D;
+    padding: 0.85rem 2.5rem;
+    border-radius: 12px;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: none !important;
+    transition: background 0.3s, transform 0.3s;
+    display: inline-block;
+}
+
+.nav-cta-mobile:hover {
+    background: #FF9B7A !important;
+    transform: translateY(-2px);
+}
+
 /* ── Language toggle ── */
 .lang-toggle {
     font-family: "Space Grotesk", sans-serif;
@@ -343,6 +368,10 @@
 
     .nav-cta {
         display: none;
+    }
+
+    .nav-cta-li {
+        display: flex; /* show in mobile fullscreen menu */
     }
 
     .nav-dropdown > .dropdown-trigger {
