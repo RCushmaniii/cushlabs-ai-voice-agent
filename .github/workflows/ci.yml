@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -16,10 +16,5 @@ jobs:
         with:
           node-version: 20
       - run: pnpm install --frozen-lockfile
-      - name: Lint
-        run: pnpm lint
-        continue-on-error: true
-      - name: Build
-        run: pnpm build
-        env:
-          NEXT_TELEMETRY_DISABLED: 1
+      - name: Test
+        run: pnpm test
