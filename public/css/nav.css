@@ -78,6 +78,30 @@
     gap: 2.5rem;
 }
 
+/* ── Nav CTA button ── */
+.nav-cta {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: #000;
+    background: #FF6A3D;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 0 16px rgba(255, 106, 61, 0.2);
+    white-space: nowrap;
+}
+
+.nav-cta:hover {
+    background: #FF9B7A;
+    transform: translateY(-2px);
+    box-shadow: 0 0 24px rgba(255, 106, 61, 0.4);
+}
+
 /* ── Language toggle ── */
 .lang-toggle {
     font-family: "Space Grotesk", sans-serif;
@@ -270,6 +294,11 @@
     background: rgba(0, 0, 0, 0.03);
 }
 
+/* ── Portfolio light-theme: CTA button ── */
+:root.light-theme .nav-cta {
+    box-shadow: 0 0 16px rgba(255, 106, 61, 0.15);
+}
+
 /* ── Mobile responsive (768px) ── */
 @media (max-width: 768px) {
     .nav-container {
@@ -310,6 +339,10 @@
 
     .nav-controls {
         gap: 1rem;
+    }
+
+    .nav-cta {
+        display: none;
     }
 
     .nav-dropdown > .dropdown-trigger {

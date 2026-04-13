@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FF6A3D">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="canonical" href="https://voice.cushlabs.ai/faq">
+    <title>FAQ — CushLabs AI Voice Agents</title>
+    <meta name="description" content="Common questions about CushLabs AI voice agents — pricing, setup, language, integrations, and how the free trial works.">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://voice.cushlabs.ai/faq">
+    <meta property="og:title" content="FAQ — CushLabs AI Voice Agents">
+    <meta property="og:description" content="Common questions about CushLabs AI voice agents — pricing, setup, language, integrations, and the free trial.">
+    <meta property="og:image" content="https://voice.cushlabs.ai/images/og/voice-agent-og.png">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FAQ — CushLabs AI Voice Agents">
+    <meta name="twitter:description" content="Common questions about CushLabs AI voice agents — pricing, setup, language, and the free trial.">
+    <meta name="twitter:image" content="https://voice.cushlabs.ai/images/og/voice-agent-og.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/nav.css">
+    <style>
+        :root {
+            --cush-orange: #FF6A3D;
+            --cush-orange-light: #FF9B7A;
+            --cush-orange-glow: rgba(255, 106, 61, 0.2);
+            --cush-black: #050505;
+            --glass-bg: rgba(10, 10, 12, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-highlight: rgba(255, 255, 255, 0.12);
+            --gray-950: #080808;
+            --gray-900: #121212;
+            --gray-800: #1E1E1E;
+            --gray-400: #9CA3AF;
+            --gray-300: #B8C0CC;
+            --gray-200: #D4D8DE;
+            --text-main: #FAFAFA;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        ::selection {
+            background-color: var(--cush-orange);
+            color: var(--cush-black);
+        }
+
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+        body {
+            font-family: "Source Serif 4", Georgia, serif;
+            background: var(--cush-black);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ── Aurora ── */
+        .aurora-container {
+            position: fixed; inset: 0; overflow: hidden; z-index: 0; pointer-events: none;
+        }
+        .aurora-orb {
+            position: absolute; border-radius: 50%; filter: blur(140px); opacity: 0.12; mix-blend-mode: screen;
+        }
+        .aurora-orb-1 {
+            width: 900px; height: 900px; background: var(--cush-orange);
+            top: -20%; right: -20%; animation: aurora-1 30s ease-in-out infinite;
+        }
+        .aurora-orb-2 {
+            width: 700px; height: 700px; background: #9D4EDD;
+            bottom: -20%; left: -15%; animation: aurora-2 35s ease-in-out infinite;
+        }
+        .aurora-orb-3 {
+            width: 500px; height: 500px; background: #3B82F6;
+            top: 40%; left: 30%; animation: aurora-1 25s ease-in-out infinite reverse;
+        }
+        @keyframes aurora-1 {
+            0%, 100% { transform: translate(0,0) scale(1); }
+            33% { transform: translate(50px,-50px) scale(1.1); }
+            66% { transform: translate(-30px,30px) scale(0.9); }
+        }
+        @keyframes aurora-2 {
+            0%, 100% { transform: translate(0,0) scale(1); }
+            33% { transform: translate(-50px,30px) scale(0.9); }
+            66% { transform: translate(40px,-40px) scale(1.1); }
+        }
+
+        .top-line {
+            position: fixed; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--cush-orange), transparent);
+            z-index: 10; opacity: 0.8;
+        }
+
+        /* ── Section ── */
+        .section {
+            position: relative; z-index: 1;
+            max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center; margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.75rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.2em;
+            color: var(--cush-orange); margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700; color: var(--text-main);
+            letter-spacing: -0.02em; margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 1.1rem; font-weight: 300;
+            color: var(--gray-300); max-width: 600px;
+            margin: 0 auto; line-height: 1.7;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            min-height: 50vh;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center;
+            padding-top: 8rem; padding-bottom: 4rem;
+            animation: fade-in-up 0.8s ease-out;
+        }
+
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-label {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.75rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.25em;
+            color: var(--cush-orange); margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700; color: var(--text-main);
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.03em; line-height: 1.1;
+        }
+
+        .hero h1 .accent {
+            background: linear-gradient(135deg, #FF6A3D, #FF9B7A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            font-weight: 300; color: var(--gray-300);
+            max-width: 600px; line-height: 1.7;
+        }
+
+        /* ── FAQ section ── */
+        .faq-section {
+            padding: 4rem 2rem 8rem;
+        }
+
+        .faq-list {
+            max-width: 820px;
+            margin: 0 auto;
+            display: flex; flex-direction: column; gap: 1rem;
+        }
+
+        .faq-item {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(255,106,61,0.25);
+        }
+
+        .faq-item.open {
+            border-color: rgba(255,106,61,0.3);
+        }
+
+        .faq-question {
+            width: 100%; background: none; border: none; cursor: pointer;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 1.5rem; padding: 1.75rem 2rem; text-align: left;
+        }
+
+        .faq-question-text {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.05rem; font-weight: 600;
+            color: var(--text-main); line-height: 1.4;
+        }
+
+        .faq-icon {
+            width: 28px; height: 28px; flex-shrink: 0;
+            border-radius: 50%;
+            background: rgba(255,106,61,0.1);
+            border: 1px solid rgba(255,106,61,0.2);
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 0.35s, background 0.3s;
+        }
+
+        .faq-icon svg {
+            width: 14px; height: 14px; fill: var(--cush-orange);
+            transition: transform 0.35s;
+        }
+
+        .faq-item.open .faq-icon {
+            background: rgba(255,106,61,0.2);
+        }
+
+        .faq-item.open .faq-icon svg {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+            padding: 0 2rem;
+        }
+
+        .faq-answer-inner {
+            padding-bottom: 1.75rem;
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 1rem; font-weight: 300;
+            color: var(--gray-300); line-height: 1.8;
+        }
+
+        .faq-answer-inner a {
+            color: var(--cush-orange); text-decoration: none;
+        }
+
+        .faq-answer-inner a:hover {
+            text-decoration: underline;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 600px;
+        }
+
+        /* ── CTA ── */
+        .cta {
+            padding: 8rem 2rem; text-align: center; position: relative;
+        }
+
+        .cta h2 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700; color: var(--text-main);
+            margin-bottom: 1.5rem; letter-spacing: -0.02em;
+        }
+
+        .cta p {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 1.1rem; font-weight: 300;
+            color: var(--gray-300); max-width: 550px;
+            margin: 0 auto 3rem; line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.95rem; font-weight: 600;
+            color: #000; background: var(--cush-orange);
+            border: none; padding: 1rem 2.5rem; border-radius: 12px;
+            cursor: pointer; text-decoration: none; transition: all 0.3s;
+            box-shadow: 0 0 25px var(--cush-orange-glow);
+            display: inline-flex; align-items: center; justify-content: center;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(255,106,61,0.4);
+            background: var(--cush-orange-light);
+        }
+
+        .btn-secondary {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.95rem; font-weight: 600;
+            color: var(--text-main); background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 1rem 2.5rem; border-radius: 12px;
+            cursor: pointer; text-decoration: none; transition: all 0.3s;
+            display: inline-flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+        .btn-secondary:hover {
+            background: var(--glass-highlight);
+            border-color: var(--glass-highlight);
+            transform: translateY(-3px);
+        }
+
+        /* ── Footer ── */
+        .footer {
+            position: relative; z-index: 1;
+            border-top: 1px solid var(--glass-border);
+            background: rgba(5,5,5,0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .footer-inner {
+            max-width: 1200px; margin: 0 auto; padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 3rem; margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.3rem; font-weight: 700;
+            color: var(--text-main); text-decoration: none;
+            letter-spacing: -0.02em; display: inline-block; margin-bottom: 1rem;
+        }
+        .footer-brand span { color: var(--cush-orange); }
+
+        .footer-tagline {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 0.95rem; color: var(--gray-400);
+            line-height: 1.7; margin-bottom: 1.25rem; max-width: 280px;
+        }
+
+        .footer-location {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.8rem; color: var(--gray-400);
+            display: flex; align-items: center; gap: 0.4rem;
+        }
+        .footer-location svg { width: 14px; height: 14px; fill: var(--cush-orange); flex-shrink: 0; }
+
+        .footer-heading {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.75rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.15em;
+            color: var(--text-main); margin-bottom: 1.25rem;
+        }
+
+        .footer-links {
+            list-style: none; display: flex; flex-direction: column; gap: 0.75rem;
+        }
+
+        .footer-links a {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 0.9rem; font-weight: 300;
+            color: var(--gray-400); text-decoration: none; transition: color 0.3s;
+        }
+        .footer-links a:hover { color: var(--cush-orange); }
+
+        .footer-bottom {
+            border-top: 1px solid var(--glass-border);
+            padding-top: 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 1rem;
+        }
+
+        .footer-bottom p {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.8rem; color: var(--gray-400);
+        }
+
+        .footer-bottom a { color: var(--gray-300); text-decoration: none; }
+        .footer-bottom a:hover { color: var(--cush-orange); }
+
+        /* ── Reveal ── */
+        .reveal {
+            opacity: 0; transform: translateY(20px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .faq-question { padding: 1.5rem; }
+            .faq-answer { padding: 0 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="aurora-container">
+        <div class="aurora-orb aurora-orb-1"></div>
+        <div class="aurora-orb aurora-orb-2"></div>
+        <div class="aurora-orb aurora-orb-3"></div>
+    </div>
+    <div class="top-line"></div>
+
+    <div id="nav-root" data-page="faq"></div>
+    <script src="/js/nav.js"></script>
+
+    <!-- ═══ Hero ═══ -->
+    <section class="section hero" id="hero">
+        <p class="hero-label">Frequently Asked Questions</p>
+        <h1>Got <span class="accent">Questions?</span></h1>
+        <p class="hero-subtitle">
+            Everything you need to know before starting your free trial.
+            Don't see yours here? <a href="/contact" style="color: var(--cush-orange); text-decoration: none;">Ask us directly.</a>
+        </p>
+    </section>
+
+    <!-- ═══ FAQ ═══ -->
+    <section class="section faq-section" id="faq">
+        <div class="faq-list">
+
+            <div class="faq-item reveal">
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">Does it sound like a robot?</span>
+                    <span class="faq-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        No. Modern AI voices are natural and conversational — your callers won't feel like they're talking to a phone tree. The best way to hear it for yourself is to <a href="/">talk to Clara</a> on the homepage. That's a real production agent, not a demo recording.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">What if a caller gets frustrated and wants a human?</span>
+                    <span class="faq-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        The agent detects frustration signals in the conversation and transfers the call to you or a team member. It also hands over the full context of what was discussed — so whoever picks up already knows what the caller needs. Nobody gets trapped in a loop.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">What if I go over 500 minutes?</span>
+                    <span class="faq-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Overage is billed at $0.50/min (US) or $8.50 MXN/min (MX). Most clients use 200–400 minutes per month, so the included 500 is enough for the majority of businesses. You'll be alerted before you hit the cap so there are no billing surprises.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">How long does setup take?</span>
+                    <span class="faq-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Most agents are live within 3–5 business days after the discovery call. We move fast because the build is focused — we're building one agent for your specific business, not a generic template.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">Do I need a developer or IT team?</span>
+                    <span class="faq-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        No. CushLabs handles everything — setup, integration, maintenance, and monthly optimization. You tell us about your business on a single discovery call and we take it from there. Your only job is to approve the agent before it goes live.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">How does the free 2-week trial work?</span>
+                    <span class="faq-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Your agent is built and deployed during the trial — you see it working with real callers before you pay anything. No credit card required to start. If you're not happy at the end of two weeks, walk away. No invoice, no pressure.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">Can it speak Spanish?</span>
+                    <span class="faq-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Yes. Every agent is bilingual EN/ES with automatic language detection. If a caller speaks Spanish, the agent responds in Spanish — no configuration required, no separate number. It just works.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">What systems does it connect to?</span>
+                    <span class="faq-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Google Calendar, Calendly, and most CRMs via webhook, Zapier, or Make. If you use a specific CRM or scheduling tool, ask about it on the <a href="/consultation">discovery call</a> — we've integrated with a wide range of stacks and can usually make it work.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-question" aria-expanded="false">
+                    <span class="faq-question-text">Do you sign NDAs?</span>
+                    <span class="faq-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Yes. We're happy to sign a mutual NDA before any sensitive business information is shared. Just mention it when you book the discovery call.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══ CTA ═══ -->
+    <section class="section cta" id="cta">
+        <div class="reveal">
+            <h2>Still have questions?</h2>
+            <p>
+                Book a free discovery call and we'll answer everything — no pitch, no pressure.
+                Just a conversation about your business and whether an AI agent makes sense for you.
+            </p>
+            <div class="cta-buttons">
+                <a href="/consultation" class="btn-primary">Book a Free Call</a>
+                <a href="/" class="btn-secondary">Talk to Clara First</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ Footer ═══ -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="/" class="footer-brand">CUSH<span>LABS.AI</span></a>
+                    <p class="footer-tagline">AI voice agents that qualify leads, book appointments, and handle customer calls — 24/7.</p>
+                    <p class="footer-location">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        Serving US &amp; Mexico
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-heading">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/services">Services</a></li>
+                        <li><a href="/portfolio">Portfolio</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-heading">Live Demos</h4>
+                    <ul class="footer-links">
+                        <li><a href="/">Clara — AI Assistant</a></li>
+                        <li><a href="/nyc-coaching">James — Exec Coaching</a></li>
+                        <li><a href="/medspa">Sophia — Med Spa</a></li>
+                        <li><a href="/trades">Mike — Home Services</a></li>
+                        <li><a href="/realestate">David — Real Estate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#105;&#110;&#102;&#111;&#64;&#99;&#117;&#115;&#104;&#108;&#97;&#98;&#115;&#46;&#97;&#105;">&#105;&#110;&#102;&#111;&#64;&#99;&#117;&#115;&#104;&#108;&#97;&#98;&#115;&#46;&#97;&#105;</a></li>
+                        <li><a href="https://wa.me/523315590572" target="_blank" rel="noopener">WhatsApp</a></li>
+                        <li><a href="/consultation">Book a Free Call</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a></p>
+                <p>Built by Robert Cushman — powered by AI and voice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FAQ accordion logic -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var items = document.querySelectorAll(".faq-item");
+
+            items.forEach(function (item) {
+                var btn = item.querySelector(".faq-question");
+                var answer = item.querySelector(".faq-answer");
+
+                btn.addEventListener("click", function () {
+                    var isOpen = item.classList.contains("open");
+
+                    // Close all
+                    items.forEach(function (other) {
+                        other.classList.remove("open");
+                        other.querySelector(".faq-question").setAttribute("aria-expanded", "false");
+                    });
+
+                    // Open clicked (unless it was already open)
+                    if (!isOpen) {
+                        item.classList.add("open");
+                        btn.setAttribute("aria-expanded", "true");
+                    }
+                });
+            });
+
+            // Scroll reveal
+            var reveals = document.querySelectorAll(".reveal");
+            if (!reveals.length) return;
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+            reveals.forEach(function (el) { observer.observe(el); });
+        });
+    </script>
+    <script src="https://vitals.cushlabs.ai/tracker.js" data-site="voice" defer></script>
+</body>
+</html>

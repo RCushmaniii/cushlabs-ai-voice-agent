@@ -6,7 +6,7 @@
  * Usage: <div id="nav-root" data-page="PAGE_NAME"></div>
  *        <script src="/js/nav.js"></script>
  *
- * data-page values: index, portfolio, contact, trades, nyc-coaching, medspa
+ * data-page values: index, portfolio, contact, trades, nyc-coaching, medspa, services, faq
  */
 (function () {
     var root = document.getElementById('nav-root');
@@ -15,7 +15,7 @@
     var page = root.getAttribute('data-page') || '';
 
     // Pages that show a language toggle
-    var i18nPages = { index: true, trades: true, contact: true, realestate: true };
+    var i18nPages = { index: true, trades: true, contact: true, realestate: true, services: true };
     var showLang = !!i18nPages[page];
 
     // Portfolio shows theme toggle instead
@@ -29,7 +29,9 @@
         trades: 'demos',
         realestate: 'demos',
         portfolio: 'portfolio',
-        contact: 'contact'
+        contact: 'contact',
+        services: 'services',
+        faq: 'services'
     };
     var activePage = activeMap[page] || '';
 
@@ -38,8 +40,8 @@
 
     // Nav translation strings
     var navStrings = {
-        en: { demos: 'Demos', portfolio: 'Portfolio', contact: 'Contact' },
-        es: { demos: 'Demos', portfolio: 'Portafolio', contact: 'Contacto' }
+        en: { demos: 'Demos', services: 'Services', portfolio: 'Portfolio', contact: 'Contact', cta: 'Start Free Trial' },
+        es: { demos: 'Demos', services: 'Servicios', portfolio: 'Portafolio', contact: 'Contacto', cta: 'Prueba Gratis' }
     };
 
     // Current language (read from localStorage or default)
@@ -76,9 +78,11 @@
         '<li><a href="/trades">Mike &mdash; Home Services</a></li>' +
         '<li><a href="/realestate">David &mdash; Real Estate</a></li>' +
         '</ul></li>' +
+        '<li><a href="/services"' + cls('services') + '>' + t('services') + '</a></li>' +
         '<li><a href="/portfolio"' + cls('portfolio') + '>' + t('portfolio') + '</a></li>' +
         '<li><a href="/contact"' + cls('contact') + '>' + t('contact') + '</a></li>' +
-        '</ul>';
+        '</ul>' +
+        '<a href="/consultation" class="nav-cta">' + t('cta') + '</a>';
 
     // Language toggle
     if (showLang) {
@@ -135,10 +139,14 @@
                 trigger.innerHTML = t('demos') +
                     ' <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>';
             }
+            var servicesLink = root.querySelector('a[href="/services"]');
+            if (servicesLink) servicesLink.textContent = t('services');
             var portfolioLink = root.querySelector('a[href="/portfolio"]');
             if (portfolioLink) portfolioLink.textContent = t('portfolio');
             var contactLink = root.querySelector('a[href="/contact"]');
             if (contactLink) contactLink.textContent = t('contact');
+            var ctaLink = root.querySelector('a.nav-cta');
+            if (ctaLink) ctaLink.textContent = t('cta');
             // Update lang toggle text
             var langBtn = document.getElementById('langToggle');
             if (langBtn) langBtn.textContent = lang === 'en' ? 'ES' : 'EN';
