@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
-    "@sentry/node": "^10.47.0",
+    "@sentry/node": "^10.48.0",
     "compression": "^1.8.1",
     "cors": "^2.8.6",
     "dotenv": "^17.4.0",
