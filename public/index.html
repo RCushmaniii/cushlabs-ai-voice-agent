@@ -951,8 +951,8 @@
 
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
         }
 
         .reveal.visible {
@@ -1069,6 +1069,11 @@
             </svg>
         </button>
         <p class="status-text" id="statusText">Loading...</p>
+
+        <div class="hero-cta-group" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem;">
+            <a href="/consultation" class="btn-primary" data-i18n="hero.cta.primary">Start Free Trial</a>
+            <a href="#how-it-works" class="btn-secondary" data-i18n="hero.cta.secondary">See How It Works</a>
+        </div>
 
         <div class="hero-stats">
             <div class="hero-stat">
@@ -1551,6 +1556,10 @@
             const reveals = document.querySelectorAll(".reveal");
             if (!reveals.length) return;
 
+            function showAll() {
+                reveals.forEach((el) => el.classList.add("visible"));
+            }
+
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
@@ -1558,9 +1567,13 @@
                         observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+            }, { threshold: 0.05, rootMargin: "0px 0px 0px 0px" });
 
             reveals.forEach((el) => observer.observe(el));
+
+            // Fallback: if visitor scrolls faster than the observer fires,
+            // ensure nothing stays hidden after 2.5s
+            setTimeout(showAll, 2500);
         });
     </script>
 
@@ -1580,6 +1593,8 @@
                 "hero.stat.response": "Response",
                 "hero.stat.availability": "Availability",
                 "hero.stat.assistants": "Live Assistants",
+                "hero.cta.primary": "Start Free Trial",
+                "hero.cta.secondary": "See How It Works",
                 "hero.warmup": "Waking up the server — one moment...",
                 // Vapi status strings
                 "status.loading": "Loading...",
@@ -1686,6 +1701,8 @@
                 "hero.stat.response": "Respuesta",
                 "hero.stat.availability": "Disponibilidad",
                 "hero.stat.assistants": "Asistentes Activos",
+                "hero.cta.primary": "Comenzar Prueba Gratis",
+                "hero.cta.secondary": "Cómo Funciona",
                 "hero.warmup": "Iniciando el servidor — un momento...",
                 // Vapi status strings
                 "status.loading": "Cargando...",
