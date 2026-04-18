@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FF6A3D">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="canonical" href="https://voice.cushlabs.ai/services">
+    <title>Services &amp; Pricing — CushLabs AI Voice Agents</title>
+    <meta name="description" content="AI voice agents that answer every call 24/7. $1,497/mo US · $10,997 MXN/mes. 500 minutes included. Free 2-week trial. No setup fee. No contract.">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://voice.cushlabs.ai/services">
+    <meta property="og:title" content="Services &amp; Pricing — CushLabs AI Voice Agents">
+    <meta property="og:description" content="AI voice agents that answer every call 24/7. $1,497/mo US · $10,997 MXN/mes. Free 2-week trial.">
+    <meta property="og:image" content="https://voice.cushlabs.ai/images/og/voice-agent-og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Services &amp; Pricing — CushLabs AI Voice Agents">
+    <meta name="twitter:description" content="AI voice agents that answer every call 24/7. $1,497/mo US · $10,997 MXN/mes. Free 2-week trial.">
+    <meta name="twitter:image" content="https://voice.cushlabs.ai/images/og/voice-agent-og.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/nav.css">
+    <style>
+        :root {
+            --cush-orange: #FF6A3D;
+            --cush-orange-light: #FF9B7A;
+            --cush-orange-glow: rgba(255, 106, 61, 0.2);
+            --cush-black: #050505;
+            --glass-bg: rgba(10, 10, 12, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-highlight: rgba(255, 255, 255, 0.12);
+            --gray-950: #080808;
+            --gray-900: #121212;
+            --gray-800: #1E1E1E;
+            --gray-400: #9CA3AF;
+            --gray-300: #B8C0CC;
+            --gray-200: #D4D8DE;
+            --text-main: #FAFAFA;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        ::selection {
+            background-color: var(--cush-orange);
+            color: var(--cush-black);
+        }
+
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+        body {
+            font-family: "Source Serif 4", Georgia, serif;
+            background: var(--cush-black);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ── Aurora ── */
+        .aurora-container {
+            position: fixed; inset: 0; overflow: hidden; z-index: 0; pointer-events: none;
+        }
+        .aurora-orb {
+            position: absolute; border-radius: 50%; filter: blur(140px); opacity: 0.12; mix-blend-mode: screen;
+        }
+        .aurora-orb-1 {
+            width: 900px; height: 900px; background: var(--cush-orange);
+            top: -20%; right: -20%; animation: aurora-1 30s ease-in-out infinite;
+        }
+        .aurora-orb-2 {
+            width: 700px; height: 700px; background: #9D4EDD;
+            bottom: -20%; left: -15%; animation: aurora-2 35s ease-in-out infinite;
+        }
+        .aurora-orb-3 {
+            width: 500px; height: 500px; background: #3B82F6;
+            top: 40%; left: 30%; animation: aurora-1 25s ease-in-out infinite reverse;
+        }
+        @keyframes aurora-1 {
+            0%, 100% { transform: translate(0,0) scale(1); }
+            33% { transform: translate(50px,-50px) scale(1.1); }
+            66% { transform: translate(-30px,30px) scale(0.9); }
+        }
+        @keyframes aurora-2 {
+            0%, 100% { transform: translate(0,0) scale(1); }
+            33% { transform: translate(-50px,30px) scale(0.9); }
+            66% { transform: translate(40px,-40px) scale(1.1); }
+        }
+
+        /* ── Top accent line ── */
+        .top-line {
+            position: fixed; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--cush-orange), transparent);
+            z-index: 10; opacity: 0.8;
+        }
+
+        /* ── Glass utility ── */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.4);
+        }
+
+        /* ── Section base ── */
+        .section {
+            position: relative; z-index: 1;
+            max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center; margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.75rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.2em;
+            color: var(--cush-orange); margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700; color: var(--text-main);
+            letter-spacing: -0.02em; margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 1.1rem; font-weight: 300;
+            color: var(--gray-300); max-width: 600px;
+            margin: 0 auto; line-height: 1.7;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            min-height: 80vh;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center;
+            padding-top: 8rem; padding-bottom: 5rem;
+            animation: fade-in-up 0.8s ease-out;
+        }
+
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-label {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.75rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.25em;
+            color: var(--cush-orange); margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700; color: var(--text-main);
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.03em; line-height: 1.1;
+        }
+
+        .hero h1 .accent {
+            background: linear-gradient(135deg, #FF6A3D, #FF9B7A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            font-weight: 300; color: var(--gray-300);
+            max-width: 640px; line-height: 1.7; margin-bottom: 3rem;
+        }
+
+        .hero-cta-group {
+            display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap;
+        }
+
+        /* ── Buttons ── */
+        .btn-primary {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.95rem; font-weight: 600;
+            color: #000; background: var(--cush-orange);
+            border: none; padding: 1rem 2.5rem;
+            border-radius: 12px; cursor: pointer;
+            text-decoration: none; transition: all 0.3s;
+            box-shadow: 0 0 25px var(--cush-orange-glow);
+            display: inline-flex; align-items: center; justify-content: center;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(255,106,61,0.4);
+            background: var(--cush-orange-light);
+        }
+
+        .btn-secondary {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.95rem; font-weight: 600;
+            color: var(--text-main); background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 1rem 2.5rem; border-radius: 12px;
+            cursor: pointer; text-decoration: none; transition: all 0.3s;
+            display: inline-flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+        .btn-secondary:hover {
+            background: var(--glass-highlight);
+            border-color: var(--glass-highlight);
+            transform: translateY(-3px);
+        }
+
+        /* ── Pain section ── */
+        .pain-section {
+            padding: 6rem 2rem;
+        }
+
+        .pain-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .pain-text h2 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            font-weight: 700; color: var(--text-main);
+            letter-spacing: -0.02em; line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .pain-text p {
+            font-size: 1.05rem; font-weight: 300;
+            color: var(--gray-300); line-height: 1.8;
+            margin-bottom: 1.25rem;
+        }
+
+        .pain-stats {
+            display: flex; flex-direction: column; gap: 1.25rem;
+        }
+
+        .pain-stat-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px; padding: 1.5rem 2rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.3s;
+        }
+
+        .pain-stat-card:hover {
+            border-color: rgba(255,106,61,0.3);
+            transform: translateX(4px);
+        }
+
+        .pain-stat-number {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 2rem; font-weight: 700;
+            color: var(--cush-orange); display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .pain-stat-label {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 0.95rem; font-weight: 300;
+            color: var(--gray-300); line-height: 1.5;
+        }
+
+        /* ── Pricing ── */
+        .pricing-section {
+            padding: 6rem 2rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px; padding: 3rem 2.5rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: relative; overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255,106,61,0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .pricing-card.featured {
+            border-color: rgba(255,106,61,0.4);
+            background: rgba(255,106,61,0.05);
+        }
+
+        .pricing-card.featured::before {
+            content: "";
+            position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--cush-orange), transparent);
+        }
+
+        .pricing-badge {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.7rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.15em;
+            color: #000; background: var(--cush-orange);
+            padding: 0.3rem 0.85rem; border-radius: 100px;
+            display: inline-block; margin-bottom: 1.5rem;
+        }
+
+        .pricing-market {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.8rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.15em;
+            color: var(--cush-orange); margin-bottom: 0.5rem;
+        }
+
+        .pricing-price {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700; color: var(--text-main);
+            letter-spacing: -0.03em; line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-price sup {
+            font-size: 1.5rem; vertical-align: super; font-weight: 600;
+        }
+
+        .pricing-period {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.9rem; font-weight: 500;
+            color: var(--gray-400); margin-bottom: 0.75rem;
+        }
+
+        .pricing-minutes {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 0.95rem; font-weight: 300;
+            color: var(--gray-300); margin-bottom: 0.5rem;
+        }
+
+        .pricing-overage {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 0.85rem; font-weight: 300;
+            color: var(--gray-400); margin-bottom: 2rem;
+        }
+
+        .pricing-divider {
+            border: none; border-top: 1px solid var(--glass-border);
+            margin: 1.75rem 0;
+        }
+
+        .pricing-meta {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.8rem; font-weight: 500;
+            color: var(--cush-orange); letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-cta {
+            display: block; text-align: center;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.95rem; font-weight: 600;
+            color: #000; background: var(--cush-orange);
+            padding: 0.9rem 2rem; border-radius: 12px;
+            text-decoration: none; transition: all 0.3s;
+            box-shadow: 0 0 20px var(--cush-orange-glow);
+        }
+
+        .pricing-cta:hover {
+            background: var(--cush-orange-light);
+            transform: translateY(-2px);
+            box-shadow: 0 0 35px rgba(255,106,61,0.4);
+        }
+
+        .pricing-cta.secondary {
+            background: var(--glass-bg);
+            color: var(--text-main);
+            border: 1px solid var(--glass-border);
+            box-shadow: none;
+        }
+
+        .pricing-cta.secondary:hover {
+            background: var(--glass-highlight);
+            border-color: var(--glass-highlight);
+        }
+
+        /* ── Features section ── */
+        .features-section {
+            padding: 6rem 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .feature-item {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px; padding: 1.75rem 1.5rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex; align-items: flex-start; gap: 1rem;
+            transition: all 0.3s;
+        }
+
+        .feature-item:hover {
+            border-color: rgba(255,106,61,0.2);
+            transform: translateY(-3px);
+        }
+
+        .feature-check {
+            width: 22px; height: 22px; flex-shrink: 0;
+            background: rgba(255,106,61,0.12);
+            border: 1px solid rgba(255,106,61,0.25);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin-top: 1px;
+        }
+
+        .feature-check svg {
+            width: 12px; height: 12px; fill: var(--cush-orange);
+        }
+
+        .feature-text {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 0.95rem; font-weight: 300;
+            color: var(--gray-200); line-height: 1.5;
+        }
+
+        /* ── ROI Table ── */
+        .roi-section {
+            padding: 6rem 2rem;
+        }
+
+        .roi-table-wrap {
+            overflow-x: auto;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .roi-table {
+            width: 100%; border-collapse: collapse;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .roi-table th {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.8rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.12em;
+            padding: 1.25rem 2rem;
+            border-bottom: 1px solid var(--glass-border);
+            text-align: left;
+        }
+
+        .roi-table th:first-child { color: var(--gray-400); }
+        .roi-table th:nth-child(2) { color: var(--gray-400); }
+        .roi-table th:nth-child(3) { color: var(--cush-orange); }
+
+        .roi-table td {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 0.95rem; font-weight: 300;
+            color: var(--gray-300); padding: 1.1rem 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            vertical-align: middle;
+        }
+
+        .roi-table tr:last-child td { border-bottom: none; }
+
+        .roi-table td:first-child {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.85rem; font-weight: 600;
+            color: var(--gray-200); text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .roi-table td.highlight {
+            color: var(--text-main); font-weight: 400;
+        }
+
+        .roi-win {
+            color: var(--cush-orange) !important;
+            font-weight: 500 !important;
+        }
+
+        /* ── Who it's for ── */
+        .verticals-section {
+            padding: 6rem 2rem;
+        }
+
+        .verticals-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .vertical-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px; padding: 2.5rem 2rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+            position: relative; overflow: hidden;
+        }
+
+        .vertical-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--glass-highlight);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .vertical-icon {
+            width: 52px; height: 52px; border-radius: 14px;
+            background: rgba(255,106,61,0.1);
+            border: 1px solid rgba(255,106,61,0.2);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .vertical-icon svg {
+            width: 24px; height: 24px; fill: var(--cush-orange);
+        }
+
+        .vertical-card h3 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.1rem; font-weight: 600;
+            color: var(--text-main); margin-bottom: 0.75rem;
+        }
+
+        .vertical-card p {
+            font-size: 0.95rem; font-weight: 300;
+            color: var(--gray-300); line-height: 1.6;
+        }
+
+        /* ── How it works ── */
+        .how-section {
+            padding: 6rem 2rem;
+        }
+
+        .steps {
+            display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem;
+        }
+
+        .step {
+            position: relative; padding: 2rem; border-radius: 24px;
+            border: 1px solid transparent;
+            transition: border-color 0.4s, background 0.4s, transform 0.3s;
+        }
+
+        .step:hover {
+            border-color: rgba(255,106,61,0.15);
+            background: rgba(255,106,61,0.03);
+            transform: translateY(-4px);
+        }
+
+        .step-number {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 3.5rem; font-weight: 700;
+            color: var(--glass-highlight); opacity: 0.4;
+            line-height: 1; margin-bottom: 1.5rem;
+            transition: opacity 0.4s, color 0.4s, text-shadow 0.4s;
+        }
+
+        .step:hover .step-number {
+            opacity: 1; color: var(--cush-orange);
+            text-shadow: 0 0 30px var(--cush-orange-glow);
+        }
+
+        .step h3 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.1rem; font-weight: 600;
+            color: var(--text-main); margin-bottom: 0.75rem;
+        }
+
+        .step p {
+            font-size: 0.95rem; font-weight: 300;
+            color: var(--gray-300); line-height: 1.7;
+        }
+
+        /* ── CTA ── */
+        .cta {
+            padding: 8rem 2rem; text-align: center; position: relative;
+        }
+
+        .cta h2 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700; color: var(--text-main);
+            margin-bottom: 1.5rem; letter-spacing: -0.02em;
+        }
+
+        .cta p {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 1.1rem; font-weight: 300;
+            color: var(--gray-300); max-width: 550px;
+            margin: 0 auto 3rem; line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            position: relative; z-index: 1;
+            border-top: 1px solid var(--glass-border);
+            background: rgba(5,5,5,0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .footer-inner {
+            max-width: 1200px; margin: 0 auto; padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 3rem; margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.3rem; font-weight: 700;
+            color: var(--text-main); text-decoration: none;
+            letter-spacing: -0.02em; display: inline-block; margin-bottom: 1rem;
+        }
+        .footer-brand span { color: var(--cush-orange); }
+
+        .footer-tagline {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 0.95rem; color: var(--gray-400);
+            line-height: 1.7; margin-bottom: 1.25rem; max-width: 280px;
+        }
+
+        .footer-location {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.8rem; color: var(--gray-400);
+            display: flex; align-items: center; gap: 0.4rem;
+        }
+        .footer-location svg { width: 14px; height: 14px; fill: var(--cush-orange); flex-shrink: 0; }
+
+        .footer-heading {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.75rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.15em;
+            color: var(--text-main); margin-bottom: 1.25rem;
+        }
+
+        .footer-links {
+            list-style: none; display: flex; flex-direction: column; gap: 0.75rem;
+        }
+
+        .footer-links a {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 0.9rem; font-weight: 300;
+            color: var(--gray-400); text-decoration: none; transition: color 0.3s;
+        }
+        .footer-links a:hover { color: var(--cush-orange); }
+
+        .footer-bottom {
+            border-top: 1px solid var(--glass-border);
+            padding-top: 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 1rem;
+        }
+
+        .footer-bottom p {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.8rem; color: var(--gray-400);
+        }
+
+        .footer-bottom a { color: var(--gray-300); text-decoration: none; }
+        .footer-bottom a:hover { color: var(--cush-orange); }
+
+        /* ── Reveal animation ── */
+        .reveal {
+            opacity: 0; transform: translateY(20px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── Responsive ── */
+        @media (max-width: 1024px) {
+            .pain-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .features-grid { grid-template-columns: repeat(2,1fr); }
+            .verticals-grid { grid-template-columns: repeat(2,1fr); }
+            .steps { grid-template-columns: repeat(2,1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .pricing-grid { grid-template-columns: 1fr; }
+            .features-grid { grid-template-columns: 1fr; }
+            .verticals-grid { grid-template-columns: 1fr; }
+            .steps { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .roi-table th, .roi-table td { padding: 1rem 1.25rem; }
+        }
+
+        @media (max-width: 480px) {
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Aurora background -->
+    <div class="aurora-container">
+        <div class="aurora-orb aurora-orb-1"></div>
+        <div class="aurora-orb aurora-orb-2"></div>
+        <div class="aurora-orb aurora-orb-3"></div>
+    </div>
+    <div class="top-line"></div>
+
+    <!-- Navigation -->
+    <div id="nav-root" data-page="services"></div>
+    <script src="/js/nav.js"></script>
+
+    <!-- ═══ 1. Hero ═══ -->
+    <section class="section hero" id="hero">
+        <p class="hero-label">Services &amp; Pricing</p>
+        <h1>Stop Paying $3,500/Month<br>for a Receptionist <span class="accent">Who Sleeps</span></h1>
+        <p class="hero-subtitle">
+            Every missed call is a missed customer. Your AI voice agent answers on the first ring,
+            qualifies the lead, books the appointment, and texts you the details — while you focus on the work.
+        </p>
+        <div class="hero-cta-group">
+            <a href="/consultation" class="btn-primary">Start Free Trial</a>
+            <a href="/" class="btn-secondary">Talk to Clara First</a>
+        </div>
+    </section>
+
+    <!-- ═══ 2. Pain / Cost of Inaction ═══ -->
+    <section class="section pain-section" id="cost">
+        <div class="pain-grid">
+            <div class="pain-text reveal">
+                <h2>You're losing $7,500–$37,500 a month to voicemail</h2>
+                <p>
+                    Most businesses miss 3–5 calls a day. Each one could be a $500–$1,500 customer. That math hurts.
+                </p>
+                <p>
+                    Your AI voice agent works 24/7, answers in under a second, and never puts a caller on hold.
+                    It's not a phone tree. It has a real conversation, captures what you need, and routes the right calls to you.
+                </p>
+                <p>
+                    A full-time receptionist costs $3,000–$4,500/month and works 8 hours a day, 5 days a week.
+                    Your AI agent costs $1,497/month and works every hour of every day of every year.
+                </p>
+            </div>
+            <div class="pain-stats">
+                <div class="pain-stat-card reveal">
+                    <span class="pain-stat-number">&lt;1s</span>
+                    <span class="pain-stat-label">Response time. Every call answered on the first ring, 24/7.</span>
+                </div>
+                <div class="pain-stat-card reveal">
+                    <span class="pain-stat-number">$37,500</span>
+                    <span class="pain-stat-label">Revenue at risk monthly if you miss 5 calls/day at $1,500 each.</span>
+                </div>
+                <div class="pain-stat-card reveal">
+                    <span class="pain-stat-number">3–5 days</span>
+                    <span class="pain-stat-label">From discovery call to your agent going live. Not months.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ 3. Pricing ═══ -->
+    <section class="section pricing-section" id="pricing">
+        <div class="section-header reveal">
+            <p class="section-label">Pricing</p>
+            <h2 class="section-title">One flat monthly rate. No surprises.</h2>
+            <p class="section-subtitle">No setup fee. No long-term contract. Cancel anytime. Your first two weeks are free.</p>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- US -->
+            <div class="pricing-card featured reveal">
+                <span class="pricing-badge">Most Popular</span>
+                <p class="pricing-market">United States</p>
+                <div class="pricing-price"><sup>$</sup>1,497</div>
+                <p class="pricing-period">per month</p>
+                <p class="pricing-minutes">500 minutes included</p>
+                <p class="pricing-overage">Overage: $0.50/min</p>
+                <hr class="pricing-divider">
+                <p class="pricing-meta">Free 2-week trial &mdash; No setup fee &mdash; Cancel anytime</p>
+                <a href="/consultation" class="pricing-cta">Start Free Trial</a>
+            </div>
+
+            <!-- MX -->
+            <div class="pricing-card reveal">
+                <p class="pricing-market">México / LATAM</p>
+                <div class="pricing-price"><sup>$</sup>10,997</div>
+                <p class="pricing-period">MXN por mes</p>
+                <p class="pricing-minutes">500 minutos incluidos</p>
+                <p class="pricing-overage">Excedente: $8.50 MXN/min</p>
+                <hr class="pricing-divider">
+                <p class="pricing-meta">Prueba gratuita de 2 semanas &mdash; Sin costo inicial &mdash; Cancela cuando quieras</p>
+                <a href="/consultation" class="pricing-cta secondary">Comenzar Prueba Gratis</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ 4. What's included ═══ -->
+    <section class="section features-section" id="features">
+        <div class="section-header reveal">
+            <p class="section-label">What's Included</p>
+            <h2 class="section-title">Everything. Fully managed.</h2>
+            <p class="section-subtitle">No IT team needed. CushLabs handles setup, integration, and ongoing optimization.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-item reveal">
+                <div class="feature-check">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                </div>
+                <span class="feature-text">Natural-sounding AI voice matched to your brand</span>
+            </div>
+            <div class="feature-item reveal">
+                <div class="feature-check">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                </div>
+                <span class="feature-text">Answers every call on the first ring, 24/7/365</span>
+            </div>
+            <div class="feature-item reveal">
+                <div class="feature-check">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                </div>
+                <span class="feature-text">500 minutes/month included</span>
+            </div>
+            <div class="feature-item reveal">
+                <div class="feature-check">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                </div>
+                <span class="feature-text">Appointment booking directly into your calendar (Google Calendar, Calendly, and more)</span>
+            </div>
+            <div class="feature-item reveal">
+                <div class="feature-check">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                </div>
+                <span class="feature-text">Lead capture — name, number, and intent texted to you instantly</span>
+            </div>
+            <div class="feature-item reveal">
+                <div class="feature-check">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                </div>
+                <span class="feature-text">Call transfer with full context when a human is needed</span>
+            </div>
+            <div class="feature-item reveal">
+                <div class="feature-check">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                </div>
+                <span class="feature-text">Bilingual EN/ES with automatic language detection</span>
+            </div>
+            <div class="feature-item reveal">
+                <div class="feature-check">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                </div>
+                <span class="feature-text">Monthly call reports and ongoing optimization</span>
+            </div>
+            <div class="feature-item reveal">
+                <div class="feature-check">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                </div>
+                <span class="feature-text">Custom voice, persona, and script tuned for your business</span>
+            </div>
+            <div class="feature-item reveal">
+                <div class="feature-check">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                </div>
+                <span class="feature-text">No IT team needed — fully managed setup and maintenance</span>
+            </div>
+            <div class="feature-item reveal">
+                <div class="feature-check">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                </div>
+                <span class="feature-text">CRM integration via webhook, Zapier, or Make</span>
+            </div>
+            <div class="feature-item reveal">
+                <div class="feature-check">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                </div>
+                <span class="feature-text">Instant text/email notifications for every qualified lead</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ 5. ROI Comparison ═══ -->
+    <section class="section roi-section" id="roi">
+        <div class="section-header reveal">
+            <p class="section-label">The Math</p>
+            <h2 class="section-title">AI vs. a Receptionist</h2>
+            <p class="section-subtitle">Same job. One-third the cost. No sick days. No 5pm.</p>
+        </div>
+
+        <div class="roi-table-wrap reveal">
+            <table class="roi-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Full-time Receptionist</th>
+                        <th>AI Voice Agent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Monthly cost</td>
+                        <td>$3,000–$4,500/mo</td>
+                        <td class="roi-win">$1,497/mo</td>
+                    </tr>
+                    <tr>
+                        <td>Hours</td>
+                        <td>8/day, 5 days/week</td>
+                        <td class="roi-win">24/7, 365 days/year</td>
+                    </tr>
+                    <tr>
+                        <td>Sick days</td>
+                        <td>Yes</td>
+                        <td class="roi-win">Never</td>
+                    </tr>
+                    <tr>
+                        <td>Bilingual</td>
+                        <td>Rarely</td>
+                        <td class="roi-win">Always (EN/ES)</td>
+                    </tr>
+                    <tr>
+                        <td>Appointment booking</td>
+                        <td>Manual</td>
+                        <td class="roi-win">Automatic</td>
+                    </tr>
+                    <tr>
+                        <td>Lead data capture</td>
+                        <td>Inconsistent</td>
+                        <td class="roi-win">Every call, every time</td>
+                    </tr>
+                    <tr>
+                        <td>Setup time</td>
+                        <td>Weeks of hiring</td>
+                        <td class="roi-win">3–5 business days</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ═══ 6. Who it's for ═══ -->
+    <section class="section verticals-section" id="verticals">
+        <div class="section-header reveal">
+            <p class="section-label">Built For</p>
+            <h2 class="section-title">If your phone rings, this is for you</h2>
+            <p class="section-subtitle">Every agent is custom-built for your industry, your call flow, and your customers.</p>
+        </div>
+
+        <div class="verticals-grid">
+            <!-- Home Services -->
+            <div class="vertical-card reveal">
+                <div class="vertical-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/>
+                    </svg>
+                </div>
+                <h3>Home Services</h3>
+                <p>Plumbing, HVAC, roofing, electrical. Every missed call is a $1,200 job. Your agent dispatches service requests and books appointments while you're on the job site.</p>
+            </div>
+
+            <!-- Med Spa / Clinic -->
+            <div class="vertical-card reveal">
+                <div class="vertical-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/>
+                    </svg>
+                </div>
+                <h3>Med Spas &amp; Clinics</h3>
+                <p>A front desk that never puts callers on hold. Qualifies new clients, answers treatment questions, handles pricing objections, and books consultations 24/7.</p>
+            </div>
+
+            <!-- Real Estate -->
+            <div class="vertical-card reveal">
+                <div class="vertical-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                </div>
+                <h3>Real Estate Teams</h3>
+                <p>Outbound follow-up and inbound lead qualification at scale. Your agent calls prospects, qualifies buyers, and books property tours — automatically.</p>
+            </div>
+
+            <!-- Law / Professional Services -->
+            <div class="vertical-card reveal">
+                <div class="vertical-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 6l-1-2H5v17h2v-7h5l1 2h7V6h-6zm4 8h-4l-1-2H7V6h5l1 2h5v6z"/>
+                    </svg>
+                </div>
+                <h3>Law &amp; Professional Services</h3>
+                <p>Client intake without a receptionist. Captures case type, contact info, and urgency — so you arrive to the consultation already knowing the situation.</p>
+            </div>
+
+            <!-- Any business that misses calls -->
+            <div class="vertical-card reveal">
+                <div class="vertical-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                    </svg>
+                </div>
+                <h3>Any Business That Misses Calls</h3>
+                <p>If your phone rings and nobody picks up, you're sending customers to a competitor who did. Your AI agent is the answer that wins those calls back.</p>
+            </div>
+
+            <!-- eCommerce / Online -->
+            <div class="vertical-card reveal">
+                <div class="vertical-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96C5 16.1 6.1 17 7 17h11v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63H17c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0 0 21.46 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </div>
+                <h3>E-commerce &amp; Retail</h3>
+                <p>Order status, return policy questions, and product inquiries handled instantly. Fewer support tickets. Happier customers. Zero hold time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ 7. How It Works ═══ -->
+    <section class="section how-section" id="how-it-works">
+        <div class="section-header reveal">
+            <p class="section-label">My Process</p>
+            <h2 class="section-title">From call to launch in days</h2>
+            <p class="section-subtitle">I do the heavy lifting. You just talk to me about your business.</p>
+        </div>
+
+        <div class="steps">
+            <div class="step reveal">
+                <div class="step-number">01</div>
+                <h3>Discovery Call (Free)</h3>
+                <p>I learn your call flow, customer questions, and business rules. No forms to fill out — just a conversation.</p>
+            </div>
+
+            <div class="step reveal">
+                <div class="step-number">02</div>
+                <h3>I Build Your Agent</h3>
+                <p>Custom voice, persona, and scripts built in 3–5 business days. You preview and approve before anything goes live.</p>
+            </div>
+
+            <div class="step reveal">
+                <div class="step-number">03</div>
+                <h3>Connect Your Systems</h3>
+                <p>I wire up your calendar, CRM, and text notifications. Your agent integrates directly with the tools you already use.</p>
+            </div>
+
+            <div class="step reveal">
+                <div class="step-number">04</div>
+                <h3>Go Live + Monthly Optimization</h3>
+                <p>Launch on web, phone, or both. Every month I review real call data and tune your agent so it keeps improving.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ 8. CTA ═══ -->
+    <section class="section cta" id="cta">
+        <div class="reveal">
+            <h2>Start your free 2-week trial</h2>
+            <p>
+                Your agent is built and deployed during the trial — you see it working with real callers before you pay a dollar.
+                No invoice. No risk. If you're not happy, walk away.
+            </p>
+            <div class="cta-buttons">
+                <a href="/consultation" class="btn-primary">Start Free Trial</a>
+                <a href="/" class="btn-secondary">Talk to Clara First</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ 9. Footer ═══ -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="/" class="footer-brand">CUSH<span>LABS.AI</span></a>
+                    <p class="footer-tagline">AI voice agents that qualify leads, book appointments, and handle customer calls — 24/7.</p>
+                    <p class="footer-location">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        Serving US &amp; Mexico
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-heading">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/services">Services</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                        <li><a href="/portfolio">Portfolio</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-heading">Live Demos</h4>
+                    <ul class="footer-links">
+                        <li><a href="/">Clara — AI Assistant</a></li>
+                        <li><a href="/nyc-coaching">James — Exec Coaching</a></li>
+                        <li><a href="/medspa">Sophia — Med Spa</a></li>
+                        <li><a href="/trades">Mike — Home Services</a></li>
+                        <li><a href="/realestate">David — Real Estate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#105;&#110;&#102;&#111;&#64;&#99;&#117;&#115;&#104;&#108;&#97;&#98;&#115;&#46;&#97;&#105;">&#105;&#110;&#102;&#111;&#64;&#99;&#117;&#115;&#104;&#108;&#97;&#98;&#115;&#46;&#97;&#105;</a></li>
+                        <li><a href="https://wa.me/523315590572" target="_blank" rel="noopener">WhatsApp</a></li>
+                        <li><a href="/consultation">Book a Free Call</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 <a href="https://cushlabs.ai">CushLabs AI Services</a></p>
+                <p>Built by Robert Cushman — powered by AI and voice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll reveal -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var reveals = document.querySelectorAll(".reveal");
+            if (!reveals.length) return;
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+            reveals.forEach(function (el) { observer.observe(el); });
+        });
+    </script>
+    <script src="https://vitals.cushlabs.ai/tracker.js" data-site="voice" defer></script>
+</body>
+</html>

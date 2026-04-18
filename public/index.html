@@ -752,6 +752,35 @@
             line-height: 1.7;
         }
 
+        /* ── Builder section ── */
+        .builder {
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .builder-inner {
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .builder-body {
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--gray-300);
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+        }
+
+        .builder-body a {
+            color: var(--cush-orange);
+            text-decoration: none;
+        }
+
+        .builder-body a:hover {
+            text-decoration: underline;
+        }
+
         .cta-buttons {
             display: flex;
             gap: 1.5rem;
@@ -951,8 +980,8 @@
 
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
         }
 
         .reveal.visible {
@@ -1070,6 +1099,11 @@
         </button>
         <p class="status-text" id="statusText">Loading...</p>
 
+        <div class="hero-cta-group" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem;">
+            <a href="/consultation" class="btn-primary" data-i18n="hero.cta.primary">Start Free Trial</a>
+            <a href="#how-it-works" class="btn-secondary" data-i18n="hero.cta.secondary">See How It Works</a>
+        </div>
+
         <div class="hero-stats">
             <div class="hero-stat">
                 <span class="hero-stat-value">&lt;500ms</span>
@@ -1095,7 +1129,7 @@
     <!-- ═══ 3. What We Build ═══ -->
     <section class="section capabilities" id="capabilities">
         <div class="section-header reveal">
-            <p class="section-label" data-i18n="cap.label">What We Build</p>
+            <p class="section-label" data-i18n="cap.label">What I Build</p>
             <h2 class="section-title" data-i18n="cap.title">Voice Agents That Work for You</h2>
             <p class="section-subtitle" data-i18n="cap.subtitle">
                 Every agent is custom-built for your business — from the voice and personality
@@ -1111,7 +1145,7 @@
                     </svg>
                 </div>
                 <h3 data-i18n="cap.lead.title">Lead Qualification</h3>
-                <p data-i18n="cap.lead.desc">We train your agent on your unique business data — it asks the right questions, scores leads, and routes them to your sales team automatically.</p>
+                <p data-i18n="cap.lead.desc">I train your agent on your unique business data — it asks the right questions, scores leads, and routes them to your sales team automatically.</p>
             </div>
 
             <div class="cap-card reveal">
@@ -1149,7 +1183,7 @@
     <!-- ═══ 4. How It Works ═══ -->
     <section class="section how-it-works" id="how-it-works">
         <div class="section-header reveal">
-            <p class="section-label" data-i18n="how.label">Our Process</p>
+            <p class="section-label" data-i18n="how.label">My Process</p>
             <h2 class="section-title" data-i18n="how.title">How It Works</h2>
             <p class="section-subtitle" data-i18n="how.subtitle">
                 From concept to production in days, not months.
@@ -1160,25 +1194,25 @@
             <div class="step reveal">
                 <div class="step-number">01</div>
                 <h3 data-i18n="how.step1.title">Define the Role</h3>
-                <p data-i18n="how.step1.desc">We map your call flow, customer questions, and business rules into a detailed agent persona and script.</p>
+                <p data-i18n="how.step1.desc">I map your call flow, customer questions, and business rules into a detailed agent persona and script.</p>
             </div>
 
             <div class="step reveal">
                 <div class="step-number">02</div>
                 <h3 data-i18n="how.step2.title">Build the Agent</h3>
-                <p data-i18n="how.step2.desc">We select the best LLM, voice, and STT models for your use case and wire up the conversation logic.</p>
+                <p data-i18n="how.step2.desc">I select the best LLM, voice, and STT models for your use case and wire up the conversation logic.</p>
             </div>
 
             <div class="step reveal">
                 <div class="step-number">03</div>
                 <h3 data-i18n="how.step3.title">Connect Systems</h3>
-                <p data-i18n="how.step3.desc">Clara lives inside your CRM and Calendar — your agent integrates directly with the tools you already use.</p>
+                <p data-i18n="how.step3.desc">Your agent lives inside your CRM and Calendar — integrating directly with the tools you already use.</p>
             </div>
 
             <div class="step reveal">
                 <div class="step-number">04</div>
                 <h3 data-i18n="how.step4.title">Deploy &amp; Optimize</h3>
-                <p data-i18n="how.step4.desc">Launch on web, phone, or both. We proactively optimize your agent every week based on real conversation data — it gets smarter over time.</p>
+                <p data-i18n="how.step4.desc">Launch on web, phone, or both. I proactively optimize your agent every week based on real conversation data — it gets smarter over time.</p>
             </div>
         </div>
     </section>
@@ -1187,7 +1221,7 @@
     <section class="section demos" id="demos">
         <div class="section-header reveal">
             <p class="section-label" data-i18n="demos.label">Live Demos</p>
-            <h2 class="section-title" data-i18n="demos.title">Talk to Our Agents</h2>
+            <h2 class="section-title" data-i18n="demos.title">Talk to My Agents</h2>
             <p class="section-subtitle" data-i18n="demos.subtitle">
                 These are production voice agents — have a real conversation
                 and experience the technology firsthand.
@@ -1220,7 +1254,7 @@
                     <span class="demo-feature" data-i18n="demos.clara.f3">AI Interest Mapping</span>
                     <span class="demo-feature" data-i18n="demos.clara.f4">CRM Integration</span>
                 </div>
-                <p class="demo-tech" data-i18n="demos.clara.tech">Enterprise-Grade Stack — Claude Sonnet &middot; Vapi &middot; Neon Postgres</p>
+                <p class="demo-tech" data-i18n="demos.clara.tech">Clara surfaces the prospects worth your time — from calls your sales team would have missed.</p>
                 <a href="#hero" class="demo-link">
                     <span data-i18n="demos.clara.cta">Talk to Clara</span>
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1254,7 +1288,7 @@
                     <span class="demo-feature" data-i18n="demos.james.f3">Auto-Booking</span>
                     <span class="demo-feature" data-i18n="demos.james.f4">Email Confirmations</span>
                 </div>
-                <p class="demo-tech" data-i18n="demos.james.tech">Enterprise-Grade Stack — Groq Llama 3.1 &middot; Cartesia &middot; Google Calendar API</p>
+                <p class="demo-tech" data-i18n="demos.james.tech">James books coaching sessions from live calls — no scheduling back-and-forth needed.</p>
                 <a href="/nyc-coaching" class="demo-link">
                     <span data-i18n="demos.james.cta">Talk to James</span>
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1288,7 +1322,7 @@
                     <span class="demo-feature" data-i18n="demos.sophia.f3">Objection Handling</span>
                     <span class="demo-feature" data-i18n="demos.sophia.f4">Consultation Booking</span>
                 </div>
-                <p class="demo-tech" data-i18n="demos.sophia.tech">Enterprise-Grade Stack — Claude Sonnet &middot; Cartesia &middot; Deepgram Nova-2</p>
+                <p class="demo-tech" data-i18n="demos.sophia.tech">Sophia books consultations from calls your front desk would have missed — 24/7.</p>
                 <a href="/medspa" class="demo-link">
                     <span data-i18n="demos.sophia.cta">Talk to Sophia</span>
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1322,7 +1356,7 @@
                     <span class="demo-feature" data-i18n="demos.mike.f3">Availability Check</span>
                     <span class="demo-feature" data-i18n="demos.mike.f4">Auto-Scheduling</span>
                 </div>
-                <p class="demo-tech" data-i18n="demos.mike.tech">Enterprise-Grade Stack &mdash; Claude Sonnet &middot; Cartesia Wyatt &middot; Deepgram Nova-3</p>
+                <p class="demo-tech" data-i18n="demos.mike.tech">Mike dispatches jobs and fills your schedule while your crew is already on the clock.</p>
                 <a href="/trades" class="demo-link">
                     <span data-i18n="demos.mike.cta">Talk to Mike</span>
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1356,7 +1390,7 @@
                     <span class="demo-feature" data-i18n="demos.david.f3">Buyer Qualification</span>
                     <span class="demo-feature" data-i18n="demos.david.f4">Tour Booking</span>
                 </div>
-                <p class="demo-tech" data-i18n="demos.david.tech">Enterprise-Grade Stack &mdash; Claude Sonnet &middot; Cartesia &middot; Vapi Outbound</p>
+                <p class="demo-tech" data-i18n="demos.david.tech">David calls prospects, qualifies buyers, and books property tours — without lifting a finger.</p>
                 <a href="/realestate" class="demo-link">
                     <span data-i18n="demos.david.cta">Talk to David</span>
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1367,13 +1401,24 @@
         </div>
     </section>
 
-    <!-- ═══ 6. CTA ═══ -->
+    <!-- ═══ 6. Who Builds These ═══ -->
+    <section class="section builder" id="builder">
+        <div class="builder-inner reveal">
+            <p class="section-label" data-i18n="builder.label">The Builder</p>
+            <h2 class="section-title" data-i18n="builder.title">Who builds these?</h2>
+            <p class="builder-body" data-i18n="builder.p1">I'm Robert Cushman — a developer with 30 years in IT who got tired of watching small businesses lose leads to voicemail. Every agent on this page was built by me, not a team.</p>
+            <p class="builder-body" data-i18n="builder.p2">That means you get direct access to the person who built it, knows it inside out, and fixes it when something goes wrong. No account managers. No tickets. Just me.</p>
+            <p class="builder-body" data-i18n="builder.p3">If you're curious whether voice AI fits your business, I'll tell you honestly — and for free. <a href="/consultation" data-i18n="builder.link">Let's find out together.</a></p>
+        </div>
+    </section>
+
+    <!-- ═══ 7. CTA ═══ -->
     <section class="section cta" id="cta">
         <div class="reveal">
             <h2 data-i18n="cta.title">Ready to Build Your Agent?</h2>
             <p data-i18n="cta.subtitle">
                 Whether you need lead qualification, appointment booking,
-                or a full AI front desk — we'll build it, deploy it, and optimize it for you.
+                or a full AI front desk — I'll build it, deploy it, and optimize it for you.
             </p>
             <div class="cta-buttons">
                 <a href="/contact" class="btn-primary" data-i18n="cta.getBlueprint">Get a Free Call Flow Blueprint</a>
@@ -1391,13 +1436,15 @@
                     <p class="footer-tagline" data-i18n="footer.tagline">AI voice agents that qualify leads, book appointments, and handle customer calls — 24/7.</p>
                     <p class="footer-location">
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                        New York, NY
+                        Serving US &amp; Mexico
                     </p>
                 </div>
                 <div class="footer-col">
                     <h4 class="footer-heading" data-i18n="footer.nav">Navigation</h4>
                     <ul class="footer-links">
                         <li><a href="/">Home</a></li>
+                        <li><a href="/services">Services</a></li>
+                        <li><a href="/faq">FAQ</a></li>
                         <li><a href="/portfolio">Portfolio</a></li>
                         <li><a href="/contact">Contact</a></li>
                     </ul>
@@ -1441,12 +1488,7 @@
             "@type": "Person",
             "name": "Robert Cushman"
         },
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "New York",
-            "addressRegion": "NY",
-            "addressCountry": "US"
-        },
+        "areaServed": ["US", "MX"],
         "contactPoint": {
             "@type": "ContactPoint",
             "email": "info@cushlabs.ai",
@@ -1554,6 +1596,10 @@
             const reveals = document.querySelectorAll(".reveal");
             if (!reveals.length) return;
 
+            function showAll() {
+                reveals.forEach((el) => el.classList.add("visible"));
+            }
+
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
@@ -1561,9 +1607,13 @@
                         observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+            }, { threshold: 0.05, rootMargin: "0px 0px 0px 0px" });
 
             reveals.forEach((el) => observer.observe(el));
+
+            // Fallback: if visitor scrolls faster than the observer fires,
+            // ensure nothing stays hidden after 2.5s
+            setTimeout(showAll, 2500);
         });
     </script>
 
@@ -1583,6 +1633,8 @@
                 "hero.stat.response": "Response",
                 "hero.stat.availability": "Availability",
                 "hero.stat.assistants": "Live Assistants",
+                "hero.cta.primary": "Start Free Trial",
+                "hero.cta.secondary": "See How It Works",
                 "hero.warmup": "Waking up the server — one moment...",
                 // Vapi status strings
                 "status.loading": "Loading...",
@@ -1596,11 +1648,11 @@
                 "status.failInit": "Failed to load. Please refresh.",
                 "status.failConnect": "Failed to connect. Try again.",
                 // Capabilities
-                "cap.label": "What We Build",
+                "cap.label": "What I Build",
                 "cap.title": "Voice Agents That Work for You",
                 "cap.subtitle": "Every agent is custom-built for your business — from the voice and personality to the systems it connects to.",
                 "cap.lead.title": "Lead Qualification",
-                "cap.lead.desc": "We train your agent on your unique business data — it asks the right questions, scores leads, and routes them to your sales team automatically.",
+                "cap.lead.desc": "I train your agent on your unique business data — it asks the right questions, scores leads, and routes them to your sales team automatically.",
                 "cap.booking.title": "Appointment Booking",
                 "cap.booking.desc": "Real-time calendar checks, auto-booking with confirmations, and Google Meet links — all hands-free.",
                 "cap.support.title": "Customer Support",
@@ -1608,20 +1660,20 @@
                 "cap.frontdesk.title": "AI Front Desk",
                 "cap.frontdesk.desc": "A virtual receptionist that greets callers, answers questions, manages scheduling, and instantly transfers to a real person when needed — 24/7.",
                 // How It Works
-                "how.label": "Our Process",
+                "how.label": "My Process",
                 "how.title": "How It Works",
                 "how.subtitle": "From concept to production in days, not months.",
                 "how.step1.title": "Define the Role",
-                "how.step1.desc": "We map your call flow, customer questions, and business rules into a detailed agent persona and script.",
+                "how.step1.desc": "I map your call flow, customer questions, and business rules into a detailed agent persona and script.",
                 "how.step2.title": "Build the Agent",
-                "how.step2.desc": "We select the best LLM, voice, and STT models for your use case and wire up the conversation logic.",
+                "how.step2.desc": "I select the best LLM, voice, and STT models for your use case and wire up the conversation logic.",
                 "how.step3.title": "Connect Systems",
-                "how.step3.desc": "Clara lives inside your CRM and Calendar — your agent integrates directly with the tools you already use.",
+                "how.step3.desc": "Your agent lives inside your CRM and Calendar — integrating directly with the tools you already use.",
                 "how.step4.title": "Deploy & Optimize",
-                "how.step4.desc": "Launch on web, phone, or both. We proactively optimize your agent every week based on real conversation data — it gets smarter over time.",
+                "how.step4.desc": "Launch on web, phone, or both. I proactively optimize your agent every week based on real conversation data — it gets smarter over time.",
                 // Live Demos
                 "demos.label": "Live Demos",
-                "demos.title": "Talk to Our Agents",
+                "demos.title": "Talk to My Agents",
                 "demos.subtitle": "These are production voice agents — have a real conversation and experience the technology firsthand.",
                 "demos.badge": "Live",
                 "demos.clara.role": "Lead Qualification",
@@ -1630,7 +1682,7 @@
                 "demos.clara.f2": "Needs Assessment",
                 "demos.clara.f3": "AI Interest Mapping",
                 "demos.clara.f4": "CRM Integration",
-                "demos.clara.tech": "Enterprise-Grade Stack — Claude Sonnet · Vapi · Neon Postgres",
+                "demos.clara.tech": "Clara surfaces the prospects worth your time — from calls your sales team would have missed.",
                 "demos.clara.cta": "Talk to Clara",
                 "demos.james.role": "Appointment Booking",
                 "demos.james.desc": "A premium scheduling assistant for an executive coaching practice. James checks real-time Google Calendar availability, books sessions with Google Meet links, and sends confirmation emails.",
@@ -1638,7 +1690,7 @@
                 "demos.james.f2": "Real-Time Availability",
                 "demos.james.f3": "Auto-Booking",
                 "demos.james.f4": "Email Confirmations",
-                "demos.james.tech": "Enterprise-Grade Stack — Groq Llama 3.1 · Cartesia · Google Calendar API",
+                "demos.james.tech": "James books coaching sessions from live calls — no scheduling back-and-forth needed.",
                 "demos.james.cta": "Talk to James",
                 "demos.sophia.role": "Med Spa AI Front Desk",
                 "demos.sophia.desc": "An AI front desk agent for medical aesthetics clinics. Sophia qualifies new clients, answers treatment questions, handles pricing objections, and books consultations — 24/7.",
@@ -1646,7 +1698,7 @@
                 "demos.sophia.f2": "Treatment Info",
                 "demos.sophia.f3": "Objection Handling",
                 "demos.sophia.f4": "Consultation Booking",
-                "demos.sophia.tech": "Enterprise-Grade Stack — Claude Sonnet · Cartesia · Deepgram Nova-2",
+                "demos.sophia.tech": "Sophia books consultations from calls your front desk would have missed — 24/7.",
                 "demos.sophia.cta": "Talk to Sophia",
                 "demos.mike.role": "AI Dispatcher",
                 "demos.mike.desc": "An AI dispatch agent for home service companies. Mike qualifies service requests, captures job details, checks technician availability, and books service calls.",
@@ -1654,7 +1706,7 @@
                 "demos.mike.f2": "Job Qualification",
                 "demos.mike.f3": "Availability Check",
                 "demos.mike.f4": "Auto-Scheduling",
-                "demos.mike.tech": "Enterprise-Grade Stack — Claude Sonnet · Cartesia Wyatt · Deepgram Nova-3",
+                "demos.mike.tech": "Mike dispatches jobs and fills your schedule while your crew is already on the clock.",
                 "demos.mike.cta": "Talk to Mike",
                 "demos.david.role": "Real Estate Setter",
                 "demos.david.desc": "An outbound voice agent for real estate teams. David calls prospects, discusses property listings, qualifies buyers, and books property tours — automatically.",
@@ -1662,11 +1714,18 @@
                 "demos.david.f2": "MLS Lookup",
                 "demos.david.f3": "Buyer Qualification",
                 "demos.david.f4": "Tour Booking",
-                "demos.david.tech": "Enterprise-Grade Stack — Claude Sonnet · Cartesia · Vapi Outbound",
+                "demos.david.tech": "David calls prospects, qualifies buyers, and books property tours — without lifting a finger.",
                 "demos.david.cta": "Talk to David",
+                // Builder
+                "builder.label": "The Builder",
+                "builder.title": "Who builds these?",
+                "builder.p1": "I'm Robert Cushman — a developer with 30 years in IT who got tired of watching small businesses lose leads to voicemail. Every agent on this page was built by me, not a team.",
+                "builder.p2": "That means you get direct access to the person who built it, knows it inside out, and fixes it when something goes wrong. No account managers. No tickets. Just me.",
+                "builder.p3": "If you're curious whether voice AI fits your business, I'll tell you honestly — and for free.",
+                "builder.link": "Let's find out together.",
                 // CTA
                 "cta.title": "Ready to Build Your Agent?",
-                "cta.subtitle": "Whether you need lead qualification, appointment booking, or a full AI front desk — we'll build it, deploy it, and optimize it for you.",
+                "cta.subtitle": "Whether you need lead qualification, appointment booking, or a full AI front desk — I'll build it, deploy it, and optimize it for you.",
                 "cta.getBlueprint": "Get a Free Call Flow Blueprint",
                 "cta.talkClara": "Talk to Clara",
                 // Footer
@@ -1689,6 +1748,8 @@
                 "hero.stat.response": "Respuesta",
                 "hero.stat.availability": "Disponibilidad",
                 "hero.stat.assistants": "Asistentes Activos",
+                "hero.cta.primary": "Comenzar Prueba Gratis",
+                "hero.cta.secondary": "Cómo Funciona",
                 "hero.warmup": "Iniciando el servidor — un momento...",
                 // Vapi status strings
                 "status.loading": "Cargando...",
@@ -1702,11 +1763,11 @@
                 "status.failInit": "Error al cargar. Actualiza la p\u00e1gina.",
                 "status.failConnect": "Error al conectar. Int\u00e9ntalo de nuevo.",
                 // Capabilities
-                "cap.label": "Nuestros Servicios",
+                "cap.label": "Mis Servicios",
                 "cap.title": "Agentes de Voz Que Trabajan Para Ti",
                 "cap.subtitle": "Cada agente se construye a medida para tu negocio — desde la voz y personalidad hasta los sistemas que conecta.",
                 "cap.lead.title": "Calificaci\u00f3n de Prospectos",
-                "cap.lead.desc": "Entrenamos a tu agente con los datos únicos de tu negocio — hace las preguntas correctas, puntúa prospectos y los dirige a tu equipo de ventas automáticamente.",
+                "cap.lead.desc": "Entreno a tu agente con los datos únicos de tu negocio — hace las preguntas correctas, puntúa prospectos y los dirige a tu equipo de ventas automáticamente.",
                 "cap.booking.title": "Agendamiento de Citas",
                 "cap.booking.desc": "Consultas de calendario en tiempo real, reservas autom\u00e1ticas con confirmaciones y enlaces de Google Meet — todo sin intervenci\u00f3n.",
                 "cap.support.title": "Soporte al Cliente",
@@ -1714,20 +1775,20 @@
                 "cap.frontdesk.title": "Recepción Virtual IA",
                 "cap.frontdesk.desc": "Una recepcionista virtual que recibe llamadas, responde preguntas, gestiona agendamientos y transfiere instantáneamente a una persona real cuando es necesario — 24/7.",
                 // How It Works
-                "how.label": "Nuestro Proceso",
+                "how.label": "Mi Proceso",
                 "how.title": "C\u00f3mo Funciona",
                 "how.subtitle": "Del concepto a producci\u00f3n en d\u00edas, no meses.",
                 "how.step1.title": "Definir el Rol",
-                "how.step1.desc": "Mapeamos tu flujo de llamadas, preguntas de clientes y reglas de negocio en una persona y gui\u00f3n detallado.",
+                "how.step1.desc": "Mapeo tu flujo de llamadas, preguntas de clientes y reglas de negocio en una persona y gui\u00f3n detallado.",
                 "how.step2.title": "Construir el Agente",
-                "how.step2.desc": "Seleccionamos los mejores modelos de LLM, voz y STT para tu caso de uso y conectamos la l\u00f3gica conversacional.",
+                "how.step2.desc": "Selecciono los mejores modelos de LLM, voz y STT para tu caso de uso y conecto la l\u00f3gica conversacional.",
                 "how.step3.title": "Conectar Sistemas",
-                "how.step3.desc": "Clara vive dentro de tu CRM y Calendario — tu agente se integra directamente con las herramientas que ya usas.",
+                "how.step3.desc": "Tu agente vive dentro de tu CRM y Calendario — se integra directamente con las herramientas que ya usas.",
                 "how.step4.title": "Lanzar y Optimizar",
-                "how.step4.desc": "Lanza en web, teléfono o ambos. Optimizamos proactivamente tu agente cada semana con datos de conversaciones reales — se vuelve más inteligente con el tiempo.",
+                "how.step4.desc": "Lanza en web, teléfono o ambos. Optimizo proactivamente tu agente cada semana con datos de conversaciones reales — se vuelve más inteligente con el tiempo.",
                 // Live Demos
                 "demos.label": "Demos en Vivo",
-                "demos.title": "Habla con Nuestros Agentes",
+                "demos.title": "Habla con Mis Agentes",
                 "demos.subtitle": "Estos son agentes de voz en producci\u00f3n — ten una conversaci\u00f3n real y experimenta la tecnolog\u00eda de primera mano.",
                 "demos.badge": "En Vivo",
                 "demos.clara.role": "Calificaci\u00f3n de Prospectos",
@@ -1736,7 +1797,7 @@
                 "demos.clara.f2": "Evaluaci\u00f3n de Necesidades",
                 "demos.clara.f3": "Mapeo de Inter\u00e9s IA",
                 "demos.clara.f4": "Integraci\u00f3n CRM",
-                "demos.clara.tech": "Stack Empresarial — Claude Sonnet · Vapi · Neon Postgres",
+                "demos.clara.tech": "Clara identifica los prospectos que valen tu tiempo — de llamadas que tu equipo habría perdido.",
                 "demos.clara.cta": "Hablar con Clara",
                 "demos.james.role": "Agendamiento de Citas",
                 "demos.james.desc": "Un asistente premium de agendamiento para una pr\u00e1ctica de coaching ejecutivo. James verifica la disponibilidad en Google Calendar en tiempo real, agenda sesiones con enlaces de Google Meet y env\u00eda correos de confirmaci\u00f3n.",
@@ -1744,7 +1805,7 @@
                 "demos.james.f2": "Disponibilidad en Tiempo Real",
                 "demos.james.f3": "Reserva Autom\u00e1tica",
                 "demos.james.f4": "Confirmaciones por Email",
-                "demos.james.tech": "Stack Empresarial — Groq Llama 3.1 · Cartesia · Google Calendar API",
+                "demos.james.tech": "James agenda sesiones de coaching desde llamadas en vivo — sin el ir y venir del correo.",
                 "demos.james.cta": "Hablar con James",
                 "demos.sophia.role": "Recepci\u00f3n IA para Med Spa",
                 "demos.sophia.desc": "Un agente de recepci\u00f3n IA para cl\u00ednicas de est\u00e9tica m\u00e9dica. Sophia califica nuevos clientes, responde preguntas sobre tratamientos, maneja objeciones de precio y agenda consultas — 24/7.",
@@ -1752,7 +1813,7 @@
                 "demos.sophia.f2": "Info de Tratamientos",
                 "demos.sophia.f3": "Manejo de Objeciones",
                 "demos.sophia.f4": "Reserva de Consultas",
-                "demos.sophia.tech": "Stack Empresarial — Claude Sonnet · Cartesia · Deepgram Nova-2",
+                "demos.sophia.tech": "Sophia agenda consultas de llamadas que tu recepción habría perdido — 24/7.",
                 "demos.sophia.cta": "Hablar con Sophia",
                 "demos.mike.role": "Despachador IA",
                 "demos.mike.desc": "Un agente de despacho IA para empresas de servicios del hogar. Mike califica solicitudes de servicio, captura detalles del trabajo, verifica disponibilidad de técnicos y agenda llamadas de servicio.",
@@ -1760,7 +1821,7 @@
                 "demos.mike.f2": "Calificación de Trabajo",
                 "demos.mike.f3": "Verificación de Disponibilidad",
                 "demos.mike.f4": "Agendamiento Automático",
-                "demos.mike.tech": "Stack Empresarial — Claude Sonnet · Cartesia Wyatt · Deepgram Nova-3",
+                "demos.mike.tech": "Mike despacha trabajos y llena tu agenda mientras tu equipo ya está en el campo.",
                 "demos.mike.cta": "Hablar con Mike",
                 "demos.david.role": "Agente Inmobiliario",
                 "demos.david.desc": "Un agente de voz saliente para equipos inmobiliarios. David llama a prospectos, presenta propiedades, califica compradores y agenda tours de propiedades — automáticamente.",
@@ -1768,11 +1829,18 @@
                 "demos.david.f2": "Búsqueda MLS",
                 "demos.david.f3": "Calificación de Compradores",
                 "demos.david.f4": "Reserva de Tours",
-                "demos.david.tech": "Stack Empresarial — Claude Sonnet · Cartesia · Vapi Saliente",
+                "demos.david.tech": "David llama prospectos, califica compradores y agenda tours de propiedades — sin esfuerzo.",
                 "demos.david.cta": "Hablar con David",
+                // Builder
+                "builder.label": "El Constructor",
+                "builder.title": "\u00bfQui\u00e9n construye estos agentes?",
+                "builder.p1": "Soy Robert Cushman — un desarrollador con 30 años en IT que se cansó de ver negocios pequeños perder prospectos por el buzón de voz. Cada agente en esta página lo construí yo, no un equipo.",
+                "builder.p2": "Eso significa que tienes acceso directo a la persona que lo construyó, lo conoce por dentro y lo arregla cuando algo falla. Sin gestores de cuenta. Sin tickets. Solo yo.",
+                "builder.p3": "Si tienes curiosidad sobre si la IA de voz es para tu negocio, te lo digo con honestidad — y gratis.",
+                "builder.link": "Averigüémoslo juntos.",
                 // CTA
                 "cta.title": "\u00bfListo Para Crear Tu Agente?",
-                "cta.subtitle": "Ya sea que necesites calificación de prospectos, agendamiento de citas o una recepción virtual completa — lo construimos, lo desplegamos y lo optimizamos por ti.",
+                "cta.subtitle": "Ya sea que necesites calificación de prospectos, agendamiento de citas o una recepción virtual completa — yo lo construyo, lo despliego y lo optimizo por ti.",
                 "cta.getBlueprint": "Obtén un Plan de Flujo de Llamadas Gratis",
                 "cta.talkClara": "Hablar con Clara",
                 // Footer
