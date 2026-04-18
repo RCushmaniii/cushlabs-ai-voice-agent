@@ -8,7 +8,7 @@ portfolio_featured: true
 portfolio_last_reviewed: "2026-04-05"
 
 title: "AI Voice Agent Platform"
-tagline: "Production voice AI agents that qualify leads, book appointments, and handle support calls 24/7"
+tagline: "AI phone agents that answer calls, qualify leads, and book appointments — 24/7, under 500ms response"
 slug: "cushlabs-voice-agent"
 category: "AI Automation"
 tech_stack:
@@ -91,19 +91,6 @@ health_status:
   security_headers: "Y"
   rate_limiting: "n/a"
   env_validation: "-"
-  analytics: "DEFERRED"
-  structured_logging: "-"
-  dependabot: "Y"
-  secret_scanning: "Y"
-  db_backup: "-"
-health_status:
-  sentry: "Y"
-  testing: "Y"
-  ci_cd: "Y"
-  health_endpoint: "Y"
-  security_headers: "Y"
-  rate_limiting: "Y"
-  env_validation: "Y"
   analytics: "DEFERRED"
   structured_logging: "-"
   dependabot: "Y"
