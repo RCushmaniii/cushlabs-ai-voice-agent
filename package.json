@@ -6,7 +6,11 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "test": "node --experimental-vm-modules --test test/*.test.js"
+    "test": "node --experimental-vm-modules --test test/*.test.js",
+    "seo:indexnow": "node scripts/seo/indexnow-submit.mjs",
+    "seo:gsc": "node scripts/seo/gsc-submit-urls.mjs --sitemap",
+    "seo:gsc:url": "node scripts/seo/gsc-submit-urls.mjs --url",
+    "seo:submit": "pnpm run seo:indexnow && pnpm run seo:gsc"
   },
   "keywords": [
     "ai",
@@ -35,6 +39,7 @@
     "cors": "^2.8.6",
     "dotenv": "^17.4.0",
     "express": "^5.2.1",
+    "googleapis": "^171.4.0",
     "redis": "^5.11.0"
   }
 }
