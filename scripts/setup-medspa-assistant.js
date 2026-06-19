@@ -5,48 +5,58 @@
  * Usage: node scripts/setup-medspa-assistant.js
  */
 
-const VAPI_PRIVATE_KEY = process.env.VAPI_API_PRIVATE_KEY || 'eb3f8f64-ba73-4751-915c-b9863c9a4c11';
-const CARTESIA_API_KEY = process.env.CARTESIA_API_KEY || 'sk_car_ioVqRYKamkQP43vTBBHYZJ';
+const VAPI_PRIVATE_KEY =
+  process.env.VAPI_API_PRIVATE_KEY || "eb3f8f64-ba73-4751-915c-b9863c9a4c11";
+const CARTESIA_API_KEY =
+  process.env.CARTESIA_API_KEY || "sk_car_ioVqRYKamkQP43vTBBHYZJ";
 
 async function findHannahVoice() {
-    console.log('[1/3] Searching Cartesia for Hannah voice...');
-    const res = await fetch('https://api.cartesia.ai/voices', {
-        headers: {
-            'X-API-Key': CARTESIA_API_KEY,
-            'Cartesia-Version': '2024-06-10',
-        },
-    });
+  console.log("[1/3] Searching Cartesia for Hannah voice...");
+  const res = await fetch("https://api.cartesia.ai/voices", {
+    headers: {
+      "X-API-Key": CARTESIA_API_KEY,
+      "Cartesia-Version": "2024-06-10",
+    },
+  });
 
-    if (!res.ok) {
-        throw new Error(`Cartesia API error: ${res.status} ${await res.text()}`);
-    }
+  if (!res.ok) {
+    throw new Error(`Cartesia API error: ${res.status} ${await res.text()}`);
+  }
 
-    const voices = await res.json();
+  const voices = await res.json();
 
-    // Use Cindy - Receptionist: "Smooth, welcoming adult female for frontline customer interactions"
-    // Hannah was deprecated/renamed by Cartesia. Cindy is the best med spa front desk match.
-    const CINDY_ID = '1242fb95-7ddd-44ac-8a05-9e8a22a6137d';
-    const cindy = voices.find(v => v.id === CINDY_ID);
-    if (cindy) {
-        console.log(`   Using: "${cindy.name}" (${cindy.id})`);
-        console.log(`   Description: ${(cindy.description || 'none').substring(0, 120)}`);
-        return cindy.id;
-    }
+  // Use Cindy - Receptionist: "Smooth, welcoming adult female for frontline customer interactions"
+  // Hannah was deprecated/renamed by Cartesia. Cindy is the best med spa front desk match.
+  const CINDY_ID = "1242fb95-7ddd-44ac-8a05-9e8a22a6137d";
+  const cindy = voices.find((v) => v.id === CINDY_ID);
+  if (cindy) {
+    console.log(`   Using: "${cindy.name}" (${cindy.id})`);
+    console.log(
+      `   Description: ${(cindy.description || "none").substring(0, 120)}`,
+    );
+    return cindy.id;
+  }
 
-    // Fallback: search for any receptionist/front desk voice
-    const fallback = voices.find(v => (v.name || '').toLowerCase().includes('receptionist'));
-    if (fallback) {
-        console.log(`   Fallback: "${fallback.name}" (${fallback.id})`);
-        return fallback.id;
-    }
+  // Fallback: search for any receptionist/front desk voice
+  const fallback = voices.find((v) =>
+    (v.name || "").toLowerCase().includes("receptionist"),
+  );
+  if (fallback) {
+    console.log(`   Fallback: "${fallback.name}" (${fallback.id})`);
+    return fallback.id;
+  }
 
-    throw new Error('Could not find a suitable voice. Check Cartesia voice library.');
+  throw new Error(
+    "Could not find a suitable voice. Check Cartesia voice library.",
+  );
 }
 
 async function createAssistant(voiceId) {
-    console.log(`[2/3] Creating Sophia assistant in Vapi with voice ${voiceId}...`);
+  console.log(
+    `[2/3] Creating Sophia assistant in Vapi with voice ${voiceId}...`,
+  );
 
-    const systemPrompt = `You are Sophia, the AI scheduling assistant for Radiance Medical Spa, a premier medical aesthetics clinic in Scottsdale, Arizona. You answer inbound calls to help prospective and existing clients learn about services and book consultations.
+  const systemPrompt = `You are Sophia, the AI scheduling assistant for Radiance Medical Spa, a premier medical aesthetics clinic in Scottsdale, Arizona. You answer inbound calls to help prospective and existing clients learn about services and book consultations.
 
 ## Voice & Personality
 
@@ -156,76 +166,78 @@ If they say no:
 If the call comes in outside business hours:
 "Thanks for calling Radiance Medical Spa. Our office is currently closed, but I'd love to help you. I can book a consultation for you, or if you'd prefer, I can have someone from our team call you back during business hours. What works best for you?"`;
 
-    const body = {
-        name: 'Sophia - Med Spa AI Front Desk',
-        firstMessage: 'Thank you for calling Radiance Medical Spa. This is Sophia, how can I help you today?',
-        model: {
-            provider: 'anthropic',
-            model: 'claude-sonnet-4-20250514',
-            temperature: 0.4,
-            maxTokens: 250,
-            messages: [
-                {
-                    role: 'system',
-                    content: systemPrompt,
-                },
-            ],
+  const body = {
+    name: "Sophia - Med Spa AI Front Desk",
+    firstMessage:
+      "Thank you for calling Radiance Medical Spa. This is Sophia, how can I help you today?",
+    model: {
+      provider: "anthropic",
+      model: "claude-sonnet-4-6",
+      temperature: 0.4,
+      maxTokens: 250,
+      messages: [
+        {
+          role: "system",
+          content: systemPrompt,
         },
-        voice: {
-            provider: 'cartesia',
-            voiceId: voiceId,
-        },
-        transcriber: {
-            provider: 'deepgram',
-            model: 'nova-2',
-            language: 'en',
-        },
-        endCallMessage: 'Thank you for calling Radiance Medical Spa. We look forward to seeing you. Have a wonderful day!',
-        silenceTimeoutSeconds: 30,
-        maxDurationSeconds: 600,
-        endCallPhrases: ['goodbye', "that's all", 'have a good day', 'thanks bye'],
-        serverUrl: 'https://voice.cushlabs.ai/api/webhook',
-        metadata: {
-            vertical: 'med-spa',
-            demo: true,
-            version: '1.0',
-        },
-    };
+      ],
+    },
+    voice: {
+      provider: "cartesia",
+      voiceId: voiceId,
+    },
+    transcriber: {
+      provider: "deepgram",
+      model: "nova-2",
+      language: "en",
+    },
+    endCallMessage:
+      "Thank you for calling Radiance Medical Spa. We look forward to seeing you. Have a wonderful day!",
+    silenceTimeoutSeconds: 30,
+    maxDurationSeconds: 600,
+    endCallPhrases: ["goodbye", "that's all", "have a good day", "thanks bye"],
+    serverUrl: "https://voice.cushlabs.ai/api/webhook",
+    metadata: {
+      vertical: "med-spa",
+      demo: true,
+      version: "1.0",
+    },
+  };
 
-    const res = await fetch('https://api.vapi.ai/assistant', {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${VAPI_PRIVATE_KEY}`,
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-    });
+  const res = await fetch("https://api.vapi.ai/assistant", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${VAPI_PRIVATE_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
 
-    if (!res.ok) {
-        const err = await res.text();
-        throw new Error(`Vapi API error: ${res.status} ${err}`);
-    }
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`Vapi API error: ${res.status} ${err}`);
+  }
 
-    const assistant = await res.json();
-    console.log(`   Created! Assistant ID: ${assistant.id}`);
-    console.log(`   Name: ${assistant.name}`);
-    return assistant.id;
+  const assistant = await res.json();
+  console.log(`   Created! Assistant ID: ${assistant.id}`);
+  console.log(`   Name: ${assistant.name}`);
+  return assistant.id;
 }
 
 async function main() {
-    try {
-        const voiceId = await findHannahVoice();
-        const assistantId = await createAssistant(voiceId);
+  try {
+    const voiceId = await findHannahVoice();
+    const assistantId = await createAssistant(voiceId);
 
-        console.log(`[3/3] Done!\n`);
-        console.log('='.repeat(60));
-        console.log(`VAPI_ASSISTANT_ID_MEDSPA=${assistantId}`);
-        console.log('='.repeat(60));
-        console.log(`\nAdd this env var to Render to activate the med spa demo.`);
-    } catch (err) {
-        console.error(`\nERROR: ${err.message}`);
-        process.exit(1);
-    }
+    console.log(`[3/3] Done!\n`);
+    console.log("=".repeat(60));
+    console.log(`VAPI_ASSISTANT_ID_MEDSPA=${assistantId}`);
+    console.log("=".repeat(60));
+    console.log(`\nAdd this env var to Render to activate the med spa demo.`);
+  } catch (err) {
+    console.error(`\nERROR: ${err.message}`);
+    process.exit(1);
+  }
 }
 
 main();
