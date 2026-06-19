@@ -2,7 +2,7 @@
   "name": "Sophia - Med Spa AI Front Desk",
   "model": {
     "provider": "anthropic",
-    "model": "claude-sonnet-4-20250514",
+    "model": "claude-sonnet-4-6",
     "temperature": 0.4,
     "maxTokens": 250,
     "systemMessage": "[PASTE FULL SYSTEM PROMPT FROM medspa-system-prompt.md HERE]"
@@ -22,12 +22,7 @@
   "endCallMessage": "Thank you for calling Radiance Medical Spa. We look forward to seeing you. Have a wonderful day!",
   "silenceTimeoutSeconds": 30,
   "maxDurationSeconds": 600,
-  "endCallPhrases": [
-    "goodbye",
-    "that's all",
-    "have a good day",
-    "thanks bye"
-  ],
+  "endCallPhrases": ["goodbye", "that's all", "have a good day", "thanks bye"],
   "metadata": {
     "vertical": "med-spa",
     "demo": true,
