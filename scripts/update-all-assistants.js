@@ -4,25 +4,31 @@
  * Run: node scripts/update-all-assistants.js
  */
 
-const KEY = process.env.VAPI_API_PRIVATE_KEY || 'eb3f8f64-ba73-4751-915c-b9863c9a4c11';
-const WEBHOOK_URL = 'https://voice.cushlabs.ai/api/webhook';
+const KEY = process.env.VAPI_API_PRIVATE_KEY;
+if (!KEY) {
+  console.error(
+    "VAPI_API_PRIVATE_KEY is required. Set it before running (e.g. node --env-file=.env scripts/update-all-assistants.js).",
+  );
+  process.exit(1);
+}
+const WEBHOOK_URL = "https://voice.cushlabs.ai/api/webhook";
 
 async function patch(id, name, body) {
-    const res = await fetch(`https://api.vapi.ai/assistant/${id}`, {
-        method: 'PATCH',
-        headers: {
-            'Authorization': `Bearer ${KEY}`,
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-    });
-    const data = await res.json();
-    if (!res.ok) {
-        console.error(`${name}: FAILED`, JSON.stringify(data, null, 2));
-        return false;
-    }
-    console.log(`${name}: OK — updated ${data.updatedAt}`);
-    return true;
+  const res = await fetch(`https://api.vapi.ai/assistant/${id}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    console.error(`${name}: FAILED`, JSON.stringify(data, null, 2));
+    return false;
+  }
+  console.log(`${name}: OK — updated ${data.updatedAt}`);
+  return true;
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -73,69 +79,101 @@ BOUNDARIES:
 - If someone asks if you are AI, say: Yes, I am Clara, CushLabs' AI assistant. I can help you learn about our services and connect you with our team. What are you looking for?`;
 
 const claraConfig = {
-    name: 'Clara — Lead Qualifier (CushLabs)',
-    firstMessage: "Hi, this is Clara from CushLabs AI. Thanks for reaching out — how can I help you today?",
-    voicemailMessage: "Hi, this is Clara from CushLabs AI Services. Sorry I missed you! You can reach us anytime at voice.cushlabs.ai or email robert@cushlabs.ai. We look forward to hearing from you.",
-    endCallMessage: "Thanks for connecting with CushLabs. We'll follow up with you shortly. Have a great day!",
-    endCallPhrases: ['goodbye', 'talk to you soon', "that's all", 'thanks bye', 'have a good day', 'take care', 'bye bye'],
-    backgroundDenoisingEnabled: true,
-    silenceTimeoutSeconds: 30,
-    maxDurationSeconds: 600,
-    transcriber: {
-        model: 'nova-3',
-        language: 'en',
-        provider: 'deepgram',
-        endpointing: 255,
-    },
-    startSpeakingPlan: {
-        waitSeconds: 0.4,
-        smartEndpointingEnabled: 'livekit',
-    },
-    server: {
-        url: WEBHOOK_URL,
-        timeoutSeconds: 20,
-    },
-    model: {
-        model: 'claude-sonnet-4-6',
-        provider: 'anthropic',
-        temperature: 0.5,
-        maxTokens: 300,
-        messages: [{ role: 'system', content: claraSystemPrompt }],
-        tools: [
-            {
-                type: 'function',
-                function: {
-                    name: 'qualify_lead',
-                    description: "Save qualified lead data when you have collected the caller's name, business type, and AI interest. Call this after gathering their information.",
-                    parameters: {
-                        type: 'object',
-                        required: ['user_name', 'ai_interest'],
-                        properties: {
-                            user_name: { type: 'string', description: 'Full name of the caller' },
-                            business_type: { type: 'string', description: 'Type of business or industry the caller is in' },
-                            ai_interest: { type: 'string', description: 'What AI solution they are interested in — voice agent, chatbot, automation, etc.' },
-                        },
-                    },
-                },
+  name: "Clara — Lead Qualifier (CushLabs)",
+  firstMessage:
+    "Hi, this is Clara from CushLabs AI. Thanks for reaching out — how can I help you today?",
+  voicemailMessage:
+    "Hi, this is Clara from CushLabs AI Services. Sorry I missed you! You can reach us anytime at voice.cushlabs.ai or email robert@cushlabs.ai. We look forward to hearing from you.",
+  endCallMessage:
+    "Thanks for connecting with CushLabs. We'll follow up with you shortly. Have a great day!",
+  endCallPhrases: [
+    "goodbye",
+    "talk to you soon",
+    "that's all",
+    "thanks bye",
+    "have a good day",
+    "take care",
+    "bye bye",
+  ],
+  backgroundDenoisingEnabled: true,
+  silenceTimeoutSeconds: 30,
+  maxDurationSeconds: 600,
+  transcriber: {
+    model: "nova-3",
+    language: "en",
+    provider: "deepgram",
+    endpointing: 255,
+  },
+  startSpeakingPlan: {
+    waitSeconds: 0.4,
+    smartEndpointingEnabled: "livekit",
+  },
+  server: {
+    url: WEBHOOK_URL,
+    timeoutSeconds: 20,
+  },
+  model: {
+    model: "claude-sonnet-4-6",
+    provider: "anthropic",
+    temperature: 0.5,
+    maxTokens: 300,
+    messages: [{ role: "system", content: claraSystemPrompt }],
+    tools: [
+      {
+        type: "function",
+        function: {
+          name: "qualify_lead",
+          description:
+            "Save qualified lead data when you have collected the caller's name, business type, and AI interest. Call this after gathering their information.",
+          parameters: {
+            type: "object",
+            required: ["user_name", "ai_interest"],
+            properties: {
+              user_name: {
+                type: "string",
+                description: "Full name of the caller",
+              },
+              business_type: {
+                type: "string",
+                description: "Type of business or industry the caller is in",
+              },
+              ai_interest: {
+                type: "string",
+                description:
+                  "What AI solution they are interested in — voice agent, chatbot, automation, etc.",
+              },
             },
-            {
-                type: 'function',
-                function: {
-                    name: 'save_lead',
-                    description: 'Save basic lead info when the caller is interested but not ready for a full qualification. Use when you have at least a name and general interest.',
-                    parameters: {
-                        type: 'object',
-                        required: ['caller_name', 'interest'],
-                        properties: {
-                            caller_name: { type: 'string', description: 'Name of the caller' },
-                            interest: { type: 'string', description: 'What they are interested in' },
-                            contact_info: { type: 'string', description: 'Phone number or email if provided' },
-                        },
-                    },
-                },
+          },
+        },
+      },
+      {
+        type: "function",
+        function: {
+          name: "save_lead",
+          description:
+            "Save basic lead info when the caller is interested but not ready for a full qualification. Use when you have at least a name and general interest.",
+          parameters: {
+            type: "object",
+            required: ["caller_name", "interest"],
+            properties: {
+              caller_name: {
+                type: "string",
+                description: "Name of the caller",
+              },
+              interest: {
+                type: "string",
+                description: "What they are interested in",
+              },
+              contact_info: {
+                type: "string",
+                description: "Phone number or email if provided",
+              },
             },
-        ],
-    },
+          },
+        },
+      },
+    ],
+  },
 };
 
 // ═══════════════════════════════════════════════════════════════
@@ -143,20 +181,27 @@ const claraConfig = {
 // ═══════════════════════════════════════════════════════════════
 
 const jamesConfig = {
-    name: 'James — Scheduler (NYC Coaching)',
-    server: {
-        url: WEBHOOK_URL,
-        timeoutSeconds: 20,
-    },
-    transcriber: {
-        model: 'nova-3',
-        language: 'en',
-        provider: 'deepgram',
-    },
-    maxDurationSeconds: 600,
-    backgroundDenoisingEnabled: true,
-    silenceTimeoutSeconds: 30,
-    endCallPhrases: ['goodbye', 'talk to you soon', "that's all", 'thanks bye', 'have a good day', 'take care'],
+  name: "James — Scheduler (NYC Coaching)",
+  server: {
+    url: WEBHOOK_URL,
+    timeoutSeconds: 20,
+  },
+  transcriber: {
+    model: "nova-3",
+    language: "en",
+    provider: "deepgram",
+  },
+  maxDurationSeconds: 600,
+  backgroundDenoisingEnabled: true,
+  silenceTimeoutSeconds: 30,
+  endCallPhrases: [
+    "goodbye",
+    "talk to you soon",
+    "that's all",
+    "thanks bye",
+    "have a good day",
+    "take care",
+  ],
 };
 
 // ═══════════════════════════════════════════════════════════════
@@ -230,79 +275,129 @@ Insurance: Most aesthetic treatments are elective and not covered by insurance, 
 - Vary your language — never repeat the same phrasing twice`;
 
 const sophiaConfig = {
-    name: 'Sophia — Front Desk (Radiance Med Spa)',
-    transcriber: {
-        model: 'nova-3',
-        language: 'en',
-        provider: 'deepgram',
-    },
-    backgroundDenoisingEnabled: true,
-    endCallPhrases: ['goodbye', "that's all", 'have a good day', 'thanks bye', 'take care'],
-    model: {
-        model: 'claude-sonnet-4-6',
-        provider: 'anthropic',
-        temperature: 0.4,
-        maxTokens: 250,
-        messages: [{ role: 'system', content: sophiaSystemPrompt }],
-        tools: [
-            {
-                type: 'function',
-                function: {
-                    name: 'check_availability',
-                    description: 'Check available appointment slots for the next 5 business days. Call this when the caller wants to schedule a consultation.',
-                    parameters: {
-                        type: 'object',
-                        required: [],
-                        properties: {
-                            timezone: { type: 'string', description: 'The caller timezone, e.g. America/New_York. Default to America/New_York if not specified.' },
-                        },
-                    },
-                },
+  name: "Sophia — Front Desk (Radiance Med Spa)",
+  transcriber: {
+    model: "nova-3",
+    language: "en",
+    provider: "deepgram",
+  },
+  backgroundDenoisingEnabled: true,
+  endCallPhrases: [
+    "goodbye",
+    "that's all",
+    "have a good day",
+    "thanks bye",
+    "take care",
+  ],
+  model: {
+    model: "claude-sonnet-4-6",
+    provider: "anthropic",
+    temperature: 0.4,
+    maxTokens: 250,
+    messages: [{ role: "system", content: sophiaSystemPrompt }],
+    tools: [
+      {
+        type: "function",
+        function: {
+          name: "check_availability",
+          description:
+            "Check available appointment slots for the next 5 business days. Call this when the caller wants to schedule a consultation.",
+          parameters: {
+            type: "object",
+            required: [],
+            properties: {
+              timezone: {
+                type: "string",
+                description:
+                  "The caller timezone, e.g. America/New_York. Default to America/New_York if not specified.",
+              },
             },
-            {
-                type: 'function',
-                function: {
-                    name: 'book_appointment',
-                    description: 'Book a consultation appointment on Google Calendar and send invites.',
-                    parameters: {
-                        type: 'object',
-                        required: ['caller_name', 'caller_email', 'date_time'],
-                        properties: {
-                            caller_name: { type: 'string', description: 'Full name of the caller' },
-                            caller_email: { type: 'string', description: 'Email address for the calendar invite' },
-                            date_time: { type: 'string', description: 'Selected date and time in ISO 8601, e.g. 2026-03-05T14:00:00-05:00' },
-                            notes: { type: 'string', description: 'Brief summary — treatment interest, concerns, etc.' },
-                        },
-                    },
-                },
+          },
+        },
+      },
+      {
+        type: "function",
+        function: {
+          name: "book_appointment",
+          description:
+            "Book a consultation appointment on Google Calendar and send invites.",
+          parameters: {
+            type: "object",
+            required: ["caller_name", "caller_email", "date_time"],
+            properties: {
+              caller_name: {
+                type: "string",
+                description: "Full name of the caller",
+              },
+              caller_email: {
+                type: "string",
+                description: "Email address for the calendar invite",
+              },
+              date_time: {
+                type: "string",
+                description:
+                  "Selected date and time in ISO 8601, e.g. 2026-03-05T14:00:00-05:00",
+              },
+              notes: {
+                type: "string",
+                description:
+                  "Brief summary — treatment interest, concerns, etc.",
+              },
             },
-            {
-                type: 'function',
-                function: {
-                    name: 'save_lead',
-                    description: 'Save lead info when the caller is interested but not ready to book yet.',
-                    parameters: {
-                        type: 'object',
-                        required: ['caller_name', 'interest'],
-                        properties: {
-                            caller_name: { type: 'string', description: 'Name of the caller' },
-                            interest: { type: 'string', description: 'What treatment or service they are interested in' },
-                            contact_info: { type: 'string', description: 'Phone or email if provided' },
-                        },
-                    },
-                },
+          },
+        },
+      },
+      {
+        type: "function",
+        function: {
+          name: "save_lead",
+          description:
+            "Save lead info when the caller is interested but not ready to book yet.",
+          parameters: {
+            type: "object",
+            required: ["caller_name", "interest"],
+            properties: {
+              caller_name: {
+                type: "string",
+                description: "Name of the caller",
+              },
+              interest: {
+                type: "string",
+                description: "What treatment or service they are interested in",
+              },
+              contact_info: {
+                type: "string",
+                description: "Phone or email if provided",
+              },
             },
-        ],
-    },
+          },
+        },
+      },
+    ],
+  },
 };
 
 // ═══ RUN ═══
 (async () => {
-    console.log('Updating all 3 Vapi assistants...\n');
+  console.log("Updating all 3 Vapi assistants...\n");
 
-    const r1 = await patch('c9ca3aaf-9bc1-4277-b0d3-08c9d925e695', 'Clara', claraConfig);
-    const r2 = await patch('71cadc36-0f08-49f0-bca5-99199a5ed269', 'James', jamesConfig);
-    const r3 = await patch('432d9f70-1548-4532-9fb9-f030223bae2b', 'Sophia', sophiaConfig);
+  const r1 = await patch(
+    "c9ca3aaf-9bc1-4277-b0d3-08c9d925e695",
+    "Clara",
+    claraConfig,
+  );
+  const r2 = await patch(
+    "71cadc36-0f08-49f0-bca5-99199a5ed269",
+    "James",
+    jamesConfig,
+  );
+  const r3 = await patch(
+    "432d9f70-1548-4532-9fb9-f030223bae2b",
+    "Sophia",
+    sophiaConfig,
+  );
 
-    console.log(`\nResults: Clara=${r1 ? 'OK' : 'FAIL'} James=${r2 ? 'OK' : 'FAIL'} Sophia=${r3 ? 'OK' : 'FAIL'}`);
+  console.log(
+    `\nResults: Clara=${r1 ? "OK" : "FAIL"} James=${r2 ? "OK" : "FAIL"} Sophia=${r3 ? "OK" : "FAIL"}`,
+  );
 })();

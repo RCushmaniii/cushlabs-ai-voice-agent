@@ -5,10 +5,14 @@
  * Usage: node scripts/setup-medspa-assistant.js
  */
 
-const VAPI_PRIVATE_KEY =
-  process.env.VAPI_API_PRIVATE_KEY || "eb3f8f64-ba73-4751-915c-b9863c9a4c11";
-const CARTESIA_API_KEY =
-  process.env.CARTESIA_API_KEY || "sk_car_ioVqRYKamkQP43vTBBHYZJ";
+const VAPI_PRIVATE_KEY = process.env.VAPI_API_PRIVATE_KEY;
+const CARTESIA_API_KEY = process.env.CARTESIA_API_KEY;
+if (!VAPI_PRIVATE_KEY || !CARTESIA_API_KEY) {
+  console.error(
+    "Missing required env vars: set VAPI_API_PRIVATE_KEY and CARTESIA_API_KEY before running (e.g. node --env-file=.env scripts/setup-medspa-assistant.js).",
+  );
+  process.exit(1);
+}
 
 async function findHannahVoice() {
   console.log("[1/3] Searching Cartesia for Hannah voice...");
