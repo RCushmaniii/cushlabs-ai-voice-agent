@@ -55,16 +55,36 @@ demo_url: "https://voice.cushlabs.ai"
 live_url: "https://voice.cushlabs.ai"
 
 hero_images:
-  - "/portfolio/voice-cushlabs-01.webp"
-  - "/portfolio/voice-cushlabs-02.webp"
-  - "/portfolio/voice-cushlabs-03.webp"
-  - "/portfolio/voice-cushlabs-04.webp"
-  - "/portfolio/voice-cushlabs-05.webp"
-  - "/portfolio/voice-cushlabs-06.webp"
-  - "/portfolio/voice-cushlabs-07.webp"
-  - "/portfolio/voice-cushlabs-08.webp"
-  - "/portfolio/voice-cushlabs-09.webp"
-  - "/portfolio/voice-cushlabs-10.webp"
+  - src: "/portfolio/voice-cushlabs-01.webp"
+    alt_en: "CushLabs AI Voice Agent landing page at voice.cushlabs.ai showing the demo agent lineup"
+    alt_es: "Página principal del Agente de Voz con IA de CushLabs en voice.cushlabs.ai que muestra la lista de agentes de demostración"
+  - src: "/portfolio/voice-cushlabs-02.webp"
+    alt_en: "Clara lead-qualification voice agent demo screen with live call controls"
+    alt_es: "Pantalla de demostración del agente de voz Clara para calificación de prospectos con controles de llamada en vivo"
+  - src: "/portfolio/voice-cushlabs-03.webp"
+    alt_en: "James appointment-booking agent showing real-time Google Calendar availability during a call"
+    alt_es: "Agente James de reservación de citas que muestra la disponibilidad de Google Calendar en tiempo real durante una llamada"
+  - src: "/portfolio/voice-cushlabs-04.webp"
+    alt_en: "Sophia med spa front desk voice agent answering FAQs and booking treatments"
+    alt_es: "Agente de voz Sophia de recepción de spa médico que responde preguntas frecuentes y agenda tratamientos"
+  - src: "/portfolio/voice-cushlabs-05.webp"
+    alt_en: "Mike home services dispatch agent capturing a service request mid-conversation"
+    alt_es: "Agente Mike de despacho de servicios para el hogar que captura una solicitud de servicio durante la conversación"
+  - src: "/portfolio/voice-cushlabs-06.webp"
+    alt_en: "David outbound real estate agent placing a Twilio PSTN call to qualify a buyer"
+    alt_es: "Agente saliente de bienes raíces David realizando una llamada por Twilio PSTN para calificar a un comprador"
+  - src: "/portfolio/voice-cushlabs-07.webp"
+    alt_en: "Live call interface showing the Vapi voice agent status and transcript in progress"
+    alt_es: "Interfaz de llamada en vivo que muestra el estado del agente de voz Vapi y la transcripción en curso"
+  - src: "/portfolio/voice-cushlabs-08.webp"
+    alt_en: "Mock MLS property lookup results for the real estate demo with New Jersey listings"
+    alt_es: "Resultados de búsqueda de propiedades de MLS simulado para la demostración de bienes raíces con propiedades en Nueva Jersey"
+  - src: "/portfolio/voice-cushlabs-09.webp"
+    alt_en: "Appointment confirmation booked into Google Calendar with an auto-generated Google Meet link"
+    alt_es: "Confirmación de cita agendada en Google Calendar con un enlace de Google Meet generado automáticamente"
+  - src: "/portfolio/voice-cushlabs-10.webp"
+    alt_en: "Bilingual EN/ES interface toggle on the voice agent platform"
+    alt_es: "Selector de interfaz bilingüe inglés/español en la plataforma del agente de voz"
 demo_video_url: "/video/voice-cushlabs-brief.mp4"
 demo_video_poster: "/video/voice-cushlabs-brief-poster.webp"
 tags:
@@ -141,11 +161,13 @@ Five demo agents are deployed at voice.cushlabs.ai: Clara handles lead qualifica
 ## Results
 
 **For the Business:**
+
 - Every inbound call answered instantly, 24/7 — zero missed leads
 - Qualified prospects booked directly into calendar before hanging up
 - L1 support handled automatically, human agents reserved for complex issues
 
 **Technical Demonstration:**
+
 - Real-time voice AI with production-grade latency (<500ms)
 - Both inbound (Web SDK) and outbound (Twilio PSTN) calling in a single platform
 - Webhook-driven architecture that executes real-world actions during live calls (8 function handlers)
