@@ -35,11 +35,11 @@
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
     "@sentry/node": "^10.47.0",
+    "@upstash/redis": "^1.38.0",
     "compression": "^1.8.1",
     "cors": "^2.8.6",
     "dotenv": "^17.4.0",
     "express": "^5.2.1",
-    "googleapis": "^171.4.0",
-    "redis": "^5.11.0"
+    "googleapis": "^171.4.0"
   }
 }
