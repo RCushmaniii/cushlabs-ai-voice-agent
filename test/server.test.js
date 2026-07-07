@@ -122,12 +122,12 @@ describe("Server", () => {
         "Content-Security-Policy",
         [
           "default-src 'self'",
-          "script-src 'self' 'unsafe-inline' blob: https://cdn.jsdelivr.net https://vitals.cushlabs.ai https://*.daily.co",
+          "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob: https://cdn.jsdelivr.net https://vitals.cushlabs.ai https://*.daily.co",
           "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
           "font-src 'self' https://fonts.gstatic.com",
           "img-src 'self' data: blob:",
-          "connect-src 'self' https://*.vapi.ai wss://*.vapi.ai https://*.daily.co wss://*.daily.co https://*.sentry.io https://cdn.jsdelivr.net https://formspree.io https://vitals.cushlabs.ai",
-          "media-src 'self' blob: https://*.daily.co",
+          "connect-src 'self' https://*.vapi.ai https://*.daily.co https://*.pluot.blue https://*.sentry.io https://cdn.jsdelivr.net https://formspree.io https://vitals.cushlabs.ai wss:",
+          "media-src 'self' blob: https://*.daily.co https://*.pluot.blue",
           "worker-src 'self' blob:",
           "frame-src 'none'",
         ].join("; "),
@@ -223,10 +223,11 @@ describe("Server", () => {
       assert.ok(
         res.headers["content-security-policy"].includes("vitals.cushlabs.ai"),
       );
-      // Vapi rides on Daily.co WebRTC — connect-src must allow it or voice calls silently fail.
-      assert.ok(
-        res.headers["content-security-policy"].includes("wss://*.daily.co"),
-      );
+      // Vapi rides on Daily.co WebRTC — connect-src must allow Daily's media/TURN relays
+      // (*.pluot.blue) and secure WebSockets (wss:) or calls time out at the join stage.
+      const csp = res.headers["content-security-policy"];
+      assert.ok(csp.includes("*.pluot.blue"));
+      assert.ok(csp.includes("wss:"));
     });
   });
 
