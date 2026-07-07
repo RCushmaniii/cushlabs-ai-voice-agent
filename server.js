@@ -37,16 +37,17 @@ app.use((req, res, next) => {
     "Content-Security-Policy",
     [
       "default-src 'self'",
-      // Vapi's Web SDK runs on Daily.co's WebRTC stack; script-src blob: is needed for the
-      // call-machine bundle Daily fetches and executes, *.daily.co for its hosted assets.
-      "script-src 'self' 'unsafe-inline' blob: https://cdn.jsdelivr.net https://vitals.cushlabs.ai https://*.daily.co",
+      // Vapi's Web SDK runs on Daily.co's WebRTC stack. blob: + wasm-unsafe-eval run the
+      // call-machine bundle and Krisp noise-cancellation WASM; *.daily.co = hosted assets.
+      "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob: https://cdn.jsdelivr.net https://vitals.cushlabs.ai https://*.daily.co",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: blob:",
-      // *.daily.co (https + wss) = Daily media mesh; *.sentry.io = Vapi/Daily telemetry;
-      // cdn.jsdelivr.net = SDK sourcemap fetches.
-      "connect-src 'self' https://*.vapi.ai wss://*.vapi.ai https://*.daily.co wss://*.daily.co https://*.sentry.io https://cdn.jsdelivr.net https://formspree.io https://vitals.cushlabs.ai",
-      "media-src 'self' blob: https://*.daily.co",
+      // Per Daily's CSP guide: *.daily.co = signaling/assets, *.pluot.blue = media/TURN relays,
+      // broad wss: = TURN-over-WebSocket relays on dynamic hosts (else calls time out at join).
+      // *.sentry.io = Vapi/Daily telemetry; cdn.jsdelivr.net = SDK sourcemap fetches.
+      "connect-src 'self' https://*.vapi.ai https://*.daily.co https://*.pluot.blue https://*.sentry.io https://cdn.jsdelivr.net https://formspree.io https://vitals.cushlabs.ai wss:",
+      "media-src 'self' blob: https://*.daily.co https://*.pluot.blue",
       "worker-src 'self' blob:", // Daily spawns audio-processing workers from blob URLs
       "frame-src 'none'",
     ].join("; "),
