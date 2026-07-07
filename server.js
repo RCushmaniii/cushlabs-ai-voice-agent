@@ -77,15 +77,20 @@ app.use(
 // Body parser with size limit (100KB — webhooks can include transcripts)
 app.use(express.json({ limit: "100kb" }));
 
-// Serve static frontend files with caching
+// Serve static frontend files.
+// Filenames are NOT content-hashed, so long-caching HTML/CSS/JS would serve
+// stale code (e.g. the voice widget) for a day after every deploy. Images and
+// fonts are safe to cache hard; everything else uses no-cache so the browser
+// revalidates via ETag on each load (fast 304 when unchanged, fresh on deploy).
 app.use(
   express.static(path.join(__dirname, "public"), {
-    maxAge: "1d", // HTML/CSS/JS: 1 day cache
     etag: true,
     setHeaders: (res, filePath) => {
-      // Images and fonts: 1 year immutable cache
       if (/\.(png|jpg|jpeg|webp|svg|ico|woff2?|ttf|eot)$/i.test(filePath)) {
         res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+      } else {
+        // HTML, CSS, JS — must revalidate so deploys are picked up immediately.
+        res.setHeader("Cache-Control", "no-cache");
       }
     },
   }),
