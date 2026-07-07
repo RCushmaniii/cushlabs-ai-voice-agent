@@ -15,6 +15,7 @@ Entries are newest-first. Each entry documents one Claude Code working session.
 - Shipped Mexican Spanish (es-MX) voice tied to the site language switcher (#38): created 4 es-MX Vapi assistants (Clara/Mike/Sophia/James) with Mexican Cartesia voices + Deepgram `nova-2/es` + es-MX prompts; `/api/config?lang=es` returns `*_ES` assistant with English fallback; widget pages re-resolve assistant at click time from `localStorage['cushlabs-lang']`. New tooling: `scripts/create-spanish-assistants.js`. 32 tests pass.
 - Verified end-to-end headless: EN and ES both connect clean; ES path requests `lang=es` and loads the Spanish assistant.
 - Fixed a 24h HTML cache bug (#39): `express.static` sent `Cache-Control: max-age=86400` on unhashed HTML, so returning visitors ran stale code for a day — this is why the Spanish voice looked broken live (cached HTML called `/api/config` without `&lang`). HTML/CSS/JS now `no-cache` (ETag revalidate); images/fonts stay immutable.
+- Fixed premature Spanish call termination (#40): es-MX `endCallPhrases` contained courtesy phrases ("muchas gracias", "que tenga buen día") — these fire when the assistant says them, and Clara opens turns with "muchas gracias", so calls ended at 22–36s (diagnosed via Vapi call logs + transcripts). Now only true farewells (adiós/hasta luego/hasta pronto), patched live on all 4 es-MX assistants + tooling constant. Also: widget error handlers now treat the benign "Meeting has ended"/ejected Daily error as a normal end (no more "Something went wrong" on a clean hangup).
 
 ### Decisions Made
 
@@ -24,7 +25,7 @@ Entries are newest-first. Each entry documents one Claude Code working session.
 
 ### Immediate Next Steps
 
-- [ ] Robert to place a live Spanish call (real mic) on https://voice.cushlabs.ai/ to confirm audio + accent quality.
+- [ ] Robert to place a live Spanish call (real mic) on https://voice.cushlabs.ai/ to confirm a full multi-turn conversation now holds (post-endCallPhrases fix) + accent quality.
 - [ ] Consider enabling the language switcher on medspa/nyc-coaching pages (assistants + wiring already Spanish-ready; nav.js `i18nPages` currently excludes them).
 
 ### Technical Debt
