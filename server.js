@@ -109,12 +109,26 @@ const assistants = {
   realestate: process.env.VAPI_ASSISTANT_ID_REALESTATE,
 };
 
+// Mexican-Professional-Spanish (es-MX) assistant variants. Falls back to the
+// English assistant for any service without a Spanish counterpart.
+const assistantsEs = {
+  cushlabs: process.env.VAPI_ASSISTANT_ID_CUSHLABS_ES,
+  coaching: process.env.VAPI_ASSISTANT_ID_COACHING_ES,
+  medspa: process.env.VAPI_ASSISTANT_ID_MEDSPA_ES,
+  trades: process.env.VAPI_ASSISTANT_ID_TRADES_ES,
+};
+
 app.get("/api/config", (req, res) => {
-  const service = req.query.service || "cushlabs";
-  const assistantId = assistants[service] || assistants.cushlabs;
+  const service = assistants[req.query.service]
+    ? req.query.service
+    : "cushlabs";
+  const lang = req.query.lang === "es" ? "es" : "en";
+  const assistantId =
+    (lang === "es" && assistantsEs[service]) || assistants[service];
   res.json({
     publicKey: process.env.VAPI_API_PUBLIC_KEY,
     assistantId,
+    lang,
   });
 });
 

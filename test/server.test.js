@@ -11,6 +11,8 @@ process.env.VAPI_ASSISTANT_ID_COACHING = "test-coaching-id";
 process.env.VAPI_ASSISTANT_ID_MEDSPA = "test-medspa-id";
 process.env.VAPI_ASSISTANT_ID_TRADES = "test-trades-id";
 process.env.VAPI_ASSISTANT_ID_REALESTATE = "test-realestate-id";
+process.env.VAPI_ASSISTANT_ID_CUSHLABS_ES = "test-cushlabs-es-id";
+process.env.VAPI_ASSISTANT_ID_MEDSPA_ES = "test-medspa-es-id";
 process.env.DATABASE_URL = "postgresql://fake:fake@localhost/fake";
 process.env.REDIS_URL = "redis://localhost:6379";
 process.env.VAPI_WEBHOOK_SECRET = "test-webhook-secret";
@@ -151,10 +153,24 @@ describe("Server", () => {
       trades: process.env.VAPI_ASSISTANT_ID_TRADES,
       realestate: process.env.VAPI_ASSISTANT_ID_REALESTATE,
     };
+    const assistantsEs = {
+      cushlabs: process.env.VAPI_ASSISTANT_ID_CUSHLABS_ES,
+      coaching: process.env.VAPI_ASSISTANT_ID_COACHING_ES,
+      medspa: process.env.VAPI_ASSISTANT_ID_MEDSPA_ES,
+      trades: process.env.VAPI_ASSISTANT_ID_TRADES_ES,
+    };
     app.get("/api/config", (req, res) => {
-      const service = req.query.service || "cushlabs";
-      const assistantId = assistants[service] || assistants.cushlabs;
-      res.json({ publicKey: process.env.VAPI_API_PUBLIC_KEY, assistantId });
+      const service = assistants[req.query.service]
+        ? req.query.service
+        : "cushlabs";
+      const lang = req.query.lang === "es" ? "es" : "en";
+      const assistantId =
+        (lang === "es" && assistantsEs[service]) || assistants[service];
+      res.json({
+        publicKey: process.env.VAPI_API_PUBLIC_KEY,
+        assistantId,
+        lang,
+      });
     });
 
     const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -255,6 +271,37 @@ describe("Server", () => {
         "/api/config?service=nonexistent",
       );
       assert.equal(res.body.assistantId, "test-cushlabs-id");
+    });
+
+    it("returns the es-MX assistant when lang=es", async () => {
+      const res = await request(server, "GET", "/api/config?lang=es");
+      assert.equal(res.body.assistantId, "test-cushlabs-es-id");
+      assert.equal(res.body.lang, "es");
+    });
+
+    it("returns service-specific es-MX assistant when lang=es", async () => {
+      const res = await request(
+        server,
+        "GET",
+        "/api/config?service=medspa&lang=es",
+      );
+      assert.equal(res.body.assistantId, "test-medspa-es-id");
+    });
+
+    it("falls back to English assistant when no es variant exists", async () => {
+      // coaching has no _ES env var set in this test → English id
+      const res = await request(
+        server,
+        "GET",
+        "/api/config?service=coaching&lang=es",
+      );
+      assert.equal(res.body.assistantId, "test-coaching-id");
+    });
+
+    it("defaults to English (en) when lang omitted", async () => {
+      const res = await request(server, "GET", "/api/config?service=medspa");
+      assert.equal(res.body.assistantId, "test-medspa-id");
+      assert.equal(res.body.lang, "en");
     });
   });
 
