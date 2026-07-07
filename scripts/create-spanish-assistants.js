@@ -33,16 +33,12 @@ const MX_VOICE = {
   coaching: "d46e87a1-7c6d-4b18-9359-926f4a35ffdf", // Andres — dependable, measured Mexican male
 };
 
-const SPANISH_ENDCALL = [
-  "adiós",
-  "hasta luego",
-  "gracias adiós",
-  "eso es todo",
-  "que tenga buen día",
-  "nos vemos",
-  "hasta pronto",
-  "muchas gracias",
-];
+// ONLY unambiguous farewells. Courtesy phrases like "muchas gracias" or
+// "que tenga buen día" recur constantly in Mexican professional speech, so
+// including them here hangs up the call the moment the assistant is polite
+// (endCallPhrases fire when the ASSISTANT says them). Verified failure:
+// Clara said "muchas gracias por preguntar" and the call ended at 22s.
+const SPANISH_ENDCALL = ["adiós", "hasta luego", "hasta pronto"];
 
 // ─────────────────────────────────────────────────────────────────────────
 // es-MX content per assistant
