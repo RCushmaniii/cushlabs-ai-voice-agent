@@ -1857,13 +1857,22 @@
           });
 
           vapi.on("error", (error) => {
-            console.error("[CushLabs] Vapi error:", error);
-            statusText.textContent = "Something went wrong. Try again.";
-            statusText.className = "status-text";
+            // A normal call-end (silence timeout, user hangup, end-call phrase)
+            // surfaces as a Daily "Meeting has ended" / ejected error. That's not
+            // a failure — let the call-end handler show the friendly message.
+            const msg = (error && error.errorMsg) || "";
+            const inner = error && error.error && error.error.error;
+            const benignEnd =
+              /meeting has ended|ejected/i.test(msg) ||
+              (inner && inner.type === "ejected");
             isCallActive = false;
             voiceBtn.classList.remove("active");
             micIcon.style.display = "block";
             stopIcon.style.display = "none";
+            if (benignEnd) return;
+            console.error("[CushLabs] Vapi error:", error);
+            statusText.textContent = "Something went wrong. Try again.";
+            statusText.className = "status-text";
           });
 
           vapi.on("speech-start", () => {
