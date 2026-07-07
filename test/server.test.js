@@ -122,7 +122,7 @@ describe("Server", () => {
         "Content-Security-Policy",
         [
           "default-src 'self'",
-          "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob: https://cdn.jsdelivr.net https://vitals.cushlabs.ai https://*.daily.co",
+          "script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://cdn.jsdelivr.net https://vitals.cushlabs.ai https://*.daily.co",
           "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
           "font-src 'self' https://fonts.gstatic.com",
           "img-src 'self' data: blob:",
@@ -228,6 +228,9 @@ describe("Server", () => {
       const csp = res.headers["content-security-policy"];
       assert.ok(csp.includes("*.pluot.blue"));
       assert.ok(csp.includes("wss:"));
+      // Daily's call-object bundle is eval'd; without 'unsafe-eval' it throws an EvalError
+      // that surfaces only as a generic daily-error, and calls fail to start.
+      assert.ok(csp.includes("'unsafe-eval'"));
     });
   });
 

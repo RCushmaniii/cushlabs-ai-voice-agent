@@ -37,9 +37,10 @@ app.use((req, res, next) => {
     "Content-Security-Policy",
     [
       "default-src 'self'",
-      // Vapi's Web SDK runs on Daily.co's WebRTC stack. blob: + wasm-unsafe-eval run the
-      // call-machine bundle and Krisp noise-cancellation WASM; *.daily.co = hosted assets.
-      "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob: https://cdn.jsdelivr.net https://vitals.cushlabs.ai https://*.daily.co",
+      // Vapi's Web SDK runs on Daily.co's WebRTC stack. Daily's call-object mode evaluates its
+      // fetched call-machine bundle via eval() → 'unsafe-eval' is required (Vapi doesn't expose
+      // Daily's avoidEval option). blob: for worker bundles, *.daily.co for hosted assets.
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://cdn.jsdelivr.net https://vitals.cushlabs.ai https://*.daily.co",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: blob:",
