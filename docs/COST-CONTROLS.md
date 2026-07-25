@@ -34,22 +34,26 @@ hiccups, and — see the open item below — Redis may not be wired in productio
 all. The in-process fallback is strictly stronger than the per-IP Map it
 replaced, because the fallback counter is global.
 
-### ⚠️ Open item: Redis may not be configured in production
+### Redis in production — VERIFIED WORKING (2026-07-25)
 
-`render.yaml` provisions a Render Redis service and injects **`REDIS_URL`** (a
-TCP connection string). But `services/redis.js` and `services/rate-limit.js`
-both read **`UPSTASH_REDIS_REST_URL`** and **`UPSTASH_REDIS_REST_TOKEN`**, which
-`render.yaml` never sets.
+Checked directly against the running container, not inferred:
 
-If those two vars were not added manually in the Render dashboard, then in
-production today:
+```
+UPSTASH_REDIS_REST_URL     present
+UPSTASH_REDIS_REST_TOKEN   present
+VAPI_WEBHOOK_SECRET        present
+Upstash round-trip         WORKING   (set → get → del inside voice-agent)
+```
 
-- rate limits run on the in-process fallback (works, but per-instance), **and**
-- `services/redis.js` lead-session caching is silently failing.
+So rate limits run on **durable, shared Redis**, not the in-process fallback,
+and `services/redis.js` lead caching is healthy.
 
-This could not be verified from the CLI — the available `RENDER_API_KEY` returned
-no services. **Confirm in the Render dashboard** (steps below) before assuming
-either component is healthy.
+> **Do not trust `render.yaml` in this repo — it is a dead artifact.** The whole
+> stack was migrated off Render to a self-hosted Hetzner VPS in **March 2026**
+> (see `cushlabs-prod-server`). Reasoning from `render.yaml` produced a false
+> conclusion that Redis was misconfigured. `REDIS_URL` still appears in the
+> container env as a leftover and is unused. Verify against the box, never
+> against `render.yaml`.
 
 ---
 
@@ -98,20 +102,34 @@ Mike / trades, David / realestate):
    converts a scripted flood into a queue instead of a bill.
 3. Click **Save**
 
-### 4. Verify the Redis wiring while you are in dashboards
+### 4. Credit balance is itself a ceiling (PAYG)
 
-Open https://dashboard.render.com → service **cushlabs-voice-agent** →
-**Environment** tab, and check whether these two keys exist:
+The Vapi org is on **Pay-as-you-go**. Whatever sits in **Credit Balance** is the
+practical worst case for runaway spend — *provided auto-recharge is off*. Check
+**Settings → Billing → Payment method**: if auto-recharge/auto-top-up is
+enabled, that ceiling disappears and the spending limit in step 1 becomes the
+only backstop.
 
-- `UPSTASH_REDIS_REST_URL`
-- `UPSTASH_REDIS_REST_TOKEN`
+---
 
-- **If both present:** Redis-backed limits and lead caching are working. Nothing
-  to do.
-- **If absent:** either add them (from the Upstash console) so limits become
-  durable and shared, or migrate `services/redis.js` and `services/rate-limit.js`
-  to the TCP `REDIS_URL` that `render.yaml` already provides. Do not leave the
-  two halves disagreeing — that is the current state and it fails silently.
+## Deployment (not Render)
+
+The stack runs on a **Hetzner CPX21 VPS** (`178.156.192.117`), Docker Compose
+behind Caddy. Orchestration lives in the **`cushlabs-prod-server`** repo.
+
+- Push to `main` → GitHub Actions (`.github/workflows/build-image.yml`) builds
+  and pushes `ghcr.io/rcushmaniii/cushlabs-ai-voice-agent:latest`.
+- The box **does not auto-pull** — there is no Watchtower. Deploy is manual:
+
+```
+ssh deploy@178.156.192.117
+cd ~/apps/cushlabs-prod-server
+docker compose pull voice-agent && docker compose up -d voice-agent
+```
+
+- Env lives in `~/apps/cushlabs-prod-server/.env.voice-agent` on the box, **not**
+  in any dashboard. `OUTBOUND_CALLS_PER_DAY` is absent there, so the 50/day
+  default applies; add it to that file and re-up the container to change it.
 
 ---
 

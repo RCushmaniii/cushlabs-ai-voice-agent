@@ -24,23 +24,22 @@
  *   - globalBudget degrades to an IN-PROCESS global counter. It never returns
  *     503 for infrastructure reasons.
  *
- * Why not fail closed on the budget? Fail-closed is the textbook answer for a
- * spending gate, but it could only be justified by confirming Redis is actually
- * configured in production — and that could NOT be verified: render.yaml
- * provisions a Render Redis and injects REDIS_URL (TCP), while services/redis.js
- * reads the UPSTASH_REDIS_REST_URL / _TOKEN pair, which render.yaml never sets.
- * If those Upstash vars are absent on the live service, a fail-closed gate would
- * 503 every outbound call on a client-facing demo.
+ * Upstash was verified WORKING in production on 2026-07-25 (live set/get/del
+ * round-trip inside the running container), so the Redis path — durable and
+ * shared — is what actually runs. The fallback is for transient outages.
  *
- * The in-process fallback is strictly better than what it replaces (an in-memory
- * PER-IP map, which IP rotation walks straight through) because the fallback
- * counter is GLOBAL — it still bounds total spend per window on that instance,
- * which is the actual attack. Render free plan runs a single instance, so in
- * practice the fallback is close to a true global cap. Every degraded decision
- * is logged loudly so the gap is visible rather than silent.
+ * Why not fail closed anyway? A spending gate that fails closed turns any
+ * Upstash blip into a 503 on a client-facing demo. The in-process fallback
+ * still bounds spend, and it is strictly stronger than the code this replaced
+ * (an in-memory PER-IP map, which IP rotation walks straight through) because
+ * the fallback counter is GLOBAL. The box runs a single container per service,
+ * so in practice the fallback is a true global cap. Every degraded decision is
+ * logged loudly so the gap is visible rather than silent.
  *
- * TODO: once UPSTASH_REDIS_REST_URL / _TOKEN are confirmed present on the Render
- * service, revisit whether globalBudget should fail closed.
+ * Deployment note: this service runs on a Hetzner VPS via Docker Compose
+ * (repo: cushlabs-prod-server), NOT on Render. Env lives in .env.voice-agent on
+ * the box. The repo's old render.yaml was removed — reasoning from it produced
+ * a false "Redis is misconfigured" conclusion.
  */
 
 const { Redis } = require("@upstash/redis");

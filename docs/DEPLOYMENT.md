@@ -1,13 +1,44 @@
 # Deployment & Infrastructure
 
-## Hosting: Render (Free Tier)
+## Hosting: Hetzner VPS (Docker Compose + Caddy)
+
+> **⚠️ SUPERSEDED 2026-07-25.** Everything below the "Historical" heading
+> described a Render free-tier deploy that has not existed since **March 2026**,
+> when the stack was migrated to a self-hosted Hetzner VPS. `render.yaml` has
+> been deleted from this repo. Reasoning from that file produced a false
+> "Redis is misconfigured in production" conclusion — verify against the box,
+> never against Render docs. See `cushlabs-prod-server` and
+> `docs/COST-CONTROLS.md`.
+
+### Current — accurate as of 2026-07-25
 
 - **Live URL**: https://voice.cushlabs.ai
+- **Host**: Hetzner CPX21 (`178.156.192.117`), Ashburn VA — Docker Compose behind Caddy
+- **Orchestration repo**: `cushlabs-prod-server` (single source of truth for the stack)
+- **Image**: `ghcr.io/rcushmaniii/cushlabs-ai-voice-agent:latest`, built by
+  `.github/workflows/build-image.yml` on push to `main`
+- **Deploy**: **manual** — the box does not auto-pull (no Watchtower):
+
+```bash
+ssh deploy@178.156.192.117
+cd ~/apps/cushlabs-prod-server
+docker compose pull voice-agent && docker compose up -d voice-agent
+```
+
+- **Environment**: an env file per service on the box, alongside the compose
+  stack — not in any hosting dashboard.
+- **Verified 2026-07-25**: Upstash Redis round-trip WORKING; webhook
+  verification credential present.
+
+---
+
+## Historical: Render (Free Tier) — NO LONGER USED
+
 - **Platform**: [Render](https://render.com) — free web service + free Redis
 - **Domain**: `voice.cushlabs.ai` (custom domain via Render)
 - **Deploy method**: Auto-deploy from GitHub on push to `main`
 - **GitHub repo**: https://github.com/RCushmaniii/cushlabs-ai-voice-agent
-- **Blueprint file**: `render.yaml` (defines services + env var declarations)
+- **Blueprint file**: `render.yaml` (deleted 2026-07-25)
 
 ### How It Was Deployed
 

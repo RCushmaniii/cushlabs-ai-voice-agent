@@ -2,10 +2,10 @@ const test = require("node:test");
 const assert = require("node:assert");
 const express = require("express");
 
-// Exercise the fallback path deliberately: these vars are absent locally and,
-// as of 2026-07-25, render.yaml injects REDIS_URL rather than the UPSTASH_*
-// pair this module reads — so the in-process path is what production runs
-// unless those vars were added in the Render dashboard.
+// Exercise the in-process fallback deliberately. Production runs the Redis path
+// (Upstash verified working on the box 2026-07-25), but the fallback is what
+// carries the service through an Upstash outage, so it is the path most worth
+// pinning down with tests — an untested degradation path is a silent one.
 delete process.env.UPSTASH_REDIS_REST_URL;
 delete process.env.UPSTASH_REDIS_REST_TOKEN;
 
