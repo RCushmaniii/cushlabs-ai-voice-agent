@@ -60,7 +60,8 @@ cushlabs-ai-voice-agent/
 ├── server.js                      # Express entry point, routes, config endpoint
 ├── package.json                   # pnpm, Node.js deps
 ├── pnpm-lock.yaml
-├── render.yaml                    # Render Blueprint (web + Redis)
+│                                  # (render.yaml removed 2026-07-25 — the stack
+│                                  #  runs on a Hetzner VPS, see cushlabs-prod-server)
 ├── vapi-config.json               # Reference Vapi config (Phase 1 docs)
 ├── .env                           # Local secrets (git-ignored)
 ├── .env.example                   # Template for local setup

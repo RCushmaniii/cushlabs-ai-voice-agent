@@ -15,6 +15,7 @@ const path = require("path");
 const webhookRouter = require("./routes/webhook");
 const { initDb } = require("./services/db");
 const { validateEnv } = require("./services/env");
+const { perIpLimiter, globalBudget } = require("./services/rate-limit");
 
 // Fail fast if critical env vars are missing
 validateEnv();
@@ -123,7 +124,21 @@ const assistantsEs = {
   trades: process.env.VAPI_ASSISTANT_ID_TRADES_ES,
 };
 
-app.get("/api/config", (req, res) => {
+// Throttled to slow scripted enumeration of assistant IDs.
+//
+// NOTE ON WHAT THIS DOES AND DOES NOT PROTECT: VAPI_API_PUBLIC_KEY is a
+// browser-side key by design — the Vapi Web SDK needs it in the page, so it is
+// not a secret and rate-limiting this route does not stop someone who has
+// already read it from starting calls. The controls that actually bound inbound
+// spend live in the Vapi dashboard (spending limit, max concurrent calls,
+// per-assistant max call duration). See docs/COST-CONTROLS.md.
+const configLimiter = perIpLimiter({
+  name: "config",
+  windowSec: 60,
+  max: 30,
+});
+
+app.get("/api/config", configLimiter, (req, res) => {
   const service = assistants[req.query.service]
     ? req.query.service
     : "cushlabs";
@@ -172,37 +187,14 @@ app.get("/realestate", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "realestate.html"));
 });
 
-// --- Simple rate limiter factory ---
-function createRateLimiter(windowMs, maxPerWindow) {
-  const hits = new Map();
-  // Periodic cleanup every 60s to prevent memory leak
-  setInterval(() => {
-    const cutoff = Date.now() - windowMs;
-    for (const [key, timestamps] of hits) {
-      const filtered = timestamps.filter((t) => t > cutoff);
-      if (filtered.length === 0) hits.delete(key);
-      else hits.set(key, filtered);
-    }
-  }, 60000).unref();
-
-  return (req, res, next) => {
-    const ip = req.ip || req.connection?.remoteAddress || "unknown";
-    const now = Date.now();
-    const cutoff = now - windowMs;
-    const timestamps = (hits.get(ip) || []).filter((t) => t > cutoff);
-    if (timestamps.length >= maxPerWindow) {
-      return res
-        .status(429)
-        .json({ error: "Too many requests. Please try again later." });
-    }
-    timestamps.push(now);
-    hits.set(ip, timestamps);
-    next();
-  };
-}
-
-// Rate limit: 5 contact form submissions per 15 min per IP
-const contactLimiter = createRateLimiter(15 * 60 * 1000, 5);
+// Rate limit: 5 contact form submissions per 15 min per IP.
+// Redis-backed so it survives deploys and free-plan spin-downs; see
+// services/rate-limit.js for the fail-open / fail-closed split.
+const contactLimiter = perIpLimiter({
+  name: "contact",
+  windowSec: 15 * 60,
+  max: 5,
+});
 
 // Contact form endpoint
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -242,68 +234,95 @@ app.post("/api/contact", contactLimiter, async (req, res) => {
 });
 
 // --- Outbound Call Endpoint (Real Estate) ---
-// Rate limit: 1 call per 30s per IP
-const outboundLimiter = createRateLimiter(30000, 1);
+// This endpoint SPENDS MONEY: it places a Twilio PSTN call through Vapi, which
+// bills telephony + LLM + TTS per call. Two layers guard it:
+//
+//   outboundLimiter — 1 call per 30s per IP. Courtesy throttle only; an attacker
+//                     rotating IPs walks straight through it.
+//   outboundBudget  — hard ceiling of 50 calls/day across ALL callers. This is
+//                     the control that actually bounds the bill, and it fails
+//                     CLOSED: if Redis cannot confirm we are under budget, the
+//                     call is refused rather than placed.
+//
+// Tune OUTBOUND_CALLS_PER_DAY in the environment if the demo needs more room.
+const outboundLimiter = perIpLimiter({
+  name: "outbound-call",
+  windowSec: 30,
+  max: 1,
+});
 
-app.post("/api/outbound-call", outboundLimiter, async (req, res) => {
-  const { phoneNumber, propertyId } = req.body;
+const outboundBudget = globalBudget({
+  name: "outbound-call",
+  windowSec: 86400,
+  max: Number(process.env.OUTBOUND_CALLS_PER_DAY) || 50,
+});
 
-  // Validate env vars
-  const vapiKey = process.env.VAPI_API_PRIVATE_KEY;
-  const phoneNumberId = process.env.VAPI_PHONE_NUMBER_ID;
-  const assistantId = process.env.VAPI_ASSISTANT_ID_REALESTATE;
+app.post(
+  "/api/outbound-call",
+  outboundLimiter,
+  outboundBudget,
+  async (req, res) => {
+    const { phoneNumber, propertyId } = req.body;
 
-  if (!vapiKey || !phoneNumberId || !assistantId) {
-    return res.status(503).json({
-      error:
-        "Outbound calling is not configured. Missing VAPI_API_PRIVATE_KEY, VAPI_PHONE_NUMBER_ID, or VAPI_ASSISTANT_ID_REALESTATE.",
-    });
-  }
+    // Validate env vars
+    const vapiKey = process.env.VAPI_API_PRIVATE_KEY;
+    const phoneNumberId = process.env.VAPI_PHONE_NUMBER_ID;
+    const assistantId = process.env.VAPI_ASSISTANT_ID_REALESTATE;
 
-  // Validate phone number (E.164 US format)
-  if (!phoneNumber || !/^\+1\d{10}$/.test(phoneNumber)) {
-    return res.status(400).json({
-      error: "Invalid phone number. Must be US E.164 format: +1XXXXXXXXXX",
-    });
-  }
-
-  try {
-    const callBody = {
-      phoneNumberId,
-      assistantId,
-      customer: { number: phoneNumber },
-      metadata: { source: "realestate-demo", propertyId: propertyId || null },
-    };
-
-    console.log(`[Outbound] Initiating call to ${phoneNumber}`, { propertyId });
-
-    const vapiRes = await fetch("https://api.vapi.ai/call", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${vapiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(callBody),
-    });
-
-    const data = await vapiRes.json();
-
-    if (!vapiRes.ok) {
-      console.error("[Outbound] Vapi API error:", JSON.stringify(data));
-      return res.status(vapiRes.status >= 500 ? 502 : 400).json({
-        error: data.message || "Failed to initiate outbound call.",
+    if (!vapiKey || !phoneNumberId || !assistantId) {
+      return res.status(503).json({
+        error:
+          "Outbound calling is not configured. Missing VAPI_API_PRIVATE_KEY, VAPI_PHONE_NUMBER_ID, or VAPI_ASSISTANT_ID_REALESTATE.",
       });
     }
 
-    console.log(`[Outbound] Call initiated: ${data.id} → ${phoneNumber}`);
-    return res.json({ callId: data.id, status: data.status || "queued" });
-  } catch (err) {
-    console.error("[Outbound] Error:", err.message);
-    return res
-      .status(500)
-      .json({ error: "Internal server error initiating call." });
-  }
-});
+    // Validate phone number (E.164 US format)
+    if (!phoneNumber || !/^\+1\d{10}$/.test(phoneNumber)) {
+      return res.status(400).json({
+        error: "Invalid phone number. Must be US E.164 format: +1XXXXXXXXXX",
+      });
+    }
+
+    try {
+      const callBody = {
+        phoneNumberId,
+        assistantId,
+        customer: { number: phoneNumber },
+        metadata: { source: "realestate-demo", propertyId: propertyId || null },
+      };
+
+      console.log(`[Outbound] Initiating call to ${phoneNumber}`, {
+        propertyId,
+      });
+
+      const vapiRes = await fetch("https://api.vapi.ai/call", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${vapiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(callBody),
+      });
+
+      const data = await vapiRes.json();
+
+      if (!vapiRes.ok) {
+        console.error("[Outbound] Vapi API error:", JSON.stringify(data));
+        return res.status(vapiRes.status >= 500 ? 502 : 400).json({
+          error: data.message || "Failed to initiate outbound call.",
+        });
+      }
+
+      console.log(`[Outbound] Call initiated: ${data.id} → ${phoneNumber}`);
+      return res.json({ callId: data.id, status: data.status || "queued" });
+    } catch (err) {
+      console.error("[Outbound] Error:", err.message);
+      return res
+        .status(500)
+        .json({ error: "Internal server error initiating call." });
+    }
+  },
+);
 
 // Vapi webhook endpoint
 app.use("/api/webhook", webhookRouter);
