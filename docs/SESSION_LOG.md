@@ -41,12 +41,64 @@ for it. Verified against this codebase and the live box on arrival.
       Outbound PSTN is now disabled, but the five browser voice demos
       (`cushlabs`, `coaching`, `medspa`, `trades`, `realestate`) still start real Vapi
       sessions from a public page using a browser-side key, so this still matters.
+      _Narrowed 2026-08-06, not closed:_ all 9 assistants on the account carry
+      `maxDurationSeconds: 600`, verified via `GET /assistant`, so a single abusive
+      web call is bounded at ~$0.84. That caps the **per-call** cost. It does not cap
+      the **aggregate**, which is what auto-recharge plus an unset Spending Limit
+      would leave open.
       _Closes when:_ Vapi → Settings → Billing is read. Dashboard-only; no API access
       is configured from here.
+
+- [ ] **PR #45 is written and mergeable but unmerged — GitHub platform incident.**
+      _Blocks: nothing operationally._ The outbound shutoff it documents is already
+      applied and verified on the box; the PR is docs-only
+      (`docs/COST-CONTROLS.md`, `docs/SESSION_LOG.md`). Held because merges were
+      unavailable on 2026-08-06, not for any review reason.
+      _Closes when:_ `gh pr merge 45 --squash --delete-branch` succeeds and `main`
+      is pulled clean.
 
 ---
 
 <!-- New entries go above this line -->
+
+## Session: 2026-08-06 (Spend audit — answering "is something wasting my money" from the API, not from reasoning)
+
+### Accomplished
+
+- **Answered the spend question with evidence: nothing was ever spending.** `GET /call?limit=100`
+  returned exactly **1 call in the account's entire history** — a `webCall` on 2026-07-28, 148s,
+  **$0.2066**, `customer-ended-call`. **Zero outbound phone calls have ever been placed.** Lifetime
+  spend on the account is twenty-one cents.
+- **Confirmed nothing is scheduled.** VPS crontab holds one line (weekly `docker image prune`);
+  systemd timers are OS housekeeping plus two `marketsignal-*` units belonging to a different app.
+  Nothing touches the voice agent. No Claude-side crons or routines either.
+- **Re-confirmed outbound is off:** `VAPI_PHONE_NUMBER_ID` — 0 active, 1 commented out.
+- **Put a number on the one live spend path.** All 9 assistants carry `maxDurationSeconds: 600`,
+  so the public-key web-call path — which `server.js:129-134` correctly notes the per-IP limiter
+  cannot protect, since the browser key is public by design — is bounded at ~$0.84 per call.
+
+### Decisions Made
+
+- **PR #45 left unmerged:** GitHub platform incident, not a review concern. Moved to Open Items.
+- **`|| 50` still not fixed:** unchanged from this morning's reasoning — outbound is off by a
+  stronger mechanism, so it stays a latent trap, tracked, not bundled into a spend shutoff.
+
+### Immediate Next Steps
+
+- [ ] Merge PR #45 once GitHub merges are available again.
+- [ ] Read Vapi → Settings → Billing for auto-recharge + Spending Limit. Last unverified control.
+- [ ] Fix `server.js:257` `|| 50`, cover the zero case, deploy, re-probe on the box.
+
+### Technical Debt
+
+- Aggregate spend on the public demo key is bounded per-call but not in total. Per-call is verified;
+  the org-level ceiling is not, and there is no Vapi API for it.
+
+### Open Questions / Blockers
+
+- Vapi auto-recharge state — dashboard-only, unreadable from here.
+
+---
 
 ## Session: 2026-08-06 (Outbound PSTN calling turned off — and the documented way to do it turned out to be a no-op)
 
