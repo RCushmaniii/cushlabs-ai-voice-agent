@@ -10,15 +10,15 @@ does **not** bound, and the dashboard settings that are the actual backstop.
 
 Implemented in `services/rate-limit.js`, wired in `server.js`.
 
-| Endpoint | Guard | Limit | What it stops |
-|---|---|---|---|
-| `POST /api/outbound-call` | `perIpLimiter` | 1 per 30s per IP | Casual hammering from one client |
-| `POST /api/outbound-call` | `globalBudget` | **50 per day, all callers** (`OUTBOUND_CALLS_PER_DAY`) | IP rotation — the real attack |
-| `POST /api/contact` | `perIpLimiter` | 5 per 15 min per IP | Contact-form spam |
-| `GET /api/config` | `perIpLimiter` | 30 per min per IP | Scripted enumeration of assistant IDs |
+| Endpoint                  | Guard          | Limit                                                  | What it stops                         |
+| ------------------------- | -------------- | ------------------------------------------------------ | ------------------------------------- |
+| `POST /api/outbound-call` | `perIpLimiter` | 1 per 30s per IP                                       | Casual hammering from one client      |
+| `POST /api/outbound-call` | `globalBudget` | **50 per day, all callers** (`OUTBOUND_CALLS_PER_DAY`) | IP rotation — the real attack         |
+| `POST /api/contact`       | `perIpLimiter` | 5 per 15 min per IP                                    | Contact-form spam                     |
+| `GET /api/config`         | `perIpLimiter` | 30 per min per IP                                      | Scripted enumeration of assistant IDs |
 
 **Why a global budget and not just per-IP:** IP addresses are cheap to rotate.
-A per-IP limit on a spending endpoint gives the *appearance* of protection while
+A per-IP limit on a spending endpoint gives the _appearance_ of protection while
 leaving the bill unbounded. The global counter is the control that actually caps
 the day's spend, and it is the one to tune if the demo needs more headroom.
 
@@ -105,7 +105,7 @@ Mike / trades, David / realestate):
 ### 4. Credit balance is itself a ceiling (PAYG)
 
 The Vapi org is on **Pay-as-you-go**. Whatever sits in **Credit Balance** is the
-practical worst case for runaway spend — *provided auto-recharge is off*. Check
+practical worst case for runaway spend — _provided auto-recharge is off_. Check
 **Settings → Billing → Payment method**: if auto-recharge/auto-top-up is
 enabled, that ceiling disappears and the spending limit in step 1 becomes the
 only backstop.
@@ -133,9 +133,42 @@ docker compose pull voice-agent && docker compose up -d voice-agent
 
 ---
 
+## Outbound PSTN calling is currently DISABLED
+
+**As of 2026-08-06, by owner decision.** `VAPI_PHONE_NUMBER_ID` is commented out in
+`.env.voice-agent` on the box, so `POST /api/outbound-call` returns `503 Outbound
+calling is not configured` at `server.js:272` — before any Vapi or Twilio request
+is made. Verified live: the route answered `400` (invalid number, i.e. configured)
+before the change and `503` after.
+
+Nothing else is affected. `VAPI_PHONE_NUMBER_ID` is read in exactly one runtime
+place (`server.js:269`). The five browser voice demos, all other assistants, and
+the other five compose services were re-checked after the restart and are
+unaffected.
+
+**To re-enable:**
+
+```
+ssh deploy@178.156.192.117
+python3 /home/deploy/toggle_outbound.py enable
+cd ~/apps/cushlabs-prod-server && docker compose up -d --wait voice-agent
+```
+
+That helper reports counts and filenames only and never prints a value. It backs
+the env file up before every change. `toggle_outbound.py check` is read-only.
+
+---
+
 ## Tuning
 
 `OUTBOUND_CALLS_PER_DAY` (default `50`) sets the global daily ceiling on outbound
-PSTN calls. Raise it for a demo push; lower it if the number ever looks abused.
-Budget exhaustion logs `GLOBAL BUDGET REACHED` and returns `429` with a
-`Retry-After` header.
+PSTN calls. Raise it for a demo push. Budget exhaustion logs
+`GLOBAL BUDGET REACHED` and returns `429` with a `Retry-After` header.
+
+> **`OUTBOUND_CALLS_PER_DAY=0` does NOT disable outbound calling.** `server.js:257`
+> is `Number(process.env.OUTBOUND_CALLS_PER_DAY) || 50`. `Number("0")` is `0`,
+> which is falsy, so `|| 50` fires and the ceiling lands back on **50** — the
+> default it was already at. Setting it to zero reports success and changes
+> nothing. This is a known bug, tracked in `docs/SESSION_LOG.md` Open Items. Until
+> it is fixed, the only working kill switch is removing `VAPI_PHONE_NUMBER_ID`
+> as described above.
