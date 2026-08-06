@@ -33,12 +33,12 @@
     }
   },
   "dependencies": {
-    "@neondatabase/serverless": "^1.0.2",
-    "@sentry/node": "^10.47.0",
-    "@upstash/redis": "^1.38.0",
+    "@neondatabase/serverless": "^1.1.0",
+    "@sentry/node": "^10.69.0",
+    "@upstash/redis": "^1.38.1",
     "compression": "^1.8.1",
     "cors": "^2.8.6",
-    "dotenv": "^17.4.0",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "googleapis": "^171.4.0"
   }
