@@ -1,6 +1,43 @@
 # Session Log — cushlabs-ai-voice-agent
 
 Entries are newest-first. Each entry documents one Claude Code working session.
+**Open Items** is a standing register pinned above them — read it first.
+
+---
+
+## Open Items
+
+Standing register, scoped to this repo. **An item leaves this list only when it
+has been verified end to end against the real system.** "Tests pass" and "the
+config looks right" are not verification.
+
+Opened 2026-08-06. Both items below arrived from `ny-eng/docs/HANDOFF.md`, which
+had been tracking voice-agent work inside the website repo where nobody would
+think to look for it. Verified against this codebase on arrival.
+
+---
+
+- [ ] **Decide whether outbound PSTN calling should exist at all.**
+      _Blocks: real money, on a client-facing route._ Robert flagged he may not want
+      outbound calling in any form. PR #41 only _capped_ it — the decision was never
+      made.
+      _Verified 2026-08-06:_ `server.js:257` reads
+      `Number(process.env.OUTBOUND_CALLS_PER_DAY) || 50`, and that variable is absent
+      from the env file on the box (`docs/COST-CONTROLS.md:131`). So **the default of
+      50 billed Twilio calls/day is live right now** on `voice.cushlabs.ai/realestate`
+      (the "David" agent) — a ceiling nobody chose, not a configured limit.
+      _Closes when:_ Robert decides. To disable, set `OUTBOUND_CALLS_PER_DAY=0` in the
+      env file on the VPS and re-up the container, or gate the route behind a feature
+      flag. Claude has SSH access and can do either.
+
+- [ ] **Vapi auto-recharge state has never been re-verified.**
+      _Blocks: the spend ceiling above._ Robert changed the payment method on
+      2026-07-25 and auto-recharge was not re-checked afterward. If it is OFF, the
+      credit balance is a natural ceiling and nothing more is needed. If it is ON with
+      no Spending Limit set, there is no ceiling at all — and the outbound route above
+      bills against it.
+      _Closes when:_ Vapi → Settings → Billing is read. Dashboard-only; no API access
+      is configured from here.
 
 ---
 
