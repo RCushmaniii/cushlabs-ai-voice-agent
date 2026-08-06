@@ -1,5 +1,30 @@
 # CLAUDE.md — CushLabs AI Voice Agent
 
+<!-- capability-registry-pointer -->
+## Platform approvals — read the registry, never restate it
+
+**Canonical source:** `C:/Users/Robert Cushman/Projects/operating-system/cushlabs/capability-registry.json`
+
+This repo does **not** record platform approval status in prose. Anything here that states whether
+Meta, Google, or any other platform has approved something is a **bug** — it will drift, and it has,
+four separate times in one week. Ask the registry instead:
+
+```powershell
+node "C:/Users/Robert Cushman/Projects/operating-system/scripts/validate-capability-registry.mjs"
+```
+
+**What this repo depends on:**
+
+- No platform approval gates this repo today. It ships on the Ultra tier; if that changes, the approval is recorded centrally, not here.
+
+**The distinction that keeps causing errors:** `status: approved` and `reachable_by: any_client` are
+different facts. An approval can be granted and still unusable by a paying client. Only
+`reachable_by: any_client` makes a capability sellable.
+
+Deep-dive how-to docs in this repo stay where they are — the registry owns *state*, not procedure.
+
+---
+
 ## Project Overview
 
 Production AI voice agent platform for lead qualification, appointment booking, and customer conversations. Powered by Vapi (voice infrastructure), Claude (AI), and Google Calendar (scheduling). Express 5 backend with Neon Postgres for persistence and Redis for session caching.
