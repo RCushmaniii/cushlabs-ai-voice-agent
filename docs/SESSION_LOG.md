@@ -1,10 +1,171 @@
 # Session Log — cushlabs-ai-voice-agent
 
 Entries are newest-first. Each entry documents one Claude Code working session.
+**Open Items** is a standing register pinned above them — read it first.
+
+---
+
+## Open Items
+
+Standing register, scoped to this repo. **An item leaves this list only when it
+has been verified end to end against the real system.** "Tests pass" and "the
+config looks right" are not verification.
+
+Opened 2026-08-06. These arrived from `ny-eng/docs/HANDOFF.md`, which had been
+tracking voice-agent work inside the website repo where nobody would think to look
+for it. Verified against this codebase and the live box on arrival.
+
+---
+
+- [ ] **`OUTBOUND_CALLS_PER_DAY=0` silently does nothing — the documented disable
+      method is a no-op.**
+      _Blocks: anyone who trusts the docs to turn off spending._ `server.js:257` reads
+      `Number(process.env.OUTBOUND_CALLS_PER_DAY) || 50`. `Number("0")` is `0`, which
+      is falsy, so `|| 50` fires and the cap lands back on **50**. Setting the
+      variable to zero to stop outbound calling leaves it running at exactly the rate
+      it was already running at, while reporting success. This was the disable
+      instruction written in `ny-eng/docs/HANDOFF.md` and repeated in
+      `docs/COST-CONTROLS.md`; it was never tested.
+      _Not urgent as of 2026-08-06_ — outbound is off by a stronger mechanism (see
+      today's entry), so this is a latent trap rather than a live hole.
+      _Closes when:_ the parse handles `0` (`Number(x)` with an explicit
+      `Number.isFinite` check, or an `OUTBOUND_ENABLED` flag), a test covers the zero
+      case, and the fix is deployed and re-probed on the box. A unit test alone does
+      not close this — the whole point is that the deployed path was never checked.
+
+- [ ] **Vapi auto-recharge state has never been re-verified.**
+      _Blocks: the spend ceiling on everything that is still live._ Robert changed the
+      payment method on 2026-07-25 and auto-recharge was not re-checked afterward. If
+      it is OFF, the credit balance is a natural ceiling and nothing more is needed. If
+      it is ON with no Spending Limit set, there is no ceiling at all.
+      Outbound PSTN is now disabled, but the five browser voice demos
+      (`cushlabs`, `coaching`, `medspa`, `trades`, `realestate`) still start real Vapi
+      sessions from a public page using a browser-side key, so this still matters.
+      _Narrowed 2026-08-06, not closed:_ all 9 assistants on the account carry
+      `maxDurationSeconds: 600`, verified via `GET /assistant`, so a single abusive
+      web call is bounded at ~$0.84. That caps the **per-call** cost. It does not cap
+      the **aggregate**, which is what auto-recharge plus an unset Spending Limit
+      would leave open.
+      _Closes when:_ Vapi → Settings → Billing is read. Dashboard-only; no API access
+      is configured from here.
+
+- [ ] **PR #45 is written and mergeable but unmerged — GitHub platform incident.**
+      _Blocks: nothing operationally._ The outbound shutoff it documents is already
+      applied and verified on the box; the PR is docs-only
+      (`docs/COST-CONTROLS.md`, `docs/SESSION_LOG.md`). Held because merges were
+      unavailable on 2026-08-06, not for any review reason.
+      _Closes when:_ `gh pr merge 45 --squash --delete-branch` succeeds and `main`
+      is pulled clean.
 
 ---
 
 <!-- New entries go above this line -->
+
+## Session: 2026-08-06 (Spend audit — answering "is something wasting my money" from the API, not from reasoning)
+
+### Accomplished
+
+- **Answered the spend question with evidence: nothing was ever spending.** `GET /call?limit=100`
+  returned exactly **1 call in the account's entire history** — a `webCall` on 2026-07-28, 148s,
+  **$0.2066**, `customer-ended-call`. **Zero outbound phone calls have ever been placed.** Lifetime
+  spend on the account is twenty-one cents.
+- **Confirmed nothing is scheduled.** VPS crontab holds one line (weekly `docker image prune`);
+  systemd timers are OS housekeeping plus two `marketsignal-*` units belonging to a different app.
+  Nothing touches the voice agent. No Claude-side crons or routines either.
+- **Re-confirmed outbound is off:** `VAPI_PHONE_NUMBER_ID` — 0 active, 1 commented out.
+- **Put a number on the one live spend path.** All 9 assistants carry `maxDurationSeconds: 600`,
+  so the public-key web-call path — which `server.js:129-134` correctly notes the per-IP limiter
+  cannot protect, since the browser key is public by design — is bounded at ~$0.84 per call.
+
+### Decisions Made
+
+- **PR #45 left unmerged:** GitHub platform incident, not a review concern. Moved to Open Items.
+- **`|| 50` still not fixed:** unchanged from this morning's reasoning — outbound is off by a
+  stronger mechanism, so it stays a latent trap, tracked, not bundled into a spend shutoff.
+
+### Immediate Next Steps
+
+- [ ] Merge PR #45 once GitHub merges are available again.
+- [ ] Read Vapi → Settings → Billing for auto-recharge + Spending Limit. Last unverified control.
+- [ ] Fix `server.js:257` `|| 50`, cover the zero case, deploy, re-probe on the box.
+
+### Technical Debt
+
+- Aggregate spend on the public demo key is bounded per-call but not in total. Per-call is verified;
+  the org-level ceiling is not, and there is no Vapi API for it.
+
+### Open Questions / Blockers
+
+- Vapi auto-recharge state — dashboard-only, unreadable from here.
+
+---
+
+## Session: 2026-08-06 (Outbound PSTN calling turned off — and the documented way to do it turned out to be a no-op)
+
+### Accomplished
+
+- **Outbound billed calling is off, verified against the live system.** Robert's
+  decision; the question had been open since PR #41 in July, which capped outbound
+  but never settled whether it should exist.
+- **Caught that the approved method would not have worked.** The plan of record — in
+  `ny-eng/docs/HANDOFF.md` and echoed in `docs/COST-CONTROLS.md` — was
+  `OUTBOUND_CALLS_PER_DAY=0`. `server.js:257` is
+  `Number(process.env.OUTBOUND_CALLS_PER_DAY) || 50`, and `0` is falsy, so zero
+  resolves back to **50**. Following the documented procedure would have produced a
+  confident "outbound is disabled" report with outbound still running at its
+  original rate.
+- **Used the kill switch already in the code instead.** `server.js:272` returns 503
+  _"Outbound calling is not configured"_ if `VAPI_API_PRIVATE_KEY`,
+  `VAPI_PHONE_NUMBER_ID`, or `VAPI_ASSISTANT_ID_REALESTATE` is missing — before any
+  Vapi/Twilio request is made. `VAPI_PHONE_NUMBER_ID` is read in exactly **one**
+  runtime place (`server.js:269`, inside that handler), so commenting it out in
+  `.env.voice-agent` disables outbound and nothing else. The other two are shared:
+  `VAPI_API_PRIVATE_KEY` is used across the service, and
+  `VAPI_ASSISTANT_ID_REALESTATE` also feeds the `assistants` map at `server.js:115`
+  — blanking that one would have made `/api/config?service=realestate` silently fall
+  through to the CushLabs assistant (`server.js:142`) rather than fail, which is
+  worse than a visible error.
+- **Verified end to end, before and after, on the real endpoint.** Probed
+  `POST /api/outbound-call` with a deliberately invalid number (`+1000`) so no call
+  could be placed in either state — the env check at `:272` runs before phone
+  validation at `:280`, so the two states are distinguishable at zero cost:
+
+  |        | Response                                                                     |
+  | ------ | ---------------------------------------------------------------------------- |
+  | Before | `HTTP 400` — _"Invalid phone number"_, i.e. env check **passed**, route live |
+  | After  | `HTTP 503` — _"Outbound calling is not configured"_                          |
+
+  All five browser voice demos re-checked after the restart: `realestate`,
+  `cushlabs`, `coaching`, `medspa`, `trades` each return `200` with `assistantId`
+  and `publicKey` present. All six compose services healthy.
+
+### Decisions Made
+
+- **Commented the line out rather than deleting it**, with a marker comment above,
+  so the value never left the box and re-enabling is removing one `#`.
+- **Did not fix the `|| 50` falsy-zero bug in the same change.** Outbound is already
+  off by a stronger mechanism, so the bug is now latent; fixing it means a code
+  change plus an image rebuild and manual pull, and bundling that with a spend
+  shutoff would have made it impossible to tell which change did what. Tracked in
+  Open Items.
+
+### Files Touched
+
+- `.env.voice-agent` **on the box** (not in the repo) — `VAPI_PHONE_NUMBER_ID`
+  commented out. Timestamped backup written alongside it before the edit.
+- `/home/deploy/toggle_outbound.py` on the box — idempotent
+  `check` / `disable` / `enable` helper. Reports counts and filenames only; never
+  reads or prints a value. **`enable` is the one-command rollback.**
+- `docs/COST-CONTROLS.md` — corrected the tuning section.
+
+### Lessons
+
+- **The `||` default is a footgun for any numeric env var whose meaningful value is
+  zero**, which is every cap, ceiling, limit, and timeout. `server.js:257` was the
+  only instance in this repo; worth grepping for on sight elsewhere.
+- **A documented procedure nobody has executed is a hypothesis.** This one had been
+  written down twice, in two repos, and carried forward through three sessions
+  without once being run.
 
 ## Session: 2026-07-07
 
