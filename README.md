@@ -8,13 +8,13 @@ Production-ready AI voice agents that qualify leads, book appointments, and hand
 
 ## Live Agents
 
-| Agent | Role | Industry | Voice | LLM | Page |
-|-------|------|----------|-------|-----|------|
-| **Clara** | Lead Qualification | AI Services | Cartesia | Claude Sonnet | [/](https://voice.cushlabs.ai) |
-| **James** | Appointment Booking | Executive Coaching | Cartesia Nathan | Groq Llama 3.1 | [/nyc-coaching](https://voice.cushlabs.ai/nyc-coaching) |
-| **Sophia** | AI Front Desk | Medical Spa | Cartesia Cindy | Claude Sonnet | [/medspa](https://voice.cushlabs.ai/medspa) |
-| **Mike** | AI Dispatcher | Home Services | Cartesia Wyatt | Claude Sonnet | [/trades](https://voice.cushlabs.ai/trades) |
-| **David** | Real Estate Setter | Real Estate | Cartesia | Claude Sonnet | [/realestate](https://voice.cushlabs.ai/realestate) |
+| Agent      | Role                | Industry           | Voice           | LLM            | Page                                                    |
+| ---------- | ------------------- | ------------------ | --------------- | -------------- | ------------------------------------------------------- |
+| **Clara**  | Lead Qualification  | AI Services        | Cartesia        | Claude Sonnet  | [/](https://voice.cushlabs.ai)                          |
+| **James**  | Appointment Booking | Executive Coaching | Cartesia Nathan | Groq Llama 3.1 | [/nyc-coaching](https://voice.cushlabs.ai/nyc-coaching) |
+| **Sophia** | AI Front Desk       | Medical Spa        | Cartesia Cindy  | Claude Sonnet  | [/medspa](https://voice.cushlabs.ai/medspa)             |
+| **Mike**   | AI Dispatcher       | Home Services      | Cartesia Wyatt  | Claude Sonnet  | [/trades](https://voice.cushlabs.ai/trades)             |
+| **David**  | Real Estate Setter  | Real Estate        | Cartesia        | Claude Sonnet  | [/realestate](https://voice.cushlabs.ai/realestate)     |
 
 Clara, James, Sophia, and Mike are **inbound** agents (click the mic button to talk). David is the first **outbound** agent — enter a phone number and he calls you via Twilio PSTN.
 
@@ -54,15 +54,15 @@ Browser → POST /api/outbound-call
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| **Orchestration** | [Vapi](https://vapi.ai) — voice AI platform (Web SDK + webhooks) |
-| **Backend** | Node.js + Express 5 |
-| **Database** | Neon Postgres (leads, bookings, transcripts) |
-| **Session State** | Redis (call-scoped data, 24h TTL) |
-| **Calendar** | Google Calendar API (OAuth2 + FreeBusy + Meet links) |
-| **Hosting** | [Render](https://render.com) with self-ping keep-alive |
-| **Frontend** | Static HTML, Vapi Web SDK (ESM), client-side i18n |
+| Layer             | Technology                                                                      |
+| ----------------- | ------------------------------------------------------------------------------- |
+| **Orchestration** | [Vapi](https://vapi.ai) — voice AI platform (Web SDK + webhooks)                |
+| **Backend**       | Node.js + Express 5                                                             |
+| **Database**      | Neon Postgres (leads, bookings, transcripts)                                    |
+| **Session State** | [Upstash](https://upstash.com) Redis over REST (call-scoped data, 24h TTL)      |
+| **Calendar**      | Google Calendar API (OAuth2 + FreeBusy + Meet links)                            |
+| **Hosting**       | Self-hosted Hetzner VPS — Docker Compose behind Caddy (HTTPS via Let's Encrypt) |
+| **Frontend**      | Static HTML, Vapi Web SDK (ESM), client-side i18n                               |
 
 ---
 
@@ -97,8 +97,8 @@ Browser → POST /api/outbound-call
 │   ├── ARCHITECTURE.md          # System design + patterns
 │   ├── realestate-system-prompt.md # David's system prompt
 │   └── vapi-realestate-config.json # Vapi reference config for David
-├── render.yaml                  # Render Blueprint (web + Redis)
-└── package.json                 # pnpm, Node 18+
+├── Dockerfile                   # Node 20 Alpine, pnpm
+└── package.json                 # pnpm, Node 20
 ```
 
 ---
@@ -130,34 +130,33 @@ pnpm dev
 
 ### Environment Variables
 
-| Variable | Required | Purpose |
-|----------|----------|---------|
-| `VAPI_API_PUBLIC_KEY` | Yes | Vapi public key (sent to frontend) |
-| `VAPI_API_PRIVATE_KEY` | Yes | Vapi private key (server-side API calls) |
-| `VAPI_ASSISTANT_ID_CUSHLABS` | Yes | Clara assistant ID |
-| `VAPI_ASSISTANT_ID_COACHING` | Yes | James assistant ID |
-| `VAPI_ASSISTANT_ID_MEDSPA` | Yes | Sophia assistant ID |
-| `VAPI_ASSISTANT_ID_TRADES` | Yes | Mike assistant ID |
-| `VAPI_ASSISTANT_ID_REALESTATE` | Yes | David assistant ID |
-| `VAPI_PHONE_NUMBER_ID` | Yes | Vapi phone number for outbound calls (Twilio) |
-| `REDIS_URL` | Yes | Redis connection string |
-| `DATABASE_URL` | Optional | Neon Postgres (leads + bookings persist) |
-| `GOOGLE_CLIENT_ID` | Optional | Google Calendar real-time availability |
-| `GOOGLE_CLIENT_SECRET` | Optional | Google OAuth |
-| `GOOGLE_REFRESH_TOKEN` | Optional | Google OAuth refresh token |
-| `CALENDAR_ID` | Optional | Google Calendar ID for FreeBusy |
+| Variable                       | Required | Purpose                                       |
+| ------------------------------ | -------- | --------------------------------------------- |
+| `VAPI_API_PUBLIC_KEY`          | Yes      | Vapi public key (sent to frontend)            |
+| `VAPI_API_PRIVATE_KEY`         | Yes      | Vapi private key (server-side API calls)      |
+| `VAPI_ASSISTANT_ID_CUSHLABS`   | Yes      | Clara assistant ID                            |
+| `VAPI_ASSISTANT_ID_COACHING`   | Yes      | James assistant ID                            |
+| `VAPI_ASSISTANT_ID_MEDSPA`     | Yes      | Sophia assistant ID                           |
+| `VAPI_ASSISTANT_ID_TRADES`     | Yes      | Mike assistant ID                             |
+| `VAPI_ASSISTANT_ID_REALESTATE` | Yes      | David assistant ID                            |
+| `VAPI_PHONE_NUMBER_ID`         | Yes      | Vapi phone number for outbound calls (Twilio) |
+| `REDIS_URL`                    | Yes      | Redis connection string                       |
+| `DATABASE_URL`                 | Optional | Neon Postgres (leads + bookings persist)      |
+| `GOOGLE_CLIENT_ID`             | Optional | Google Calendar real-time availability        |
+| `GOOGLE_CLIENT_SECRET`         | Optional | Google OAuth                                  |
+| `GOOGLE_REFRESH_TOKEN`         | Optional | Google OAuth refresh token                    |
+| `CALENDAR_ID`                  | Optional | Google Calendar ID for FreeBusy               |
 
 ---
 
 ## Features
 
 ### Bilingual (EN/ES)
+
 The landing page and contact page support English and Spanish with a client-side language toggle. Language preference persists across pages via `localStorage`.
 
-### Server Keep-Alive
-Self-ping every 14 minutes prevents Render free-tier cold starts. Uses `RENDER_EXTERNAL_URL` in production, falls back to localhost in dev.
-
 ### Graceful Degradation
+
 - **No Google creds?** Calendar returns default business hours (9-5 ET, weekdays)
 - **No DATABASE_URL?** Leads still cached in Redis (24h TTL)
 - **No Redis?** Server still serves pages and Vapi calls work (no lead persistence)
@@ -166,10 +165,12 @@ Self-ping every 14 minutes prevents Render free-tier cold starts. Uses `RENDER_E
 
 ## Deployment
 
-Deployed via [Render Blueprint](https://render.com/docs/infrastructure-as-code) — push to `main` triggers auto-deploy.
+Push to `main` builds the production image in GitHub Actions and pushes it to
+GHCR. The box pulls the prebuilt image rather than building on-box.
 
 ```
-git push origin main → Render builds → pnpm install → node server.js
+git push origin main → Actions builds → ghcr.io/rcushmaniii/cushlabs-ai-voice-agent:latest
+                     → docker compose pull voice-agent && docker compose up -d voice-agent
 ```
 
 See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for full infrastructure documentation.

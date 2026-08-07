@@ -17,22 +17,6 @@ for it. Verified against this codebase and the live box on arrival.
 
 ---
 
-- [ ] **`OUTBOUND_CALLS_PER_DAY=0` silently does nothing — the documented disable
-      method is a no-op.**
-      _Blocks: anyone who trusts the docs to turn off spending._ `server.js:257` reads
-      `Number(process.env.OUTBOUND_CALLS_PER_DAY) || 50`. `Number("0")` is `0`, which
-      is falsy, so `|| 50` fires and the cap lands back on **50**. Setting the
-      variable to zero to stop outbound calling leaves it running at exactly the rate
-      it was already running at, while reporting success. This was the disable
-      instruction written in `ny-eng/docs/HANDOFF.md` and repeated in
-      `docs/COST-CONTROLS.md`; it was never tested.
-      _Not urgent as of 2026-08-06_ — outbound is off by a stronger mechanism (see
-      today's entry), so this is a latent trap rather than a live hole.
-      _Closes when:_ the parse handles `0` (`Number(x)` with an explicit
-      `Number.isFinite` check, or an `OUTBOUND_ENABLED` flag), a test covers the zero
-      case, and the fix is deployed and re-probed on the box. A unit test alone does
-      not close this — the whole point is that the deployed path was never checked.
-
 - [ ] **Vapi auto-recharge state has never been re-verified.**
       _Blocks: the spend ceiling on everything that is still live._ Robert changed the
       payment method on 2026-07-25 and auto-recharge was not re-checked afterward. If
@@ -51,6 +35,15 @@ for it. Verified against this codebase and the live box on arrival.
 
 ---
 
+_Closed 2026-08-06: the `OUTBOUND_CALLS_PER_DAY=0` no-op, fixed in #49 and merged as `bab5ae1`.
+Closed against the stated bar, not below it. The parse now goes through `intFromEnv`; five
+regression tests cover it, one asserting the old broken expression so the trap shows up in test
+output; and the fix was probed in the **deployed container**, not just in CI —_
+`docker exec -e T_CAP=0 voice-agent node -e "…"` _returned `0` from `intFromEnv` and `50` from
+the old `Number(x) || 50` form side by side in the same process. Live re-probe after deploy:
+outbound still `503`, `/healthz` `200`, all five browser demos `200` with assistant and browser
+token present._
+
 _Closed 2026-08-06: PR #45 merged as `fe072a8` once GitHub Actions recovered. Worth keeping
 the reason it was held — the red check on that PR was_ "The job was not acquired by Runner of
 type hosted" _, meaning no test ever executed. A phantom red from a platform outage is
@@ -59,6 +52,43 @@ genuine run, never to merge past it. Re-run on the same HEAD went green in 21s; 
 suite was independently confirmed at 37/37 first._
 
 <!-- New entries go above this line -->
+
+## Session: 2026-08-06 (Backlog closeout — 7 Dependabot PRs, all 7 advisories, and the falsy-zero bug)
+
+### Accomplished
+
+- **All 7 Dependabot PRs closed; zero PRs now open.** Batched into #47 (npm) and #48 (actions)
+  rather than merged in sequence, which would have meant four lockfile rebase cycles.
+- **All 7 security advisories cleared** — 3 high, 3 moderate, 1 low. `brace-expansion` (3 high)
+  left the tree entirely with googleapis 174; `@opentelemetry/core` came along with the Sentry
+  bump; `qs` → 6.15.3 and `body-parser` → 2.3.0 needed no override, because Express 5.2.1's
+  ranges already permitted the patched versions and the lockfile was simply stale.
+- **Fixed the `|| 50` falsy-zero bug (#49)** and closed its register item against the stated bar —
+  deployed and probed in the running container, not just green in CI. See the closed-items note.
+- **Deleted `keep-alive.yml`** — pinged every 14 min to stop a Render cold start on a platform
+  this service left on 2026-07-25. ~103 no-op runs/day, and it swallowed failures with `|| echo`
+  so it was never monitoring either.
+- **Corrected the public README**, which still advertised Render hosting and a self-ping
+  keep-alive that does not exist in `server.js` (`RENDER_EXTERNAL_URL` appears nowhere in code).
+
+### Decisions Made
+
+- **Superseded rather than merged the Dependabot PRs:** #29 would not even have fixed its own
+  advisory — it proposed brace-expansion 5.0.6 where the high alerts require 5.0.9. #24 was
+  obsolete outright; `redis` left the project in `eb8ee69`.
+- **No pnpm override for `qs`/`body-parser`:** pinning against Express's own resolution for a
+  staleness problem would be debt, not a fix.
+
+### Technical Debt
+
+- `docs/DEPLOYMENT.md` still describes the Render deployment in its body. It carries a historical
+  banner, so it is labelled rather than misleading — lower priority than the README was.
+
+### Open Questions / Blockers
+
+- Vapi auto-recharge — still the one control that cannot be read from here. Dashboard-only.
+
+---
 
 ## Session: 2026-08-06 (Spend audit — answering "is something wasting my money" from the API, not from reasoning)
 
