@@ -130,6 +130,7 @@ docker compose pull voice-agent && docker compose up -d voice-agent
 - Env lives in `~/apps/cushlabs-prod-server/.env.voice-agent` on the box, **not**
   in any dashboard. `OUTBOUND_CALLS_PER_DAY` is absent there, so the 50/day
   default applies; add it to that file and re-up the container to change it.
+  Setting it to `0` now genuinely means zero — see Tuning below.
 
 ---
 
@@ -165,10 +166,19 @@ the env file up before every change. `toggle_outbound.py check` is read-only.
 PSTN calls. Raise it for a demo push. Budget exhaustion logs
 `GLOBAL BUDGET REACHED` and returns `429` with a `Retry-After` header.
 
-> **`OUTBOUND_CALLS_PER_DAY=0` does NOT disable outbound calling.** `server.js:257`
-> is `Number(process.env.OUTBOUND_CALLS_PER_DAY) || 50`. `Number("0")` is `0`,
-> which is falsy, so `|| 50` fires and the ceiling lands back on **50** — the
-> default it was already at. Setting it to zero reports success and changes
-> nothing. This is a known bug, tracked in `docs/SESSION_LOG.md` Open Items. Until
-> it is fixed, the only working kill switch is removing `VAPI_PHONE_NUMBER_ID`
-> as described above.
+`OUTBOUND_CALLS_PER_DAY=0` **is honoured** and means zero calls per day — every
+request gets a `429`, including the first. Fixed 2026-08-06.
+
+> **History, kept deliberately.** Until 2026-08-06 this document said the opposite,
+> and it was right to: `server.js:257` read
+> `Number(process.env.OUTBOUND_CALLS_PER_DAY) || 50`, and because `Number("0")` is
+> falsy the documented shutoff silently restored the ceiling of **50** — the rate it
+> was already running at. That instruction was written in two repos and carried
+> through three sessions without ever being executed. The parse now goes through
+> `intFromEnv` in `services/rate-limit.js`, which treats `0` as a real value, and
+> five regression tests cover it — one of which asserts the old broken expression
+> so the trap stays visible in the test output.
+>
+> **The stronger kill switch is still unsetting `VAPI_PHONE_NUMBER_ID`**, as described
+> above, and that is what is in force on the box today. It short-circuits at the
+> `503` before any Vapi request is built, rather than relying on a counter.

@@ -230,9 +230,51 @@ function globalBudget({ name, windowSec, max }) {
   };
 }
 
+/**
+ * Read a non-negative integer from the environment, treating 0 as a real value.
+ *
+ * The obvious form, `Number(process.env.X) || fallback`, is wrong in a way that
+ * matters here. `Number("0")` is `0`, which is falsy, so the fallback fires and
+ * a deliberate zero silently becomes the default. On a spend ceiling that
+ * inverts the operator's intent exactly: setting the cap to zero to STOP
+ * spending restores the default cap instead, and reports success while doing it.
+ *
+ * That was not hypothetical. `OUTBOUND_CALLS_PER_DAY=0` was the documented way
+ * to disable outbound calling in two separate repos, carried through three
+ * sessions, and it would have left outbound running at 50/day. See the
+ * 2026-08-06 entries in docs/SESSION_LOG.md.
+ *
+ * Anything that is not a finite non-negative integer falls back and warns
+ * loudly, because a typo in a spend ceiling should not be silent either. The
+ * warning names the variable but never echoes its value — this helper is for
+ * numeric knobs, and echoing env values is a habit worth not forming.
+ *
+ * @param {string} name      Environment variable name
+ * @param {number} fallback  Value to use when unset, blank, or unparseable
+ * @returns {number}
+ */
+function intFromEnv(name, fallback) {
+  const raw = process.env[name];
+  if (raw === undefined || raw === null || String(raw).trim() === "") {
+    return fallback;
+  }
+
+  const n = Number(raw);
+  if (!Number.isInteger(n) || n < 0) {
+    console.warn(
+      `[rate-limit] ${name} is set but is not a non-negative integer. ` +
+        `Falling back to ${fallback}. Value not shown.`,
+    );
+    return fallback;
+  }
+
+  return n;
+}
+
 module.exports = {
   perIpLimiter,
   globalBudget,
   clientIp,
+  intFromEnv,
   redisConfigured: configured,
 };

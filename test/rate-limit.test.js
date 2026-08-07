@@ -9,7 +9,11 @@ const express = require("express");
 delete process.env.UPSTASH_REDIS_REST_URL;
 delete process.env.UPSTASH_REDIS_REST_TOKEN;
 
-const { perIpLimiter, globalBudget } = require("../services/rate-limit");
+const {
+  perIpLimiter,
+  globalBudget,
+  intFromEnv,
+} = require("../services/rate-limit");
 
 /** Boot a throwaway app on an ephemeral port and return {url, close}. */
 function serve(routes) {
@@ -119,4 +123,64 @@ test("budget window rollover releases capacity", async () => {
   assert.strictEqual((await fetch(url + "/")).status, 200);
 
   await close();
+});
+
+// --- intFromEnv: the falsy-zero trap -----------------------------------------
+//
+// These exist because `Number(process.env.X) || 50` shipped as the spend ceiling
+// and `OUTBOUND_CALLS_PER_DAY=0` was the documented way to turn outbound calling
+// off. Zero is falsy, so the documented shutoff restored the default cap of 50.
+// The regression that matters is the first test; the rest pin the surrounding
+// behaviour so nobody "simplifies" it back.
+
+test("intFromEnv honours 0 — the whole point", () => {
+  process.env.T_CAP = "0";
+  assert.strictEqual(intFromEnv("T_CAP", 50), 0);
+  delete process.env.T_CAP;
+
+  // The exact expression this replaced, asserted so the bug is legible in the
+  // test output rather than described in a comment.
+  process.env.T_CAP = "0";
+  assert.strictEqual(Number(process.env.T_CAP) || 50, 50);
+  delete process.env.T_CAP;
+});
+
+test("intFromEnv falls back when unset or blank", () => {
+  delete process.env.T_CAP;
+  assert.strictEqual(intFromEnv("T_CAP", 50), 50);
+
+  process.env.T_CAP = "";
+  assert.strictEqual(intFromEnv("T_CAP", 50), 50);
+
+  process.env.T_CAP = "   ";
+  assert.strictEqual(intFromEnv("T_CAP", 50), 50);
+  delete process.env.T_CAP;
+});
+
+test("intFromEnv rejects junk, negatives and fractions", () => {
+  for (const bad of ["abc", "-1", "1.5", "NaN", "Infinity", "1e400"]) {
+    process.env.T_CAP = bad;
+    assert.strictEqual(intFromEnv("T_CAP", 50), 50, `expected fallback for ${bad}`);
+  }
+  delete process.env.T_CAP;
+});
+
+test("intFromEnv reads ordinary values", () => {
+  process.env.T_CAP = "7";
+  assert.strictEqual(intFromEnv("T_CAP", 50), 7);
+  delete process.env.T_CAP;
+});
+
+test("a budget of 0 refuses the very first request", async () => {
+  const { url, close } = await serve((app) =>
+    app.get("/", globalBudget({ name: "t-zero", windowSec: 60, max: 0 }), (_q, r) =>
+      r.json({ ok: true }),
+    ),
+  );
+
+  // Not "the second one" — with a cap of zero there is no allowance at all.
+  const res = await fetch(url + "/");
+  await close();
+
+  assert.strictEqual(res.status, 429);
 });

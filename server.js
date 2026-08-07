@@ -15,7 +15,11 @@ const path = require("path");
 const webhookRouter = require("./routes/webhook");
 const { initDb } = require("./services/db");
 const { validateEnv } = require("./services/env");
-const { perIpLimiter, globalBudget } = require("./services/rate-limit");
+const {
+  perIpLimiter,
+  globalBudget,
+  intFromEnv,
+} = require("./services/rate-limit");
 
 // Fail fast if critical env vars are missing
 validateEnv();
@@ -97,7 +101,9 @@ app.use(
   }),
 );
 
-// Health check endpoints — /healthz for Render's health check path, /api/health for internal use
+// Health check endpoints — /healthz is probed by Caddy and the Docker healthcheck
+// on the Hetzner box; /api/health for internal use. (The name is a leftover from
+// Render, which this service left on 2026-07-25.)
 app.get("/healthz", (req, res) => {
   res.status(200).send("OK");
 });
@@ -245,6 +251,14 @@ app.post("/api/contact", contactLimiter, async (req, res) => {
 //                     call is refused rather than placed.
 //
 // Tune OUTBOUND_CALLS_PER_DAY in the environment if the demo needs more room.
+// OUTBOUND_CALLS_PER_DAY=0 is honoured and means zero calls per day — every
+// request gets a 429. Do not rewrite this as `Number(...) || 50`: zero is falsy,
+// so that form turns a deliberate shutoff back into the default ceiling of 50.
+// See intFromEnv in services/rate-limit.js for the full account.
+//
+// Note this is the SOFT disable. The hard one is unsetting VAPI_PHONE_NUMBER_ID,
+// which short-circuits at the 503 below before any Vapi request is built, and is
+// what is actually in force on the box today.
 const outboundLimiter = perIpLimiter({
   name: "outbound-call",
   windowSec: 30,
@@ -254,7 +268,7 @@ const outboundLimiter = perIpLimiter({
 const outboundBudget = globalBudget({
   name: "outbound-call",
   windowSec: 86400,
-  max: Number(process.env.OUTBOUND_CALLS_PER_DAY) || 50,
+  max: intFromEnv("OUTBOUND_CALLS_PER_DAY", 50),
 });
 
 app.post(
