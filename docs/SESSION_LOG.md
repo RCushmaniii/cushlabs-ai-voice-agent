@@ -49,15 +49,14 @@ for it. Verified against this codebase and the live box on arrival.
       _Closes when:_ Vapi → Settings → Billing is read. Dashboard-only; no API access
       is configured from here.
 
-- [ ] **PR #45 is written and mergeable but unmerged — GitHub platform incident.**
-      _Blocks: nothing operationally._ The outbound shutoff it documents is already
-      applied and verified on the box; the PR is docs-only
-      (`docs/COST-CONTROLS.md`, `docs/SESSION_LOG.md`). Held because merges were
-      unavailable on 2026-08-06, not for any review reason.
-      _Closes when:_ `gh pr merge 45 --squash --delete-branch` succeeds and `main`
-      is pulled clean.
-
 ---
+
+_Closed 2026-08-06: PR #45 merged as `fe072a8` once GitHub Actions recovered. Worth keeping
+the reason it was held — the red check on that PR was_ "The job was not acquired by Runner of
+type hosted" _, meaning no test ever executed. A phantom red from a platform outage is
+indistinguishable at a glance from a real failure, and the fix is to re-trigger and get a
+genuine run, never to merge past it. Re-run on the same HEAD went green in 21s; the local
+suite was independently confirmed at 37/37 first._
 
 <!-- New entries go above this line -->
 
