@@ -17,24 +17,25 @@ for it. Verified against this codebase and the live box on arrival.
 
 ---
 
-- [ ] **Auto reload is ON, and on Vapi there is nothing behind it.**
-      _Blocks: the only aggregate spend ceiling that exists._ Read from the billing
-      dashboard 2026-08-07: auto reload **enabled**, $10 top-up at a $5 threshold, one
-      credit purchase in the account's life ($10 on 2026-07-25). It has never fired —
-      lifetime spend is $0.21 — so this is an unexercised exposure, not a leak.
-      **The reason this is not merely "a setting to review":** Vapi has no spending
-      limit, no monthly budget, and no way to lower concurrency below 10. Verified
-      against the vendor docs, not assumed. The credit balance is the entire ceiling,
-      and auto reload is precisely the switch that removes it. Worst case with the
-      floor of 10 concurrent lines and the 600s per-call cap is ~$50/hour, billed to
-      the card in $10 increments indefinitely.
-      _Decision rule, one input:_ no paying client on live calls → OFF, and the
-      balance is a hard ceiling. First paying client → ON, accepting there is no
-      backstop, and compensate with monitoring rather than settings.
-      _Closes when:_ auto reload is toggled off in the dashboard and the billing page
-      re-read to confirm. Owner action — there is no Vapi API for billing.
+- [ ] **`docs/DEPLOYMENT.md` still describes the Render deployment in its body.**
+      _Blocks: nothing operationally; it is labelled, not silently wrong._ The file
+      carries a historical banner at the top, so it reads as a record. Lower priority
+      than the README was, but it is the last Render artifact in the repo.
+      _Closes when:_ the body is rewritten for Hetzner + Docker Compose + GHCR, or the
+      file is explicitly retitled as a historical record.
 
 ---
+
+_Closed 2026-08-07: auto reload turned OFF by Robert. **The credit balance is now the spend
+ceiling, and on Vapi it is the only one that exists** — no spending limit, no monthly budget,
+and concurrency cannot be lowered below 10. Worst case is therefore the remaining balance,
+about $9.79, instead of ~$50/hour billed to the card indefinitely._
+
+_Recorded honestly: this is **owner-confirmed, not tool-verified.** Vapi exposes no billing API,
+so unlike every other item closed in this register there is no probe behind it — the evidence is
+Robert's word and the screenshot he sent. If it is ever worth re-confirming, it is a dashboard
+read, and the decision rule to apply is in `docs/COST-CONTROLS.md` §4: flip it back ON only for a
+paying client whose live call must not drop, accepting that nothing sits behind it._
 
 _Closed 2026-08-07: "Vapi auto-recharge state has never been re-verified." It has now been read
 — auto reload ON, $10 at a $5 threshold — and replaced by the item above, which records the
@@ -62,6 +63,41 @@ genuine run, never to merge past it. Re-run on the same HEAD went green in 21s; 
 suite was independently confirmed at 37/37 first._
 
 <!-- New entries go above this line -->
+
+## Session: 2026-08-07 (Vapi's cost controls are mostly imaginary, and the shutoff left a public leak)
+
+### Accomplished
+
+- **Turned off the last unbounded spend path.** Auto reload was ON ($10 at a $5 threshold) with
+  nothing behind it. Robert switched it off; the credit balance (~$9.79) is now the ceiling.
+- **Found that two of the four cost controls this repo documented do not exist** (#51). Vapi has
+  no spending limit, no monthly budget, and concurrency cannot be lowered below 10 — verified
+  against vendor docs, not assumed. Both were written here on 2026-07-25 from guesswork.
+- **Closed a live leak on a public page** (#52). `public/realestate.html` renders the server's
+  `error` verbatim, so pressing "Call Now" on the portfolio demo returned
+  _"Missing VAPI_API_PRIVATE_KEY, VAPI_PHONE_NUMBER_ID, or VAPI_ASSISTANT_ID_REALESTATE"_ to any
+  visitor. The 503 body is now generic, details go to `console.warn`, `/api/config` exposes an
+  `outboundEnabled` boolean, and the dial form disables itself up front with a bilingual note.
+- **Corrected the PORTFOLIO.md outbound claim** to say built-and-working-but-switched-off, rather
+  than implying a live capability behind a disabled button.
+
+### Decisions Made
+
+- **The auto-reload question has one input, written down to stop it oscillating:** a paying client
+  whose live call must not drop. No client → OFF. This had read as contradictory advice for two
+  weeks only because the docs offered a third option, "ON plus a Spending Limit," that was never real.
+- **Marked the fictional controls as unavailable rather than deleting them**, so the same steps do
+  not get re-derived in six weeks.
+
+### Technical Debt
+
+- `docs/DEPLOYMENT.md` — last Render artifact. Labelled with a banner, so not silently wrong.
+
+### Open Questions / Blockers
+
+- None. The auto-reload close is owner-confirmed rather than tool-verified; Vapi has no billing API.
+
+---
 
 ## Session: 2026-08-06 (Backlog closeout — 7 Dependabot PRs, all 7 advisories, and the falsy-zero bug)
 
