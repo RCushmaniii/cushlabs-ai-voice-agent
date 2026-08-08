@@ -17,23 +17,33 @@ for it. Verified against this codebase and the live box on arrival.
 
 ---
 
-- [ ] **Vapi auto-recharge state has never been re-verified.**
-      _Blocks: the spend ceiling on everything that is still live._ Robert changed the
-      payment method on 2026-07-25 and auto-recharge was not re-checked afterward. If
-      it is OFF, the credit balance is a natural ceiling and nothing more is needed. If
-      it is ON with no Spending Limit set, there is no ceiling at all.
-      Outbound PSTN is now disabled, but the five browser voice demos
-      (`cushlabs`, `coaching`, `medspa`, `trades`, `realestate`) still start real Vapi
-      sessions from a public page using a browser-side key, so this still matters.
-      _Narrowed 2026-08-06, not closed:_ all 9 assistants on the account carry
-      `maxDurationSeconds: 600`, verified via `GET /assistant`, so a single abusive
-      web call is bounded at ~$0.84. That caps the **per-call** cost. It does not cap
-      the **aggregate**, which is what auto-recharge plus an unset Spending Limit
-      would leave open.
-      _Closes when:_ Vapi → Settings → Billing is read. Dashboard-only; no API access
-      is configured from here.
+- [ ] **Auto reload is ON, and on Vapi there is nothing behind it.**
+      _Blocks: the only aggregate spend ceiling that exists._ Read from the billing
+      dashboard 2026-08-07: auto reload **enabled**, $10 top-up at a $5 threshold, one
+      credit purchase in the account's life ($10 on 2026-07-25). It has never fired —
+      lifetime spend is $0.21 — so this is an unexercised exposure, not a leak.
+      **The reason this is not merely "a setting to review":** Vapi has no spending
+      limit, no monthly budget, and no way to lower concurrency below 10. Verified
+      against the vendor docs, not assumed. The credit balance is the entire ceiling,
+      and auto reload is precisely the switch that removes it. Worst case with the
+      floor of 10 concurrent lines and the 600s per-call cap is ~$50/hour, billed to
+      the card in $10 increments indefinitely.
+      _Decision rule, one input:_ no paying client on live calls → OFF, and the
+      balance is a hard ceiling. First paying client → ON, accepting there is no
+      backstop, and compensate with monitoring rather than settings.
+      _Closes when:_ auto reload is toggled off in the dashboard and the billing page
+      re-read to confirm. Owner action — there is no Vapi API for billing.
 
 ---
+
+_Closed 2026-08-07: "Vapi auto-recharge state has never been re-verified." It has now been read
+— auto reload ON, $10 at a $5 threshold — and replaced by the item above, which records the
+finding rather than the question. Reading it also exposed a defect in the plan that had been
+sitting behind this item the whole time: the fallback it assumed, "if ON, set a Spending Limit,"
+was never available, because **Vapi has no spending limit.** That instruction was written on
+2026-07-25 in `1caf1ef` from assumption rather than from the dashboard, and it made ON look
+survivable for two weeks. `docs/COST-CONTROLS.md` §1 and §3 now document both fictional controls
+as unavailable instead of deleting them, so the same steps do not get re-derived later._
 
 _Closed 2026-08-06: the `OUTBOUND_CALLS_PER_DAY=0` no-op, fixed in #49 and merged as `bab5ae1`.
 Closed against the stated bar, not below it. The parse now goes through `intFromEnv`; five
