@@ -74,14 +74,23 @@ and start calls without ever touching our server again, so throttling
 
 Open https://dashboard.vapi.ai
 
-### 1. Account spending limit
+> **Corrected 2026-08-07 against the vendor docs and the live dashboard.** Two of
+> the four controls this section used to recommend do not exist. They were written
+> on 2026-07-25 from assumption, not from the dashboard, and the giveaway was the
+> hedged parenthetical — "Find **Spending Limit** (or **Monthly Budget**)" is what
+> guessing at a UI looks like in prose. Both are documented below as unavailable
+> rather than deleted, so nobody re-derives them and writes the same steps again.
 
-1. Left sidebar → **Settings** → **Billing**
-2. Find **Spending Limit** (or **Monthly Budget**)
-3. Set a hard monthly cap you are willing to lose in the worst case
-4. Set **Alert threshold** to ~50% so warning arrives with room to react
-5. Confirm the alert email is one that is actually read
-6. Click **Save**
+### 1. Account spending limit — DOES NOT EXIST
+
+**Vapi has no spending limit, monthly budget, or hard spend ceiling of any kind.**
+Confirmed against https://docs.vapi.ai/billing/manage-billing-and-credits, which
+lists exactly three billing controls: manual credit purchases (min $10), auto
+reload, and payment method. There is no proactive cap, and no alert threshold.
+
+The practical consequence is severe and drives everything below: **the credit
+balance is the only aggregate spend ceiling that exists on this platform.** There
+is no second line of defence behind it. See §4.
 
 ### 2. Per-assistant call duration
 
@@ -95,20 +104,38 @@ Mike / trades, David / realestate):
 4. **Silence Timeout** — set to `30` seconds so abandoned sessions end
 5. Click **Publish** / **Save** on that assistant before moving to the next
 
-### 3. Concurrency
+### 3. Concurrency — CANNOT BE LOWERED
 
-1. Left sidebar → **Settings** → **Account** (or **Org**)
-2. **Max Concurrent Calls** — set to a small number (e.g. `5`). This is what
-   converts a scripted flood into a queue instead of a bill.
-3. Click **Save**
+Every Vapi account includes **10 concurrent call slots** and concurrency can only
+be bought _upward_ (Reserved concurrency, +$10/mo per line). There is no setting
+to cap it below the included 10. The old instruction here — "Max Concurrent Calls
+— set to a small number (e.g. 5)" — describes a control that is not offered.
 
-### 4. Credit balance is itself a ceiling (PAYG)
+10 is therefore a floor, not a dial, and it is an input to the worst case rather
+than a lever against it: 10 lines × 6 calls/hour × $0.84 = **~$50/hour**.
 
-The Vapi org is on **Pay-as-you-go**. Whatever sits in **Credit Balance** is the
-practical worst case for runaway spend — _provided auto-recharge is off_. Check
-**Settings → Billing → Payment method**: if auto-recharge/auto-top-up is
-enabled, that ceiling disappears and the spending limit in step 1 becomes the
-only backstop.
+### 4. Credit balance is the ONLY aggregate ceiling (PAYG)
+
+The org is on **Pay-as-you-go**. Because §1 does not exist, whatever sits in
+**Credit Balance** is the entire worst case for runaway spend — _and only while
+auto reload is off_.
+
+**Auto reload is the switch that deletes the last ceiling.** It tops up a fixed
+amount whenever the balance falls to a threshold, with no documented cap on how
+many times it can fire. Turning it on converts a bounded loss into an open-ended
+one billed to the card in small increments.
+
+**Decision rule — one input:**
+
+| Is there a paying client whose live call must not drop? | Auto reload                                                                             |
+| ------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| No (state as of 2026-08-07 — no clients)                | **OFF.** Balance is a hard ceiling; worst case is the balance.                          |
+| Yes                                                     | ON, accepting there is NO backstop behind it. Compensate with monitoring, not settings. |
+
+Verified 2026-08-07 from the billing dashboard: auto reload **ON**, $10 reload at a
+$5 threshold, one credit purchase in the account's life ($10 on 2026-07-25). It has
+therefore never actually fired — lifetime spend is $0.21 — so this is a live
+exposure that has never been exercised, not an active leak.
 
 ---
 
