@@ -146,7 +146,7 @@ Five demo agents are deployed at voice.cushlabs.ai: Clara handles lead qualifica
 ## Technical Highlights
 
 - **Vapi WebRTC pipeline:** Browser microphone → Deepgram Nova-2/3 STT → LLM (Claude/Groq) → Cartesia TTS → browser speaker, all under 500ms round-trip
-- **Outbound PSTN calling:** Server-side POST /api/outbound-call triggers Vapi to call prospects via Twilio with E.164 validation and per-IP rate limiting
+- **Outbound PSTN calling:** Server-side POST /api/outbound-call triggers Vapi to call prospects via Twilio with E.164 validation, per-IP throttling and a global daily spend ceiling. _Built and working; switched off on the public demo since 2026-08-06 as a cost control, so the dial form there is disabled by design rather than broken. Available on request._
 - **Webhook function calling:** Vapi triggers POST /api/webhook with structured function call payloads; server routes to calendar, database, MLS lookup, or custom business logic services (8 function handlers)
 - **Mock MLS integration:** Property lookup by ID or address for real estate demo with 6 NJ listings
 - **Google Calendar OAuth:** Real-time availability checks and event creation with auto-generated Google Meet links during live calls
