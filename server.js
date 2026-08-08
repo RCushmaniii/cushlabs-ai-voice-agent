@@ -155,6 +155,14 @@ app.get("/api/config", configLimiter, (req, res) => {
     publicKey: process.env.VAPI_API_PUBLIC_KEY,
     assistantId,
     lang,
+    // Lets the realestate demo disable its dial form up front instead of letting a
+    // visitor type a number, press Call, and collect a 503. Booleans only — this
+    // says whether the feature is on, never which variable is missing.
+    outboundEnabled: Boolean(
+      process.env.VAPI_API_PRIVATE_KEY &&
+      process.env.VAPI_PHONE_NUMBER_ID &&
+      process.env.VAPI_ASSISTANT_ID_REALESTATE,
+    ),
   });
 });
 
@@ -284,9 +292,22 @@ app.post(
     const assistantId = process.env.VAPI_ASSISTANT_ID_REALESTATE;
 
     if (!vapiKey || !phoneNumberId || !assistantId) {
+      // The detail goes to the log, not to the response. This endpoint is reachable
+      // from a public demo page whose UI renders `error` verbatim, so naming the
+      // missing variables here published our env schema to any visitor.
+      const missing = [
+        !vapiKey && "VAPI_API_PRIVATE_KEY",
+        !phoneNumberId && "VAPI_PHONE_NUMBER_ID",
+        !assistantId && "VAPI_ASSISTANT_ID_REALESTATE",
+      ].filter(Boolean);
+      console.warn(
+        `[Outbound] Refused: outbound calling is not configured. Missing: ${missing.join(", ")}`,
+      );
+
       return res.status(503).json({
         error:
-          "Outbound calling is not configured. Missing VAPI_API_PRIVATE_KEY, VAPI_PHONE_NUMBER_ID, or VAPI_ASSISTANT_ID_REALESTATE.",
+          "Outbound calling is turned off for this demo. The live web demos above still work.",
+        outboundEnabled: false,
       });
     }
 
