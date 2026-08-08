@@ -64,6 +64,48 @@ suite was independently confirmed at 37/37 first._
 
 <!-- New entries go above this line -->
 
+## Session: 2026-08-08 (Closeout — repo purpose doc, and the accomplishments record)
+
+Continuation of the 2026-08-07 session past midnight; the substantive work is in that entry.
+
+### Accomplished
+
+- **`docs/REPO_PURPOSE.md` added (#54).** This was the last CushLabs repo without one. Written
+  as its own map of the conversational surfaces from the voice end, following the
+  `cushlabs-whatsapp` precedent — explicitly **not** a clone of the Messenger family's shared
+  table, and the file says so, because "update all three" applies only inside that family.
+  The section that earns its place is _"The constraint that makes this repo different"_: this
+  is the only CushLabs surface billing per second of audio to an anonymous visitor, and because
+  the Vapi Web SDK requires a browser-side key in the page, server-side rate limiting cannot
+  protect that path. Previously that was only discoverable as a comment in `server.js`.
+- **Also recorded the strict split with `cushlabs-prod-server`** — app code here,
+  `docker-compose.yml` and `Caddyfile` there, six co-tenant services on the same box — so a
+  compose change never lands in a voice-agent PR and takes the other five services with it.
+- **Three accomplishments logged** (`a-163` infrastructure, `a-164` portfolio, `a-165`
+  infrastructure) plus a correction appended to `a-155`, whose title claimed every repo had a
+  purpose doc before this one existed.
+
+### Decisions Made
+
+- **One inference in REPO_PURPOSE.md is labelled as an inference.** The white-glove-not-self-serve
+  boundary was decided for the Messenger product, not here, so it reads as a reason to ask before
+  building ops UI rather than as settled law. Inventing a decision that was never made is how
+  these documents start drifting.
+
+### Technical Debt
+
+- **`operating-system/strategy/accomplished.json` is written concurrently by parallel sessions.**
+  Mid-task it grew 156 → 162 items when another session committed `bf0db24`, invalidating IDs read
+  minutes earlier. Caught by a guard rather than by luck. Not this repo's file, so not on this
+  register — but the next thing writing to it should derive IDs at write time, not from an
+  earlier read.
+
+### Open Questions / Blockers
+
+- None.
+
+---
+
 ## Session: 2026-08-07 (Vapi's cost controls are mostly imaginary, and the shutoff left a public leak)
 
 ### Accomplished
