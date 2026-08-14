@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const { storeLeadData, getLeadData, deleteLeadData } = require('../services/redis');
 const { getAvailableSlots, bookAppointment } = require('../services/calendar');
+const { demoLabelForAssistantId } = require('../services/assistants');
 const { saveLead, saveBooking, updateLeadWithCallData } = require('../services/db');
 
 // Load mock MLS data
@@ -70,14 +71,25 @@ async function handleFunctionCall(message, res) {
     }
 
     const callId = message.call?.id || 'unknown';
-    console.log(`[Vapi] Function call: ${functionCall.name}`, functionCall.parameters);
+
+    // Which demo the caller is actually talking to. Vapi has moved this field
+    // around across payload shapes, so read every place it has appeared rather
+    // than trusting one. Unresolvable is fine and expected — it yields no tag.
+    const assistantId =
+        message.call?.assistantId ||
+        message.call?.assistant?.id ||
+        message.assistant?.id ||
+        null;
+    const demo = demoLabelForAssistantId(assistantId);
+
+    console.log(`[Vapi] Function call: ${functionCall.name}`, functionCall.parameters, `| demo: ${demo || 'none'}`);
 
     switch (functionCall.name) {
         case 'check_availability':
             return handleCheckAvailability(functionCall, res);
 
         case 'book_appointment':
-            return handleBookAppointment(functionCall, callId, res);
+            return handleBookAppointment(functionCall, callId, res, demo);
 
         case 'qualify_lead':
             return handleQualifyLead(functionCall, callId, res);
@@ -95,7 +107,7 @@ async function handleFunctionCall(message, res) {
             return handleCheckTourAvailability(functionCall, res);
 
         case 'book_tour':
-            return handleBookTour(functionCall, callId, res);
+            return handleBookTour(functionCall, callId, res, demo);
 
         default:
             console.log(`[Vapi] Unknown function: ${functionCall.name}`);
@@ -138,7 +150,7 @@ async function handleCheckAvailability(functionCall, res) {
 }
 
 // --- Book Appointment ---
-async function handleBookAppointment(functionCall, callId, res) {
+async function handleBookAppointment(functionCall, callId, res, demo) {
     const { caller_name, caller_email, date_time, notes } = functionCall.parameters || {};
 
     if (!caller_name || !caller_email || !date_time) {
@@ -151,7 +163,7 @@ async function handleBookAppointment(functionCall, callId, res) {
     }
 
     try {
-        const result = await bookAppointment({ caller_name, caller_email, date_time, notes });
+        const result = await bookAppointment({ caller_name, caller_email, date_time, notes, demo });
         console.log('[Calendar] Appointment booked:', result);
 
         // Store in Redis (session) and Neon (permanent)
@@ -360,7 +372,7 @@ async function handleCheckTourAvailability(functionCall, res) {
 }
 
 // --- Book Tour (Real Estate) ---
-async function handleBookTour(functionCall, callId, res) {
+async function handleBookTour(functionCall, callId, res, demo) {
     const { buyer_name, buyer_email, date_time, property_address, notes } = functionCall.parameters || {};
 
     if (!buyer_name || !buyer_email || !date_time) {
@@ -380,6 +392,7 @@ async function handleBookTour(functionCall, callId, res) {
             caller_email: buyer_email,
             date_time,
             notes: tourNotes,
+            demo,
         });
         console.log('[Calendar] Tour booked:', result);
 
