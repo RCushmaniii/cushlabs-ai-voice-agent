@@ -113,22 +113,12 @@ app.get("/api/health", (req, res) => {
 });
 
 // Serve public Vapi config to frontend (only public key + assistant ID, never private key)
-const assistants = {
-  cushlabs: process.env.VAPI_ASSISTANT_ID_CUSHLABS,
-  coaching: process.env.VAPI_ASSISTANT_ID_COACHING,
-  medspa: process.env.VAPI_ASSISTANT_ID_MEDSPA,
-  trades: process.env.VAPI_ASSISTANT_ID_TRADES,
-  realestate: process.env.VAPI_ASSISTANT_ID_REALESTATE,
-};
-
-// Mexican-Professional-Spanish (es-MX) assistant variants. Falls back to the
-// English assistant for any service without a Spanish counterpart.
-const assistantsEs = {
-  cushlabs: process.env.VAPI_ASSISTANT_ID_CUSHLABS_ES,
-  coaching: process.env.VAPI_ASSISTANT_ID_COACHING_ES,
-  medspa: process.env.VAPI_ASSISTANT_ID_MEDSPA_ES,
-  trades: process.env.VAPI_ASSISTANT_ID_TRADES_ES,
-};
+//
+// The maps moved to services/assistants.js so the Vapi webhook can run the same
+// lookup in reverse and name the demo on the calendar invite. `assistantsEs`
+// still falls back to the English assistant for any service without a Spanish
+// counterpart — that behavior is unchanged, it just lives elsewhere now.
+const { assistants, assistantsEs } = require("./services/assistants");
 
 // Throttled to slow scripted enumeration of assistant IDs.
 //

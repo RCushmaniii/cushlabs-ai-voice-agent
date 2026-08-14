@@ -204,7 +204,7 @@ function getDefaultSlots(timezone) {
  * Book a 30-minute discovery session on Google Calendar.
  * Creates event with attendees (sends email invites) and Google Meet link.
  */
-async function bookAppointment({ caller_name, caller_email, date_time, notes }) {
+async function bookAppointment({ caller_name, caller_email, date_time, notes, demo }) {
     const appointmentDate = new Date(date_time);
     const endDate = new Date(appointmentDate.getTime() + SESSION_DURATION_MIN * 60 * 1000);
 
@@ -228,9 +228,17 @@ async function bookAppointment({ caller_name, caller_email, date_time, notes }) 
     try {
         const accessToken = await getAccessToken();
 
+        // Every persona books onto one calendar, so the title has to say which
+        // demo took the call. The meeting is a CushLabs AI strategy consultation
+        // in all cases — the caller reached a demonstration business, and that
+        // is what the tag records. No label (Clara, or an assistant ID we
+        // cannot resolve) reproduces exactly the title this service produced
+        // before.
+        const demoTag = demo ? ` (${demo})` : '';
+
         const eventBody = {
-            summary: `AI Strategy Consultation — CushLabs: ${caller_name}`,
-            description: `AI Strategy Consultation — CushLabs.ai\nName: ${caller_name}\nEmail: ${caller_email}${notes ? `\nNotes: ${notes}` : ''}`,
+            summary: `AI Strategy Consultation — CushLabs${demoTag}: ${caller_name}`,
+            description: `AI Strategy Consultation — CushLabs.ai${demo ? `\nDemo: ${demo}` : ''}\nName: ${caller_name}\nEmail: ${caller_email}${notes ? `\nNotes: ${notes}` : ''}`,
             start: { dateTime: date_time, timeZone: TIMEZONE },
             end: { dateTime: endDate.toISOString(), timeZone: TIMEZONE },
             attendees: [
