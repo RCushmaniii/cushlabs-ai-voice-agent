@@ -1,5 +1,12 @@
 # CLAUDE.md — CushLabs AI Voice Agent
 
+## Why this matters before you change anything
+
+Answers the phone for client businesses.
+
+**If this breaks:** Calls go unanswered or are answered badly, in real time, out loud, to a caller who is deciding whether to buy. There is no draft stage here -- what it says is said.
+
+Its risk class and revenue proximity are recorded in `operating-system/portfolio/repo-metadata.json`, and are read from there rather than restated here -- the same rule that governs prices, client facts and platform approvals.
 <!-- capability-registry-pointer -->
 ## Platform approvals — read the registry, never restate it
 
