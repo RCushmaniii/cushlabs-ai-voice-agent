@@ -152,6 +152,7 @@ Use the `session-logger` skill to generate the entry.
 | --- | --- | --- |
 | `operating-system/cushlabs/operating-vision.json` | How the business is run - the operations vision, the six operating principles, and the precedence order that settles conflicts between them. | `eea191dbd2c5` |
 | `operating-system/cushlabs/capability-registry.json` | Every platform approval, entitlement and quota, and whether a client can actually reach it. **(internal — never quote to a client)** | `4cb1de1e9bbb` |
+| `operating-system/cushlabs/tech-standard.json` | The sanctioned technology lanes, the gate a new technology must pass, and the baseline every deployed repo must meet. | `913dded097dc` |
 
 If a revision above no longer matches what `operating-system` holds, this repo is reading a
 stale assumption. Re-read the file before acting on anything it covers. To check:
