@@ -1,5 +1,34 @@
 # CushLabs AI Voice Agent
 
+> The phone rings while you are with a customer. It goes to voicemail. That caller
+> phones the next business on the list instead.
+
+## The problem it solves
+
+For a service business, a missed call is usually a missed sale — and it is invisible.
+
+- Nobody can answer the phone and serve the person in front of them at the same time.
+- Voicemail is close to useless: most callers hang up and try someone else rather than leave a message.
+- Hiring reception cover for evenings and weekends costs more than the calls are worth.
+
+## What it does for the business
+
+- Answers the phone, at any hour, and holds a real conversation rather than reading a menu.
+- Qualifies the caller and books appointments straight into the calendar.
+- Speaks English and Spanish.
+- Hands the owner the ones worth their time instead of all of them.
+
+## Who it's for
+
+- **Service businesses** whose enquiries arrive by phone.
+- **Their callers**, who get an answer instead of a beep.
+
+---
+
+# Technical reference
+
+Everything below is implementation detail. The business case is above.
+
 Production-ready AI voice agents that qualify leads, book appointments, and handle customer conversations — 24/7, with sub-500ms response times.
 
 **Live:** [voice.cushlabs.ai](https://voice.cushlabs.ai) | **Bilingual:** English + Spanish
