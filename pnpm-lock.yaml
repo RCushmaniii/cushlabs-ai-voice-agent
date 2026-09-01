@@ -18,8 +18,8 @@ importers:
         specifier: ^10.69.0
         version: 10.69.0(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))
       '@upstash/redis':
-        specifier: ^1.38.2
-        version: 1.38.2
+        specifier: ^1.38.3
+        version: 1.38.3
       compression:
         specifier: ^1.8.1
         version: 1.8.1
@@ -146,8 +146,8 @@ packages:
   '@types/estree@1.0.9':
     resolution: {integrity: sha512-GhdPgy1el4/ImP05X05Uw4cw2/M93BCUmnEvWZNStlCzEKME4Fkk+YpoA5OiHNQmoS7Cafb8Xa3Pya8m1Qrzeg==}
 
-  '@upstash/redis@1.38.2':
-    resolution: {integrity: sha512-RZ+JaRCVIS+ZTGnjOnDMr+/0aqDxsBb5rV6aW+Pys4SGELwr5lwE3UbLHRCHqMQ5Ulxj0b/CFBHfbmE175Otog==}
+  '@upstash/redis@1.38.3':
+    resolution: {integrity: sha512-vtS0BonQHU6kDSWvHTISh+LOuLIEk+jeMXebv20CDJ/aHGOG085SGa8OpI+I+Ow8WgPFhqH23XG8kQ2LXXRnag==}
 
   accepts@2.0.0:
     resolution: {integrity: sha512-5cvg6CtKwfgdmVqY1WIiXKc3Q1bkRqGLi+2W/6ao+6Y7gu/RCwRuAhGEzh5B4KlszSuTLgZYuqFqo5bImjNKng==}
@@ -732,7 +732,7 @@ snapshots:
 
   '@types/estree@1.0.9': {}
 
-  '@upstash/redis@1.38.2':
+  '@upstash/redis@1.38.3':
     dependencies:
       uncrypto: 0.1.3
 
