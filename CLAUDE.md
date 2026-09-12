@@ -158,7 +158,7 @@ Use the `session-logger` skill to generate the entry.
 | Canonical file | Owns | Reconciled at |
 | --- | --- | --- |
 | `operating-system/cushlabs/operating-vision.json` | How the business is run - the operations vision, the six operating principles, and the precedence order that settles conflicts between them. | `eea191dbd2c5` |
-| `operating-system/cushlabs/capability-registry.json` | Every platform approval, entitlement and quota, and whether a client can actually reach it. **(internal — never quote to a client)** | `83b82a0b7a03` |
+| `operating-system/cushlabs/capability-registry.json` | Every platform approval, entitlement and quota, and whether a client can actually reach it. **(internal — never quote to a client)** | `9e06d7012f1f` |
 | `operating-system/cushlabs/tech-standard.json` | The sanctioned technology lanes, the gate a new technology must pass, and the baseline every deployed repo must meet. | `913dded097dc` |
 
 If a revision above no longer matches what `operating-system` holds, this repo is reading a
