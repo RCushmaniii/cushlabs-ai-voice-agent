@@ -10,3 +10,4 @@
 overrides:
   path-to-regexp: ">=8.4.0"
   qs: ">=6.16.0"
+  proxy-addr: ">=2.0.8"
