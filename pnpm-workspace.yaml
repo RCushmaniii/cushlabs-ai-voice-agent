@@ -1,0 +1,12 @@
+# Transitive-dependency floors that close Dependabot security alerts.
+#
+# These used to live in package.json under "pnpm.overrides". pnpm 11 stopped
+# reading that block, and Dependabot's pnpm moved past 11 in September 2026,
+# so every lockfile it regenerates silently drops the pins and then fails the
+# frozen install (ERR_PNPM_LOCKFILE_CONFIG_MISMATCH) on CI and in the image
+# build. pnpm-workspace.yaml is read by pnpm 10, 11 and 12 alike.
+#
+# Floor = the first patched version named by the alert. Raise, never lower.
+overrides:
+  path-to-regexp: ">=8.4.0"
+  qs: ">=6.16.0"
