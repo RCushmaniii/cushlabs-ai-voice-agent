@@ -5,7 +5,7 @@
 portfolio_enabled: true
 portfolio_priority: 3
 portfolio_featured: true
-portfolio_last_reviewed: "2026-04-05"
+portfolio_last_reviewed: "2026-09-13"
 
 title: "AI Voice Agent Platform"
 tagline: "AI phone agents that answer calls, qualify leads, and book appointments — 24/7, under 500ms response"
