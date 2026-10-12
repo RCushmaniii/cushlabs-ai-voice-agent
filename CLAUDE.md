@@ -112,10 +112,10 @@ See `.env` on VPS at `~/apps/cushlabs-prod-server/.env.voice-agent`. Key vars in
 ### Deploy
 
 ```bash
-ssh deploy@178.156.192.117 'cd ~/apps/cushlabs-ai-voice-agent && git pull && cd ~/apps/cushlabs-prod-server && docker compose up -d --build voice-agent'
+ssh deploy@178.156.192.117 'cd ~/apps/cushlabs-prod-server && git pull && docker compose pull voice-agent && docker compose up -d voice-agent'
 ```
 
-Code changes require `--build`. Config-only changes (env vars) just need `docker compose restart voice-agent`.
+The box never builds: CI pushes `ghcr.io/rcushmaniii/cushlabs-ai-voice-agent:latest` from main, and the compose service pulls it (verified on the box 2026-10-12, `cushlabs-prod-server/docker-compose.yml`). Wait for the main `build-image` run before deploying. Config-only changes (env vars) just need `docker compose restart voice-agent`. Roll back by re-tagging a previous image as `:latest` and running `docker compose up -d voice-agent` without pulling.
 
 ### Logs
 
