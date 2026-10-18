@@ -64,6 +64,31 @@ suite was independently confirmed at 37/37 first._
 
 <!-- New entries go above this line -->
 
+## Session: 2026-10-17 (Grok Voice 3.0 evaluated — declined, stay on Vapi)
+
+**Outcome:** no code, config, or deployment change. Decision recorded so it is not re-researched.
+
+- **Reviewed xAI's Grok Voice 3.0 announcement** ($0.08/min speech-to-speech, 2026-10-14) against
+  the current Vapi pipeline (Deepgram → Claude Sonnet / Groq → Cartesia, tools via `/api/webhook`).
+- **Key finding: Vapi cannot run it.** Vapi lists xAI only as an LLM, STT, or TTS provider; its
+  only speech-to-speech option is OpenAI Realtime (checked https://docs.vapi.ai/openai-realtime and
+  https://vapi.ai/partnerships/directory/partner/xai). Trying Grok Voice means a separate build:
+  a WebSocket client, a short-lived browser auth endpoint, the 8 tools re-wired, and our own
+  call-duration limits.
+- **What a swap would lose:** Claude Sonnet as the brain, the hand-picked Mexican Cartesia voices
+  for the Spanish assistants, and Vapi's per-assistant max-duration / silence-timeout settings.
+- **Benchmark caveats:** time to first audio regressed 0.70s → 0.81s vs Grok Voice 2.0; #2 on
+  τ-Voice behind GPT-Live-1; Starlink/Tesla figures come from sister companies; Spanish / Mexican
+  accent support not confirmed in xAI docs.
+- **Decision (Robert):** no test, no change. Lifetime Vapi spend is $0.21, so per-minute savings
+  are irrelevant, and the upside was not certain enough to justify the build.
+- **Revisit only if:** Vapi adds Grok Voice as a native realtime provider, Mexican Spanish is
+  proven, or call volume makes per-minute cost matter.
+
+**Immediate next steps:** none from this session. Open Items register unchanged.
+
+---
+
 ## Session: 2026-08-08 (Closeout — repo purpose doc, and the accomplishments record)
 
 Continuation of the 2026-08-07 session past midnight; the substantive work is in that entry.
