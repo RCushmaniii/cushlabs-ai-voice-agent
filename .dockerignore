@@ -1,0 +1,10 @@
+# Keep the image to what server.js needs at runtime. Before this file existed
+# the image shipped .git, .github, docs and tests (found 2026-10-26).
+.git
+.github
+node_modules
+docs
+test
+.env
+.env.local
+.vercel
