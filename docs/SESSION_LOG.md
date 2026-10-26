@@ -64,6 +64,49 @@ suite was independently confirmed at 37/37 first._
 
 <!-- New entries go above this line -->
 
+## Session: 2026-10-26 (container runs as non-root, Sentry finally live in production)
+
+**Outcome:** PR #69 merged and deployed. The production container now runs as uid 1000 instead
+of root, the image no longer ships `.git`, and Sentry receives production errors for the first
+time.
+
+### Accomplished
+
+- **`USER node` in the Dockerfile (#69).** The image's built-in unprivileged user. No `chown`
+  was needed because the app writes nothing to disk (Neon and Upstash are remote, `public/` is
+  read-only), so the image size did not grow; it shrank 658 → 649 MB once `.dockerignore` stopped
+  copying `.git`, `.github`, `docs` and `test` into it.
+- **Proved it before editing.** The then-current production image was run on the box with
+  `--user 1000:1000` on a spare localhost port against the real env file: process `uid=1000`,
+  `/healthz` 200, index and CSS 200, Neon tables initialized, unsigned webhook POST 401.
+- **Deployed with `cushlabs-prod-server/scripts/deploy-service.sh voice-agent`** (auto-rollback if
+  the healthcheck fails within 90 s). Live container verified: `uid=1000(node)`, healthy,
+  https://voice.cushlabs.ai/healthz 200.
+- **Sentry in production.** The container had been logging `Missing recommended vars: SENTRY_DSN`
+  on every start. The DSN of the existing Sentry project `cushlabs-ai-voice-agent` and
+  `NODE_ENV=production` are now in the box's env file (so events are tagged `production`, not
+  `development`). The project's single issue alert ("high priority issues", 30-minute cadence,
+  email) is filtered to `environment:production`; a local run can never page.
+- **Docs corrected:** `CLAUDE.md` and `README.md` said Node 20; the Dockerfile has used Node 22.
+
+### Decisions Made
+
+- **No `ignoreErrors` list in `Sentry.init` yet.** The project has had zero issues in 90 days and
+  the Express handler only reports 5xx. Add filters when a real noisy issue appears, not before.
+- **`REDIS_URL` stays in the env file.** `services/env.js` lists it as REQUIRED and the process
+  exits without it, although nothing reads its value (sessions use Upstash REST). The clean fix is
+  to drop it from `REQUIRED` here, then remove it from the box; the prod-server log previously
+  said to delete it from the env file first, which would have taken the service down.
+
+### Immediate Next Steps
+
+- [ ] Drop `REDIS_URL` from `REQUIRED` in `services/env.js` (it is unused), then remove the line
+      from the box's env file in the same change.
+- [ ] Sentry project platform is still `javascript-nextjs`; set it to `node-express` so the SDK
+      hints match (cosmetic).
+
+---
+
 ## Session: 2026-10-17 (Grok Voice 3.0 evaluated — declined, stay on Vapi)
 
 **Outcome:** no code, config, or deployment change. Decision recorded so it is not re-researched.
