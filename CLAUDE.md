@@ -38,7 +38,7 @@ Production AI voice agent platform for lead qualification, appointment booking, 
 
 ## Tech Stack
 
-- Node.js 20 (Alpine in Docker)
+- Node.js 22 (Alpine in Docker, runs as the unprivileged `node` user, uid 1000)
 - Express 5
 - Vapi — voice agent infrastructure (webhook-driven)
 - Anthropic Claude — conversational AI
@@ -61,7 +61,7 @@ cushlabs-ai-voice-agent/
 ├── data/                   # Static data files
 ├── scripts/                # Utility scripts
 ├── docs/                   # Documentation
-├── Dockerfile              # Node 20 Alpine, pnpm
+├── Dockerfile              # Node 22 Alpine, pnpm, USER node (non-root)
 ├── vapi-config.json        # Vapi assistant configuration
 └── package.json
 ```

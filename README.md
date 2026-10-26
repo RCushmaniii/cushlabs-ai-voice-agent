@@ -126,7 +126,7 @@ Browser → POST /api/outbound-call
 │   ├── ARCHITECTURE.md          # System design + patterns
 │   ├── realestate-system-prompt.md # David's system prompt
 │   └── vapi-realestate-config.json # Vapi reference config for David
-├── Dockerfile                   # Node 20 Alpine, pnpm
+├── Dockerfile                   # Node 22 Alpine, pnpm, runs as non-root `node`
 └── package.json                 # pnpm, Node 20
 ```
 
