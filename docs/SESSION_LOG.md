@@ -100,8 +100,10 @@ time.
 
 ### Immediate Next Steps
 
-- [ ] Drop `REDIS_URL` from `REQUIRED` in `services/env.js` (it is unused), then remove the line
-      from the box's env file in the same change.
+- [x] Drop `REDIS_URL` from `REQUIRED` in `services/env.js` — done 2026-10-26 (chore/drop-redis-url):
+      REQUIRED no longer lists it, the two Upstash REST vars are RECOMMENDED, and the stale
+      "Redis 7 container" wording in CLAUDE.md, README and `.env.example` now describes Upstash.
+      The `REDIS_URL` line comes out of the box env file right after this image deploys.
 - [ ] Sentry project platform is still `javascript-nextjs`; set it to `node-express` so the SDK
       hints match (cosmetic).
 

@@ -44,7 +44,7 @@ Production AI voice agent platform for lead qualification, appointment booking, 
 - Anthropic Claude — conversational AI
 - Google Calendar API — appointment scheduling
 - Neon Postgres — persistent storage
-- Redis 7 — session cache (64MB max, allkeys-lru)
+- Upstash Redis (REST) — session cache, 24 h TTL per call
 - pnpm — package manager
 
 ## Project Structure
@@ -57,7 +57,7 @@ cushlabs-ai-voice-agent/
 ├── services/
 │   ├── calendar.js         # Google Calendar integration
 │   ├── db.js               # Neon Postgres client
-│   └── redis.js            # Redis session cache
+│   └── redis.js            # Upstash Redis session cache (REST)
 ├── data/                   # Static data files
 ├── scripts/                # Utility scripts
 ├── docs/                   # Documentation
@@ -82,7 +82,7 @@ pnpm start
 ## Key Patterns & Conventions
 
 - **Webhook-driven:** Vapi sends events to `/webhook` — the app processes and responds
-- **Session caching:** Redis stores conversation state with TTL-based expiry
+- **Session caching:** Upstash Redis (REST) stores lead data per call with a 24 h TTL
 - **External databases:** Neon Postgres is remote (connection string in env), not self-hosted
 - **Stateless app layer:** App can be restarted without losing data (Redis is a cache, Postgres is persistent)
 
@@ -93,7 +93,7 @@ See `.env` on VPS at `~/apps/cushlabs-prod-server/.env.voice-agent`. Key vars in
 - Anthropic API key
 - Google Calendar OAuth credentials
 - Neon Postgres connection string
-- Redis URL (`redis://redis:6379` in Docker)
+- Upstash Redis REST URL + token
 
 ## Production Deployment — Hetzner VPS
 
@@ -101,11 +101,11 @@ See `.env` on VPS at `~/apps/cushlabs-prod-server/.env.voice-agent`. Key vars in
 - **Host:** `178.156.192.117`
 - **SSH:** `ssh deploy@178.156.192.117`
 - **URL:** https://voice.cushlabs.ai
-- **VPS path:** `~/apps/cushlabs-ai-voice-agent/`
+- **VPS path:** none — the box holds no checkout of this repo (removed 2026-10-26); it runs the GHCR image only
 - **Orchestration:** `~/apps/cushlabs-prod-server/docker-compose.yml`
 - **Domain:** `voice.cushlabs.ai` (HTTPS via Caddy/Let's Encrypt)
 - **Internal port:** 3000 (behind Caddy reverse proxy, bound to `127.0.0.1`)
-- **Redis:** Container on same Docker network at `redis://redis:6379`
+- **Redis:** Upstash (REST, external) via `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN`; there is no Redis container on the box
 - **Database:** Neon Postgres (external, connection string in env)
 - **Health check:** `GET /healthz`
 
@@ -132,7 +132,7 @@ Add to HTML pages:
 
 ## Known Issues
 
-- Redis is a cache only — if it restarts, active sessions are lost but no persistent data is affected
+- Redis is a cache only — if Upstash is unreachable, in-flight lead data for a call is lost but nothing persistent is affected
 - Google Calendar OAuth tokens need periodic refresh
 
 
