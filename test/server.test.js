@@ -14,7 +14,6 @@ process.env.VAPI_ASSISTANT_ID_REALESTATE = "test-realestate-id";
 process.env.VAPI_ASSISTANT_ID_CUSHLABS_ES = "test-cushlabs-es-id";
 process.env.VAPI_ASSISTANT_ID_MEDSPA_ES = "test-medspa-es-id";
 process.env.DATABASE_URL = "postgresql://fake:fake@localhost/fake";
-process.env.REDIS_URL = "redis://localhost:6379";
 process.env.VAPI_WEBHOOK_SECRET = "test-webhook-secret";
 process.env.SENTRY_DSN = "";
 process.env.NODE_ENV = "test";

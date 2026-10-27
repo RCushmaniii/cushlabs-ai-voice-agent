@@ -169,7 +169,8 @@ pnpm dev
 | `VAPI_ASSISTANT_ID_TRADES`     | Yes      | Mike assistant ID                             |
 | `VAPI_ASSISTANT_ID_REALESTATE` | Yes      | David assistant ID                            |
 | `VAPI_PHONE_NUMBER_ID`         | Yes      | Vapi phone number for outbound calls (Twilio) |
-| `REDIS_URL`                    | Yes      | Redis connection string                       |
+| `UPSTASH_REDIS_REST_URL`       | Yes      | Upstash Redis REST endpoint (session cache)   |
+| `UPSTASH_REDIS_REST_TOKEN`     | Yes      | Upstash Redis REST token                      |
 | `DATABASE_URL`                 | Optional | Neon Postgres (leads + bookings persist)      |
 | `GOOGLE_CLIENT_ID`             | Optional | Google Calendar real-time availability        |
 | `GOOGLE_CLIENT_SECRET`         | Optional | Google OAuth                                  |
