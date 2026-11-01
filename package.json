@@ -28,13 +28,13 @@
   "license": "ISC",
   "packageManager": "pnpm@10.17.0",
   "dependencies": {
-    "@neondatabase/serverless": "^1.1.0",
+    "@neondatabase/serverless": "^1.2.0",
     "@sentry/node": "^10.69.0",
-    "@upstash/redis": "^1.39.0",
+    "@upstash/redis": "^1.40.0",
     "compression": "^1.8.2",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
-    "express": "^5.2.1",
+    "express": "^5.3.0",
     "googleapis": "^183.0.0"
   }
 }
